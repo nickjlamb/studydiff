@@ -1,0 +1,30 @@
+{
+  "name": "studydiff",
+  "version": "0.1.0",
+  "description": "Explain why two scientific papers disagree — a contradiction explorer for bench scientists. Extracts each study's design, isolates the methodological differences that likely drive conflicting conclusions, and grounds every claim in the source text.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "studydiff": "src/cli.mjs"
+  },
+  "scripts": {
+    "demo": "node src/demo.mjs",
+    "serve": "node src/server.mjs",
+    "start": "node src/cli.mjs"
+  },
+  "dependencies": {
+    "@pharmatools/opengate": "^0.9.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "life-sciences",
+    "literature",
+    "evidence",
+    "contradiction",
+    "grounding",
+    "claude",
+    "pubmed"
+  ]
+}

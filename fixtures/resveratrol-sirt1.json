@@ -1,0 +1,47 @@
+{
+  "question": "Does resveratrol directly activate the SIRT1 enzyme?",
+  "note": "Real PubMed abstracts (retrieved verbatim). A classic assay-artifact contradiction: the disagreement traces to the substrate used to measure SIRT1 activity. Golden cards are example extractions; every quote is an exact substring of the paper text so OpenGATE grounding passes.",
+  "naiveClaim": "Resveratrol is a direct SIRT1 activator and extends lifespan by 90% in yeast.",
+  "papers": [
+    {
+      "pmid": "12939617",
+      "citation": "Howitz et al. 2003, Nature",
+      "title": "Small molecule activators of sirtuins extend Saccharomyces cerevisiae lifespan",
+      "sourceDepth": "abstract",
+      "text": "In diverse organisms, calorie restriction slows the pace of ageing and increases maximum lifespan. In the budding yeast Saccharomyces cerevisiae, calorie restriction extends lifespan by increasing the activity of Sir2 (ref. 1), a member of the conserved sirtuin family of NAD(+)-dependent protein deacetylases. Included in this family are SIR-2.1, a Caenorhabditis elegans enzyme that regulates lifespan, and SIRT1, a human deacetylase that promotes cell survival by negatively regulating the p53 tumour suppressor. Here we report the discovery of three classes of small molecules that activate sirtuins. We show that the potent activator resveratrol, a polyphenol found in red wine, lowers the Michaelis constant of SIRT1 for both the acetylated substrate and NAD(+), and increases cell survival by stimulating SIRT1-dependent deacetylation of p53. In yeast, resveratrol mimics calorie restriction by stimulating Sir2, increasing DNA stability and extending lifespan by 70%. We discuss possible evolutionary origins of this phenomenon and suggest new lines of research into the therapeutic use of sirtuin activators.",
+      "card": {
+        "finding": { "value": "Resveratrol is a potent direct activator of SIRT1", "quote": "the potent activator resveratrol, a polyphenol found in red wine, lowers the Michaelis constant of SIRT1" },
+        "species": { "value": "Human SIRT1 enzyme and budding yeast", "quote": "In the budding yeast Saccharomyces cerevisiae" },
+        "model": { "value": "In vitro SIRT1 enzyme assay and yeast lifespan", "quote": "In the budding yeast Saccharomyces cerevisiae" },
+        "intervention": { "value": "Resveratrol", "quote": "the potent activator resveratrol" },
+        "assay": { "value": "SIRT1 activity measured with an acetylated peptide substrate and NAD+", "quote": "lowers the Michaelis constant of SIRT1 for both the acetylated substrate and NAD(+)" },
+        "dose": { "value": "not reported", "quote": "" },
+        "timing": { "value": "not reported", "quote": "" },
+        "endpoint": { "value": "SIRT1-dependent deacetylation of p53; yeast lifespan", "quote": "stimulating SIRT1-dependent deacetylation of p53" },
+        "sampleSize": { "value": "not reported", "quote": "" },
+        "statistic": { "value": "Extends yeast lifespan by 70%", "quote": "extending lifespan by 70%" },
+        "limitations": { "value": "Proposes therapeutic use of sirtuin activators", "quote": "the therapeutic use of sirtuin activators" }
+      }
+    },
+    {
+      "pmid": "19843076",
+      "citation": "Beher et al. 2009, Chem Biol Drug Des",
+      "title": "Resveratrol is not a direct activator of SIRT1 enzyme activity",
+      "sourceDepth": "abstract",
+      "text": "Resveratrol is a plant polyphenol capable of exerting beneficial metabolic effects which are thought to be mediated in large by the activation of the NAD(+)-dependent protein deacetylase SIRT1. Although resveratrol has been claimed to be a bona fide SIRT1 activator using a peptide substrate (Fluor de Lys-SIRT1 peptide substrate), recent reports indicate that this finding might be an experimental artifact and need to be clarified. Here, we show that: (i) the Fluor de Lys-SIRT1 peptide is an artificial SIRT1 substrate because in the absence of the covalently linked fluorophore the peptide itself is not a substrate of the enzyme, (ii) resveratrol does not activate SIRT1 in vitro in the presence of either a p53-derived peptide substrate or acetylated PGC-1alpha isolated from cells, and (iii) although SIRT1 deacetylates PGC-1alpha in both in vitro and cell-based assays, resveratrol did not activate SIRT1 under these conditions. Based on these observations, we conclude that the pharmacological effects of resveratrol in various models are unlikely to be mediated by a direct enhancement of the catalytic activity of the SIRT1 enzyme. In consequence, our data challenge the overall utility of resveratrol as a pharmacological tool to directly activate SIRT1.",
+      "card": {
+        "finding": { "value": "Resveratrol does not directly activate SIRT1", "quote": "resveratrol does not activate SIRT1 in vitro in the presence of either a p53-derived peptide substrate or acetylated PGC-1alpha" },
+        "species": { "value": "Human SIRT1 enzyme (in vitro and cell-based)", "quote": "in both in vitro and cell-based assays" },
+        "model": { "value": "In vitro and cell-based SIRT1 assays", "quote": "in both in vitro and cell-based assays" },
+        "intervention": { "value": "Resveratrol", "quote": "Resveratrol is a plant polyphenol" },
+        "assay": { "value": "Native substrates (p53-derived peptide and acetylated PGC-1alpha); shows the Fluor de Lys peptide is an artificial substrate", "quote": "the Fluor de Lys-SIRT1 peptide is an artificial SIRT1 substrate because in the absence of the covalently linked fluorophore the peptide itself is not a substrate of the enzyme" },
+        "dose": { "value": "not reported", "quote": "" },
+        "timing": { "value": "not reported", "quote": "" },
+        "endpoint": { "value": "SIRT1 deacetylation of PGC-1alpha", "quote": "SIRT1 deacetylates PGC-1alpha in both in vitro and cell-based assays" },
+        "sampleSize": { "value": "not reported", "quote": "" },
+        "statistic": { "value": "not reported", "quote": "" },
+        "limitations": { "value": "Challenges use of resveratrol as a direct SIRT1 activator", "quote": "our data challenge the overall utility of resveratrol as a pharmacological tool to directly activate SIRT1" }
+      }
+    }
+  ]
+}

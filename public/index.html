@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>StudyDiff — why papers disagree</title>
+<style>
+  :root {
+    --bg:#f6f7f9; --panel:#ffffff; --ink:#111827; --muted:#6b7280; --line:#e5e7eb;
+    --teal:#0f766e; --teal-2:#0d9488; --amber-bg:#fef3c7; --amber:#b45309;
+    --green:#15803d; --red:#b91c1c; --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { max-width:1040px; margin:0 auto; padding:28px 20px 80px; }
+  header h1 { margin:0 0 2px; font-size:26px; letter-spacing:-0.02em; }
+  header h1 span { color:var(--teal); }
+  header p { margin:0 0 22px; color:var(--muted); }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px; }
+  .tabs { display:flex; gap:6px; margin-bottom:14px; }
+  .tab { padding:7px 14px; border:1px solid var(--line); background:#fff; border-radius:999px;
+    cursor:pointer; font-size:13px; color:var(--muted); }
+  .tab.active { background:var(--teal); color:#fff; border-color:var(--teal); }
+  .mode { display:none; } .mode.active { display:block; }
+  label.f { display:block; font-size:12px; color:var(--muted); margin:10px 0 4px; }
+  input, textarea { width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:8px;
+    font:inherit; background:#fff; }
+  textarea { min-height:120px; resize:vertical; font-size:13px; }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .btn { margin-top:14px; background:var(--teal); color:#fff; border:0; padding:10px 18px;
+    border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; }
+  .btn:disabled { opacity:.5; cursor:default; }
+  .examples { display:flex; gap:10px; flex-wrap:wrap; }
+  .ex { flex:1; min-width:240px; text-align:left; border:1px solid var(--line); background:#fff;
+    border-radius:10px; padding:12px 14px; cursor:pointer; }
+  .ex:hover { border-color:var(--teal); }
+  .ex b { display:block; font-size:14px; margin-bottom:3px; }
+  .ex span { font-size:12px; color:var(--muted); }
+
+  /* pipeline */
+  #pipeline { margin-top:18px; display:none; }
+  #pipeline.show { display:block; }
+  .steps { list-style:none; margin:0; padding:0; }
+  .steps li { display:flex; align-items:center; gap:10px; padding:6px 0; color:var(--muted); font-size:13px; }
+  .dot { width:14px; height:14px; border-radius:50%; border:2px solid var(--line); flex:0 0 auto; }
+  li.active .dot { border-color:var(--teal); border-top-color:transparent; animation:spin .7s linear infinite; }
+  li.active { color:var(--ink); }
+  li.done .dot { border-color:var(--green); background:var(--green); }
+  li.done { color:var(--ink); }
+  @keyframes spin { to { transform:rotate(360deg); } }
+
+  /* results */
+  #out { margin-top:22px; display:none; } #out.show { display:block; }
+  .banner { display:flex; align-items:center; gap:10px; padding:12px 16px; border-radius:10px;
+    background:#fff7ed; border:1px solid #fed7aa; color:var(--amber); font-weight:600; margin-bottom:16px; }
+  .banner.agree { background:#f0fdf4; border-color:#bbf7d0; color:var(--green); }
+  h2 { font-size:14px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted);
+    margin:22px 0 10px; }
+  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  th, td { text-align:left; padding:9px 12px; vertical-align:top; border-bottom:1px solid var(--line); font-size:13px; }
+  th { background:#fafafa; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  td.dim { color:var(--muted); white-space:nowrap; width:150px; }
+  tr.diverge td { background:var(--amber-bg); }
+  tr.diverge td.dim { background:#fde9b8; color:var(--amber); font-weight:600; }
+  .nr { color:#9ca3af; font-style:italic; }
+  .badge { font-size:10px; padding:1px 6px; border-radius:999px; margin-left:6px; vertical-align:middle; }
+  .g { background:#dcfce7; color:var(--green); } .d { background:#fee2e2; color:var(--red); }
+  .synth { background:#fff; border:1px solid var(--line); border-left:3px solid var(--teal);
+    border-radius:8px; padding:14px 16px; }
+  .synth .stat { font-family:var(--mono); font-size:12px; }
+  ol.drivers { margin:10px 0 0; padding-left:20px; } ol.drivers li { margin:4px 0; font-size:13px; }
+  .gaps { list-style:none; margin:0; padding:0; }
+  .gaps li { font-size:13px; color:var(--muted); padding:3px 0; }
+  .gaps li:before { content:"•"; color:var(--teal); margin-right:8px; }
+  .prov { font-size:11px; color:var(--muted); margin-top:6px; }
+  .err { color:var(--red); padding:12px 16px; background:#fef2f2; border:1px solid #fecaca; border-radius:8px; }
+  .foot { color:var(--muted); font-size:12px; margin-top:30px; }
+  code { font-family:var(--mono); font-size:12px; background:#f3f4f6; padding:1px 5px; border-radius:4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Study<span>Diff</span></h1>
+    <p>Why do two papers disagree? Compare them, isolate the methodological differences that drive the conflict, and verify every claim against the source.</p>
+  </header>
+
+  <div class="panel">
+    <div class="tabs">
+      <div class="tab active" data-mode="examples">Examples</div>
+      <div class="tab" data-mode="pmid">By PMID</div>
+      <div class="tab" data-mode="paste">Paste abstracts</div>
+    </div>
+
+    <div class="mode active" id="m-examples">
+      <div class="examples">
+        <button class="ex" data-fixture="mouse-inflammation">
+          <b>Do mouse models mimic human inflammation?</b>
+          <span>Seok 2013 vs Takao &amp; Miyakawa 2015 — same datasets, opposite conclusions.</span>
+        </button>
+        <button class="ex" data-fixture="resveratrol-sirt1">
+          <b>Does resveratrol activate SIRT1?</b>
+          <span>Howitz 2003 vs Beher 2009 — an assay-substrate artifact.</span>
+        </button>
+      </div>
+      <p class="prov">Examples run on cached PubMed abstracts — no API key needed.</p>
+    </div>
+
+    <div class="mode" id="m-pmid">
+      <label class="f">Question under comparison</label>
+      <input id="q-pmid" placeholder="e.g. Does resveratrol directly activate SIRT1?" />
+      <div class="row2">
+        <div><label class="f">Paper A — PMID</label><input id="pmidA" placeholder="12939617" /></div>
+        <div><label class="f">Paper B — PMID</label><input id="pmidB" placeholder="19843076" /></div>
+      </div>
+      <button class="btn" id="go-pmid">Compare</button>
+      <p class="prov">Fetches from PubMed and extracts with Claude. Needs the server running in live mode.</p>
+    </div>
+
+    <div class="mode" id="m-paste">
+      <label class="f">Question under comparison</label>
+      <input id="q-paste" placeholder="e.g. Why do these trials disagree?" />
+      <div class="row2">
+        <div>
+          <label class="f">Paper A — citation</label><input id="citeA" placeholder="Author et al. 2023" />
+          <label class="f">Paper A — abstract / methods</label><textarea id="textA"></textarea>
+        </div>
+        <div>
+          <label class="f">Paper B — citation</label><input id="citeB" placeholder="Author et al. 2024" />
+          <label class="f">Paper B — abstract / methods</label><textarea id="textB"></textarea>
+        </div>
+      </div>
+      <button class="btn" id="go-paste">Compare</button>
+    </div>
+
+    <div id="pipeline">
+      <ul class="steps">
+        <li id="s-fetch"><span class="dot"></span><span class="lbl">Retrieve papers</span></li>
+        <li id="s-extractA"><span class="dot"></span><span class="lbl">Extract study design — A</span></li>
+        <li id="s-extractB"><span class="dot"></span><span class="lbl">Extract study design — B</span></li>
+        <li id="s-verify"><span class="dot"></span><span class="lbl">Verify claims against source</span></li>
+        <li id="s-compare"><span class="dot"></span><span class="lbl">Explain the disagreement</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="out"></div>
+
+  <p class="foot">StudyDiff grounds every claim with <a href="https://github.com/nickjlamb/opengate">OpenGATE</a> — deterministic, no LLM-as-judge. Fields the source can't support are shown as <span class="nr">not reported</span>, never guessed.</p>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const STEPS = ['fetch','extractA','extractB','verify','compare'];
+
+// tab switching
+document.querySelectorAll('.tab').forEach((t) => t.onclick = () => {
+  document.querySelectorAll('.tab').forEach((x) => x.classList.remove('active'));
+  document.querySelectorAll('.mode').forEach((x) => x.classList.remove('active'));
+  t.classList.add('active');
+  $('#m-' + t.dataset.mode).classList.add('active');
+});
+
+document.querySelectorAll('.ex').forEach((b) => b.onclick = () =>
+  run({ mode:'demo', fixture:b.dataset.fixture }));
+$('#go-pmid').onclick = () => run({ mode:'pmid', question:$('#q-pmid').value,
+  pmids:[$('#pmidA').value.trim(), $('#pmidB').value.trim()].filter(Boolean) });
+$('#go-paste').onclick = () => run({ mode:'paste', question:$('#q-paste').value, papers:[
+  { citation:$('#citeA').value, text:$('#textA').value },
+  { citation:$('#citeB').value, text:$('#textB').value } ] });
+
+function resetSteps() {
+  $('#pipeline').classList.add('show');
+  STEPS.forEach((s) => { const li = $('#s-' + s); li.classList.remove('active','done'); });
+  $('#out').classList.remove('show'); $('#out').innerHTML = '';
+}
+function setStep(id, status, label) {
+  const li = $('#s-' + id); if (!li) return;
+  li.classList.remove('active','done'); li.classList.add(status);
+  if (label) li.querySelector('.lbl').textContent = label;
+}
+
+async function run(body) {
+  document.querySelectorAll('.btn').forEach((b) => b.disabled = true);
+  resetSteps();
+  try {
+    const r = await fetch('/api/compare', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(body) });
+    const reader = r.body.getReader(); const dec = new TextDecoder(); let buf = '';
+    while (true) {
+      const { value, done } = await reader.read(); if (done) break;
+      buf += dec.decode(value, { stream:true });
+      let nl; while ((nl = buf.indexOf('\n')) >= 0) {
+        const line = buf.slice(0, nl).trim(); buf = buf.slice(nl + 1);
+        if (line) handle(JSON.parse(line));
+      }
+    }
+  } catch (e) {
+    $('#out').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; $('#out').classList.add('show');
+  } finally {
+    document.querySelectorAll('.btn').forEach((b) => b.disabled = false);
+  }
+}
+
+function handle(ev) {
+  if (ev.type === 'step') setStep(ev.id, ev.status, ev.label);
+  else if (ev.type === 'error') { $('#out').innerHTML = '<div class="err">' + esc(ev.message) + '</div>'; $('#out').classList.add('show'); }
+  else if (ev.type === 'result') render(ev.payload);
+}
+
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const NR = 'not reported';
+const cell = (f, grounded) => f.value === NR
+  ? '<span class="nr">not reported</span>'
+  : esc(f.value) + (grounded ? '<span class="badge g" title="'+esc(f.quote||'')+'">✓ grounded</span>' : '');
+
+function render(p) {
+  const [a, b] = p.cards;
+  const ga = p.grounding.a.results, gb = p.grounding.b.results;
+  let h = '';
+
+  h += p.comparison.findingsConflict
+    ? '<div class="banner">These studies reach different conclusions</div>'
+    : '<div class="banner agree">These studies do not clearly differ on this question</div>';
+
+  // headers with provenance
+  h += '<h2>Comparison</h2><table><tr><th>Dimension</th><th>' + esc(a.citation) +
+    ' <span class="prov">['+a.sourceDepth+']</span></th><th>' + esc(b.citation) +
+    ' <span class="prov">['+b.sourceDepth+']</span></th></tr>';
+  for (const row of p.comparison.rows) {
+    const d = row.dimension;
+    h += '<tr class="' + (row.diverges ? 'diverge' : '') + '"><td class="dim">' + esc(row.label) + '</td><td>' +
+      cell(a[d], ga[d] && ga[d].grounded) + '</td><td>' + cell(b[d], gb[d] && gb[d].grounded) + '</td></tr>';
+  }
+  h += '</table>';
+
+  h += '<h2>Likely reason for disagreement</h2><div class="synth">' + esc(p.synthesis.text) +
+    (p.synthesis.grounded ? ' <span class="badge g">✓ grounded</span>' : ' <span class="badge d">✗ unverified</span>') + '</div>';
+
+  if (p.comparison.candidateReasons.length) {
+    h += '<ol class="drivers">';
+    for (const r of p.comparison.candidateReasons)
+      h += '<li><b>' + esc(r.label) + '</b> — A: ' + esc(r.a) + ' · B: ' + esc(r.b) + '</li>';
+    h += '</ol>';
+  }
+
+  const gaps = [...p.gaps.sharedConstraints, ...p.gaps.unreported];
+  if (gaps.length) {
+    h += '<h2>Observed across these papers <span class="prov">(bounded — not a claim about all literature)</span></h2><ul class="gaps">';
+    for (const g of gaps) h += '<li>' + esc(g) + '</li>';
+    h += '</ul>';
+  }
+
+  $('#out').innerHTML = h; $('#out').classList.add('show');
+}
+</script>
+</body>
+</html>

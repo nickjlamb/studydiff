@@ -1,0 +1,47 @@
+{
+  "question": "Do genomic responses in mouse models mimic human inflammatory diseases?",
+  "note": "Real PubMed abstracts (retrieved verbatim). Full text is not in the PMC Open Access subset for either paper, so sourceDepth is 'abstract' — StudyDiff surfaces that honestly. The golden study cards below are example extractions; every quote is an exact substring of the paper text so OpenGATE grounding passes.",
+  "naiveClaim": "Mouse models mimic human inflammatory disease, with an R2 of 0.85 across all datasets.",
+  "papers": [
+    {
+      "pmid": "23401516",
+      "citation": "Seok et al. 2013, PNAS",
+      "title": "Genomic responses in mouse models poorly mimic human inflammatory diseases",
+      "sourceDepth": "abstract",
+      "text": "A cornerstone of modern biomedical research is the use of mouse models to explore basic pathophysiological mechanisms, evaluate new therapeutic approaches, and make go or no-go decisions to carry new drug candidates forward into clinical trials. Systematic studies evaluating how well murine models mimic human inflammatory diseases are nonexistent. Here, we show that, although acute inflammatory stresses from different etiologies result in highly similar genomic responses in humans, the responses in corresponding mouse models correlate poorly with the human conditions and also, one another. Among genes changed significantly in humans, the murine orthologs are close to random in matching their human counterparts (e.g., R(2) between 0.0 and 0.1). In addition to improvements in the current animal model systems, our study supports higher priority for translational medical research to focus on the more complex human conditions rather than relying on mouse models to study human inflammatory diseases.",
+      "card": {
+        "finding": { "value": "Mouse models poorly mimic human inflammatory diseases", "quote": "the responses in corresponding mouse models correlate poorly with the human conditions" },
+        "species": { "value": "Human and mouse", "quote": "corresponding mouse models" },
+        "model": { "value": "Human acute-inflammation and mouse-model gene-expression datasets", "quote": "acute inflammatory stresses" },
+        "intervention": { "value": "not reported", "quote": "" },
+        "assay": { "value": "Compared murine orthologs of genes changed significantly in humans (human-anchored gene set)", "quote": "Among genes changed significantly in humans, the murine orthologs are close to random in matching their human counterparts" },
+        "dose": { "value": "not reported", "quote": "" },
+        "timing": { "value": "not reported", "quote": "" },
+        "endpoint": { "value": "not reported", "quote": "" },
+        "sampleSize": { "value": "not reported", "quote": "" },
+        "statistic": { "value": "R2 between 0.0 and 0.1 (near-random correspondence)", "quote": "R(2) between 0.0 and 0.1" },
+        "limitations": { "value": "Recommends prioritising human studies over mouse models", "quote": "our study supports higher priority for translational medical research to focus on the more complex human conditions" }
+      }
+    },
+    {
+      "pmid": "25092317",
+      "citation": "Takao & Miyakawa 2015, PNAS",
+      "title": "Genomic responses in mouse models greatly mimic human inflammatory diseases",
+      "sourceDepth": "abstract",
+      "text": "The use of mice as animal models has long been considered essential in modern biomedical research, but the role of mouse models in research was challenged by a recent report that genomic responses in mouse models poorly mimic human inflammatory diseases. Here we reevaluated the same gene expression datasets used in the previous study by focusing on genes whose expression levels were significantly changed in both humans and mice. Contrary to the previous findings, the gene expression levels in the mouse models showed extraordinarily significant correlations with those of the human conditions (Spearman's rank correlation coefficient: 0.43-0.68; genes changed in the same direction: 77-93%; P = 6.5 x 10(-11) to 1.2 x 10(-35)). Moreover, meta-analysis of those datasets revealed a number of pathways/biogroups commonly regulated by multiple conditions in humans and mice. These findings demonstrate that gene expression patterns in mouse models closely recapitulate those in human inflammatory conditions and strongly argue for the utility of mice as animal models of human disorders.",
+      "card": {
+        "finding": { "value": "Mouse models greatly mimic human inflammatory diseases", "quote": "gene expression patterns in mouse models closely recapitulate those in human inflammatory conditions" },
+        "species": { "value": "Human and mouse", "quote": "mouse models" },
+        "model": { "value": "Human acute-inflammation and mouse-model gene-expression datasets", "quote": "the same gene expression datasets" },
+        "intervention": { "value": "not reported", "quote": "" },
+        "assay": { "value": "Reanalysed the same datasets restricted to genes significantly changed in both humans and mice", "quote": "by focusing on genes whose expression levels were significantly changed in both humans and mice" },
+        "dose": { "value": "not reported", "quote": "" },
+        "timing": { "value": "not reported", "quote": "" },
+        "endpoint": { "value": "not reported", "quote": "" },
+        "sampleSize": { "value": "not reported", "quote": "" },
+        "statistic": { "value": "Spearman 0.43-0.68; 77-93% of genes change in the same direction", "quote": "Spearman's rank correlation coefficient: 0.43-0.68; genes changed in the same direction: 77-93%" },
+        "limitations": { "value": "Argues mice are useful models of human disorders", "quote": "strongly argue for the utility of mice as animal models of human disorders" }
+      }
+    }
+  ]
+}
