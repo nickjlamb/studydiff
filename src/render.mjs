@@ -58,7 +58,7 @@ export function renderResult(result) {
   out.push('');
 
   // Why they disagree
-  out.push(BOLD('  Likely reason for disagreement'));
+  out.push(BOLD('  Why these studies differ'));
   for (const line of wrap(synthesis.text, 88)) out.push('  ' + line);
   out.push('');
   if (comparison.candidateReasons.length) {

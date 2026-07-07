@@ -17,10 +17,22 @@ import { DIMENSIONS } from './types.mjs';
 import { fetchPaper } from './ncbi.mjs';
 import { extractCard } from './extract.mjs';
 import { buildResult } from './pipeline.mjs';
+import { clientIp, createLimiter, createCache, securityHeaders } from './guard.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(here, '..');
 const PORT = process.env.PORT || 4173;
+const MAX_BODY = 100 * 1024; // 100 KB — plenty for two abstracts, blocks abuse
+
+// Domains allowed to embed the app in an iframe (so pharmatools.ai/studydiff can
+// frame studydiff.pharmatools.ai). Override with EMBED_ORIGINS if needed.
+const EMBED_ORIGINS = process.env.EMBED_ORIGINS || "'self' https://pharmatools.ai https://*.pharmatools.ai";
+
+const limiter = createLimiter({
+  perHour: Number(process.env.RATE_LIMIT_PER_HOUR) || 30,
+  dailyGlobalLive: Number(process.env.DAILY_LIVE_CAP) || 300,
+});
+const cache = createCache({ ttlMs: 6 * 3600_000 });
 
 // Minimal .env loader so `npm run serve` works without the --env-file flag.
 function loadEnv() {
@@ -52,16 +64,42 @@ const step = (res, id, status, label) => send(res, { type: 'step', id, status, l
 
 async function readBody(req) {
   const chunks = [];
-  for await (const c of req) chunks.push(c);
+  let size = 0;
+  for await (const c of req) {
+    size += c.length;
+    if (size > MAX_BODY) throw new Error('Request too large');
+    chunks.push(c);
+  }
   return chunks.length ? JSON.parse(Buffer.concat(chunks).toString('utf8')) : {};
 }
 
+const cacheKey = (body) => JSON.stringify({
+  m: body.mode, q: body.question, p: body.pmids, f: body.fixture,
+  t: (body.papers || []).map((x) => (x.text || '').slice(0, 200)),
+});
+
+const STEP_IDS = ['fetch', 'extractA', 'extractB', 'verify', 'compare'];
+
 /** Run the pipeline while streaming step events. `mode` = demo | pmid | paste. */
-async function runStreaming(res, body) {
+async function runStreaming(res, body, ip) {
   const mode = body.mode || 'pmid';
+  const isLive = mode === 'pmid' || mode === 'paste';
   const question = body.question || 'Why do these papers reach different conclusions?';
 
   res.writeHead(200, { 'content-type': 'application/x-ndjson', 'cache-control': 'no-cache' });
+
+  // Rate limit (protects the API budget); live calls also count toward a daily cap.
+  const rl = limiter.check(ip, isLive);
+  if (!rl.ok) { send(res, { type: 'error', message: rl.reason }); return res.end(); }
+
+  // Serve a cached result instantly if we've computed this exact comparison recently.
+  const key = cacheKey(body);
+  const hit = cache.get(key);
+  if (hit) {
+    for (const id of STEP_IDS) step(res, id, 'done', null);
+    send(res, { type: 'result', payload: hit });
+    return res.end();
+  }
 
   try {
     let cards;
@@ -82,7 +120,7 @@ async function runStreaming(res, body) {
       step(res, 'extractB', 'done', `Study card ready — ${papers[1].citation}`);
       cards = papers.map(cardFromFixturePaper);
       // buildResult grounds then compares; return question from fixture if none given.
-      finishAndSend(res, fx.question || question, cards, texts);
+      finishAndSend(res, fx.question || question, cards, texts, key);
       return;
     }
 
@@ -99,7 +137,7 @@ async function runStreaming(res, body) {
         cards.push(await extractCard(p, question));
         step(res, id, 'done', `Study card ready — ${p.citation}`);
       }
-      finishAndSend(res, question, cards, texts);
+      finishAndSend(res, question, cards, texts, key);
       return;
     }
 
@@ -118,14 +156,14 @@ async function runStreaming(res, body) {
       cards.push(await extractCard(papers[i], question));
       step(res, id, 'done', `Study card ready — ${papers[i].citation}`);
     }
-    finishAndSend(res, question, cards, texts);
+    finishAndSend(res, question, cards, texts, key);
   } catch (err) {
     send(res, { type: 'error', message: err.message });
     res.end();
   }
 }
 
-async function finishAndSend(res, question, cards, texts) {
+async function finishAndSend(res, question, cards, texts, key) {
   step(res, 'verify', 'active', 'Verifying every claim against the source (OpenGATE)');
   await sleep(300);
   const result = buildResult(question, cards, texts);
@@ -133,6 +171,7 @@ async function finishAndSend(res, question, cards, texts) {
   step(res, 'compare', 'active', 'Explaining the disagreement');
   await sleep(200);
   step(res, 'compare', 'done', 'Comparison ready');
+  if (key) cache.set(key, result);
   send(res, { type: 'result', payload: result });
   res.end();
 }
@@ -140,20 +179,22 @@ async function finishAndSend(res, question, cards, texts) {
 const CONTENT = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript' };
 
 const server = createServer(async (req, res) => {
+  securityHeaders(res, { embedOrigins: EMBED_ORIGINS });
   const url = new URL(req.url, `http://localhost:${PORT}`);
   if (req.method === 'POST' && url.pathname === '/api/compare') {
     let body;
     try {
       body = await readBody(req);
-    } catch {
-      res.writeHead(400).end('bad json');
+    } catch (err) {
+      res.writeHead(413, { 'content-type': 'application/x-ndjson' });
+      res.end(JSON.stringify({ type: 'error', message: err.message || 'bad request' }) + '\n');
       return;
     }
-    return runStreaming(res, body);
+    return runStreaming(res, body, clientIp(req));
   }
   if (url.pathname === '/health') {
     res.writeHead(200, { 'content-type': 'application/json' });
-    res.end(JSON.stringify({ ok: true, live: Boolean(process.env.ANTHROPIC_API_KEY) }));
+    res.end(JSON.stringify({ ok: true, live: Boolean(process.env.ANTHROPIC_API_KEY), ...limiter.stats() }));
     return;
   }
   // static

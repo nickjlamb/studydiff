@@ -10,6 +10,13 @@ import { compareCards } from './compare.mjs';
 import { findGaps } from './gaps.mjs';
 import { groundCard, groundSynthesis } from './grounding.mjs';
 
+/** Join words as "a", "a and b", or "a, b and c". */
+function listWords(words) {
+  if (words.length <= 1) return words[0] || '';
+  if (words.length === 2) return `${words[0]} and ${words[1]}`;
+  return `${words.slice(0, -1).join(', ')} and ${words[words.length - 1]}`;
+}
+
 /** Deterministic synthesis built only from already-extracted (and grounded) fields. */
 function synthesize(comparison, cards) {
   if (!comparison.findingsConflict) {
@@ -19,18 +26,27 @@ function synthesize(comparison, cards) {
   }
   const [a, b] = cards;
   const top = comparison.candidateReasons[0];
-  let text =
-    `Both studies address the same question but reach different conclusions ` +
-    `(A: "${a.finding.value}"; B: "${b.finding.value}"). `;
-  if (top) {
-    text += `The most likely driver is the ${top.label.toLowerCase()}: A used ${top.a}, whereas B used ${top.b}.`;
-  } else {
-    text += `No differing design dimension was reported in both papers, so the source of disagreement cannot be localised from the available text.`;
+
+  // Answer-first: lead with the plain-language reason, then let the table prove it.
+  // Every clause is built from already-grounded fields, so the paragraph itself
+  // survives the grounding check (numbers trace to the source).
+  let text = 'These studies reach different conclusions';
+  const shared = comparison.sharedDesign;
+  if (shared.length) {
+    text += ` despite sharing the same ${listWords(shared.map((s) => s.toLowerCase()))}`;
   }
-  // Fold in the headline statistics when both report them — this puts numbers
-  // into the synthesis so the grounding check has something real to verify.
+  text += '. ';
+
+  if (top) {
+    text += `The most likely reason is a difference in ${top.label.toLowerCase()} — Study A: ${top.a}; Study B: ${top.b}. `;
+  } else {
+    text += 'No design dimension reported in both papers differs, so the source of disagreement cannot be localised from the available text. ';
+  }
+
+  text += `Study A concludes "${a.finding.value}", whereas Study B concludes "${b.finding.value}".`;
+
   if (a.statistic.value !== NOT_REPORTED && b.statistic.value !== NOT_REPORTED) {
-    text += ` A reports ${a.statistic.value}; B reports ${b.statistic.value}.`;
+    text += ` The reported results differ accordingly — A: ${a.statistic.value}; B: ${b.statistic.value}.`;
   }
   return { text };
 }

@@ -57,7 +57,7 @@ export const DIMENSION_LABELS = {
   timing: 'Timing / follow-up',
   endpoint: 'Endpoint',
   sampleSize: 'Sample size',
-  statistic: 'Key statistic',
+  statistic: 'Key result',
   limitations: 'Limitations',
 };
 

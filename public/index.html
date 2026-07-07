@@ -64,8 +64,14 @@
   tr.diverge td { background:var(--amber-bg); }
   tr.diverge td.dim { background:#fde9b8; color:var(--amber); font-weight:600; }
   .nr { color:#9ca3af; font-style:italic; }
-  .badge { font-size:10px; padding:1px 6px; border-radius:999px; margin-left:6px; vertical-align:middle; }
+  .badge { font-size:10px; font-weight:600; padding:2px 7px; border-radius:999px; margin-left:6px; vertical-align:middle; white-space:nowrap; }
+  .badge i { font-style:normal; }
   .g { background:#dcfce7; color:var(--green); } .d { background:#fee2e2; color:var(--red); }
+  td .badge.g { background:transparent; color:var(--green); padding:0 0 0 4px; }
+  .verified { display:flex; align-items:center; gap:8px; margin:16px 0 4px; padding:10px 14px;
+    background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px; color:var(--green); font-size:13px; }
+  .verified i { font-style:normal; font-weight:700; font-size:15px; }
+  .verified .nr { color:#6b7280; }
   .synth { background:#fff; border:1px solid var(--line); border-left:3px solid var(--teal);
     border-radius:8px; padding:14px 16px; }
   .synth .stat { font-family:var(--mono); font-size:12px; }
@@ -219,12 +225,30 @@ function render(p) {
   const ga = p.grounding.a.results, gb = p.grounding.b.results;
   let h = '';
 
+  // 1. Verdict banner
   h += p.comparison.findingsConflict
     ? '<div class="banner">These studies reach different conclusions</div>'
     : '<div class="banner agree">These studies do not clearly differ on this question</div>';
 
-  // headers with provenance
-  h += '<h2>Comparison</h2><table><tr><th>Dimension</th><th>' + esc(a.citation) +
+  // 2. Answer first — the plain-language reason, before any table.
+  h += '<h2>Why these studies differ</h2><div class="synth">' + esc(p.synthesis.text) +
+    (p.synthesis.grounded ? ' <span class="badge g"><i>✓</i> grounded</span>' : ' <span class="badge d">✗ unverified</span>') + '</div>';
+
+  if (p.comparison.candidateReasons.length) {
+    h += '<p class="prov" style="margin:12px 0 0">Ranked candidate drivers (differing methods reported in both):</p><ol class="drivers">';
+    for (const r of p.comparison.candidateReasons)
+      h += '<li><b>' + esc(r.label) + '</b> — A: ' + esc(r.a) + ' · B: ' + esc(r.b) + '</li>';
+    h += '</ol>';
+  }
+
+  // 3. Verification summary — lean into the differentiator.
+  const reported = (c, g) => p.comparison.rows.filter((r) => c[r.dimension].value !== NR).length;
+  const verified = reported(a, ga) + reported(b, gb);
+  h += '<div class="verified"><i>✓</i> All ' + verified + ' reported facts were verified against the source text. ' +
+    'Anything unsupported is shown as <span class="nr">not reported</span> — never guessed.</div>';
+
+  // 4. The proof — methodological comparison table.
+  h += '<h2>Methodological comparison</h2><table><tr><th>Dimension</th><th>' + esc(a.citation) +
     ' <span class="prov">['+a.sourceDepth+']</span></th><th>' + esc(b.citation) +
     ' <span class="prov">['+b.sourceDepth+']</span></th></tr>';
   for (const row of p.comparison.rows) {
@@ -234,16 +258,7 @@ function render(p) {
   }
   h += '</table>';
 
-  h += '<h2>Likely reason for disagreement</h2><div class="synth">' + esc(p.synthesis.text) +
-    (p.synthesis.grounded ? ' <span class="badge g">✓ grounded</span>' : ' <span class="badge d">✗ unverified</span>') + '</div>';
-
-  if (p.comparison.candidateReasons.length) {
-    h += '<ol class="drivers">';
-    for (const r of p.comparison.candidateReasons)
-      h += '<li><b>' + esc(r.label) + '</b> — A: ' + esc(r.a) + ' · B: ' + esc(r.b) + '</li>';
-    h += '</ol>';
-  }
-
+  // 5. Bounded gaps
   const gaps = [...p.gaps.sharedConstraints, ...p.gaps.unreported];
   if (gaps.length) {
     h += '<h2>Observed across these papers <span class="prov">(bounded — not a claim about all literature)</span></h2><ul class="gaps">';

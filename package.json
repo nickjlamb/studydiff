@@ -8,9 +8,10 @@
     "studydiff": "src/cli.mjs"
   },
   "scripts": {
-    "demo": "node src/demo.mjs",
+    "start": "node src/server.mjs",
     "serve": "node src/server.mjs",
-    "start": "node src/cli.mjs"
+    "demo": "node src/demo.mjs",
+    "cli": "node src/cli.mjs"
   },
   "dependencies": {
     "@pharmatools/opengate": "^0.9.0"
