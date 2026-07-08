@@ -22,6 +22,10 @@
   <a href="CONTRIBUTING.md">Contributing</a>
 </p>
 
+<p align="center">
+  <a href="https://studydiff.pharmatools.ai"><img src="docs/hero.png" alt="StudyDiff comparing two studies and explaining why they disagree" width="860"></a>
+</p>
+
 ---
 
 Two well-run papers often reach opposite conclusions. Usually the reason isn't that one is wrong — it's a methodological difference (a cell type, a dose, a follow-up window, an analysis choice) that a reader has to dig out of the methods sections by hand. **StudyDiff does that digging.** Give it two studies and it extracts each one's design, pinpoints the differences that most plausibly explain the disagreement, and — critically — grounds every statement in the source text, so it never invents a finding.
