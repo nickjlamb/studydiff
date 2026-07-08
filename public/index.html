@@ -87,12 +87,15 @@
   .dbody { font-size:13px; }
   .dbody b { font-size:14px; }
   .dcmp { display:flex; flex-direction:column; gap:2px; margin-top:4px; color:var(--muted); font-size:12.5px; }
-  details.fullcmp { margin:16px 0 6px; }
-  details.fullcmp summary { cursor:pointer; font-size:13px; color:var(--teal); font-weight:600; padding:6px 0; list-style:none; }
+  details.fullcmp { margin:18px 0 6px; }
+  details.fullcmp summary { display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none;
+    font-size:13px; font-weight:600; color:var(--teal); padding:9px 16px; border:1px solid var(--teal);
+    border-radius:8px; background:#fff; list-style:none; }
+  details.fullcmp summary:hover { background:#f0fdfa; }
   details.fullcmp summary::-webkit-details-marker { display:none; }
-  details.fullcmp summary:before { content:"▸ "; }
-  details.fullcmp[open] summary:before { content:"▾ "; }
-  details.fullcmp table { margin-top:10px; }
+  details.fullcmp summary:before { content:"▸"; font-size:11px; }
+  details.fullcmp[open] summary:before { content:"▾"; }
+  details.fullcmp table { margin-top:12px; }
   .gaps { list-style:none; margin:0; padding:0; }
   .gaps li { font-size:13px; color:var(--muted); padding:3px 0; }
   .gaps li:before { content:"•"; color:var(--teal); margin-right:8px; }
