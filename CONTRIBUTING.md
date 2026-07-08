@@ -30,7 +30,7 @@ Live extraction (the `pmid` / `paste` paths and the CLI) needs an `ANTHROPIC_API
 2. **Ground before you compare.** `buildResult` verifies every field first and downgrades anything unsupported to `not reported` *before* comparison and synthesis. StudyDiff must never cite a fact it hasn't verified.
 3. **"Not reported", never guessed.** Any field the source text doesn't support is `not reported` with an empty quote. Extraction must not infer beyond the text.
 4. **Gaps stay bounded.** Absence claims are only ever scoped to the compared papers ("none of these studies…"), never "no one has ever…".
-5. **Plain ESM, minimal deps.** `.mjs` modules, no build step; the only runtime dependency is `@pharmatools/opengate`.
+5. **Plain ESM, minimal deps.** `.mjs` modules, no build step. Runtime dependencies are kept to a minimum: `@pharmatools/opengate` (grounding) and `unpdf` (pure-JS PDF text extraction for uploads).
 
 ## Adding a demo pair
 

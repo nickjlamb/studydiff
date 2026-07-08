@@ -17,12 +17,14 @@ import { DIMENSIONS } from './types.mjs';
 import { fetchPaper } from './ncbi.mjs';
 import { extractCard } from './extract.mjs';
 import { buildResult } from './pipeline.mjs';
+import { pdfToText } from './pdf.mjs';
 import { clientIp, createLimiter, createCache, securityHeaders } from './guard.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(here, '..');
 const PORT = process.env.PORT || 4173;
-const MAX_BODY = 100 * 1024; // 100 KB — plenty for two abstracts, blocks abuse
+const MAX_BODY = 100 * 1024;        // 100 KB — plenty for two abstracts / JSON
+const MAX_PDF = 15 * 1024 * 1024;   // 15 MB — a generous single-paper PDF ceiling
 
 // Domains allowed to embed the app in an iframe (so pharmatools.ai/studydiff can
 // frame studydiff.pharmatools.ai). Override with EMBED_ORIGINS if needed.
@@ -62,15 +64,20 @@ function cardFromFixturePaper(p) {
 const send = (res, obj) => res.write(JSON.stringify(obj) + '\n');
 const step = (res, id, status, label) => send(res, { type: 'step', id, status, label });
 
-async function readBody(req) {
+async function readRaw(req, limit) {
   const chunks = [];
   let size = 0;
   for await (const c of req) {
     size += c.length;
-    if (size > MAX_BODY) throw new Error('Request too large');
+    if (size > limit) throw new Error('Request too large');
     chunks.push(c);
   }
-  return chunks.length ? JSON.parse(Buffer.concat(chunks).toString('utf8')) : {};
+  return Buffer.concat(chunks);
+}
+
+async function readBody(req) {
+  const buf = await readRaw(req, MAX_BODY);
+  return buf.length ? JSON.parse(buf.toString('utf8')) : {};
 }
 
 const cacheKey = (body) => JSON.stringify({
@@ -191,6 +198,19 @@ const server = createServer(async (req, res) => {
       return;
     }
     return runStreaming(res, body, clientIp(req));
+  }
+  if (req.method === 'POST' && url.pathname === '/api/extract-pdf') {
+    const rl = limiter.check(clientIp(req), false);
+    const reply = (code, obj) => { res.writeHead(code, { 'content-type': 'application/json' }); res.end(JSON.stringify(obj)); };
+    if (!rl.ok) return reply(429, { error: rl.reason });
+    try {
+      const buf = await readRaw(req, MAX_PDF);
+      const out = await pdfToText(buf);
+      return reply(200, out);
+    } catch (err) {
+      const tooBig = /too large/i.test(err.message);
+      return reply(tooBig ? 413 : 422, { error: tooBig ? 'PDF exceeds the 15 MB limit.' : err.message });
+    }
   }
   if (url.pathname === '/health') {
     res.writeHead(200, { 'content-type': 'application/json' });

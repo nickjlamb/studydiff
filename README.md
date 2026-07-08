@@ -40,7 +40,7 @@ cp .env.example .env      # add ANTHROPIC_API_KEY for live mode
 npm run serve             # http://localhost:4173
 ```
 
-Open the page and either run a built-in **example** (cached abstracts, no key needed), compare two **PMIDs** live, or **paste** two abstracts. The pipeline streams each step as it runs — retrieve → extract A → extract B → verify → explain — and the key stays server-side, never in the browser.
+Open the page and either run a built-in **example** (cached abstracts, no key needed), compare two **PMIDs** live, **upload two PDFs** of the full papers, or **paste** two abstracts. Uploaded PDFs are text-extracted server-side (pure JS, no system deps), which gives richer study cards than an abstract — fewer fields come back "not reported". The pipeline streams each step as it runs — retrieve → extract A → extract B → verify → explain — and the key stays server-side, never in the browser.
 
 ## Live CLI
 

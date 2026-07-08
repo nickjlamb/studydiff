@@ -96,6 +96,7 @@
     <div class="tabs">
       <div class="tab active" data-mode="examples">Examples</div>
       <div class="tab" data-mode="pmid">By PMID</div>
+      <div class="tab" data-mode="upload">Upload PDFs</div>
       <div class="tab" data-mode="paste">Paste abstracts</div>
     </div>
 
@@ -122,6 +123,23 @@
       </div>
       <button class="btn" id="go-pmid">Compare</button>
       <p class="prov">Fetches from PubMed and extracts with Claude. Needs the server running in live mode.</p>
+    </div>
+
+    <div class="mode" id="m-upload">
+      <label class="f">Question under comparison</label>
+      <input id="q-upload" placeholder="e.g. Why do these trials disagree?" />
+      <div class="row2">
+        <div>
+          <label class="f">Paper A — citation (optional)</label><input id="uciteA" placeholder="Author et al. 2023" />
+          <label class="f">Paper A — PDF</label><input type="file" id="fileA" accept="application/pdf,.pdf" />
+        </div>
+        <div>
+          <label class="f">Paper B — citation (optional)</label><input id="uciteB" placeholder="Author et al. 2024" />
+          <label class="f">Paper B — PDF</label><input type="file" id="fileB" accept="application/pdf,.pdf" />
+        </div>
+      </div>
+      <button class="btn" id="go-upload">Compare</button>
+      <p class="prov" id="upload-note">Full text is read in your browser's request and extracted on the server — richer than an abstract, so fewer fields come back “not reported”. Scanned (image-only) PDFs won't work.</p>
     </div>
 
     <div class="mode" id="m-paste">
@@ -187,6 +205,35 @@ $('#go-pmid').onclick = () => run({ mode:'pmid', question:$('#q-pmid').value,
 $('#go-paste').onclick = () => run({ mode:'paste', question:$('#q-paste').value, papers:[
   { citation:$('#citeA').value, text:$('#textA').value },
   { citation:$('#citeB').value, text:$('#textB').value } ] });
+$('#go-upload').onclick = runUpload;
+
+async function extractPdf(file) {
+  const r = await fetch('/api/extract-pdf', { method:'POST', headers:{'content-type':'application/pdf'}, body:file });
+  const data = await r.json().catch(() => ({ error:'Could not read the server response.' }));
+  if (!r.ok) throw new Error((file.name ? file.name + ': ' : '') + (data.error || 'PDF extraction failed'));
+  return data.text;
+}
+
+async function runUpload() {
+  const fA = $('#fileA').files[0], fB = $('#fileB').files[0];
+  const note = $('#upload-note');
+  if (!fA || !fB) { note.textContent = 'Please choose a PDF for both Paper A and Paper B.'; note.style.color = 'var(--red)'; return; }
+  note.style.color = ''; note.textContent = 'Reading PDFs…';
+  document.querySelectorAll('.btn').forEach((b) => b.disabled = true);
+  try {
+    const [textA, textB] = await Promise.all([extractPdf(fA), extractPdf(fB)]);
+    note.textContent = 'PDFs read. Comparing…';
+    await run({ mode:'paste', question:$('#q-upload').value, papers:[
+      { citation:$('#uciteA').value || fA.name.replace(/\.pdf$/i,''), text:textA },
+      { citation:$('#uciteB').value || fB.name.replace(/\.pdf$/i,''), text:textB } ] });
+    note.textContent = 'Full text is read on the server — richer than an abstract. Scanned (image-only) PDFs won’t work.';
+  } catch (e) {
+    $('#out').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; $('#out').classList.add('show');
+    note.textContent = '';
+  } finally {
+    document.querySelectorAll('.btn').forEach((b) => b.disabled = false);
+  }
+}
 
 function resetSteps() {
   $('#pipeline').classList.add('show');
