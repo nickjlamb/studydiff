@@ -73,9 +73,26 @@
   .verified i { font-style:normal; font-weight:700; font-size:15px; }
   .verified .nr { color:#6b7280; }
   .synth { background:#fff; border:1px solid var(--line); border-left:3px solid var(--teal);
-    border-radius:8px; padding:14px 16px; }
+    border-radius:8px; padding:14px 16px; font-size:15px; }
   .synth .stat { font-family:var(--mono); font-size:12px; }
-  ol.drivers { margin:10px 0 0; padding-left:20px; } ol.drivers li { margin:4px 0; font-size:13px; }
+  .drivers2 { display:flex; flex-direction:column; gap:8px; margin-top:6px; }
+  .drow { display:flex; gap:12px; align-items:flex-start; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff; }
+  .drow.primary { border-color:#fcd34d; background:#fffbeb; }
+  .drow.ruled { background:#fafafa; }
+  .dtag { flex:0 0 auto; min-width:96px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em;
+    padding:3px 9px; border-radius:999px; text-align:center; }
+  .drow.primary .dtag { background:var(--amber); color:#fff; }
+  .drow.secondary .dtag { background:#e5e7eb; color:#374151; }
+  .drow.ruled .dtag { background:#eef0f2; color:#6b7280; }
+  .dbody { font-size:13px; }
+  .dbody b { font-size:14px; }
+  .dcmp { display:flex; flex-direction:column; gap:2px; margin-top:4px; color:var(--muted); font-size:12.5px; }
+  details.fullcmp { margin:16px 0 6px; }
+  details.fullcmp summary { cursor:pointer; font-size:13px; color:var(--teal); font-weight:600; padding:6px 0; list-style:none; }
+  details.fullcmp summary::-webkit-details-marker { display:none; }
+  details.fullcmp summary:before { content:"▸ "; }
+  details.fullcmp[open] summary:before { content:"▾ "; }
+  details.fullcmp table { margin-top:10px; }
   .gaps { list-style:none; margin:0; padding:0; }
   .gaps li { font-size:13px; color:var(--muted); padding:3px 0; }
   .gaps li:before { content:"•"; color:var(--teal); margin-right:8px; }
@@ -115,18 +132,18 @@
     </div>
 
     <div class="mode" id="m-pmid">
-      <label class="f">Question under comparison</label>
+      <label class="f">Question</label>
       <input id="q-pmid" placeholder="e.g. Does resveratrol directly activate SIRT1?" />
       <div class="row2">
         <div><label class="f">Paper A — PMID</label><input id="pmidA" placeholder="12939617" /></div>
         <div><label class="f">Paper B — PMID</label><input id="pmidB" placeholder="19843076" /></div>
       </div>
-      <button class="btn" id="go-pmid">Compare</button>
+      <button class="btn" id="go-pmid">Compare studies →</button>
       <p class="prov">Fetches from PubMed and extracts with Claude. Needs the server running in live mode.</p>
     </div>
 
     <div class="mode" id="m-upload">
-      <label class="f">Question under comparison</label>
+      <label class="f">Question</label>
       <input id="q-upload" placeholder="e.g. Why do these trials disagree?" />
       <div class="row2">
         <div>
@@ -138,12 +155,12 @@
           <label class="f">Paper B — PDF</label><input type="file" id="fileB" accept="application/pdf,.pdf" />
         </div>
       </div>
-      <button class="btn" id="go-upload">Compare</button>
+      <button class="btn" id="go-upload">Compare studies →</button>
       <p class="prov" id="upload-note">Full text is read in your browser's request and extracted on the server — richer than an abstract, so fewer fields come back “not reported”. Scanned (image-only) PDFs won't work.</p>
     </div>
 
     <div class="mode" id="m-paste">
-      <label class="f">Question under comparison</label>
+      <label class="f">Question</label>
       <input id="q-paste" placeholder="e.g. Why do these trials disagree?" />
       <div class="row2">
         <div>
@@ -155,7 +172,7 @@
           <label class="f">Paper B — abstract / methods</label><textarea id="textB"></textarea>
         </div>
       </div>
-      <button class="btn" id="go-paste">Compare</button>
+      <button class="btn" id="go-paste">Compare studies →</button>
     </div>
 
     <div id="pipeline">
@@ -277,51 +294,61 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;',
 const NR = 'not reported';
 const cell = (f, grounded) => f.value === NR
   ? '<span class="nr">not reported</span>'
-  : esc(f.value) + (grounded ? '<span class="badge g" title="'+esc(f.quote||'')+'">✓ grounded</span>' : '');
+  : esc(f.value) + (grounded ? '<span class="badge g" title="Source: '+esc(f.quote||'')+'">✓ verified</span>' : '');
 
 function render(p) {
   const [a, b] = p.cards;
   const ga = p.grounding.a.results, gb = p.grounding.b.results;
   let h = '';
 
-  // 1. Verdict banner
+  // 1. Verdict
   h += p.comparison.findingsConflict
     ? '<div class="banner">These studies reach different conclusions</div>'
     : '<div class="banner agree">These studies do not clearly differ on this question</div>';
 
-  // 2. Answer first — the plain-language reason, before any table.
+  // 2. The answer — the plain-language reason, leading the page.
   h += '<h2>Why these studies differ</h2><div class="synth">' + esc(p.synthesis.text) +
-    (p.synthesis.grounded ? ' <span class="badge g"><i>✓</i> grounded</span>' : ' <span class="badge d">✗ unverified</span>') + '</div>';
+    (p.synthesis.grounded ? ' <span class="badge g"><i>✓</i> verified against source</span>' : ' <span class="badge d">✗ unverified</span>') + '</div>';
 
-  if (p.comparison.candidateReasons.length) {
-    h += '<p class="prov" style="margin:12px 0 0">Ranked candidate drivers (differing methods reported in both):</p><ol class="drivers">';
-    for (const r of p.comparison.candidateReasons)
-      h += '<li><b>' + esc(r.label) + '</b> — A: ' + esc(r.a) + ' · B: ' + esc(r.b) + '</li>';
-    h += '</ol>';
+  // 3. What's driving the difference — honest signals, no invented percentages.
+  const drivers = p.comparison.candidateReasons;
+  const ruledOut = p.comparison.sharedDesign || [];
+  if (drivers.length || ruledOut.length) {
+    h += '<h2>What’s driving the difference</h2><div class="drivers2">';
+    drivers.forEach((r, i) => {
+      const cls = i === 0 ? 'primary' : 'secondary';
+      const tag = i === 0 ? 'Primary driver' : 'Also differs';
+      h += '<div class="drow ' + cls + '"><span class="dtag">' + tag + '</span><div class="dbody"><b>' + esc(r.label) +
+        '</b><div class="dcmp"><span>A · ' + esc(r.a) + '</span><span>B · ' + esc(r.b) + '</span></div></div></div>';
+    });
+    if (ruledOut.length) {
+      h += '<div class="drow ruled"><span class="dtag">Ruled out</span><div class="dbody">Identical in both studies, so not the cause: <b>' +
+        ruledOut.map(esc).join(', ') + '</b></div></div>';
+    }
+    h += '</div>';
   }
 
-  // 3. Verification summary — lean into the differentiator.
-  const reported = (c, g) => p.comparison.rows.filter((r) => c[r.dimension].value !== NR).length;
-  const verified = reported(a, ga) + reported(b, gb);
-  h += '<div class="verified"><i>✓</i> All ' + verified + ' reported facts were verified against the source text. ' +
-    'Anything unsupported is shown as <span class="nr">not reported</span> — never guessed.</div>';
+  // 4. Verification summary — lean into the differentiator.
+  const reportedCount = (c) => p.comparison.rows.filter((r) => c[r.dimension].value !== NR).length;
+  const verified = reportedCount(a) + reportedCount(b);
+  h += '<div class="verified"><i>✓</i> All ' + verified + ' reported facts were verified against the source text — anything unsupported is shown as <span class="nr">not reported</span>, never guessed.</div>';
 
-  // 4. The proof — methodological comparison table.
-  h += '<h2>Methodological comparison</h2><table><tr><th>Dimension</th><th>' + esc(a.citation) +
-    ' <span class="prov">['+a.sourceDepth+']</span></th><th>' + esc(b.citation) +
-    ' <span class="prov">['+b.sourceDepth+']</span></th></tr>';
+  // 5. The proof — full comparison, collapsed by default so the story leads.
+  let rowsHtml = '';
   for (const row of p.comparison.rows) {
     const d = row.dimension;
-    h += '<tr class="' + (row.diverges ? 'diverge' : '') + '"><td class="dim">' + esc(row.label) + '</td><td>' +
+    rowsHtml += '<tr class="' + (row.diverges ? 'diverge' : '') + '"><td class="dim">' + esc(row.label) + '</td><td>' +
       cell(a[d], ga[d] && ga[d].grounded) + '</td><td>' + cell(b[d], gb[d] && gb[d].grounded) + '</td></tr>';
   }
-  h += '</table>';
+  h += '<details class="fullcmp"><summary>Full study-by-study comparison — all ' + p.comparison.rows.length + ' dimensions, each verified</summary>' +
+    '<table><tr><th>Dimension</th><th>' + esc(a.citation) + ' <span class="prov">[' + a.sourceDepth + ']</span></th><th>' +
+    esc(b.citation) + ' <span class="prov">[' + b.sourceDepth + ']</span></th></tr>' + rowsHtml + '</table></details>';
 
-  // 5. Bounded gaps
-  const gaps = [...p.gaps.sharedConstraints, ...p.gaps.unreported];
-  if (gaps.length) {
-    h += '<h2>Observed across these papers <span class="prov">(bounded — not a claim about all literature)</span></h2><ul class="gaps">';
-    for (const g of gaps) h += '<li>' + esc(g) + '</li>';
+  // 6. Honest, bounded observations — split into shared vs absent.
+  const unrep = p.gaps.unreported || [];
+  if (unrep.length) {
+    h += '<h2>Not reported by either study</h2><ul class="gaps">';
+    for (const g of unrep) h += '<li>' + esc(g) + '</li>';
     h += '</ul>';
   }
 
