@@ -14,7 +14,15 @@
   body { margin:0; background:var(--bg); color:var(--ink);
     font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
   a { color:var(--teal); }
-  .wrap { max-width:1080px; margin:0 auto; padding:22px 20px 80px; }
+  .wrap { max-width:1340px; margin:0 auto; padding:22px 20px 80px; }
+  .layout { display:grid; grid-template-columns:minmax(0,1fr) 316px; gap:24px; align-items:start; }
+  .col-side { position:sticky; top:16px; display:flex; flex-direction:column; gap:12px; }
+  .railrow { display:flex; gap:10px; align-items:flex-start; font-size:12.5px; padding:6px 0; }
+  .railrow:not(:last-child) { border-bottom:1px solid var(--line); padding-bottom:11px; }
+  .railrow svg { width:18px; height:18px; color:var(--teal); flex:0 0 auto; margin-top:1px; }
+  .railrow b { display:block; font-size:13px; margin-bottom:2px; }
+  .railrow span { color:var(--muted); }
+  @media (max-width:980px) { .layout { grid-template-columns:1fr; } .col-side { position:static; } }
 
   /* top bar */
   .topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:16px; flex-wrap:wrap; }
@@ -179,13 +187,10 @@
       <h1>Study<span>Diff</span></h1>
       <p>Understand why scientific studies reach different conclusions.</p>
     </div>
-    <div class="trust">
-      <div class="t"><svg class="tico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Every claim verified</b><span>grounded, not guessed</span></div></div>
-      <div class="t"><svg class="tico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg><div><b>Deterministic</b><span>no LLM-as-judge</span></div></div>
-      <div class="t"><svg class="tico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16"/></svg><div><b>Open source</b><span>MIT · <a href="https://github.com/nickjlamb/studydiff" target="_blank" rel="noopener">GitHub</a></span></div></div>
-    </div>
   </div>
 
+  <div class="layout">
+  <div class="col-main">
   <div class="card">
     <div class="hero">
       <div>
@@ -263,19 +268,31 @@
     </div>
 
     <div id="status"></div>
-
-    <div class="features">
-      <div class="feature"><svg class="fico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg><b>Every claim verified</b><p>Unsupported fields are shown as <span class="nr">not reported</span>, never guessed.</p></div>
-      <div class="feature"><svg class="fico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg><b>No LLM-as-judge</b><p>Deterministic verification — the same input always gives the same result.</p></div>
-      <div class="feature"><svg class="fico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg><b>Source-first</b><p>Every fact links to the exact supporting sentence in the paper.</p></div>
-      <div class="feature"><svg class="fico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V9M9 21V5M15 21v-8M21 21V3"/></svg><b>Honest by design</b><p>We show what the source says, and flag what it doesn't.</p></div>
-    </div>
   </div>
 
   <div id="out"></div>
+  </div><!-- col-main -->
 
-  <p class="foot">StudyDiff is built for scientists, by scientists · grounded with
-    <a href="https://github.com/nickjlamb/opengate" target="_blank" rel="noopener">OpenGATE</a> — deterministic, no LLM-as-judge.</p>
+  <aside class="col-side">
+    <div id="side-default">
+      <div class="scard">
+        <h4>Why trust this</h4>
+        <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Every claim verified</b><span>Unsupported fields are shown as <span class="nr">not reported</span>, never guessed.</span></div></div>
+        <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg><div><b>No LLM-as-judge</b><span>Deterministic verification — the same input always gives the same result.</span></div></div>
+        <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg><div><b>Source-first</b><span>Every fact links to the exact supporting sentence in the paper.</span></div></div>
+        <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V9M9 21V5M15 21v-8M21 21V3"/></svg><div><b>Honest by design</b><span>We show what the source says, and flag what it doesn't.</span></div></div>
+      </div>
+      <div class="scard">
+        <h4>Open source</h4>
+        <div class="sverify">MIT-licensed · grounded with <a href="https://github.com/nickjlamb/opengate" target="_blank" rel="noopener">OpenGATE</a>. <a href="https://github.com/nickjlamb/studydiff" target="_blank" rel="noopener">View on GitHub →</a></div>
+      </div>
+    </div>
+    <div id="side-results" hidden></div>
+  </aside>
+
+  </div><!-- layout -->
+
+  <p class="foot">StudyDiff is built for scientists, by scientists · grounded deterministically, no LLM-as-judge.</p>
 </div>
 
 <script>
@@ -359,6 +376,7 @@ function trackerReset() { $$('.tracker li').forEach((li) => li.classList.remove(
 async function run(body) {
   $('#go').disabled = true;
   trackerReset(); $('#out').classList.remove('show'); $('#out').innerHTML = '';
+  $('#side-default').hidden = false; const sr = $('#side-results'); sr.hidden = true; sr.innerHTML = '';
   try {
     const r = await fetch('/api/compare', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(body) });
     const reader = r.body.getReader(); const dec = new TextDecoder(); let buf = '';
@@ -405,13 +423,10 @@ function render(p) {
   const verified = reportedCount(a) + reportedCount(b);
   const unrep = p.gaps.unreported || [];
 
-  // Verdict (full width)
+  // ---- MAIN column: the answer + on-demand detail panels ----
   let h = p.comparison.findingsConflict
     ? '<div class="banner">These studies reach different conclusions</div>'
     : '<div class="banner agree">These studies do not clearly differ on this question</div>';
-
-  // ---- two-pane: the answer on the left, the trace + follow-ups on the right ----
-  h += '<div class="rgrid"><div class="rmain">';
 
   h += '<h3 class="sec">Why these studies differ</h3><div class="synth">' + esc(p.synthesis.text) +
     (p.synthesis.grounded ? ' <span class="badge g"><i>✓</i> verified against source</span>' : ' <span class="badge d">✗ unverified</span>') + '</div>';
@@ -432,31 +447,13 @@ function render(p) {
     }
     h += '</div>';
   }
-  h += '</div>'; // .rmain
 
-  // Sidebar: how it was produced + verification + follow-up actions
-  const stepDone = (label) => '<div class="sstep"><span class="sc">✓</span>' + label + '</div>';
-  h += '<aside class="rside">';
-  h += '<div class="scard"><h4>How this was produced</h4>' +
-    stepDone('Retrieved both papers') + stepDone('Extracted study designs') +
-    stepDone('Verified every claim') + stepDone('Compared the designs') + stepDone('Explained the difference') + '</div>';
-  h += '<div class="scard"><h4>Verification</h4><div class="sverify"><b>' + verified +
-    '</b> reported facts verified against the source. Deterministic — no LLM-as-judge; unsupported fields shown as <span class="nr">not reported</span>.</div></div>';
-  h += '<div class="scard"><h4>Explore further</h4>';
-  if (p.resolve && p.resolve.length) h += '<button class="sbtn" data-panel="resolve">What would resolve this?</button>';
-  h += '<button class="sbtn" data-panel="full">Full comparison · ' + p.comparison.rows.length + ' dimensions</button>';
-  if (unrep.length) h += '<button class="sbtn" data-panel="unrep">Not reported by either</button>';
-  h += '</div></aside></div>'; // .rside, .rgrid
-
-  // Detail region (full width) — revealed on demand from the sidebar
   h += '<div id="detail">';
-
   if (p.resolve && p.resolve.length) {
     h += '<div class="dpanel" id="d-resolve"><h3 class="sec">What would resolve this disagreement?</h3><ul class="resolve">';
     for (const r of p.resolve) h += '<li>' + esc(r) + '</li>';
     h += '</ul><p class="prov" style="margin-top:8px">Suggested next evidence, derived from the differences above — reasoning about what’s missing, not a claim from the papers.</p></div>';
   }
-
   let rows = '';
   for (const row of p.comparison.rows) {
     const d = row.dimension;
@@ -466,18 +463,30 @@ function render(p) {
   h += '<div class="dpanel" id="d-full"><h3 class="sec">Full study-by-study comparison</h3>' +
     '<table><tr><th>Dimension</th><th>' + esc(a.citation) + ' <span class="prov">[' + a.sourceDepth + ']</span></th><th>' +
     esc(b.citation) + ' <span class="prov">[' + b.sourceDepth + ']</span></th></tr>' + rows + '</table></div>';
-
   if (unrep.length) {
     h += '<div class="dpanel" id="d-unrep"><h3 class="sec">Not reported by either study</h3><ul class="gaps">';
     for (const g of unrep) h += '<li>' + esc(g) + '</li>';
     h += '</ul></div>';
   }
-  h += '</div>'; // #detail
-
+  h += '</div>';
   $('#out').innerHTML = h; $('#out').classList.add('show');
 
-  // Wire the sidebar toggles (accordion-style reveal in the detail region).
-  $$('.sbtn').forEach((btn) => btn.onclick = () => {
+  // ---- RAIL: how it was produced + verification + follow-up actions ----
+  const stepDone = (label) => '<div class="sstep"><span class="sc">✓</span>' + label + '</div>';
+  let s = '<div class="scard"><h4>How this was produced</h4>' +
+    stepDone('Retrieved both papers') + stepDone('Extracted study designs') +
+    stepDone('Verified every claim') + stepDone('Compared the designs') + stepDone('Explained the difference') + '</div>';
+  s += '<div class="scard"><h4>Verification</h4><div class="sverify"><b>' + verified +
+    '</b> reported facts verified against the source. Deterministic — no LLM-as-judge; unsupported fields shown as <span class="nr">not reported</span>.</div></div>';
+  s += '<div class="scard"><h4>Explore further</h4>';
+  if (p.resolve && p.resolve.length) s += '<button class="sbtn" data-panel="resolve">What would resolve this?</button>';
+  s += '<button class="sbtn" data-panel="full">Full comparison · ' + p.comparison.rows.length + ' dimensions</button>';
+  if (unrep.length) s += '<button class="sbtn" data-panel="unrep">Not reported by either</button>';
+  s += '</div>';
+  const sideR = $('#side-results'); sideR.innerHTML = s; sideR.hidden = false;
+  $('#side-default').hidden = true;
+
+  $$('.sbtn', sideR).forEach((btn) => btn.onclick = () => {
     const panel = $('#d-' + btn.dataset.panel);
     const open = panel.classList.toggle('open');
     btn.classList.toggle('active', open);
