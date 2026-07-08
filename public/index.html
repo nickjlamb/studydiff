@@ -451,9 +451,29 @@ function trackerActive(idx) {
 function trackerAllDone() { $$('.tracker li').forEach((li) => { li.classList.add('done'); li.classList.remove('active'); }); }
 function trackerReset() { $$('.tracker li').forEach((li) => li.classList.remove('done','active')); }
 
+// Progress model: extraction is ~90% of a run and verify/compare are sub-second, and the
+// event stream can arrive buffered behind the proxy — so we advance the tracker on a timer
+// (dwelling on "Extract evidence") and let real server events snap it forward. Never regresses,
+// never completes until the real result lands.
+const GENERIC = ['Retrieving papers…', 'Extracting study designs with Claude…', 'Verifying every claim against the source…', 'Comparing designs & explaining the difference…'];
+let progStep = -1, progTimer = null;
+function gotoStep(idx, label) {
+  if (idx > progStep) { progStep = idx; trackerActive(idx); }
+  setStatus(label || GENERIC[Math.min(progStep, GENERIC.length - 1)] || '');
+}
+function startProgress() {
+  stopProgress(); progStep = -1;
+  gotoStep(0);
+  const dwell = [700, 12000, 2600];  // hold on step0, then Extract (long), then Verify → Compare
+  let i = 0;
+  const tick = () => { if (++i > 3) return; gotoStep(i); if (i < 3) progTimer = setTimeout(tick, dwell[i]); };
+  progTimer = setTimeout(tick, dwell[0]);   // holds on Compare (step 3) until the real result arrives
+}
+function stopProgress() { if (progTimer) { clearTimeout(progTimer); progTimer = null; } }
+
 async function run(body) {
   $('#go').disabled = true;
-  trackerReset(); $('#out').classList.remove('show'); $('#out').innerHTML = '';
+  trackerReset(); startProgress(); $('#out').classList.remove('show'); $('#out').innerHTML = '';
   $('#side-default').hidden = false; const sr = $('#side-results'); sr.hidden = true; sr.innerHTML = '';
   try {
     const r = await fetch('/api/compare', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(body) });
@@ -467,23 +487,21 @@ async function run(body) {
       }
     }
   } catch (e) {
+    stopProgress();
     $('#out').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; $('#out').classList.add('show');
   } finally {
-    $('#go').disabled = false; setStatus('');
+    $('#go').disabled = false; stopProgress(); setStatus('');
   }
 }
 
 function handle(ev) {
   if (ev.type === 'step') {
-    const idx = TRACK[ev.id];
-    if (ev.status === 'active') trackerActive(idx);
-    if (ev.id === 'compare' && ev.status === 'done') trackerActive(4);
-    if (ev.label) setStatus(ev.label);   // live progress text so the wait never looks frozen
+    if (ev.status === 'active') gotoStep(TRACK[ev.id], ev.label);  // real events snap the tracker forward
   } else if (ev.type === 'error') {
-    trackerReset();
+    stopProgress(); trackerReset();
     $('#out').innerHTML = '<div class="err">' + esc(ev.message) + '</div>'; $('#out').classList.add('show');
   } else if (ev.type === 'result') {
-    trackerAllDone(); render(ev.payload);
+    stopProgress(); trackerAllDone(); render(ev.payload);
     $('#out').scrollIntoView({ behavior:'smooth', block:'start' });
   }
 }

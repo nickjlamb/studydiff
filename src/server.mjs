@@ -105,7 +105,8 @@ async function runStreaming(res, body, ip) {
   const isLive = mode === 'pmid' || mode === 'paste';
   const question = body.question || 'Why do these papers reach different conclusions?';
 
-  res.writeHead(200, { 'content-type': 'application/x-ndjson', 'cache-control': 'no-cache' });
+  res.writeHead(200, { 'content-type': 'application/x-ndjson', 'cache-control': 'no-cache', 'x-accel-buffering': 'no' });
+  res.flushHeaders?.();  // push headers immediately so the proxy opens the stream now, not at the end
 
   // Rate limit (protects the API budget); live calls also count toward a daily cap.
   const rl = limiter.check(ip, isLive);
