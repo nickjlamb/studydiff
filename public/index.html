@@ -160,6 +160,18 @@
 const $ = (s) => document.querySelector(s);
 const STEPS = ['fetch','extractA','extractB','verify','compare'];
 
+// When embedded (e.g. pharmatools.ai/studydiff), report our content height to the
+// parent so the iframe can grow to fit — no inner scrollbar. No-op when top-level.
+function postHeight() {
+  if (window.parent === window) return;
+  const h = Math.ceil(document.body.getBoundingClientRect().height) + 24;
+  window.parent.postMessage({ type: 'studydiff:height', height: h }, '*');
+}
+const debouncedPostHeight = (() => { let t; return () => { clearTimeout(t); t = setTimeout(postHeight, 60); }; })();
+window.addEventListener('load', debouncedPostHeight);
+window.addEventListener('resize', debouncedPostHeight);
+new ResizeObserver(debouncedPostHeight).observe(document.body);
+
 // tab switching
 document.querySelectorAll('.tab').forEach((t) => t.onclick = () => {
   document.querySelectorAll('.tab').forEach((x) => x.classList.remove('active'));

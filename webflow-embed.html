@@ -1,0 +1,27 @@
+<!-- Paste this into the Webflow code embed on pharmatools.ai/studydiff -->
+<div style="width:100%;max-width:1120px;margin:0 auto;">
+  <iframe
+    id="studydiff-frame"
+    src="https://studydiff.pharmatools.ai"
+    title="StudyDiff — why studies disagree"
+    loading="eager"
+    referrerpolicy="no-referrer"
+    scrolling="no"
+    style="width:100%;height:440px;border:0;border-radius:12px;background:#f6f7f9;transition:height .2s ease;">
+  </iframe>
+  <p style="font-size:13px;color:#6b7280;margin-top:8px;text-align:center;">
+    Not loading? Open <a href="https://studydiff.pharmatools.ai" target="_blank" rel="noopener">StudyDiff in a new tab</a>.
+  </p>
+</div>
+
+<!-- Auto-resize: the app posts its content height, so the frame grows/shrinks to fit
+     with no inner scrollbar. -->
+<script>
+  window.addEventListener('message', function (e) {
+    if (e.origin !== 'https://studydiff.pharmatools.ai') return;
+    if (e.data && e.data.type === 'studydiff:height' && typeof e.data.height === 'number') {
+      var f = document.getElementById('studydiff-frame');
+      if (f) f.style.height = Math.max(360, e.data.height) + 'px';
+    }
+  });
+</script>
