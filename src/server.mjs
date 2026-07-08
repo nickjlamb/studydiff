@@ -23,7 +23,7 @@ import { clientIp, createLimiter, createCache, securityHeaders } from './guard.m
 const here = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(here, '..');
 const PORT = process.env.PORT || 4173;
-const MAX_BODY = 100 * 1024;        // 100 KB — plenty for two abstracts / JSON
+const MAX_BODY = 8 * 1024 * 1024;   // 8 MB — holds two full-text PDFs' extracted text (JSON), not just abstracts
 const MAX_PDF = 15 * 1024 * 1024;   // 15 MB — a generous single-paper PDF ceiling
 
 // Domains allowed to embed the app in an iframe (so pharmatools.ai/studydiff can
