@@ -225,12 +225,7 @@
       <li id="t4"><span class="tnum">5</span><div><b>Explain why</b><i>Rank drivers</i></div></li>
     </ol>
 
-    <div class="qrow" style="margin-top:22px">
-      <label class="f">Research question <span style="color:var(--muted)">(optional)</span></label>
-      <input id="question" placeholder="e.g. Does resveratrol directly activate SIRT1?" />
-    </div>
-
-    <p class="audience">For researchers planning experiments, interpreting literature, and writing reviews.</p>
+    <p class="audience" style="margin-top:22px">For researchers planning experiments, interpreting literature, and writing reviews.</p>
 
     <div class="papers">
       <div class="paper" data-side="A">
@@ -332,7 +327,7 @@ $('#go').onclick = runCompare;
 $$('.exchip').forEach((c) => c.onclick = () => run({ mode:'demo', fixture:c.dataset.fixture }));
 
 // Enter submits from any single-line input (the paste textarea keeps Enter for newlines).
-$$('#question, .in-id, .in-cite').forEach((el) => el.addEventListener('keydown', (e) => {
+$$('.in-id, .in-cite').forEach((el) => el.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') { e.preventDefault(); runCompare(); }
 }));
 
@@ -371,7 +366,7 @@ async function runCompare() {
     const descA = await descriptorFor(a);
     const descB = await descriptorFor(b);
     setStatus('');
-    await run({ mode:'papers', question: $('#question').value.trim(), papers:[descA, descB] });
+    await run({ mode:'papers', papers:[descA, descB] });
   } catch (e) {
     setStatus('');
     $('#out').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; $('#out').classList.add('show');
