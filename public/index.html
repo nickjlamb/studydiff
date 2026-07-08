@@ -89,6 +89,22 @@
   .audience { margin:22px 0 0; font-size:13px; color:var(--muted); text-align:center; }
   label.f { display:block; font-size:12px; color:var(--muted); margin:0 0 5px; }
 
+  /* unified dropzone (initial state) → splits into Paper A / Paper B on first interaction */
+  .unified { border:1px solid var(--line); border-radius:12px; margin-top:24px; overflow:hidden; }
+  .useg { display:flex; gap:6px; padding:14px 16px 0; flex-wrap:wrap; }
+  .ubtn { display:inline-flex; align-items:center; gap:6px; padding:7px 13px; border:1px solid var(--line);
+    background:#fff; border-radius:8px; cursor:pointer; font-size:12px; color:var(--muted); font:inherit; }
+  .ubtn:hover { border-color:var(--teal); color:var(--teal); }
+  .dropzone { margin:14px 16px 16px; padding:38px 20px; text-align:center; cursor:pointer;
+    border:1.5px dashed var(--line); border-radius:10px; transition:background .15s, border-color .15s; }
+  .dropzone:hover, .dropzone.drag { background:#f0fdfa; border-color:var(--teal); }
+  .dz-title { font-size:15px; font-weight:600; color:var(--ink); }
+  .dz-sub { font-size:13px; color:var(--muted); margin-top:5px; }
+  .dropzone.drag .dz-title { color:var(--teal); }
+  .papers[hidden], .cta-wrap[hidden] { display:none; }
+  .paper.filled { border-color:var(--teal); background:#f7fdfb; }
+  .paper.filled .paper-head::after { content:"✓"; margin-left:auto; color:var(--teal); font-weight:700; }
+
   .examplesrow { display:flex; align-items:center; gap:10px; margin-top:16px; flex-wrap:wrap; }
   .examplesrow .lbl { font-size:12px; color:var(--muted); }
   .exchip { border:1px solid var(--line); background:#fff; border-radius:999px; padding:6px 13px; font-size:12px; cursor:pointer; color:var(--ink); }
@@ -227,7 +243,20 @@
 
     <p class="audience" style="margin-top:22px">For researchers planning experiments, interpreting literature, and writing reviews.</p>
 
-    <div class="papers">
+    <div class="unified" id="unified">
+      <div class="useg">
+        <button class="ubtn" id="u-upload" type="button"><svg class="sico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 0L8 7m4-4l4 4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>Upload PDFs</button>
+        <button class="ubtn" id="u-id" type="button"><svg class="sico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg>PMID / DOI</button>
+        <button class="ubtn" id="u-paste" type="button"><svg class="sico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4h8a2 2 0 012 2v14a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M9 10h6M9 14h6"/></svg>Paste</button>
+      </div>
+      <div class="dropzone" id="dropzone">
+        <div class="dz-title">Drag &amp; drop two papers here to compare</div>
+        <div class="dz-sub">or click to browse for PDFs — or pick PMID / DOI or Paste above</div>
+      </div>
+      <input type="file" id="u-file" accept="application/pdf,.pdf" multiple hidden />
+    </div>
+
+    <div class="papers" hidden>
       <div class="paper" data-side="A">
         <div class="paper-head"><span class="pchip">A</span> Paper A</div>
         <div class="seg">
@@ -266,7 +295,7 @@
       <button class="exchip" data-fixture="treg-stability">Treg lineage stability</button>
     </div>
 
-    <div class="cta-wrap">
+    <div class="cta-wrap" hidden>
       <button class="cta" id="go">Compare studies →</button>
       <div class="cta-note">No account needed. StudyDiff runs your comparison on PubMed and Claude; results are cached briefly to save cost.</div>
     </div>
@@ -330,6 +359,46 @@ $$('.exchip').forEach((c) => c.onclick = () => run({ mode:'demo', fixture:c.data
 $$('.in-id, .in-cite').forEach((el) => el.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') { e.preventDefault(); runCompare(); }
 }));
+
+// ---- Unified dropzone → dynamic split into Paper A / Paper B ----
+// One clean control up front; the moment the user acts it splits into the two-column
+// view so they can finish (or mix methods per paper). One-way transition.
+const [paperA, paperB] = $$('.paper');
+let didSplit = false;
+function splitInputs() {
+  if (didSplit) return; didSplit = true;
+  $('#unified').hidden = true;
+  $('.papers').hidden = false;
+  $('.cta-wrap').hidden = false;
+}
+function setMethod(paper, m) {
+  $$('.segbtn', paper).forEach((b) => b.classList.toggle('active', b.dataset.m === m));
+  $$('.minput', paper).forEach((x) => x.hidden = x.dataset.m !== m);
+}
+function assignFile(paper, file) {
+  const input = $('.in-file', paper);
+  const dt = new DataTransfer(); dt.items.add(file); input.files = dt.files; // so descriptorFor reads it
+  setMethod(paper, 'pdf');
+  paper.classList.add('filled');
+}
+function acceptFiles(list) {
+  const files = [...list].filter((f) => /pdf$/i.test(f.type) || /\.pdf$/i.test(f.name)).slice(0, 2);
+  if (!files.length) return;
+  splitInputs();
+  assignFile(paperA, files[0]);            // 2 files → A + B; 1 file → A only, B stays open
+  if (files[1]) assignFile(paperB, files[1]);
+}
+const uFile = $('#u-file');
+$('#u-upload').onclick = () => { if (!didSplit) uFile.click(); };
+$('#dropzone').onclick = () => { if (!didSplit) uFile.click(); };
+uFile.onchange = () => acceptFiles(uFile.files);
+$('#u-id').onclick = () => { if (didSplit) return; splitInputs(); setMethod(paperA, 'id'); setMethod(paperB, 'id'); $('.in-id', paperA).focus(); };
+$('#u-paste').onclick = () => { if (didSplit) return; splitInputs(); setMethod(paperA, 'text'); setMethod(paperB, 'text'); $('.in-text', paperA).focus(); };
+// Drag & drop anywhere on the unified container.
+const uni = $('#unified'), dz = $('#dropzone');
+['dragenter', 'dragover'].forEach((ev) => uni.addEventListener(ev, (e) => { e.preventDefault(); dz.classList.add('drag'); }));
+uni.addEventListener('dragleave', (e) => { e.preventDefault(); dz.classList.remove('drag'); });
+uni.addEventListener('drop', (e) => { e.preventDefault(); dz.classList.remove('drag'); acceptFiles(e.dataTransfer.files); });
 
 const setStatus = (msg) => { const s = $('#status'); if (!msg) { s.classList.remove('show'); s.textContent=''; } else { s.classList.add('show'); s.textContent = msg; } };
 
