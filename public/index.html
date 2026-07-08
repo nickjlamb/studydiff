@@ -331,6 +331,11 @@ $$('.paper').forEach((paper) => {
 $('#go').onclick = runCompare;
 $$('.exchip').forEach((c) => c.onclick = () => run({ mode:'demo', fixture:c.dataset.fixture }));
 
+// Enter submits from any single-line input (the paste textarea keeps Enter for newlines).
+$$('#question, .in-id, .in-cite').forEach((el) => el.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); runCompare(); }
+}));
+
 const setStatus = (msg) => { const s = $('#status'); if (!msg) { s.classList.remove('show'); s.textContent=''; } else { s.classList.add('show'); s.textContent = msg; } };
 
 async function extractPdf(file) {
