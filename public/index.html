@@ -432,13 +432,13 @@ async function descriptorFor(paper) {
 }
 
 async function runCompare() {
+  startProgress();   // highlight step 1 the moment the button is clicked, before the PDF read
   try {
     const [a, b] = $$('.paper');
-    setStatus('Reading papers…');
     const [descA, descB] = await Promise.all([descriptorFor(a), descriptorFor(b)]);  // read both PDFs in parallel
     await run({ mode:'papers', papers:[descA, descB] });
   } catch (e) {
-    setStatus('');
+    endProgress(); trackerReset(); setStatus('');
     $('#out').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; $('#out').classList.add('show');
   }
 }
@@ -455,21 +455,23 @@ function trackerReset() { $$('.tracker li').forEach((li) => li.classList.remove(
 // timing and is decoupled from the (proxy-buffered) step events, so nothing can make it race.
 // The real result completes it whenever it lands; if it lands before the march ends, we snap done.
 const GENERIC = ['Retrieving papers…', 'Extracting study designs…', 'Verifying every claim…', 'Comparing the designs…', 'Explaining the difference…'];
-let progTimer = null;
+let progTimer = null, progActive = false;
 function showStep(i) { trackerActive(i); setStatus(GENERIC[Math.min(i, GENERIC.length - 1)]); }
+function clearTimer() { if (progTimer) { clearInterval(progTimer); progTimer = null; } }
 function startProgress() {
-  stopProgress();
-  let i = 0; showStep(0);
+  if (progActive) return;   // already marching — started the instant Compare was clicked, so don't restart
+  progActive = true;
+  let i = 0; showStep(0);   // step 1 lights up immediately
   progTimer = setInterval(() => {
-    if (i >= GENERIC.length - 1) { stopProgress(); return; }  // reached the last step — hold until result
+    if (i >= GENERIC.length - 1) { clearTimer(); return; }  // reached the last step — hold until result
     showStep(++i);
   }, 3000);
 }
-function stopProgress() { if (progTimer) { clearInterval(progTimer); progTimer = null; } }
+function endProgress() { progActive = false; clearTimer(); }
 
 async function run(body) {
   $('#go').disabled = true;
-  trackerReset(); startProgress(); $('#out').classList.remove('show'); $('#out').innerHTML = '';
+  startProgress(); $('#out').classList.remove('show'); $('#out').innerHTML = '';   // no-op if runCompare already started it
   $('#side-default').hidden = false; const sr = $('#side-results'); sr.hidden = true; sr.innerHTML = '';
   try {
     const r = await fetch('/api/compare', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(body) });
@@ -483,20 +485,20 @@ async function run(body) {
       }
     }
   } catch (e) {
-    stopProgress();
+    endProgress();
     $('#out').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; $('#out').classList.add('show');
   } finally {
-    $('#go').disabled = false; stopProgress(); setStatus('');
+    $('#go').disabled = false; endProgress(); setStatus('');
   }
 }
 
 function handle(ev) {
   // 'step' events are intentionally ignored — the tracker is a cosmetic timed march (see startProgress).
   if (ev.type === 'error') {
-    stopProgress(); trackerReset();
+    endProgress(); trackerReset();
     $('#out').innerHTML = '<div class="err">' + esc(ev.message) + '</div>'; $('#out').classList.add('show');
   } else if (ev.type === 'result') {
-    stopProgress(); trackerAllDone(); render(ev.payload);
+    endProgress(); trackerAllDone(); render(ev.payload);
     $('#out').scrollIntoView({ behavior:'smooth', block:'start' });
   }
 }
