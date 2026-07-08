@@ -50,6 +50,7 @@ git clone https://github.com/nickjlamb/studydiff && cd studydiff
 npm install
 npm run demo                        # explains a real, famous contradiction
 npm run demo -- resveratrol-sirt1   # a second worked example
+npm run demo -- treg-stability      # a third: Treg lineage stability
 ```
 
 Run the web app:
@@ -96,8 +97,9 @@ StudyDiff's reliability comes from *how* it uses Claude, not just that it does:
 |---|---|---|
 | Do mouse models mimic human inflammation? | [Seok 2013](https://pubmed.ncbi.nlm.nih.gov/23401516/) vs [Takao & Miyakawa 2015](https://pubmed.ncbi.nlm.nih.gov/25092317/) | Same datasets, opposite conclusions — driven by the **gene-selection strategy**. |
 | Does resveratrol activate SIRT1? | [Howitz 2003](https://pubmed.ncbi.nlm.nih.gov/12939617/) vs [Beher 2009](https://pubmed.ncbi.nlm.nih.gov/19843076/) | An **assay artifact** — the Fluor de Lys peptide substrate vs. native substrates. |
+| Is the Treg lineage stable in vivo? | [Zhou 2009](https://pubmed.ncbi.nlm.nih.gov/19633673/) vs [Rubtsov 2010](https://pubmed.ncbi.nlm.nih.gov/20929851/) | A landmark T-cell controversy — stable vs. unstable, driven by the **fate-mapping method**. |
 
-Both ship as offline demos (`npm run demo` / `npm run demo -- resveratrol-sirt1`).
+All three ship as offline demos (`npm run demo` / `npm run demo -- resveratrol-sirt1` / `npm run demo -- treg-stability`).
 
 ## Using it
 

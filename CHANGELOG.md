@@ -6,6 +6,16 @@ All notable changes to StudyDiff are documented here. Format based on
 
 ## [Unreleased]
 
+### Added
+
+- Third worked example — **Treg lineage stability** ([Zhou 2009](https://pubmed.ncbi.nlm.nih.gov/19633673/)
+  vs [Rubtsov 2010](https://pubmed.ncbi.nlm.nih.gov/20929851/)): a landmark T-cell-immunology
+  controversy where the disagreement (stable vs. unstable Treg lineage) traces to the
+  fate-mapping method. Ships as an offline demo (`npm run demo -- treg-stability`) and a
+  one-click example in the web app.
+
+### Planned
+
 - Keyword search with a results picker (currently PMID/DOI only).
 - Source viewer that highlights each grounded quote in the original text.
 

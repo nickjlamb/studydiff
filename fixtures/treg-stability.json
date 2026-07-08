@@ -1,0 +1,47 @@
+{
+  "question": "Is the regulatory T cell (Treg) lineage stable in vivo?",
+  "note": "Real PubMed abstracts (retrieved verbatim). A landmark Treg-biology controversy (relevant to Gladstone's T-cell immunology): one paper reports that Foxp3+ Tregs are unstable and can convert into pathogenic effector cells, the other that the Treg lineage is notably stable. The disagreement traces to the fate-mapping method — a reporter that scored cells by transient/unstable Foxp3 expression versus an inducible pulse-label that tags only cells expressing Foxp3 at the time of labeling. Golden cards are example extractions; every quote is an exact substring of the paper text so OpenGATE grounding passes. Full text is not in the PMC Open Access subset for both, so sourceDepth is 'abstract' — StudyDiff surfaces that honestly.",
+  "naiveClaim": "Regulatory T cells are an inherently unstable lineage — they routinely lose Foxp3 and convert into pathogenic effector cells that drive autoimmunity.",
+  "papers": [
+    {
+      "pmid": "19633673",
+      "citation": "Zhou et al. 2009, Nat Immunol",
+      "title": "Instability of the transcription factor Foxp3 leads to the generation of pathogenic memory T cells in vivo",
+      "sourceDepth": "abstract",
+      "text": "Regulatory T cells (T(reg) cells) are central to the maintenance of immune homeostasis. However, little is known about the stability of T(reg) cells in vivo. In this study, we demonstrate that a substantial percentage of cells had transient or unstable expression of the transcription factor Foxp3. These 'exFoxp3' T cells had an activated-memory T cell phenotype and produced inflammatory cytokines. Moreover, exFoxp3 cell numbers were higher in inflamed tissues in autoimmune conditions. Adoptive transfer of autoreactive exFoxp3 cells led to the rapid onset of diabetes. Finally, analysis of the T cell receptor repertoire suggested that exFoxp3 cells developed from both natural and adaptive T(reg) cells. Thus, the generation of potentially autoreactive effector T cells as a consequence of Foxp3 instability has important implications for understanding autoimmune disease pathogenesis.",
+      "card": {
+        "finding": { "value": "Regulatory T cells are unstable — a substantial fraction lose Foxp3 and become pathogenic effector cells", "quote": "a substantial percentage of cells had transient or unstable expression of the transcription factor Foxp3" },
+        "species": { "value": "not reported", "quote": "" },
+        "model": { "value": "Natural and adaptive Treg cells followed in vivo", "quote": "exFoxp3 cells developed from both natural and adaptive T(reg) cells" },
+        "intervention": { "value": "Adoptive transfer of autoreactive exFoxp3 cells", "quote": "Adoptive transfer of autoreactive exFoxp3 cells" },
+        "assay": { "value": "Scored Treg fate by transient or unstable Foxp3 expression; T-cell receptor repertoire analysis", "quote": "transient or unstable expression of the transcription factor Foxp3" },
+        "dose": { "value": "not reported", "quote": "" },
+        "timing": { "value": "not reported", "quote": "" },
+        "endpoint": { "value": "Rapid onset of diabetes after adoptive transfer; inflammatory cytokine production", "quote": "led to the rapid onset of diabetes" },
+        "sampleSize": { "value": "not reported", "quote": "" },
+        "statistic": { "value": "not reported", "quote": "" },
+        "limitations": { "value": "Frames Foxp3 instability as relevant to autoimmune disease pathogenesis", "quote": "important implications for understanding autoimmune disease pathogenesis" }
+      }
+    },
+    {
+      "pmid": "20929851",
+      "citation": "Rubtsov et al. 2010, Science",
+      "title": "Stability of the regulatory T cell lineage in vivo",
+      "sourceDepth": "abstract",
+      "text": "Tissue maintenance and homeostasis can be achieved through the replacement of dying cells by differentiating precursors or self-renewal of terminally differentiated cells or relies heavily on cellular longevity in poorly regenerating tissues. Regulatory T cells (T(reg) cells) represent an actively dividing cell population with critical function in suppression of lethal immune-mediated inflammation. The plasticity of T(reg) cells has been actively debated because it could factor importantly in protective immunity or autoimmunity. By using inducible labeling and tracking of T(reg) cell fate in vivo, or transfers of highly purified T(reg) cells, we have demonstrated notable stability of this cell population under physiologic and inflammatory conditions. Our results suggest that self-renewal of mature T(reg) cells serves as a major mechanism of maintenance of the T(reg) cell lineage in adult mice.",
+      "card": {
+        "finding": { "value": "The regulatory T cell lineage is notably stable in vivo", "quote": "we have demonstrated notable stability of this cell population under physiologic and inflammatory conditions" },
+        "species": { "value": "Adult mice", "quote": "adult mice" },
+        "model": { "value": "Mature, self-renewing Treg cells followed in vivo", "quote": "self-renewal of mature T(reg) cells serves as a major mechanism of maintenance of the T(reg) cell lineage" },
+        "intervention": { "value": "Transfers of highly purified Treg cells", "quote": "transfers of highly purified T(reg) cells" },
+        "assay": { "value": "Inducible (pulse) labeling and fate-mapping of Treg cells in vivo", "quote": "By using inducible labeling and tracking of T(reg) cell fate in vivo" },
+        "dose": { "value": "not reported", "quote": "" },
+        "timing": { "value": "not reported", "quote": "" },
+        "endpoint": { "value": "Treg persistence under physiologic and inflammatory conditions", "quote": "under physiologic and inflammatory conditions" },
+        "sampleSize": { "value": "not reported", "quote": "" },
+        "statistic": { "value": "not reported", "quote": "" },
+        "limitations": { "value": "Proposes self-renewal as the major mechanism maintaining the Treg lineage", "quote": "self-renewal of mature T(reg) cells serves as a major mechanism of maintenance of the T(reg) cell lineage" }
+      }
+    }
+  ]
+}
