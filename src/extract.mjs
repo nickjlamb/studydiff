@@ -14,6 +14,10 @@ import { DIMENSIONS, DIMENSION_LABELS, NOT_REPORTED, field } from './types.mjs';
 
 const API = 'https://api.anthropic.com/v1/messages';
 const MODEL = process.env.STUDYDIFF_MODEL || 'claude-sonnet-5';
+// Extraction latency is dominated by input size (measured: ~7s on an abstract vs ~19s on
+// full text). We cap the text the model READS for extraction; grounding still runs against
+// the FULL source text, so quotes verify normally and anything past the cap is "not reported".
+const MAX_EXTRACT_CHARS = Number(process.env.STUDYDIFF_MAX_EXTRACT_CHARS) || 18000;
 
 // input_schema for the tool the model is forced to call.
 const fieldSchema = {
@@ -52,13 +56,14 @@ const DEBUG = process.env.STUDYDIFF_DEBUG === '1';
 
 /** A single extraction API call. Returns the tool_use input object (or null) plus metadata. */
 async function callExtract(paper, question, key, retryHint = '') {
+  const source = paper.text.length > MAX_EXTRACT_CHARS ? paper.text.slice(0, MAX_EXTRACT_CHARS) : paper.text;
   const userPrompt = `Question under comparison: ${question}
 
 Paper: ${paper.citation} — ${paper.title}
 Source depth: ${paper.sourceDepth}
 
 --- SOURCE TEXT START ---
-${paper.text}
+${source}
 --- SOURCE TEXT END ---
 
 Record every dimension (${DIMENSIONS.join(', ')}) via the record_study_card tool. Base every value only on the source text above.${retryHint}`;
