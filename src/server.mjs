@@ -66,14 +66,19 @@ const step = (res, id, status, label) => send(res, { type: 'step', id, status, l
 
 /** Extract both study cards concurrently, streaming per-paper progress. Halves the
  *  wall-clock vs. sequential extraction (two Claude calls) — the dominant cost of a run. */
-async function extractCardsStreaming(res, papers, question) {
-  return Promise.all(papers.map(async (p, i) => {
+async function extractCardsStreaming(res, papers, question, timings = {}) {
+  const t0 = Date.now();
+  const cards = await Promise.all(papers.map(async (p, i) => {
     const id = i === 0 ? 'extractA' : 'extractB';
+    const s = Date.now();
     step(res, id, 'active', `Extracting study design — ${p.citation}`);
     const card = await extractCard(p, question);
     step(res, id, 'done', `Study card ready — ${p.citation}`);
+    timings[`extract_${id}_ms`] = Date.now() - s;
     return card;
   }));
+  timings.extract_wall_ms = Date.now() - t0;
+  return cards;
 }
 
 async function readRaw(req, limit) {
@@ -104,6 +109,7 @@ async function runStreaming(res, body, ip) {
   const mode = body.mode || 'pmid';
   const isLive = mode === 'pmid' || mode === 'paste';
   const question = body.question || 'Why do these papers reach different conclusions?';
+  const timings = { _start: Date.now() };  // phase timings, attached to the result payload for benchmarking
 
   res.writeHead(200, { 'content-type': 'application/x-ndjson', 'cache-control': 'no-cache', 'x-accel-buffering': 'no' });
   res.flushHeaders?.();  // push headers immediately so the proxy opens the stream now, not at the end
@@ -140,7 +146,7 @@ async function runStreaming(res, body, ip) {
       step(res, 'extractB', 'done', `Study card ready — ${papers[1].citation}`);
       cards = papers.map(cardFromFixturePaper);
       // buildResult grounds then compares; return question from fixture if none given.
-      finishAndSend(res, fx.question || question, cards, texts, key);
+      finishAndSend(res, fx.question || question, cards, texts, key, timings);
       return;
     }
 
@@ -150,8 +156,8 @@ async function runStreaming(res, body, ip) {
       step(res, 'fetch', 'done', 'Using pasted text');
       texts = papers.map((p) => p.text || '');
       const pasteObjs = papers.map((pp, i) => ({ pmid: '', citation: pp.citation || `Paper ${i + 1}`, title: pp.title || '', text: texts[i], sourceDepth: 'pasted' }));
-      cards = await extractCardsStreaming(res, pasteObjs, question);
-      finishAndSend(res, question, cards, texts, key);
+      cards = await extractCardsStreaming(res, pasteObjs, question, timings);
+      finishAndSend(res, question, cards, texts, key, timings);
       return;
     }
 
@@ -175,8 +181,8 @@ async function runStreaming(res, body, ip) {
       }
       texts = papers.map((p) => p.text);
       step(res, 'fetch', 'done', `Fetched: ${papers.map((p) => `${p.citation} [${p.sourceDepth}]`).join('  ·  ')}`);
-      cards = await extractCardsStreaming(res, papers, question);
-      finishAndSend(res, question, cards, texts, key);
+      cards = await extractCardsStreaming(res, papers, question, timings);
+      finishAndSend(res, question, cards, texts, key, timings);
       return;
     }
 
@@ -188,22 +194,25 @@ async function runStreaming(res, body, ip) {
     for (const pmid of pmids) papers.push(await fetchPaper(pmid)); // sequential — NCBI rate limits
     texts = papers.map((p) => p.text);
     step(res, 'fetch', 'done', `Fetched: ${papers.map((p) => `${p.citation} [${p.sourceDepth}]`).join('  ·  ')}`);
-    cards = await extractCardsStreaming(res, papers, question);
-    finishAndSend(res, question, cards, texts, key);
+    cards = await extractCardsStreaming(res, papers, question, timings);
+    finishAndSend(res, question, cards, texts, key, timings);
   } catch (err) {
     send(res, { type: 'error', message: err.message });
     res.end();
   }
 }
 
-async function finishAndSend(res, question, cards, texts, key) {
+async function finishAndSend(res, question, cards, texts, key, timings = {}) {
   step(res, 'verify', 'active', 'Verifying every claim against the source (OpenGATE)');
-  await sleep(300);
+  const gs = Date.now();
   const result = buildResult(question, cards, texts);
+  timings.ground_ms = Date.now() - gs;
   step(res, 'verify', 'done', 'Grounding complete');
   step(res, 'compare', 'active', 'Explaining the disagreement');
-  await sleep(200);
   step(res, 'compare', 'done', 'Comparison ready');
+  if (timings._start) { timings.total_ms = Date.now() - timings._start; delete timings._start; }
+  result.timings = timings;
+  console.log('[timings]', JSON.stringify(timings));
   if (key) cache.set(key, result);
   send(res, { type: 'result', payload: result });
   res.end();
