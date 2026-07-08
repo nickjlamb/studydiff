@@ -68,6 +68,10 @@ export function createCache({ max = 200, ttlMs = 6 * 3600_000 } = {}) {
 export function securityHeaders(res, { embedOrigins = "'self'" } = {}) {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'no-referrer');
+  // Tell browsers to always use HTTPS for this host, so a stale http:// visit
+  // can never show "Not Secure". Railway terminates TLS and already redirects
+  // http→https; this makes the browser upgrade before it even requests http.
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000');
   res.setHeader('Content-Security-Policy', [
     "default-src 'self'",
     "img-src 'self' data:",
@@ -75,5 +79,6 @@ export function securityHeaders(res, { embedOrigins = "'self'" } = {}) {
     "script-src 'self' 'unsafe-inline'",
     "connect-src 'self'",
     `frame-ancestors ${embedOrigins}`,
+    'upgrade-insecure-requests',
   ].join('; '));
 }
