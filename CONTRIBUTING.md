@@ -41,3 +41,19 @@ Add a `fixtures/<name>.json` with two `papers` (verbatim `text`, plus an example
 - Keep values concise; quotes must be copied verbatim from the source.
 - Match the existing style; no new runtime dependencies without discussion.
 - Open an issue before large changes.
+
+## Tests & CI
+
+There's no heavy test harness — the offline demos are the smoke test, and they run in CI
+([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) on every push and PR. Before opening a PR:
+
+```bash
+for f in src/*.mjs; do node --check "$f"; done   # syntax
+npm run demo                                     # mouse-model example
+npm run demo -- resveratrol-sirt1                # resveratrol example
+```
+
+CI also asserts the grounding check is discriminating (a fabricated number is rejected, a
+real one passes) — if you touch `src/grounding.mjs`, keep that property.
+
+See [ROADMAP.md](ROADMAP.md) for where the project is heading and good places to start.
