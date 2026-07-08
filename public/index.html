@@ -135,6 +135,26 @@
   details.fullcmp summary:before { content:"▸"; font-size:11px; }
   details.fullcmp[open] summary:before { content:"▾"; }
   details.fullcmp table { margin-top:12px; }
+  /* two-pane results */
+  .rgrid { display:grid; grid-template-columns:minmax(0,1fr) 296px; gap:22px; align-items:start; }
+  .rmain h3.sec:first-child { margin-top:0; }
+  .rside { display:flex; flex-direction:column; gap:12px; position:sticky; top:16px; }
+  .scard { border:1px solid var(--line); border-radius:12px; background:#fff; padding:14px 15px; }
+  .scard h4 { margin:0 0 10px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .sstep { display:flex; align-items:center; gap:9px; font-size:12.5px; padding:3px 0; color:var(--ink); }
+  .sstep .sc { width:16px; height:16px; border-radius:50%; background:var(--teal); color:#fff; display:flex;
+    align-items:center; justify-content:center; font-size:9px; flex:0 0 auto; }
+  .sverify { font-size:12.5px; color:#374151; line-height:1.5; }
+  .sverify b { color:var(--green); font-size:15px; }
+  .sverify .nr { color:#9ca3af; font-style:italic; }
+  .sbtn { display:block; width:100%; text-align:left; border:1px solid var(--line); background:#fff; border-radius:8px;
+    padding:9px 11px; font-size:12.5px; cursor:pointer; margin-top:7px; color:var(--ink); }
+  .sbtn:first-of-type { margin-top:0; }
+  .sbtn:hover { border-color:var(--teal); color:var(--teal); }
+  .sbtn.active { border-color:var(--teal); background:#f0fdfa; color:var(--teal); font-weight:600; }
+  #detail { margin-top:8px; }
+  .dpanel { display:none; } .dpanel.open { display:block; }
+  @media (max-width:820px) { .rgrid { grid-template-columns:1fr; } .rside { position:static; } }
   ul.resolve { list-style:none; margin:6px 0 0; padding:0; display:flex; flex-direction:column; gap:8px; }
   ul.resolve li { position:relative; padding:11px 14px 11px 40px; border:1px solid var(--line); border-radius:10px; background:#fff; font-size:13px; }
   ul.resolve li:before { content:"→"; position:absolute; left:15px; top:11px; color:var(--teal); font-weight:700; }
@@ -381,11 +401,17 @@ const cell = (f, grounded) => f.value === NR
 function render(p) {
   const [a, b] = p.cards;
   const ga = p.grounding.a.results, gb = p.grounding.b.results;
-  let h = '';
+  const reportedCount = (c) => p.comparison.rows.filter((r) => c[r.dimension].value !== NR).length;
+  const verified = reportedCount(a) + reportedCount(b);
+  const unrep = p.gaps.unreported || [];
 
-  h += p.comparison.findingsConflict
+  // Verdict (full width)
+  let h = p.comparison.findingsConflict
     ? '<div class="banner">These studies reach different conclusions</div>'
     : '<div class="banner agree">These studies do not clearly differ on this question</div>';
+
+  // ---- two-pane: the answer on the left, the trace + follow-ups on the right ----
+  h += '<div class="rgrid"><div class="rmain">';
 
   h += '<h3 class="sec">Why these studies differ</h3><div class="synth">' + esc(p.synthesis.text) +
     (p.synthesis.grounded ? ' <span class="badge g"><i>✓</i> verified against source</span>' : ' <span class="badge d">✗ unverified</span>') + '</div>';
@@ -406,16 +432,30 @@ function render(p) {
     }
     h += '</div>';
   }
+  h += '</div>'; // .rmain
+
+  // Sidebar: how it was produced + verification + follow-up actions
+  const stepDone = (label) => '<div class="sstep"><span class="sc">✓</span>' + label + '</div>';
+  h += '<aside class="rside">';
+  h += '<div class="scard"><h4>How this was produced</h4>' +
+    stepDone('Retrieved both papers') + stepDone('Extracted study designs') +
+    stepDone('Verified every claim') + stepDone('Compared the designs') + stepDone('Explained the difference') + '</div>';
+  h += '<div class="scard"><h4>Verification</h4><div class="sverify"><b>' + verified +
+    '</b> reported facts verified against the source. Deterministic — no LLM-as-judge; unsupported fields shown as <span class="nr">not reported</span>.</div></div>';
+  h += '<div class="scard"><h4>Explore further</h4>';
+  if (p.resolve && p.resolve.length) h += '<button class="sbtn" data-panel="resolve">What would resolve this?</button>';
+  h += '<button class="sbtn" data-panel="full">Full comparison · ' + p.comparison.rows.length + ' dimensions</button>';
+  if (unrep.length) h += '<button class="sbtn" data-panel="unrep">Not reported by either</button>';
+  h += '</div></aside></div>'; // .rside, .rgrid
+
+  // Detail region (full width) — revealed on demand from the sidebar
+  h += '<div id="detail">';
 
   if (p.resolve && p.resolve.length) {
-    h += '<h3 class="sec">What would resolve this disagreement?</h3><ul class="resolve">';
+    h += '<div class="dpanel" id="d-resolve"><h3 class="sec">What would resolve this disagreement?</h3><ul class="resolve">';
     for (const r of p.resolve) h += '<li>' + esc(r) + '</li>';
-    h += '</ul><p class="prov" style="margin-top:8px">Suggested next evidence, derived from the differences above — reasoning about what’s missing, not a claim from the papers.</p>';
+    h += '</ul><p class="prov" style="margin-top:8px">Suggested next evidence, derived from the differences above — reasoning about what’s missing, not a claim from the papers.</p></div>';
   }
-
-  const reportedCount = (c) => p.comparison.rows.filter((r) => c[r.dimension].value !== NR).length;
-  const verified = reportedCount(a) + reportedCount(b);
-  h += '<div class="verified"><i>✓</i> All ' + verified + ' reported facts were verified against the source text — anything unsupported is shown as <span class="nr">not reported</span>, never guessed.</div>';
 
   let rows = '';
   for (const row of p.comparison.rows) {
@@ -423,18 +463,26 @@ function render(p) {
     rows += '<tr class="' + (row.diverges ? 'diverge' : '') + '"><td class="dim">' + esc(row.label) + '</td><td>' +
       cell(a[d], ga[d] && ga[d].grounded) + '</td><td>' + cell(b[d], gb[d] && gb[d].grounded) + '</td></tr>';
   }
-  h += '<details class="fullcmp"><summary>Full study-by-study comparison — all ' + p.comparison.rows.length + ' dimensions, each verified</summary>' +
+  h += '<div class="dpanel" id="d-full"><h3 class="sec">Full study-by-study comparison</h3>' +
     '<table><tr><th>Dimension</th><th>' + esc(a.citation) + ' <span class="prov">[' + a.sourceDepth + ']</span></th><th>' +
-    esc(b.citation) + ' <span class="prov">[' + b.sourceDepth + ']</span></th></tr>' + rows + '</table></details>';
+    esc(b.citation) + ' <span class="prov">[' + b.sourceDepth + ']</span></th></tr>' + rows + '</table></div>';
 
-  const unrep = p.gaps.unreported || [];
   if (unrep.length) {
-    h += '<h3 class="sec">Not reported by either study</h3><ul class="gaps">';
+    h += '<div class="dpanel" id="d-unrep"><h3 class="sec">Not reported by either study</h3><ul class="gaps">';
     for (const g of unrep) h += '<li>' + esc(g) + '</li>';
-    h += '</ul>';
+    h += '</ul></div>';
   }
+  h += '</div>'; // #detail
 
   $('#out').innerHTML = h; $('#out').classList.add('show');
+
+  // Wire the sidebar toggles (accordion-style reveal in the detail region).
+  $$('.sbtn').forEach((btn) => btn.onclick = () => {
+    const panel = $('#d-' + btn.dataset.panel);
+    const open = panel.classList.toggle('open');
+    btn.classList.toggle('active', open);
+    if (open) panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  });
 }
 </script>
 </body>
