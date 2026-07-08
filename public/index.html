@@ -57,12 +57,16 @@
   .vs { display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:var(--muted);
     letter-spacing:.05em; padding-top:52px; }
   .seg { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
-  .segbtn { padding:6px 11px; border:1px solid var(--line); background:#fff; border-radius:8px; cursor:pointer;
-    font-size:12px; color:var(--muted); }
+  .segbtn { display:inline-flex; align-items:center; gap:6px; padding:6px 11px; border:1px solid var(--line);
+    background:#fff; border-radius:8px; cursor:pointer; font-size:12px; color:var(--muted); }
   .segbtn.active { background:var(--teal); color:#fff; border-color:var(--teal); }
+  .sico { width:13px; height:13px; flex:0 0 auto; }
   .minput[hidden] { display:none; }
   input, textarea { width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:8px; font:inherit; background:#fff; }
-  input[type=file] { padding:8px; font-size:13px; }
+  input[type=file] { padding:7px 9px; font-size:13px; color:var(--muted); cursor:pointer; }
+  input[type=file]::file-selector-button { border:1px solid var(--line); background:#fff; color:var(--ink);
+    padding:7px 13px; border-radius:8px; margin-right:12px; cursor:pointer; font:inherit; font-size:13px; font-weight:500; }
+  input[type=file]::file-selector-button:hover { border-color:var(--teal); color:var(--teal); background:#f0fdfa; }
   textarea { min-height:110px; resize:vertical; font-size:13px; margin-top:8px; }
   .cite { margin-bottom:0; }
   .qrow { margin-bottom:2px; }
@@ -196,12 +200,12 @@
       <div class="paper" data-side="A">
         <div class="paper-head"><span class="pchip">A</span> Paper A</div>
         <div class="seg">
-          <button class="segbtn active" data-m="id">PMID / DOI</button>
-          <button class="segbtn" data-m="pdf">Upload PDF</button>
-          <button class="segbtn" data-m="text">Paste</button>
+          <button class="segbtn active" data-m="pdf"><svg class="sico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 0L8 7m4-4l4 4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>Upload PDF</button>
+          <button class="segbtn" data-m="id"><svg class="sico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg>PMID / DOI</button>
+          <button class="segbtn" data-m="text"><svg class="sico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4h8a2 2 0 012 2v14a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M9 10h6M9 14h6"/></svg>Paste</button>
         </div>
-        <div class="minput" data-m="id"><input class="in-id" placeholder="PMID or DOI — e.g. 12939617" /></div>
-        <div class="minput" data-m="pdf" hidden><input type="file" class="in-file" accept="application/pdf,.pdf" /></div>
+        <div class="minput" data-m="id" hidden><input class="in-id" placeholder="PMID or DOI — e.g. 12939617" /></div>
+        <div class="minput" data-m="pdf"><input type="file" class="in-file" accept="application/pdf,.pdf" /></div>
         <div class="minput" data-m="text" hidden>
           <input class="in-cite cite" placeholder="Citation (optional)" />
           <textarea class="in-text" placeholder="Paste the abstract or methods…"></textarea>
@@ -211,12 +215,12 @@
       <div class="paper" data-side="B">
         <div class="paper-head"><span class="pchip">B</span> Paper B</div>
         <div class="seg">
-          <button class="segbtn active" data-m="id">PMID / DOI</button>
-          <button class="segbtn" data-m="pdf">Upload PDF</button>
-          <button class="segbtn" data-m="text">Paste</button>
+          <button class="segbtn active" data-m="pdf"><svg class="sico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 0L8 7m4-4l4 4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>Upload PDF</button>
+          <button class="segbtn" data-m="id"><svg class="sico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg>PMID / DOI</button>
+          <button class="segbtn" data-m="text"><svg class="sico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4h8a2 2 0 012 2v14a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M9 10h6M9 14h6"/></svg>Paste</button>
         </div>
-        <div class="minput" data-m="id"><input class="in-id" placeholder="PMID or DOI — e.g. 19843076" /></div>
-        <div class="minput" data-m="pdf" hidden><input type="file" class="in-file" accept="application/pdf,.pdf" /></div>
+        <div class="minput" data-m="id" hidden><input class="in-id" placeholder="PMID or DOI — e.g. 19843076" /></div>
+        <div class="minput" data-m="pdf"><input type="file" class="in-file" accept="application/pdf,.pdf" /></div>
         <div class="minput" data-m="text" hidden>
           <input class="in-cite cite" placeholder="Citation (optional)" />
           <textarea class="in-text" placeholder="Paste the abstract or methods…"></textarea>
