@@ -444,32 +444,28 @@ async function runCompare() {
 }
 
 // ---- pipeline run + step tracker ----
-const TRACK = { fetch:0, extractA:1, extractB:1, verify:2, compare:3 };
 function trackerActive(idx) {
   $$('.tracker li').forEach((li, i) => { li.classList.toggle('done', i < idx); li.classList.toggle('active', i === idx); });
 }
 function trackerAllDone() { $$('.tracker li').forEach((li) => { li.classList.add('done'); li.classList.remove('active'); }); }
 function trackerReset() { $$('.tracker li').forEach((li) => li.classList.remove('done','active')); }
 
-// Progress model: extraction is ~90% of a run and verify/compare are sub-second, and the
-// event stream can arrive buffered behind the proxy — so we advance the tracker on a timer
-// (dwelling on "Extract evidence") and let real server events snap it forward. Never regresses,
-// never completes until the real result lands.
-const GENERIC = ['Retrieving papers…', 'Extracting study designs with Claude…', 'Verifying every claim against the source…', 'Comparing designs & explaining the difference…'];
-let progStep = -1, progTimer = null;
-function gotoStep(idx, label) {
-  if (idx > progStep) { progStep = idx; trackerActive(idx); }
-  setStatus(label || GENERIC[Math.min(progStep, GENERIC.length - 1)] || '');
-}
+// Purely cosmetic progress: march the tracker through all five steps, ~3s each, so the user
+// always sees steady movement during the wait. It deliberately does NOT mirror exact backend
+// timing and is decoupled from the (proxy-buffered) step events, so nothing can make it race.
+// The real result completes it whenever it lands; if it lands before the march ends, we snap done.
+const GENERIC = ['Retrieving papers…', 'Extracting study designs…', 'Verifying every claim…', 'Comparing the designs…', 'Explaining the difference…'];
+let progTimer = null;
+function showStep(i) { trackerActive(i); setStatus(GENERIC[Math.min(i, GENERIC.length - 1)]); }
 function startProgress() {
-  stopProgress(); progStep = -1;
-  gotoStep(0);
-  const dwell = [700, 12000, 2600];  // hold on step0, then Extract (long), then Verify → Compare
-  let i = 0;
-  const tick = () => { if (++i > 3) return; gotoStep(i); if (i < 3) progTimer = setTimeout(tick, dwell[i]); };
-  progTimer = setTimeout(tick, dwell[0]);   // holds on Compare (step 3) until the real result arrives
+  stopProgress();
+  let i = 0; showStep(0);
+  progTimer = setInterval(() => {
+    if (i >= GENERIC.length - 1) { stopProgress(); return; }  // reached the last step — hold until result
+    showStep(++i);
+  }, 3000);
 }
-function stopProgress() { if (progTimer) { clearTimeout(progTimer); progTimer = null; } }
+function stopProgress() { if (progTimer) { clearInterval(progTimer); progTimer = null; } }
 
 async function run(body) {
   $('#go').disabled = true;
@@ -495,9 +491,8 @@ async function run(body) {
 }
 
 function handle(ev) {
-  if (ev.type === 'step') {
-    if (ev.status === 'active') gotoStep(TRACK[ev.id], ev.label);  // real events snap the tracker forward
-  } else if (ev.type === 'error') {
+  // 'step' events are intentionally ignored — the tracker is a cosmetic timed march (see startProgress).
+  if (ev.type === 'error') {
     stopProgress(); trackerReset();
     $('#out').innerHTML = '<div class="err">' + esc(ev.message) + '</div>'; $('#out').classList.add('show');
   } else if (ev.type === 'result') {
