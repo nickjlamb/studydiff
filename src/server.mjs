@@ -64,6 +64,18 @@ function cardFromFixturePaper(p) {
 const send = (res, obj) => res.write(JSON.stringify(obj) + '\n');
 const step = (res, id, status, label) => send(res, { type: 'step', id, status, label });
 
+/** Extract both study cards concurrently, streaming per-paper progress. Halves the
+ *  wall-clock vs. sequential extraction (two Claude calls) — the dominant cost of a run. */
+async function extractCardsStreaming(res, papers, question) {
+  return Promise.all(papers.map(async (p, i) => {
+    const id = i === 0 ? 'extractA' : 'extractB';
+    step(res, id, 'active', `Extracting study design — ${p.citation}`);
+    const card = await extractCard(p, question);
+    step(res, id, 'done', `Study card ready — ${p.citation}`);
+    return card;
+  }));
+}
+
 async function readRaw(req, limit) {
   const chunks = [];
   let size = 0;
@@ -136,14 +148,8 @@ async function runStreaming(res, body, ip) {
       if (papers.length !== 2) throw new Error('Provide two papers (title + text) to compare.');
       step(res, 'fetch', 'done', 'Using pasted text');
       texts = papers.map((p) => p.text || '');
-      cards = [];
-      for (let i = 0; i < papers.length; i++) {
-        const id = i === 0 ? 'extractA' : 'extractB';
-        const p = { pmid: '', citation: papers[i].citation || `Paper ${i + 1}`, title: papers[i].title || '', text: texts[i], sourceDepth: 'pasted' };
-        step(res, id, 'active', `Extracting study design — ${p.citation}`);
-        cards.push(await extractCard(p, question));
-        step(res, id, 'done', `Study card ready — ${p.citation}`);
-      }
+      const pasteObjs = papers.map((pp, i) => ({ pmid: '', citation: pp.citation || `Paper ${i + 1}`, title: pp.title || '', text: texts[i], sourceDepth: 'pasted' }));
+      cards = await extractCardsStreaming(res, pasteObjs, question);
       finishAndSend(res, question, cards, texts, key);
       return;
     }
@@ -168,13 +174,7 @@ async function runStreaming(res, body, ip) {
       }
       texts = papers.map((p) => p.text);
       step(res, 'fetch', 'done', `Fetched: ${papers.map((p) => `${p.citation} [${p.sourceDepth}]`).join('  ·  ')}`);
-      cards = [];
-      for (let i = 0; i < papers.length; i++) {
-        const id = i === 0 ? 'extractA' : 'extractB';
-        step(res, id, 'active', `Extracting study design — ${papers[i].citation}`);
-        cards.push(await extractCard(papers[i], question));
-        step(res, id, 'done', `Study card ready — ${papers[i].citation}`);
-      }
+      cards = await extractCardsStreaming(res, papers, question);
       finishAndSend(res, question, cards, texts, key);
       return;
     }
@@ -187,13 +187,7 @@ async function runStreaming(res, body, ip) {
     for (const pmid of pmids) papers.push(await fetchPaper(pmid)); // sequential — NCBI rate limits
     texts = papers.map((p) => p.text);
     step(res, 'fetch', 'done', `Fetched: ${papers.map((p) => `${p.citation} [${p.sourceDepth}]`).join('  ·  ')}`);
-    cards = [];
-    for (let i = 0; i < papers.length; i++) {
-      const id = i === 0 ? 'extractA' : 'extractB';
-      step(res, id, 'active', `Extracting study design — ${papers[i].citation}`);
-      cards.push(await extractCard(papers[i], question));
-      step(res, id, 'done', `Study card ready — ${papers[i].citation}`);
-    }
+    cards = await extractCardsStreaming(res, papers, question);
     finishAndSend(res, question, cards, texts, key);
   } catch (err) {
     send(res, { type: 'error', message: err.message });

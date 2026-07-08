@@ -125,7 +125,10 @@
 
   /* live status */
   #status { margin-top:14px; font-size:13px; color:var(--muted); display:none; }
-  #status.show { display:block; }
+  #status.show { display:flex; align-items:center; justify-content:center; gap:8px; }
+  #status.show::before { content:''; width:13px; height:13px; flex:0 0 auto; border:2px solid var(--line);
+    border-top-color:var(--teal); border-radius:50%; animation:spin .7s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
 
   /* results */
   #out { margin-top:22px; display:none; } #out.show { display:block; }
@@ -430,11 +433,9 @@ async function descriptorFor(paper) {
 
 async function runCompare() {
   try {
-    setStatus('');
     const [a, b] = $$('.paper');
-    const descA = await descriptorFor(a);
-    const descB = await descriptorFor(b);
-    setStatus('');
+    setStatus('Reading papers…');
+    const [descA, descB] = await Promise.all([descriptorFor(a), descriptorFor(b)]);  // read both PDFs in parallel
     await run({ mode:'papers', papers:[descA, descB] });
   } catch (e) {
     setStatus('');
@@ -477,6 +478,7 @@ function handle(ev) {
     const idx = TRACK[ev.id];
     if (ev.status === 'active') trackerActive(idx);
     if (ev.id === 'compare' && ev.status === 'done') trackerActive(4);
+    if (ev.label) setStatus(ev.label);   // live progress text so the wait never looks frozen
   } else if (ev.type === 'error') {
     trackerReset();
     $('#out').innerHTML = '<div class="err">' + esc(ev.message) + '</div>'; $('#out').classList.add('show');
