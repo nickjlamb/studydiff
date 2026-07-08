@@ -8,6 +8,7 @@ import { fetchPaper } from './ncbi.mjs';
 import { extractCard } from './extract.mjs';
 import { compareCards } from './compare.mjs';
 import { findGaps } from './gaps.mjs';
+import { resolvingEvidence } from './resolve.mjs';
 import { groundCard, groundSynthesis } from './grounding.mjs';
 
 /** Join words as "a", "a and b", or "a, b and c". */
@@ -76,7 +77,8 @@ export function buildResult(question, cards, texts) {
   const combined = `${texts[0]}\n\n${texts[1]}`;
   const g = groundSynthesis(synth.text, combined);
   const synthesis = { ...synth, grounded: g.grounded, issues: g.issues };
-  return { question, cards: clean, comparison, gaps, grounding, synthesis };
+  const resolve = resolvingEvidence(comparison);
+  return { question, cards: clean, comparison, gaps, grounding, synthesis, resolve };
 }
 
 /** Return a copy of the card with each ungrounded dimension reset to "not reported". */

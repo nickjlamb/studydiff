@@ -135,6 +135,9 @@
   details.fullcmp summary:before { content:"▸"; font-size:11px; }
   details.fullcmp[open] summary:before { content:"▾"; }
   details.fullcmp table { margin-top:12px; }
+  ul.resolve { list-style:none; margin:6px 0 0; padding:0; display:flex; flex-direction:column; gap:8px; }
+  ul.resolve li { position:relative; padding:11px 14px 11px 40px; border:1px solid var(--line); border-radius:10px; background:#fff; font-size:13px; }
+  ul.resolve li:before { content:"→"; position:absolute; left:15px; top:11px; color:var(--teal); font-weight:700; }
   .gaps { list-style:none; margin:0; padding:0; }
   .gaps li { font-size:13px; color:var(--muted); padding:3px 0; }
   .gaps li:before { content:"•"; color:var(--teal); margin-right:8px; }
@@ -402,6 +405,12 @@ function render(p) {
         ruledOut.map(esc).join(', ') + '</b></div></div>';
     }
     h += '</div>';
+  }
+
+  if (p.resolve && p.resolve.length) {
+    h += '<h3 class="sec">What would resolve this disagreement?</h3><ul class="resolve">';
+    for (const r of p.resolve) h += '<li>' + esc(r) + '</li>';
+    h += '</ul><p class="prov" style="margin-top:8px">Suggested next evidence, derived from the differences above — reasoning about what’s missing, not a claim from the papers.</p>';
   }
 
   const reportedCount = (c) => p.comparison.rows.filter((r) => c[r.dimension].value !== NR).length;

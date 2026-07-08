@@ -79,6 +79,14 @@ export function renderResult(result) {
   }
   out.push('');
 
+  // What would resolve this
+  if (result.resolve && result.resolve.length) {
+    out.push(BOLD('  What would resolve this disagreement?'));
+    for (const r of result.resolve) for (const l of wrap('→ ' + r, 88)) out.push('  ' + l);
+    out.push(DIM('  Suggested next evidence, derived from the differences — not a claim from the papers.'));
+    out.push('');
+  }
+
   // Bounded gaps
   if (gaps.sharedConstraints.length || gaps.unreported.length) {
     out.push(BOLD('  Observed across these papers') + DIM('  (bounded — not a claim about all literature)'));
