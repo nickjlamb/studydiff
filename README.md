@@ -81,6 +81,15 @@ flowchart LR
 
 The key layer is the API key never leaving the server, and grounding being deterministic — the same inputs always produce the same verdict.
 
+## Why Claude?
+
+StudyDiff's reliability comes from *how* it uses Claude, not just that it does:
+
+- **Structured extraction via tool-use.** Each paper becomes a study card through a forced Claude (Sonnet) tool schema, so every field returns validated and carries a *verbatim supporting quote* — no free-text parsing, no "mostly-JSON" failures.
+- **Reasoning that maps claims to evidence.** Claude reads the methods/abstract prose and identifies both the design value and the exact sentence that supports it — the hard part of turning unstructured papers into comparable, auditable cards.
+- **Claude proposes, grounding disposes.** StudyDiff never uses an LLM as the judge. A deterministic check verifies Claude's output against the source and downgrades anything unsupported *before* it's shown. Pairing Claude's tool-use extraction with non-LLM verification is what lets the tool trust its own output and sidesteps the usual LLM-as-evaluator pitfalls.
+- **Built with Claude Code.** The whole app — pipeline, UI, hardening, deploy — was built iteratively with Claude Code in a single agentic loop.
+
 ## Examples
 
 | Question | Papers | What StudyDiff finds |
