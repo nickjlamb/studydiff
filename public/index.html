@@ -3,60 +3,99 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>StudyDiff — why papers disagree</title>
+<title>StudyDiff — why studies disagree</title>
 <style>
   :root {
     --bg:#f6f7f9; --panel:#ffffff; --ink:#111827; --muted:#6b7280; --line:#e5e7eb;
     --teal:#0f766e; --teal-2:#0d9488; --amber-bg:#fef3c7; --amber:#b45309;
-    --green:#15803d; --red:#b91c1c; --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+    --green:#15803d; --red:#b91c1c; --purple:#6d28d9; --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
   }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--bg); color:var(--ink);
     font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
-  .wrap { max-width:1040px; margin:0 auto; padding:28px 20px 80px; }
-  header h1 { margin:0 0 2px; font-size:26px; letter-spacing:-0.02em; }
-  header h1 span { color:var(--teal); }
-  header p { margin:0 0 22px; color:var(--muted); }
-  .panel { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px; }
-  .tabs { display:flex; gap:6px; margin-bottom:14px; }
-  .tab { padding:7px 14px; border:1px solid var(--line); background:#fff; border-radius:999px;
-    cursor:pointer; font-size:13px; color:var(--muted); }
-  .tab.active { background:var(--teal); color:#fff; border-color:var(--teal); }
-  .mode { display:none; } .mode.active { display:block; }
-  label.f { display:block; font-size:12px; color:var(--muted); margin:10px 0 4px; }
-  input, textarea { width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:8px;
-    font:inherit; background:#fff; }
-  textarea { min-height:120px; resize:vertical; font-size:13px; }
-  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .btn { margin-top:14px; background:var(--teal); color:#fff; border:0; padding:10px 18px;
-    border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; }
-  .btn:disabled { opacity:.5; cursor:default; }
-  .examples { display:flex; gap:10px; flex-wrap:wrap; }
-  .ex { flex:1; min-width:240px; text-align:left; border:1px solid var(--line); background:#fff;
-    border-radius:10px; padding:12px 14px; cursor:pointer; }
-  .ex:hover { border-color:var(--teal); }
-  .ex b { display:block; font-size:14px; margin-bottom:3px; }
-  .ex span { font-size:12px; color:var(--muted); }
+  a { color:var(--teal); }
+  .wrap { max-width:1080px; margin:0 auto; padding:22px 20px 80px; }
 
-  /* pipeline */
-  #pipeline { margin-top:18px; display:none; }
-  #pipeline.show { display:block; }
-  .steps { list-style:none; margin:0; padding:0; }
-  .steps li { display:flex; align-items:center; gap:10px; padding:6px 0; color:var(--muted); font-size:13px; }
-  .dot { width:14px; height:14px; border-radius:50%; border:2px solid var(--line); flex:0 0 auto; }
-  li.active .dot { border-color:var(--teal); border-top-color:transparent; animation:spin .7s linear infinite; }
-  li.active { color:var(--ink); }
-  li.done .dot { border-color:var(--green); background:var(--green); }
-  li.done { color:var(--ink); }
-  @keyframes spin { to { transform:rotate(360deg); } }
+  /* top bar */
+  .topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:16px; flex-wrap:wrap; }
+  .brand h1 { margin:0; font-size:24px; letter-spacing:-0.02em; }
+  .brand h1 span { color:var(--teal); }
+  .brand p { margin:2px 0 0; color:var(--muted); font-size:13px; }
+  .trust { display:flex; gap:18px; }
+  .trust .t { display:flex; gap:8px; align-items:center; font-size:12px; }
+  .trust .t b { display:block; font-size:12px; color:var(--ink); }
+  .trust .t span { color:var(--muted); }
+  .tico { width:20px; height:20px; color:var(--teal); flex:0 0 auto; }
+
+  /* main card */
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:26px 28px; }
+  .hero { display:flex; justify-content:space-between; gap:24px; align-items:flex-start; }
+  .hero h2 { margin:0; font-size:34px; line-height:1.1; letter-spacing:-0.02em; font-weight:700; text-transform:none; color:var(--ink); }
+  .hero h2 em { color:var(--teal); font-style:italic; }
+  .hero p { margin:12px 0 0; color:var(--muted); max-width:460px; }
+  .heroart { flex:0 0 auto; }
+
+  /* step tracker */
+  .tracker { display:flex; list-style:none; margin:26px 0 4px; padding:0; }
+  .tracker li { flex:1; display:flex; gap:10px; align-items:flex-start; position:relative; padding:0 6px; }
+  .tracker li:not(:last-child):after { content:""; position:absolute; top:14px; left:38px; right:-6px; height:1px; background:var(--line); z-index:0; }
+  .tnum { width:28px; height:28px; border-radius:50%; border:1.5px solid var(--line); display:flex; align-items:center;
+    justify-content:center; font-size:12px; font-weight:600; color:var(--muted); background:#fff; flex:0 0 auto; z-index:1; }
+  .tracker li.active .tnum { border-color:var(--teal); color:var(--teal); }
+  .tracker li.done .tnum { background:var(--teal); border-color:var(--teal); color:#fff; }
+  .tracker b { font-size:13px; display:block; }
+  .tracker i { font-size:11px; color:var(--muted); font-style:normal; }
+  .tracker li.active b { color:var(--teal); }
+
+  /* paper inputs */
+  .papers { display:grid; grid-template-columns:1fr 44px 1fr; gap:0; margin-top:24px; align-items:start; }
+  .paper { border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .paper-head { display:flex; align-items:center; gap:8px; font-weight:600; font-size:15px; margin-bottom:12px; }
+  .pchip { width:26px; height:26px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:13px; }
+  .paper[data-side="A"] .pchip { background:#e1f5ee; color:var(--teal); }
+  .paper[data-side="B"] .pchip { background:#f3e8ff; color:var(--purple); }
+  .vs { display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:var(--muted);
+    letter-spacing:.05em; padding-top:52px; }
+  .seg { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .segbtn { padding:6px 11px; border:1px solid var(--line); background:#fff; border-radius:8px; cursor:pointer;
+    font-size:12px; color:var(--muted); }
+  .segbtn.active { background:var(--teal); color:#fff; border-color:var(--teal); }
+  .minput[hidden] { display:none; }
+  input, textarea { width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:8px; font:inherit; background:#fff; }
+  input[type=file] { padding:8px; font-size:13px; }
+  textarea { min-height:110px; resize:vertical; font-size:13px; margin-top:8px; }
+  .cite { margin-bottom:0; }
+  .qrow { margin-bottom:2px; }
+  label.f { display:block; font-size:12px; color:var(--muted); margin:0 0 5px; }
+
+  .examplesrow { display:flex; align-items:center; gap:10px; margin-top:16px; flex-wrap:wrap; }
+  .examplesrow .lbl { font-size:12px; color:var(--muted); }
+  .exchip { border:1px solid var(--line); background:#fff; border-radius:999px; padding:6px 13px; font-size:12px; cursor:pointer; color:var(--ink); }
+  .exchip:hover { border-color:var(--teal); color:var(--teal); }
+
+  .cta-wrap { text-align:center; margin-top:22px; }
+  .cta { background:var(--teal); color:#fff; border:0; padding:14px 30px; border-radius:10px; font-size:16px;
+    font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:10px; }
+  .cta:hover { background:#0b5e57; }
+  .cta:disabled { opacity:.5; cursor:default; }
+  .cta-note { margin-top:10px; font-size:12px; color:var(--muted); }
+
+  /* feature strip */
+  .features { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:26px; padding-top:22px; border-top:1px solid var(--line); }
+  .feature b { display:block; font-size:14px; margin-bottom:3px; }
+  .feature p { margin:0; font-size:12.5px; color:var(--muted); }
+  .feature .fico { color:var(--teal); width:22px; height:22px; margin-bottom:8px; display:block; }
+
+  /* live status */
+  #status { margin-top:14px; font-size:13px; color:var(--muted); display:none; }
+  #status.show { display:block; }
 
   /* results */
   #out { margin-top:22px; display:none; } #out.show { display:block; }
   .banner { display:flex; align-items:center; gap:10px; padding:12px 16px; border-radius:10px;
     background:#fff7ed; border:1px solid #fed7aa; color:var(--amber); font-weight:600; margin-bottom:16px; }
   .banner.agree { background:#f0fdf4; border-color:#bbf7d0; color:var(--green); }
-  h2 { font-size:14px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted);
-    margin:22px 0 10px; }
+  h3.sec { font-size:14px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin:22px 0 10px; }
   table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:10px; overflow:hidden; }
   th, td { text-align:left; padding:9px 12px; vertical-align:top; border-bottom:1px solid var(--line); font-size:13px; }
   th { background:#fafafa; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
@@ -72,15 +111,12 @@
     background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px; color:var(--green); font-size:13px; }
   .verified i { font-style:normal; font-weight:700; font-size:15px; }
   .verified .nr { color:#6b7280; }
-  .synth { background:#fff; border:1px solid var(--line); border-left:3px solid var(--teal);
-    border-radius:8px; padding:14px 16px; font-size:15px; }
-  .synth .stat { font-family:var(--mono); font-size:12px; }
+  .synth { background:#fff; border:1px solid var(--line); border-left:3px solid var(--teal); border-radius:8px; padding:14px 16px; font-size:15px; }
   .drivers2 { display:flex; flex-direction:column; gap:8px; margin-top:6px; }
   .drow { display:flex; gap:12px; align-items:flex-start; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff; }
   .drow.primary { border-color:#fcd34d; background:#fffbeb; }
   .drow.ruled { background:#fafafa; }
-  .dtag { flex:0 0 auto; min-width:96px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em;
-    padding:3px 9px; border-radius:999px; text-align:center; }
+  .dtag { flex:0 0 auto; min-width:96px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; padding:3px 9px; border-radius:999px; text-align:center; }
   .drow.primary .dtag { background:var(--amber); color:#fff; }
   .drow.secondary .dtag { background:#e5e7eb; color:#374151; }
   .drow.ruled .dtag { background:#eef0f2; color:#6b7280; }
@@ -89,8 +125,7 @@
   .dcmp { display:flex; flex-direction:column; gap:2px; margin-top:4px; color:var(--muted); font-size:12.5px; }
   details.fullcmp { margin:18px 0 6px; }
   details.fullcmp summary { display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none;
-    font-size:13px; font-weight:600; color:var(--teal); padding:9px 16px; border:1px solid var(--teal);
-    border-radius:8px; background:#fff; list-style:none; }
+    font-size:13px; font-weight:600; color:var(--teal); padding:9px 16px; border:1px solid var(--teal); border-radius:8px; background:#fff; list-style:none; }
   details.fullcmp summary:hover { background:#f0fdfa; }
   details.fullcmp summary::-webkit-details-marker { display:none; }
   details.fullcmp summary:before { content:"▸"; font-size:11px; }
@@ -99,133 +134,149 @@
   .gaps { list-style:none; margin:0; padding:0; }
   .gaps li { font-size:13px; color:var(--muted); padding:3px 0; }
   .gaps li:before { content:"•"; color:var(--teal); margin-right:8px; }
-  .prov { font-size:11px; color:var(--muted); margin-top:6px; }
+  .prov { font-size:11px; color:var(--muted); }
   .err { color:var(--red); padding:12px 16px; background:#fef2f2; border:1px solid #fecaca; border-radius:8px; }
-  .foot { color:var(--muted); font-size:12px; margin-top:30px; }
-  code { font-family:var(--mono); font-size:12px; background:#f3f4f6; padding:1px 5px; border-radius:4px; }
+  .foot { color:var(--muted); font-size:12px; margin-top:26px; text-align:center; }
+  @media (max-width:760px) {
+    .trust { display:none; } .papers { grid-template-columns:1fr; } .vs { padding:6px 0; }
+    .tracker { flex-wrap:wrap; gap:10px; } .tracker li { flex:1 1 45%; } .tracker li:after { display:none; }
+    .features { grid-template-columns:1fr 1fr; } .hero h2 { font-size:27px; } .heroart { display:none; }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <h1>Study<span>Diff</span></h1>
-    <p>Why do two papers disagree? Compare them, isolate the methodological differences that drive the conflict, and verify every claim against the source.</p>
-  </header>
 
-  <div class="panel">
-    <div class="tabs">
-      <div class="tab active" data-mode="examples">Examples</div>
-      <div class="tab" data-mode="pmid">By PMID</div>
-      <div class="tab" data-mode="upload">Upload PDFs</div>
-      <div class="tab" data-mode="paste">Paste abstracts</div>
+  <div class="topbar">
+    <div class="brand">
+      <h1>Study<span>Diff</span></h1>
+      <p>Understand why scientific studies reach different conclusions.</p>
     </div>
+    <div class="trust">
+      <div class="t"><svg class="tico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Every claim verified</b><span>by OpenGATE</span></div></div>
+      <div class="t"><svg class="tico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg><div><b>Deterministic</b><span>no LLM-as-judge</span></div></div>
+      <div class="t"><svg class="tico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16"/></svg><div><b>Open source</b><span>MIT · <a href="https://github.com/nickjlamb/studydiff">GitHub</a></span></div></div>
+    </div>
+  </div>
 
-    <div class="mode active" id="m-examples">
-      <div class="examples">
-        <button class="ex" data-fixture="mouse-inflammation">
-          <b>Do mouse models mimic human inflammation?</b>
-          <span>Seok 2013 vs Takao &amp; Miyakawa 2015 — same datasets, opposite conclusions.</span>
-        </button>
-        <button class="ex" data-fixture="resveratrol-sirt1">
-          <b>Does resveratrol activate SIRT1?</b>
-          <span>Howitz 2003 vs Beher 2009 — an assay-substrate artifact.</span>
-        </button>
+  <div class="card">
+    <div class="hero">
+      <div>
+        <h2>Why do these studies <em>disagree</em>?</h2>
+        <p>Compare two studies, isolate the methodological differences that drive the conflict, and verify every claim against the source.</p>
       </div>
-      <p class="prov">Examples run on cached PubMed abstracts — no API key needed.</p>
+      <svg class="heroart" width="230" height="120" viewBox="0 0 230 120" fill="none">
+        <rect x="4" y="18" width="86" height="84" rx="8" fill="#e1f5ee"/>
+        <rect x="16" y="34" width="52" height="7" rx="3.5" fill="#0f766e"/>
+        <rect x="16" y="48" width="62" height="6" rx="3" fill="#9fe1cb"/>
+        <rect x="16" y="60" width="46" height="6" rx="3" fill="#9fe1cb"/>
+        <rect x="140" y="18" width="86" height="84" rx="8" fill="#f3e8ff"/>
+        <rect x="152" y="34" width="52" height="7" rx="3.5" fill="#6d28d9"/>
+        <rect x="152" y="48" width="62" height="6" rx="3" fill="#d8b4fe"/>
+        <rect x="152" y="60" width="46" height="6" rx="3" fill="#d8b4fe"/>
+        <circle cx="115" cy="60" r="22" fill="#fff" stroke="#e5e7eb"/>
+        <path d="M115 49v22M106 55h18M110 55l-4 8h8zM120 55l-4 8h8z" stroke="#0f766e" stroke-width="2" fill="none"/>
+      </svg>
     </div>
 
-    <div class="mode" id="m-pmid">
-      <label class="f">Question</label>
-      <input id="q-pmid" placeholder="e.g. Does resveratrol directly activate SIRT1?" />
-      <div class="row2">
-        <div><label class="f">Paper A — PMID</label><input id="pmidA" placeholder="12939617" /></div>
-        <div><label class="f">Paper B — PMID</label><input id="pmidB" placeholder="19843076" /></div>
-      </div>
-      <button class="btn" id="go-pmid">Compare studies →</button>
-      <p class="prov">Fetches from PubMed and extracts with Claude. Needs the server running in live mode.</p>
+    <ol class="tracker">
+      <li id="t0"><span class="tnum">1</span><div><b>Choose papers</b><i>Add two studies</i></div></li>
+      <li id="t1"><span class="tnum">2</span><div><b>Extract evidence</b><i>Claude structures each</i></div></li>
+      <li id="t2"><span class="tnum">3</span><div><b>Verify claims</b><i>OpenGATE grounds all</i></div></li>
+      <li id="t3"><span class="tnum">4</span><div><b>Compare</b><i>Find key differences</i></div></li>
+      <li id="t4"><span class="tnum">5</span><div><b>Explain why</b><i>Rank drivers</i></div></li>
+    </ol>
+
+    <div class="qrow" style="margin-top:22px">
+      <label class="f">Question <span style="color:var(--muted)">(optional — helps focus the comparison)</span></label>
+      <input id="question" placeholder="e.g. Does resveratrol directly activate SIRT1?" />
     </div>
 
-    <div class="mode" id="m-upload">
-      <label class="f">Question</label>
-      <input id="q-upload" placeholder="e.g. Why do these trials disagree?" />
-      <div class="row2">
-        <div>
-          <label class="f">Paper A — citation (optional)</label><input id="uciteA" placeholder="Author et al. 2023" />
-          <label class="f">Paper A — PDF</label><input type="file" id="fileA" accept="application/pdf,.pdf" />
+    <div class="papers">
+      <div class="paper" data-side="A">
+        <div class="paper-head"><span class="pchip">A</span> Paper A</div>
+        <div class="seg">
+          <button class="segbtn active" data-m="id">PMID / DOI</button>
+          <button class="segbtn" data-m="pdf">Upload PDF</button>
+          <button class="segbtn" data-m="text">Paste</button>
         </div>
-        <div>
-          <label class="f">Paper B — citation (optional)</label><input id="uciteB" placeholder="Author et al. 2024" />
-          <label class="f">Paper B — PDF</label><input type="file" id="fileB" accept="application/pdf,.pdf" />
-        </div>
-      </div>
-      <button class="btn" id="go-upload">Compare studies →</button>
-      <p class="prov" id="upload-note">Full text is read in your browser's request and extracted on the server — richer than an abstract, so fewer fields come back “not reported”. Scanned (image-only) PDFs won't work.</p>
-    </div>
-
-    <div class="mode" id="m-paste">
-      <label class="f">Question</label>
-      <input id="q-paste" placeholder="e.g. Why do these trials disagree?" />
-      <div class="row2">
-        <div>
-          <label class="f">Paper A — citation</label><input id="citeA" placeholder="Author et al. 2023" />
-          <label class="f">Paper A — abstract / methods</label><textarea id="textA"></textarea>
-        </div>
-        <div>
-          <label class="f">Paper B — citation</label><input id="citeB" placeholder="Author et al. 2024" />
-          <label class="f">Paper B — abstract / methods</label><textarea id="textB"></textarea>
+        <div class="minput" data-m="id"><input class="in-id" placeholder="PMID or DOI — e.g. 12939617" /></div>
+        <div class="minput" data-m="pdf" hidden><input type="file" class="in-file" accept="application/pdf,.pdf" /></div>
+        <div class="minput" data-m="text" hidden>
+          <input class="in-cite cite" placeholder="Citation (optional)" />
+          <textarea class="in-text" placeholder="Paste the abstract or methods…"></textarea>
         </div>
       </div>
-      <button class="btn" id="go-paste">Compare studies →</button>
+      <div class="vs">VS</div>
+      <div class="paper" data-side="B">
+        <div class="paper-head"><span class="pchip">B</span> Paper B</div>
+        <div class="seg">
+          <button class="segbtn active" data-m="id">PMID / DOI</button>
+          <button class="segbtn" data-m="pdf">Upload PDF</button>
+          <button class="segbtn" data-m="text">Paste</button>
+        </div>
+        <div class="minput" data-m="id"><input class="in-id" placeholder="PMID or DOI — e.g. 19843076" /></div>
+        <div class="minput" data-m="pdf" hidden><input type="file" class="in-file" accept="application/pdf,.pdf" /></div>
+        <div class="minput" data-m="text" hidden>
+          <input class="in-cite cite" placeholder="Citation (optional)" />
+          <textarea class="in-text" placeholder="Paste the abstract or methods…"></textarea>
+        </div>
+      </div>
     </div>
 
-    <div id="pipeline">
-      <ul class="steps">
-        <li id="s-fetch"><span class="dot"></span><span class="lbl">Retrieve papers</span></li>
-        <li id="s-extractA"><span class="dot"></span><span class="lbl">Extract study design — A</span></li>
-        <li id="s-extractB"><span class="dot"></span><span class="lbl">Extract study design — B</span></li>
-        <li id="s-verify"><span class="dot"></span><span class="lbl">Verify claims against source</span></li>
-        <li id="s-compare"><span class="dot"></span><span class="lbl">Explain the disagreement</span></li>
-      </ul>
+    <div class="examplesrow">
+      <span class="lbl">No setup — try a worked example:</span>
+      <button class="exchip" data-fixture="mouse-inflammation">Mouse models &amp; human inflammation</button>
+      <button class="exchip" data-fixture="resveratrol-sirt1">Resveratrol &amp; SIRT1</button>
+    </div>
+
+    <div class="cta-wrap">
+      <button class="cta" id="go">Compare studies →</button>
+      <div class="cta-note">No account needed. StudyDiff runs your comparison on PubMed and Claude; results are cached briefly to save cost.</div>
+    </div>
+
+    <div id="status"></div>
+
+    <div class="features">
+      <div class="feature"><svg class="fico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg><b>Every claim verified</b><p>Unsupported fields are shown as <span class="nr">not reported</span>, never guessed.</p></div>
+      <div class="feature"><svg class="fico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg><b>No LLM-as-judge</b><p>Deterministic verification with OpenGATE — same input, same result.</p></div>
+      <div class="feature"><svg class="fico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg><b>Source-first</b><p>Every fact links to the exact supporting sentence in the paper.</p></div>
+      <div class="feature"><svg class="fico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V9M9 21V5M15 21v-8M21 21V3"/></svg><b>Honest by design</b><p>We show what the source says, and flag what it doesn't.</p></div>
     </div>
   </div>
 
   <div id="out"></div>
 
-  <p class="foot">StudyDiff grounds every claim with <a href="https://github.com/nickjlamb/opengate">OpenGATE</a> — deterministic, no LLM-as-judge. Fields the source can't support are shown as <span class="nr">not reported</span>, never guessed.</p>
+  <p class="foot">StudyDiff is built for scientists, by scientists · grounded with
+    <a href="https://github.com/nickjlamb/opengate">OpenGATE</a> — deterministic, no LLM-as-judge.</p>
 </div>
 
 <script>
-const $ = (s) => document.querySelector(s);
-const STEPS = ['fetch','extractA','extractB','verify','compare'];
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 
-// When embedded (e.g. pharmatools.ai/studydiff), report our content height to the
-// parent so the iframe can grow to fit — no inner scrollbar. No-op when top-level.
+// Embedded height reporting (for pharmatools.ai/studydiff iframe).
 function postHeight() {
   if (window.parent === window) return;
-  const h = Math.ceil(document.body.getBoundingClientRect().height) + 24;
-  window.parent.postMessage({ type: 'studydiff:height', height: h }, '*');
+  window.parent.postMessage({ type:'studydiff:height', height: Math.ceil(document.body.getBoundingClientRect().height) + 24 }, '*');
 }
-const debouncedPostHeight = (() => { let t; return () => { clearTimeout(t); t = setTimeout(postHeight, 60); }; })();
-window.addEventListener('load', debouncedPostHeight);
-window.addEventListener('resize', debouncedPostHeight);
-new ResizeObserver(debouncedPostHeight).observe(document.body);
+const debHeight = (() => { let t; return () => { clearTimeout(t); t = setTimeout(postHeight, 60); }; })();
+window.addEventListener('load', debHeight); window.addEventListener('resize', debHeight);
+new ResizeObserver(debHeight).observe(document.body);
 
-// tab switching
-document.querySelectorAll('.tab').forEach((t) => t.onclick = () => {
-  document.querySelectorAll('.tab').forEach((x) => x.classList.remove('active'));
-  document.querySelectorAll('.mode').forEach((x) => x.classList.remove('active'));
-  t.classList.add('active');
-  $('#m-' + t.dataset.mode).classList.add('active');
+// Per-paper input method switching.
+$$('.paper').forEach((paper) => {
+  $$('.segbtn', paper).forEach((btn) => btn.onclick = () => {
+    $$('.segbtn', paper).forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    $$('.minput', paper).forEach((m) => m.hidden = m.dataset.m !== btn.dataset.m);
+  });
 });
 
-document.querySelectorAll('.ex').forEach((b) => b.onclick = () =>
-  run({ mode:'demo', fixture:b.dataset.fixture }));
-$('#go-pmid').onclick = () => run({ mode:'pmid', question:$('#q-pmid').value,
-  pmids:[$('#pmidA').value.trim(), $('#pmidB').value.trim()].filter(Boolean) });
-$('#go-paste').onclick = () => run({ mode:'paste', question:$('#q-paste').value, papers:[
-  { citation:$('#citeA').value, text:$('#textA').value },
-  { citation:$('#citeB').value, text:$('#textB').value } ] });
-$('#go-upload').onclick = runUpload;
+$('#go').onclick = runCompare;
+$$('.exchip').forEach((c) => c.onclick = () => run({ mode:'demo', fixture:c.dataset.fixture }));
+
+const setStatus = (msg) => { const s = $('#status'); if (!msg) { s.classList.remove('show'); s.textContent=''; } else { s.classList.add('show'); s.textContent = msg; } };
 
 async function extractPdf(file) {
   const r = await fetch('/api/extract-pdf', { method:'POST', headers:{'content-type':'application/pdf'}, body:file });
@@ -234,41 +285,50 @@ async function extractPdf(file) {
   return data.text;
 }
 
-async function runUpload() {
-  const fA = $('#fileA').files[0], fB = $('#fileB').files[0];
-  const note = $('#upload-note');
-  if (!fA || !fB) { note.textContent = 'Please choose a PDF for both Paper A and Paper B.'; note.style.color = 'var(--red)'; return; }
-  note.style.color = ''; note.textContent = 'Reading PDFs…';
-  document.querySelectorAll('.btn').forEach((b) => b.disabled = true);
+async function descriptorFor(paper) {
+  const method = $('.segbtn.active', paper).dataset.m;
+  if (method === 'id') {
+    const id = $('.in-id', paper).value.trim();
+    if (!id) throw new Error('Enter a PMID or DOI for both papers (or switch input method).');
+    return { id };
+  }
+  if (method === 'text') {
+    const text = $('.in-text', paper).value.trim();
+    if (!text) throw new Error('Paste text for both papers.');
+    return { citation: $('.in-cite', paper).value.trim(), text };
+  }
+  const file = $('.in-file', paper).files[0];
+  if (!file) throw new Error('Choose a PDF for both papers.');
+  setStatus('Reading ' + file.name + '…');
+  const text = await extractPdf(file);
+  return { citation: file.name.replace(/\.pdf$/i,''), text, sourceDepth:'uploaded' };
+}
+
+async function runCompare() {
   try {
-    const [textA, textB] = await Promise.all([extractPdf(fA), extractPdf(fB)]);
-    note.textContent = 'PDFs read. Comparing…';
-    await run({ mode:'paste', question:$('#q-upload').value, papers:[
-      { citation:$('#uciteA').value || fA.name.replace(/\.pdf$/i,''), text:textA },
-      { citation:$('#uciteB').value || fB.name.replace(/\.pdf$/i,''), text:textB } ] });
-    note.textContent = 'Full text is read on the server — richer than an abstract. Scanned (image-only) PDFs won’t work.';
+    setStatus('');
+    const [a, b] = $$('.paper');
+    const descA = await descriptorFor(a);
+    const descB = await descriptorFor(b);
+    setStatus('');
+    await run({ mode:'papers', question: $('#question').value.trim(), papers:[descA, descB] });
   } catch (e) {
+    setStatus('');
     $('#out').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; $('#out').classList.add('show');
-    note.textContent = '';
-  } finally {
-    document.querySelectorAll('.btn').forEach((b) => b.disabled = false);
   }
 }
 
-function resetSteps() {
-  $('#pipeline').classList.add('show');
-  STEPS.forEach((s) => { const li = $('#s-' + s); li.classList.remove('active','done'); });
-  $('#out').classList.remove('show'); $('#out').innerHTML = '';
+// ---- pipeline run + step tracker ----
+const TRACK = { fetch:0, extractA:1, extractB:1, verify:2, compare:3 };
+function trackerActive(idx) {
+  $$('.tracker li').forEach((li, i) => { li.classList.toggle('done', i < idx); li.classList.toggle('active', i === idx); });
 }
-function setStep(id, status, label) {
-  const li = $('#s-' + id); if (!li) return;
-  li.classList.remove('active','done'); li.classList.add(status);
-  if (label) li.querySelector('.lbl').textContent = label;
-}
+function trackerAllDone() { $$('.tracker li').forEach((li) => { li.classList.add('done'); li.classList.remove('active'); }); }
+function trackerReset() { $$('.tracker li').forEach((li) => li.classList.remove('done','active')); }
 
 async function run(body) {
-  document.querySelectorAll('.btn').forEach((b) => b.disabled = true);
-  resetSteps();
+  $('#go').disabled = true;
+  trackerReset(); $('#out').classList.remove('show'); $('#out').innerHTML = '';
   try {
     const r = await fetch('/api/compare', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(body) });
     const reader = r.body.getReader(); const dec = new TextDecoder(); let buf = '';
@@ -283,16 +343,25 @@ async function run(body) {
   } catch (e) {
     $('#out').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; $('#out').classList.add('show');
   } finally {
-    document.querySelectorAll('.btn').forEach((b) => b.disabled = false);
+    $('#go').disabled = false; setStatus('');
   }
 }
 
 function handle(ev) {
-  if (ev.type === 'step') setStep(ev.id, ev.status, ev.label);
-  else if (ev.type === 'error') { $('#out').innerHTML = '<div class="err">' + esc(ev.message) + '</div>'; $('#out').classList.add('show'); }
-  else if (ev.type === 'result') render(ev.payload);
+  if (ev.type === 'step') {
+    const idx = TRACK[ev.id];
+    if (ev.status === 'active') trackerActive(idx);
+    if (ev.id === 'compare' && ev.status === 'done') trackerActive(4);
+  } else if (ev.type === 'error') {
+    trackerReset();
+    $('#out').innerHTML = '<div class="err">' + esc(ev.message) + '</div>'; $('#out').classList.add('show');
+  } else if (ev.type === 'result') {
+    trackerAllDone(); render(ev.payload);
+    $('#out').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
 }
 
+// ---- results ----
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const NR = 'not reported';
 const cell = (f, grounded) => f.value === NR
@@ -304,20 +373,17 @@ function render(p) {
   const ga = p.grounding.a.results, gb = p.grounding.b.results;
   let h = '';
 
-  // 1. Verdict
   h += p.comparison.findingsConflict
     ? '<div class="banner">These studies reach different conclusions</div>'
     : '<div class="banner agree">These studies do not clearly differ on this question</div>';
 
-  // 2. The answer — the plain-language reason, leading the page.
-  h += '<h2>Why these studies differ</h2><div class="synth">' + esc(p.synthesis.text) +
+  h += '<h3 class="sec">Why these studies differ</h3><div class="synth">' + esc(p.synthesis.text) +
     (p.synthesis.grounded ? ' <span class="badge g"><i>✓</i> verified against source</span>' : ' <span class="badge d">✗ unverified</span>') + '</div>';
 
-  // 3. What's driving the difference — honest signals, no invented percentages.
   const drivers = p.comparison.candidateReasons;
   const ruledOut = p.comparison.sharedDesign || [];
   if (drivers.length || ruledOut.length) {
-    h += '<h2>What’s driving the difference</h2><div class="drivers2">';
+    h += '<h3 class="sec">What’s driving the difference</h3><div class="drivers2">';
     drivers.forEach((r, i) => {
       const cls = i === 0 ? 'primary' : 'secondary';
       const tag = i === 0 ? 'Primary driver' : 'Also differs';
@@ -331,26 +397,23 @@ function render(p) {
     h += '</div>';
   }
 
-  // 4. Verification summary — lean into the differentiator.
   const reportedCount = (c) => p.comparison.rows.filter((r) => c[r.dimension].value !== NR).length;
   const verified = reportedCount(a) + reportedCount(b);
   h += '<div class="verified"><i>✓</i> All ' + verified + ' reported facts were verified against the source text — anything unsupported is shown as <span class="nr">not reported</span>, never guessed.</div>';
 
-  // 5. The proof — full comparison, collapsed by default so the story leads.
-  let rowsHtml = '';
+  let rows = '';
   for (const row of p.comparison.rows) {
     const d = row.dimension;
-    rowsHtml += '<tr class="' + (row.diverges ? 'diverge' : '') + '"><td class="dim">' + esc(row.label) + '</td><td>' +
+    rows += '<tr class="' + (row.diverges ? 'diverge' : '') + '"><td class="dim">' + esc(row.label) + '</td><td>' +
       cell(a[d], ga[d] && ga[d].grounded) + '</td><td>' + cell(b[d], gb[d] && gb[d].grounded) + '</td></tr>';
   }
   h += '<details class="fullcmp"><summary>Full study-by-study comparison — all ' + p.comparison.rows.length + ' dimensions, each verified</summary>' +
     '<table><tr><th>Dimension</th><th>' + esc(a.citation) + ' <span class="prov">[' + a.sourceDepth + ']</span></th><th>' +
-    esc(b.citation) + ' <span class="prov">[' + b.sourceDepth + ']</span></th></tr>' + rowsHtml + '</table></details>';
+    esc(b.citation) + ' <span class="prov">[' + b.sourceDepth + ']</span></th></tr>' + rows + '</table></details>';
 
-  // 6. Honest, bounded observations — split into shared vs absent.
   const unrep = p.gaps.unreported || [];
   if (unrep.length) {
-    h += '<h2>Not reported by either study</h2><ul class="gaps">';
+    h += '<h3 class="sec">Not reported by either study</h3><ul class="gaps">';
     for (const g of unrep) h += '<li>' + esc(g) + '</li>';
     h += '</ul>';
   }

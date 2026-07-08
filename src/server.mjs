@@ -14,7 +14,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { DIMENSIONS } from './types.mjs';
-import { fetchPaper } from './ncbi.mjs';
+import { fetchPaper, resolveDoiToPmid } from './ncbi.mjs';
 import { extractCard } from './extract.mjs';
 import { buildResult } from './pipeline.mjs';
 import { pdfToText } from './pdf.mjs';
@@ -82,7 +82,7 @@ async function readBody(req) {
 
 const cacheKey = (body) => JSON.stringify({
   m: body.mode, q: body.question, p: body.pmids, f: body.fixture,
-  t: (body.papers || []).map((x) => (x.text || '').slice(0, 200)),
+  papers: (body.papers || []).map((x) => ({ id: x.id || '', t: (x.text || '').slice(0, 200) })),
 });
 
 const STEP_IDS = ['fetch', 'extractA', 'extractB', 'verify', 'compare'];
@@ -143,6 +143,37 @@ async function runStreaming(res, body, ip) {
         step(res, id, 'active', `Extracting study design — ${p.citation}`);
         cards.push(await extractCard(p, question));
         step(res, id, 'done', `Study card ready — ${p.citation}`);
+      }
+      finishAndSend(res, question, cards, texts, key);
+      return;
+    }
+
+    if (mode === 'papers') {
+      // Unified per-paper input: each descriptor is {id} (PMID or DOI) or {citation,text}.
+      const descriptors = (body.papers || []).slice(0, 2);
+      if (descriptors.length !== 2) throw new Error('Provide two papers to compare.');
+      step(res, 'fetch', 'active', 'Resolving papers…');
+      const papers = [];
+      for (let i = 0; i < descriptors.length; i++) {
+        const d = descriptors[i];
+        if (d.text && d.text.trim()) {
+          papers.push({ pmid: '', citation: d.citation || `Paper ${i + 1}`, title: '', text: d.text, sourceDepth: d.sourceDepth || 'pasted' });
+        } else if (d.id && d.id.trim()) {
+          const raw = d.id.trim();
+          const pmid = /^\d+$/.test(raw) ? raw : await resolveDoiToPmid(raw);
+          papers.push(await fetchPaper(pmid));
+        } else {
+          throw new Error(`Paper ${i + 1}: provide a PMID/DOI, upload a PDF, or paste text.`);
+        }
+      }
+      texts = papers.map((p) => p.text);
+      step(res, 'fetch', 'done', `Fetched: ${papers.map((p) => `${p.citation} [${p.sourceDepth}]`).join('  ·  ')}`);
+      cards = [];
+      for (let i = 0; i < papers.length; i++) {
+        const id = i === 0 ? 'extractA' : 'extractB';
+        step(res, id, 'active', `Extracting study design — ${papers[i].citation}`);
+        cards.push(await extractCard(papers[i], question));
+        step(res, id, 'done', `Study card ready — ${papers[i].citation}`);
       }
       finishAndSend(res, question, cards, texts, key);
       return;

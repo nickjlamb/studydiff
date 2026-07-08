@@ -38,6 +38,15 @@ export async function search(query, { retmax = 10 } = {}) {
   return j?.esearchresult?.idlist ?? [];
 }
 
+/** Resolve a DOI to a PMID via PubMed (searches the article-id index). */
+export async function resolveDoiToPmid(doi) {
+  const clean = String(doi).replace(/^https?:\/\/(dx\.)?doi\.org\//i, '').trim();
+  let ids = await search(`${clean}[AID]`, { retmax: 1 });
+  if (!ids.length) ids = await search(clean, { retmax: 1 });
+  if (!ids.length) throw new Error(`No PubMed record found for DOI ${clean}.`);
+  return ids[0];
+}
+
 const firstTag = (xml, tag) => {
   const m = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`, 'i'));
   return m ? m[1].replace(/<[^>]+>/g, '').trim() : '';
