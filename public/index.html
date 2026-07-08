@@ -35,16 +35,16 @@
   .hero p { margin:12px 0 0; color:var(--muted); max-width:460px; }
   .heroart { flex:0 0 auto; }
 
-  /* step tracker */
-  .tracker { display:flex; list-style:none; margin:26px 0 4px; padding:0; }
-  .tracker li { flex:1; display:flex; gap:10px; align-items:flex-start; position:relative; padding:0 6px; }
-  .tracker li:not(:last-child):after { content:""; position:absolute; top:14px; left:38px; right:-6px; height:1px; background:var(--line); z-index:0; }
+  /* step tracker — number stacked above label so the connector never crosses text */
+  .tracker { display:flex; list-style:none; margin:30px 0 6px; padding:0; }
+  .tracker li { flex:1; display:flex; flex-direction:column; gap:10px; position:relative; padding:0 8px; }
+  .tracker li:not(:last-child):after { content:""; position:absolute; top:14px; left:46px; right:6px; height:1px; background:var(--line); z-index:0; }
   .tnum { width:28px; height:28px; border-radius:50%; border:1.5px solid var(--line); display:flex; align-items:center;
     justify-content:center; font-size:12px; font-weight:600; color:var(--muted); background:#fff; flex:0 0 auto; z-index:1; }
   .tracker li.active .tnum { border-color:var(--teal); color:var(--teal); }
   .tracker li.done .tnum { background:var(--teal); border-color:var(--teal); color:#fff; }
-  .tracker b { font-size:13px; display:block; }
-  .tracker i { font-size:11px; color:var(--muted); font-style:normal; }
+  .tracker b { font-size:13px; display:block; line-height:1.25; }
+  .tracker i { font-size:11px; color:var(--muted); font-style:normal; display:block; margin-top:2px; }
   .tracker li.active b { color:var(--teal); }
 
   /* paper inputs */
@@ -155,7 +155,7 @@
     <div class="trust">
       <div class="t"><svg class="tico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Every claim verified</b><span>by OpenGATE</span></div></div>
       <div class="t"><svg class="tico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg><div><b>Deterministic</b><span>no LLM-as-judge</span></div></div>
-      <div class="t"><svg class="tico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16"/></svg><div><b>Open source</b><span>MIT · <a href="https://github.com/nickjlamb/studydiff">GitHub</a></span></div></div>
+      <div class="t"><svg class="tico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16"/></svg><div><b>Open source</b><span>MIT · <a href="https://github.com/nickjlamb/studydiff" target="_blank" rel="noopener">GitHub</a></span></div></div>
     </div>
   </div>
 
@@ -248,12 +248,15 @@
   <div id="out"></div>
 
   <p class="foot">StudyDiff is built for scientists, by scientists · grounded with
-    <a href="https://github.com/nickjlamb/opengate">OpenGATE</a> — deterministic, no LLM-as-judge.</p>
+    <a href="https://github.com/nickjlamb/opengate" target="_blank" rel="noopener">OpenGATE</a> — deterministic, no LLM-as-judge.</p>
 </div>
 
 <script>
 const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+
+// Any external link opens in a new tab (so nothing navigates inside the iframe).
+$$('a[href^="http"]').forEach((a) => { a.target = '_blank'; a.rel = 'noopener'; });
 
 // Embedded height reporting (for pharmatools.ai/studydiff iframe).
 function postHeight() {
