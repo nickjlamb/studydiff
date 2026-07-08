@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://github.com/nickjlamb/studydiff/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/nickjlamb/studydiff/actions/workflows/ci.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg"></a>
-  <img alt="Node >=20" src="https://img.shields.io/badge/node-%3E%3D20-brightgreen">
+  <img alt="Node 20+" src="https://img.shields.io/badge/node-20%2B-brightgreen">
   <a href="https://studydiff.pharmatools.ai"><img alt="Live demo" src="https://img.shields.io/badge/demo-studydiff.pharmatools.ai-0f766e"></a>
   <img alt="Built with Claude" src="https://img.shields.io/badge/built%20with-Claude-d97757">
   <img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-6d28d9">
