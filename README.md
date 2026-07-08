@@ -92,7 +92,7 @@ Both ship as offline demos (`npm run demo` / `npm run demo -- resveratrol-sirt1`
 
 ## Using it
 
-- **Web app** (`npm run serve`) — examples, PMID/DOI lookup, PDF upload, or paste; streams each pipeline step live.
+- **Web app** (`npm run serve`) — examples, PMID/DOI lookup, PDF upload, or paste; streams each pipeline step live, and exports a reproducible **Markdown report** with every value's verbatim supporting sentence.
 - **CLI** — `node src/cli.mjs --q "Does resveratrol activate SIRT1?" 12939617 19843076`
 - **Deploy** — see [DEPLOY.md](DEPLOY.md) (Railway + custom domain).
 
