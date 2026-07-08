@@ -40,7 +40,12 @@
   .hero { display:flex; justify-content:space-between; gap:24px; align-items:flex-start; }
   .hero h2 { margin:0; font-size:34px; line-height:1.1; letter-spacing:-0.02em; font-weight:700; text-transform:none; color:var(--ink); }
   .hero h2 em { color:var(--teal); font-style:italic; }
-  .hero p { margin:12px 0 0; color:var(--muted); max-width:460px; }
+  .hero p { margin:12px 0 0; color:var(--muted); max-width:520px; }
+  .hero .herouser { margin-top:10px; font-size:13px; color:var(--muted); border-left:2px solid var(--line); padding-left:12px; }
+  .railfoot { font-size:12px; color:var(--muted); padding:0 4px; line-height:1.6; margin:0; }
+  .stag { width:22px; height:22px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:600; flex:0 0 auto; }
+  .stag.a { background:#e1f5ee; color:var(--teal); } .stag.b { background:#f3e8ff; color:var(--purple); }
   .heroart { flex:0 0 auto; }
 
   /* step tracker — number stacked above label so the connector never crosses text */
@@ -85,7 +90,7 @@
   .exchip { border:1px solid var(--line); background:#fff; border-radius:999px; padding:6px 13px; font-size:12px; cursor:pointer; color:var(--ink); }
   .exchip:hover { border-color:var(--teal); color:var(--teal); }
 
-  .cta-wrap { text-align:center; margin-top:22px; }
+  .cta-wrap { text-align:center; margin-top:34px; padding-top:26px; border-top:1px solid var(--line); }
   .cta { background:var(--teal); color:#fff; border:0; padding:14px 30px; border-radius:10px; font-size:16px;
     font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:10px; }
   .cta:hover { background:#0b5e57; }
@@ -195,7 +200,8 @@
     <div class="hero">
       <div>
         <h2>Why do these studies <em>disagree</em>?</h2>
-        <p>Compare two studies, isolate the methodological differences that drive the conflict, and verify every claim against the source.</p>
+        <p>Compare two papers and pinpoint the methodological differences that explain the disagreement — every finding linked back to the source.</p>
+        <p class="herouser">For researchers weighing conflicting evidence before planning experiments, writing reviews, or interpreting new findings.</p>
       </div>
       <svg class="heroart" width="230" height="120" viewBox="0 0 230 120" fill="none">
         <rect x="4" y="18" width="86" height="84" rx="8" fill="#e1f5ee"/>
@@ -212,7 +218,7 @@
     </div>
 
     <ol class="tracker">
-      <li id="t0"><span class="tnum">1</span><div><b>Choose papers</b><i>Add two studies</i></div></li>
+      <li id="t0"><span class="tnum">1</span><div><b>Add studies</b><i>Two papers to compare</i></div></li>
       <li id="t1"><span class="tnum">2</span><div><b>Extract evidence</b><i>Claude structures each</i></div></li>
       <li id="t2"><span class="tnum">3</span><div><b>Verify claims</b><i>grounded to source</i></div></li>
       <li id="t3"><span class="tnum">4</span><div><b>Compare</b><i>Find key differences</i></div></li>
@@ -220,7 +226,7 @@
     </ol>
 
     <div class="qrow" style="margin-top:22px">
-      <label class="f">Question <span style="color:var(--muted)">(optional — helps focus the comparison)</span></label>
+      <label class="f">Research question <span style="color:var(--muted)">(optional)</span></label>
       <input id="question" placeholder="e.g. Does resveratrol directly activate SIRT1?" />
     </div>
 
@@ -282,10 +288,7 @@
         <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg><div><b>Source-first</b><span>Every fact links to the exact supporting sentence in the paper.</span></div></div>
         <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V9M9 21V5M15 21v-8M21 21V3"/></svg><div><b>Honest by design</b><span>We show what the source says, and flag what it doesn't.</span></div></div>
       </div>
-      <div class="scard">
-        <h4>Open source</h4>
-        <div class="sverify">MIT-licensed · grounded with <a href="https://github.com/nickjlamb/opengate" target="_blank" rel="noopener">OpenGATE</a>. <a href="https://github.com/nickjlamb/studydiff" target="_blank" rel="noopener">View on GitHub →</a></div>
-      </div>
+      <p class="railfoot">Open source · MIT · <a href="https://github.com/nickjlamb/studydiff" target="_blank" rel="noopener">GitHub</a> · grounded with <a href="https://github.com/nickjlamb/opengate" target="_blank" rel="noopener">OpenGATE</a></p>
     </div>
     <div id="side-results" hidden></div>
   </aside>
@@ -471,9 +474,14 @@ function render(p) {
   h += '</div>';
   $('#out').innerHTML = h; $('#out').classList.add('show');
 
-  // ---- RAIL: how it was produced + verification + follow-up actions ----
+  // ---- RAIL: sources + how it was produced + verification + follow-up actions ----
+  const depth = { fulltext:'full text', abstract:'abstract', pasted:'pasted text', uploaded:'uploaded PDF' };
+  const srcRow = (tag, c) => '<div class="railrow"><span class="stag ' + tag.toLowerCase() + '">' + tag + '</span><div><b>' +
+    esc(c.citation) + '</b><span>' + (depth[c.sourceDepth] || c.sourceDepth) + ' · ' + reportedCount(c) + ' fields extracted</span></div></div>';
+  let s = '<div class="scard"><h4>Sources</h4>' + srcRow('A', a) + srcRow('B', b) + '</div>';
+
   const stepDone = (label) => '<div class="sstep"><span class="sc">✓</span>' + label + '</div>';
-  let s = '<div class="scard"><h4>How this was produced</h4>' +
+  s += '<div class="scard"><h4>How this was produced</h4>' +
     stepDone('Retrieved both papers') + stepDone('Extracted study designs') +
     stepDone('Verified every claim') + stepDone('Compared the designs') + stepDone('Explained the difference') + '</div>';
   s += '<div class="scard"><h4>Verification</h4><div class="sverify"><b>' + verified +
