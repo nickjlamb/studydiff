@@ -79,6 +79,8 @@ async function extractCardsStreaming(res, papers, question, timings = {}) {
     timings[`attempts_${id}`] = m.attempts;
     timings[`outcomes_${id}`] = m.outcomes;
     timings[`src_chars_${id}`] = p.text.length;
+    timings[`in_tokens_${id}`] = m.inputTokens;
+    timings[`out_tokens_${id}`] = m.outputTokens;
     return card;
   }));
   timings.extract_wall_ms = Date.now() - t0;

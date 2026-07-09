@@ -95,7 +95,7 @@ Record every dimension (${DIMENSIONS.join(', ')}) via the record_study_card tool
       `inputKeys=${block ? Object.keys(block.input || {}).length : 0}`,
     );
   }
-  return { input: block?.input ?? null, stopReason: data.stop_reason };
+  return { input: block?.input ?? null, stopReason: data.stop_reason, usage: data.usage };
 }
 
 /**
@@ -118,9 +118,11 @@ export async function extractCard(paper, question, meta = {}) {
     // On retries, add an explicit nudge (this model deprecates `temperature`, so
     // we vary the prompt instead of the sampling temperature).
     const hint = attempt === 1 ? '' : ` The "finding" field must state this paper's main conclusion from the text — do not leave it as "${NOT_REPORTED}".`;
-    const { input, stopReason } = await callExtract(paper, question, key, hint);
+    const { input, stopReason, usage } = await callExtract(paper, question, key, hint);
     lastReason = stopReason;
     meta.attempts = attempt;
+    meta.inputTokens = usage?.input_tokens;
+    meta.outputTokens = usage?.output_tokens;
     if (!input) {
       meta.outcomes.push(`${stopReason}:no_tool_use`);
     } else {
