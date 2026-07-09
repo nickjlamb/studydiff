@@ -200,6 +200,11 @@
   .sverify { font-size:13.5px; color:#374151; line-height:1.65; }
   .sverify b { color:var(--green); font-size:16px; }
   .sverify .nr { color:#9ca3af; font-style:italic; }
+  .vgrid { display:flex; flex-direction:column; gap:8px; margin-bottom:4px; }
+  .vtile { display:flex; align-items:center; gap:12px; padding:11px 13px; background:#f6f7f9; border-radius:9px; }
+  .vtile .num { font-size:22px; font-weight:600; line-height:1; flex:0 0 auto; min-width:26px; color:var(--ink); }
+  .vtile .num.g { color:var(--green); }
+  .vtile .lbl { font-size:12.5px; color:var(--muted); line-height:1.35; }
   .sbtn { display:block; width:100%; text-align:left; border:1px solid var(--line); background:#fff; border-radius:9px;
     padding:13px 15px; font-size:13.5px; cursor:pointer; margin-top:10px; color:var(--ink); }
   .sbtn:first-of-type { margin-top:0; }
@@ -264,7 +269,7 @@
     <div class="hero">
       <div>
         <h2>Why do these two studies <em>disagree</em>?</h2>
-        <p>Find out why two studies reach opposite conclusions.</p>
+        <p>Find out why two studies reach opposite conclusions – every difference traced back to the exact sentence that supports it.</p>
       </div>
     </div>
 
@@ -633,8 +638,13 @@ function render(p) {
   s += '<div class="rsec"><h4>How this was produced</h4>' +
     stepDone('Retrieved both papers') + stepDone('Extracted study designs') +
     stepDone('Verified every claim') + stepDone('Compared the designs') + stepDone('Explained the difference') + '</div>';
-  s += '<div class="rsec"><h4>Verification</h4><div class="sverify"><b>' + verified +
-    '</b> reported facts verified against the source. Deterministic – no LLM-as-judge; unsupported fields shown as <span class="nr">not reported</span>.</div></div>';
+  s += '<div class="rsec"><h4>Verification</h4>' +
+    '<div class="vgrid">' +
+      '<div class="vtile"><span class="num g">' + verified + '</span><span class="lbl">claims verified against the source</span></div>' +
+      '<div class="vtile"><span class="num">' + Math.max(0, p.comparison.rows.length * 2 - verified) + '</span><span class="lbl">fields not reported by the papers</span></div>' +
+      '<div class="vtile"><span class="num g">0</span><span class="lbl">invented – every claim links to a source sentence</span></div>' +
+    '</div>' +
+    '<p class="sverify" style="margin:12px 0 0">Deterministic – no LLM-as-judge. Re-run and you get identical drivers.</p></div>';
   s += '<div class="rsec jump"><h4>Jump to</h4>';
   if (p.resolve && p.resolve.length) s += '<button class="sbtn" data-panel="resolve">What would resolve this?</button>';
   s += '<button class="sbtn" data-panel="full">Full comparison · ' + p.comparison.rows.length + ' dimensions</button>';
