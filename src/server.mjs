@@ -1,7 +1,7 @@
 // StudyDiff local server. Serves the browser UI and runs the pipeline server-side
 // so your ANTHROPIC_API_KEY never reaches the browser. Streams pipeline progress
 // to the page as newline-delimited JSON (NDJSON) so the UI can show each step
-// lighting up — fetch → extract → verify → compare.
+// lighting up – fetch → extract → verify → compare.
 //
 //   node --env-file=.env src/server.mjs      (live: needs key + network)
 //   npm run serve                            (loads .env if present)
@@ -23,8 +23,8 @@ import { clientIp, createLimiter, createCache, securityHeaders } from './guard.m
 const here = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(here, '..');
 const PORT = process.env.PORT || 4173;
-const MAX_BODY = 8 * 1024 * 1024;   // 8 MB — holds two full-text PDFs' extracted text (JSON), not just abstracts
-const MAX_PDF = 15 * 1024 * 1024;   // 15 MB — a generous single-paper PDF ceiling
+const MAX_BODY = 8 * 1024 * 1024;   // 8 MB – holds two full-text PDFs' extracted text (JSON), not just abstracts
+const MAX_PDF = 15 * 1024 * 1024;   // 15 MB – a generous single-paper PDF ceiling
 
 // Domains allowed to embed the app in an iframe (so pharmatools.ai/studydiff can
 // frame studydiff.pharmatools.ai). Override with EMBED_ORIGINS if needed.
@@ -65,13 +65,13 @@ const send = (res, obj) => res.write(JSON.stringify(obj) + '\n');
 const step = (res, id, status, label) => send(res, { type: 'step', id, status, label });
 
 /** Extract both study cards concurrently, streaming per-paper progress. Halves the
- *  wall-clock vs. sequential extraction (two Claude calls) — the dominant cost of a run. */
+ *  wall-clock vs. sequential extraction (two Claude calls) – the dominant cost of a run. */
 async function extractCardsStreaming(res, papers, question) {
   return Promise.all(papers.map(async (p, i) => {
     const id = i === 0 ? 'extractA' : 'extractB';
-    step(res, id, 'active', `Extracting study design — ${p.citation}`);
+    step(res, id, 'active', `Extracting study design – ${p.citation}`);
     const card = await extractCard(p, question);
-    step(res, id, 'done', `Study card ready — ${p.citation}`);
+    step(res, id, 'done', `Study card ready – ${p.citation}`);
     return card;
   }));
 }
@@ -132,12 +132,12 @@ async function runStreaming(res, body, ip) {
       const papers = fx.papers;
       texts = papers.map((p) => p.text);
       step(res, 'fetch', 'done', `Loaded ${papers.length} papers`);
-      step(res, 'extractA', 'active', `Extracting study design — ${papers[0].citation}`);
+      step(res, 'extractA', 'active', `Extracting study design – ${papers[0].citation}`);
       await sleep(500);
-      step(res, 'extractA', 'done', `Study card ready — ${papers[0].citation}`);
-      step(res, 'extractB', 'active', `Extracting study design — ${papers[1].citation}`);
+      step(res, 'extractA', 'done', `Study card ready – ${papers[0].citation}`);
+      step(res, 'extractB', 'active', `Extracting study design – ${papers[1].citation}`);
       await sleep(500);
-      step(res, 'extractB', 'done', `Study card ready — ${papers[1].citation}`);
+      step(res, 'extractB', 'done', `Study card ready – ${papers[1].citation}`);
       cards = papers.map(cardFromFixturePaper);
       // buildResult grounds then compares; return question from fixture if none given.
       finishAndSend(res, fx.question || question, cards, texts, key);
@@ -185,7 +185,7 @@ async function runStreaming(res, body, ip) {
     if (pmids.length !== 2) throw new Error('Provide exactly two PMIDs.');
     step(res, 'fetch', 'active', `Fetching PubMed ${pmids.join(' & ')}`);
     const papers = [];
-    for (const pmid of pmids) papers.push(await fetchPaper(pmid)); // sequential — NCBI rate limits
+    for (const pmid of pmids) papers.push(await fetchPaper(pmid)); // sequential – NCBI rate limits
     texts = papers.map((p) => p.text);
     step(res, 'fetch', 'done', `Fetched: ${papers.map((p) => `${p.citation} [${p.sourceDepth}]`).join('  ·  ')}`);
     cards = await extractCardsStreaming(res, papers, question);

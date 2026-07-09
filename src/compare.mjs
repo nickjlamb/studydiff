@@ -9,7 +9,7 @@ const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 const reported = (f) => f && f.value && f.value !== NOT_REPORTED;
 
 // Which design differences most plausibly flip a conclusion, most-to-least.
-// (finding = the conclusion itself; limitations = commentary — both excluded.)
+// (finding = the conclusion itself; limitations = commentary – both excluded.)
 const DRIVER_RANK = {
   assay: 0,
   model: 1,

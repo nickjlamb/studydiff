@@ -1,6 +1,6 @@
 {
   "question": "Do genomic responses in mouse models mimic human inflammatory diseases?",
-  "note": "Real PubMed abstracts (retrieved verbatim). Full text is not in the PMC Open Access subset for either paper, so sourceDepth is 'abstract' — StudyDiff surfaces that honestly. The golden study cards below are example extractions; every quote is an exact substring of the paper text so OpenGATE grounding passes.",
+  "note": "Real PubMed abstracts (retrieved verbatim). Full text is not in the PMC Open Access subset for either paper, so sourceDepth is 'abstract' – StudyDiff surfaces that honestly. The golden study cards below are example extractions; every quote is an exact substring of the paper text so OpenGATE grounding passes.",
   "naiveClaim": "Mouse models mimic human inflammatory disease, with an R2 of 0.85 across all datasets.",
   "papers": [
     {

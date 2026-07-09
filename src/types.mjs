@@ -12,7 +12,7 @@
  */
 
 /**
- * The dimensions StudyDiff compares across papers. Keep this list stable — the
+ * The dimensions StudyDiff compares across papers. Keep this list stable – the
  * comparison and grounding logic iterate over it.
  * @typedef {Object} StudyCard
  * @property {string} pmid

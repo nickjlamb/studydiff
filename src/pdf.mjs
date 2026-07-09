@@ -17,7 +17,7 @@ export async function pdfToText(bytes) {
   // Copy into a fresh Uint8Array: a Node Buffer is a view into a shared pool, and
   // pdf.js reads the whole underlying ArrayBuffer unless we give it a clean copy.
   const data = Uint8Array.from(bytes);
-  // Cheap signature check — reject anything that isn't a PDF up front.
+  // Cheap signature check – reject anything that isn't a PDF up front.
   if (data.length < 5 || String.fromCharCode(data[0], data[1], data[2], data[3]) !== '%PDF') {
     throw new Error('That file does not look like a PDF.');
   }
@@ -25,12 +25,12 @@ export async function pdfToText(bytes) {
   try {
     doc = await getDocumentProxy(data);
   } catch {
-    throw new Error('Could not read that PDF — it may be corrupted or password-protected.');
+    throw new Error('Could not read that PDF – it may be corrupted or password-protected.');
   }
   const { text, totalPages } = await extractText(doc, { mergePages: true });
   const clean = String(text || '').replace(/\s+\n/g, '\n').replace(/[ \t]{2,}/g, ' ').trim();
   if (clean.length < 40) {
-    throw new Error('No selectable text found — this PDF may be scanned images. Paste the text instead, or use a text-based PDF.');
+    throw new Error('No selectable text found – this PDF may be scanned images. Paste the text instead, or use a text-based PDF.');
   }
   const truncated = clean.length > MAX_CHARS;
   return {

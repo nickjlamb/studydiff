@@ -2,7 +2,7 @@
 //
 // Three entry points: search (PMIDs for a query), abstract (structured summary),
 // and fullText (PMC body text, only for the Open Access subset). fetchPaper ties
-// them together and tags how deep we managed to read — `sourceDepth` — because a
+// them together and tags how deep we managed to read – `sourceDepth` – because a
 // claim can only be grounded against text we actually retrieved.
 //
 // Design note learned the hard way: an article being *free to read* on PMC does

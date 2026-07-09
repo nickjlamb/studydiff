@@ -1,4 +1,4 @@
-// Offline demo — runs the whole downstream pipeline on real, cached PubMed
+// Offline demo – runs the whole downstream pipeline on real, cached PubMed
 // abstracts with example study cards, so it needs no API key and no network.
 // `npm run demo`
 //
@@ -40,12 +40,12 @@ const GREEN = (s) => `\x1b[32m${s}\x1b[0m`;
 const BOLD = (s) => `\x1b[1m${s}\x1b[0m`;
 const DIM = (s) => `\x1b[2m${s}\x1b[0m`;
 
-console.log(BOLD('  Guardrail demo — a naive summary vs. grounding'));
+console.log(BOLD('  Guardrail demo – a naive summary vs. grounding'));
 console.log(DIM('  Naive claim: ') + `"${naive}"`);
 if (!check.grounded) {
   console.log('  OpenGATE verdict: ' + RED('✗ rejected'));
   for (const i of check.issues) console.log('    - ' + i);
-  console.log(DIM('  → StudyDiff would not surface this — the flagged figure is nowhere in either paper.'));
+  console.log(DIM('  → StudyDiff would not surface this – the flagged figure is nowhere in either paper.'));
 } else {
   console.log('  OpenGATE verdict: ' + GREEN('✓ grounded'));
 }

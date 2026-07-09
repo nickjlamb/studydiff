@@ -31,7 +31,7 @@ export function renderResult(result) {
   const out = [];
 
   out.push('');
-  out.push(BOLD('  StudyDiff — why these papers disagree'));
+  out.push(BOLD('  StudyDiff – why these papers disagree'));
   out.push(DIM(`  Question: ${question}`));
   out.push('');
   out.push(`  A  ${BOLD(a.citation)}  ${DIM('[' + a.sourceDepth + ']')}`);
@@ -64,13 +64,13 @@ export function renderResult(result) {
   if (comparison.candidateReasons.length) {
     out.push(DIM('  Ranked candidate drivers (differing design dimensions):'));
     comparison.candidateReasons.forEach((r, i) => {
-      out.push(`    ${i + 1}. ${BOLD(r.label)} — A: ${r.a}  |  B: ${r.b}`);
+      out.push(`    ${i + 1}. ${BOLD(r.label)} – A: ${r.a}  |  B: ${r.b}`);
     });
     out.push('');
   }
 
   // Grounding
-  out.push(BOLD('  Grounding (OpenGATE, deterministic — no LLM judge)'));
+  out.push(BOLD('  Grounding (OpenGATE, deterministic – no LLM judge)'));
   out.push(`  Synthesis: ${badge(synthesis.grounded)}${synthesis.grounded ? '' : '  ' + DIM(synthesis.issues.join('; '))}`);
   for (const [key, g] of [['A', grounding.a], ['B', grounding.b]]) {
     const bad = g.downgraded.filter((d) => d !== 'finding');
@@ -83,13 +83,13 @@ export function renderResult(result) {
   if (result.resolve && result.resolve.length) {
     out.push(BOLD('  What would resolve this disagreement?'));
     for (const r of result.resolve) for (const l of wrap('→ ' + r, 88)) out.push('  ' + l);
-    out.push(DIM('  Suggested next evidence, derived from the differences — not a claim from the papers.'));
+    out.push(DIM('  Suggested next evidence, derived from the differences – not a claim from the papers.'));
     out.push('');
   }
 
   // Bounded gaps
   if (gaps.sharedConstraints.length || gaps.unreported.length) {
-    out.push(BOLD('  Observed across these papers') + DIM('  (bounded — not a claim about all literature)'));
+    out.push(BOLD('  Observed across these papers') + DIM('  (bounded – not a claim about all literature)'));
     for (const s of gaps.sharedConstraints) for (const l of wrap('• ' + s, 88)) out.push('  ' + l);
     for (const s of gaps.unreported) for (const l of wrap('• ' + s, 88)) out.push('  ' + l);
     out.push('');

@@ -1,5 +1,5 @@
 // Bounded gap detection. The ONLY safe claim a literature tool can make about
-// absence is one scoped to the papers in front of it — never "no one has ever
+// absence is one scoped to the papers in front of it – never "no one has ever
 // studied X". So we report two kinds of observation, both provably true of the
 // compared set: shared constraints (every study did the same thing here, which
 // bounds how far the conclusions generalise) and dimensions no study reported.

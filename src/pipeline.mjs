@@ -39,7 +39,7 @@ function synthesize(comparison, cards) {
   text += '. ';
 
   if (top) {
-    text += `The most likely reason is a difference in ${top.label.toLowerCase()} — Study A: ${top.a}; Study B: ${top.b}. `;
+    text += `The most likely reason is a difference in ${top.label.toLowerCase()} – Study A: ${top.a}; Study B: ${top.b}. `;
   } else {
     text += 'No design dimension reported in both papers differs, so the source of disagreement cannot be localised from the available text. ';
   }
@@ -47,7 +47,7 @@ function synthesize(comparison, cards) {
   text += `Study A concludes "${a.finding.value}", whereas Study B concludes "${b.finding.value}".`;
 
   if (a.statistic.value !== NOT_REPORTED && b.statistic.value !== NOT_REPORTED) {
-    text += ` The reported results differ accordingly — A: ${a.statistic.value}; B: ${b.statistic.value}.`;
+    text += ` The reported results differ accordingly – A: ${a.statistic.value}; B: ${b.statistic.value}.`;
   }
   return { text };
 }
@@ -95,7 +95,7 @@ function downgradeUngrounded(card, downgraded) {
  */
 export async function runPipeline(question, pmids) {
   const papers = [];
-  for (const pmid of pmids) papers.push(await fetchPaper(pmid)); // sequential — respect NCBI rate limits
+  for (const pmid of pmids) papers.push(await fetchPaper(pmid)); // sequential – respect NCBI rate limits
   const cards = [];
   for (const p of papers) cards.push(await extractCard(p, question));
   return buildResult(question, cards, papers.map((p) => p.text));

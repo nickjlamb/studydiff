@@ -1,12 +1,12 @@
 // Study-card extraction: turn a paper's source text into a structured StudyCard
-// using Claude. The contract is strict — every field returns BOTH a value and a
+// using Claude. The contract is strict – every field returns BOTH a value and a
 // verbatim supporting quote, and any field the text does not state must be
 // "not reported" with an empty quote. That discipline is what lets the grounding
 // step later verify the card instead of trusting it.
 //
 // Extraction uses Claude tool-use with a forced input schema. That guarantees a
 // validated JSON object back (no prose, no code fences, no all-or-nothing parse
-// failure if the model chats first) — which is exactly the fragility that made an
+// failure if the model chats first) – which is exactly the fragility that made an
 // early version silently return an all-"not reported" card when one response
 // didn't parse.
 
@@ -24,7 +24,7 @@ const fieldSchema = {
   type: 'object',
   properties: {
     value: { type: 'string', description: `concise value (≤12 words), or "${NOT_REPORTED}"` },
-    quote: { type: 'string', description: 'the SHORTEST verbatim span (≤15 words) copied exactly from the source that supports the value — never a whole sentence or paragraph; "" if not reported' },
+    quote: { type: 'string', description: 'the SHORTEST verbatim span (≤15 words) copied exactly from the source that supports the value – never a whole sentence or paragraph; "" if not reported' },
   },
   required: ['value', 'quote'],
 };
@@ -42,8 +42,8 @@ const systemPrompt = `You extract the study design of a single research paper in
 
 Rules:
 - Call the record_study_card tool with one entry per dimension.
-- For every field provide "value" (concise, ≤12 words) and "quote" (a VERBATIM span copied exactly from the provided text — same characters and numbers — that supports the value).
-- Keep every quote to the SHORTEST exact span that proves the value — at most ~15 words. Never copy a whole sentence or paragraph; pick the key phrase.
+- For every field provide "value" (concise, ≤12 words) and "quote" (a VERBATIM span copied exactly from the provided text – same characters and numbers – that supports the value).
+- Keep every quote to the SHORTEST exact span that proves the value – at most ~15 words. Never copy a whole sentence or paragraph; pick the key phrase.
 - If the text does not state a field, set "value" to "${NOT_REPORTED}" and "quote" to "". Never guess or infer beyond the text.
 - "finding" is the paper's main conclusion stated as a direction of effect relevant to the question.`;
 
@@ -59,7 +59,7 @@ async function callExtract(paper, question, key, retryHint = '') {
   const source = paper.text.length > MAX_EXTRACT_CHARS ? paper.text.slice(0, MAX_EXTRACT_CHARS) : paper.text;
   const userPrompt = `Question under comparison: ${question}
 
-Paper: ${paper.citation} — ${paper.title}
+Paper: ${paper.citation} – ${paper.title}
 Source depth: ${paper.sourceDepth}
 
 --- SOURCE TEXT START ---
@@ -105,7 +105,7 @@ Record every dimension (${DIMENSIONS.join(', ')}) via the record_study_card tool
  */
 export async function extractCard(paper, question) {
   const key = process.env.ANTHROPIC_API_KEY;
-  if (!key) throw new Error('ANTHROPIC_API_KEY not set — use the offline demo, or add a key for live extraction.');
+  if (!key) throw new Error('ANTHROPIC_API_KEY not set – use the offline demo, or add a key for live extraction.');
 
   // Every paper has a main finding; a card that comes back with no `finding` is a
   // failed call, not a real "the paper says nothing". Retry those, then fail loudly
@@ -115,7 +115,7 @@ export async function extractCard(paper, question) {
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     // On retries, add an explicit nudge (this model deprecates `temperature`, so
     // we vary the prompt instead of the sampling temperature).
-    const hint = attempt === 1 ? '' : ` The "finding" field must state this paper's main conclusion from the text — do not leave it as "${NOT_REPORTED}".`;
+    const hint = attempt === 1 ? '' : ` The "finding" field must state this paper's main conclusion from the text – do not leave it as "${NOT_REPORTED}".`;
     const { input, stopReason } = await callExtract(paper, question, key, hint);
     lastReason = stopReason;
     if (input) {

@@ -1,6 +1,6 @@
 // Grounding: the trust layer. Every extracted value and every synthesised reason
 // is checked against the actual source text using OpenGATE's deterministic
-// checkGrounding — no second LLM acting as judge. A field is grounded only when
+// checkGrounding – no second LLM acting as judge. A field is grounded only when
 // its supporting quote really appears in the source AND every number in its value
 // traces back to that source. Anything that fails is downgraded, not shown as fact.
 
@@ -13,7 +13,7 @@ import { NOT_REPORTED } from './types.mjs';
  */
 export function groundField(f, sourceText) {
   if (!f || f.value === NOT_REPORTED || !f.value) {
-    return { grounded: true, reason: 'not reported — nothing to verify' };
+    return { grounded: true, reason: 'not reported – nothing to verify' };
   }
   // 1. The supporting quote must genuinely exist in the source.
   if (!f.quote) return { grounded: false, reason: 'no supporting quote provided' };

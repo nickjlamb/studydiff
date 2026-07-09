@@ -1,9 +1,9 @@
-// "What would resolve this disagreement?" — the scientist's next question after
+// "What would resolve this disagreement?" – the scientist's next question after
 // seeing *why* two studies differ. These are deterministic, method-level next
 // steps derived from the comparison we already computed (which dimension drives
 // the conflict, and whether the studies share their data). They are framed as
-// reasoning about what evidence is missing — NOT as claims extracted from the
-// papers — so they stay on the right side of the grounding guarantee.
+// reasoning about what evidence is missing – NOT as claims extracted from the
+// papers – so they stay on the right side of the grounding guarantee.
 
 /**
  * @param {{findingsConflict:boolean, candidateReasons:Array, sharedDesign:string[]}} comparison
@@ -17,7 +17,7 @@ export function resolvingEvidence(comparison) {
 
   if (top) {
     out.push(
-      `Vary only the ${top.label.toLowerCase()}: applying both studies' approaches to the same data would isolate whether this difference — rather than the underlying biology — drives the divergence.`,
+      `Vary only the ${top.label.toLowerCase()}: applying both studies' approaches to the same data would isolate whether this difference – rather than the underlying biology – drives the divergence.`,
     );
   }
 
@@ -25,7 +25,7 @@ export function resolvingEvidence(comparison) {
   // settle it; if they don't, independent replication is the missing evidence.
   if (shared.includes('Model system') || shared.includes('Intervention')) {
     out.push(
-      `Both studies share the same ${shared.includes('Model system') ? 'data/model system' : 'intervention'}, so resolving this calls for new, independent data — not a further reanalysis of the same source.`,
+      `Both studies share the same ${shared.includes('Model system') ? 'data/model system' : 'intervention'}, so resolving this calls for new, independent data – not a further reanalysis of the same source.`,
     );
   } else {
     out.push(

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>StudyDiff — why studies disagree</title>
+<title>StudyDiff – why studies disagree</title>
 <style>
   :root {
     --bg:#f6f7f9; --panel:#ffffff; --ink:#111827; --muted:#6b7280; --line:#e5e7eb;
@@ -51,7 +51,7 @@
   .stag.a { background:#e1f5ee; color:var(--teal); } .stag.b { background:#f3e8ff; color:var(--purple); }
   .heroart { flex:0 0 auto; }
 
-  /* step tracker — number stacked above label so the connector never crosses text */
+  /* step tracker – number stacked above label so the connector never crosses text */
   .tracker { display:flex; list-style:none; margin:30px 0 6px; padding:0; }
   .tracker li { flex:1; display:flex; flex-direction:column; gap:10px; position:relative; padding:0 8px; }
   .tracker li:not(:last-child):after { content:""; position:absolute; top:14px; left:46px; right:6px; height:1px; background:var(--line); z-index:0; }
@@ -286,7 +286,7 @@
       </div>
       <div class="dropzone" id="dropzone">
         <div class="dz-title">Drag &amp; drop two papers here to compare</div>
-        <div class="dz-sub">or click to browse for PDFs — or pick PMID / DOI or Paste above</div>
+        <div class="dz-sub">or click to browse for PDFs – or pick PMID / DOI or Paste above</div>
       </div>
       <input type="file" id="u-file" accept="application/pdf,.pdf" multiple hidden />
     </div>
@@ -299,7 +299,7 @@
           <button class="segbtn" data-m="id"><svg class="sico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg>PMID / DOI</button>
           <button class="segbtn" data-m="text"><svg class="sico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4h8a2 2 0 012 2v14a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M9 10h6M9 14h6"/></svg>Paste</button>
         </div>
-        <div class="minput" data-m="id" hidden><input class="in-id" placeholder="PMID or DOI — e.g. 12939617" /></div>
+        <div class="minput" data-m="id" hidden><input class="in-id" placeholder="PMID or DOI – e.g. 12939617" /></div>
         <div class="minput" data-m="pdf"><input type="file" class="in-file" accept="application/pdf,.pdf" /></div>
         <div class="minput" data-m="text" hidden>
           <input class="in-cite cite" placeholder="Citation (optional)" />
@@ -314,7 +314,7 @@
           <button class="segbtn" data-m="id"><svg class="sico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg>PMID / DOI</button>
           <button class="segbtn" data-m="text"><svg class="sico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4h8a2 2 0 012 2v14a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M9 10h6M9 14h6"/></svg>Paste</button>
         </div>
-        <div class="minput" data-m="id" hidden><input class="in-id" placeholder="PMID or DOI — e.g. 19843076" /></div>
+        <div class="minput" data-m="id" hidden><input class="in-id" placeholder="PMID or DOI – e.g. 19843076" /></div>
         <div class="minput" data-m="pdf"><input type="file" class="in-file" accept="application/pdf,.pdf" /></div>
         <div class="minput" data-m="text" hidden>
           <input class="in-cite cite" placeholder="Citation (optional)" />
@@ -324,7 +324,7 @@
     </div>
 
     <div class="examplesrow">
-      <span class="lbl">No setup — try a worked example:</span>
+      <span class="lbl">No setup – try a worked example:</span>
       <button class="exchip" data-fixture="mouse-inflammation">Mouse models &amp; human inflammation</button>
       <button class="exchip" data-fixture="resveratrol-sirt1">Resveratrol &amp; SIRT1</button>
       <button class="exchip" data-fixture="treg-stability">Treg lineage stability</button>
@@ -347,7 +347,7 @@
         <h4>Why trust this</h4>
         <p class="railsub">Every finding is traced back to the original evidence.</p>
         <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Every claim verified</b><span>Unsupported fields are shown as <span class="nr">not reported</span>, never guessed.</span></div></div>
-        <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg><div><b>No LLM-as-judge</b><span>Deterministic verification — the same input always gives the same result.</span></div></div>
+        <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg><div><b>No LLM-as-judge</b><span>Deterministic verification – the same input always gives the same result.</span></div></div>
         <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg><div><b>Source-first</b><span>Every fact links to the exact supporting sentence in the paper.</span></div></div>
         <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V9M9 21V5M15 21v-8M21 21V3"/></svg><div><b>Honest by design</b><span>We show what the source says, and flag what it doesn't.</span></div></div>
       </div>
@@ -490,11 +490,11 @@ let progTimer = null, progActive = false;
 function showStep(i) { trackerActive(i); setStatus(GENERIC[Math.min(i, GENERIC.length - 1)]); }
 function clearTimer() { if (progTimer) { clearInterval(progTimer); progTimer = null; } }
 function startProgress() {
-  if (progActive) return;   // already marching — started the instant Compare was clicked, so don't restart
+  if (progActive) return;   // already marching – started the instant Compare was clicked, so don't restart
   progActive = true;
   let i = 0; showStep(0);   // step 1 lights up immediately
   progTimer = setInterval(() => {
-    if (i >= GENERIC.length - 1) { clearTimer(); return; }  // reached the last step — hold until result
+    if (i >= GENERIC.length - 1) { clearTimer(); return; }  // reached the last step – hold until result
     showStep(++i);
   }, 3000);
 }
@@ -524,7 +524,7 @@ async function run(body) {
 }
 
 function handle(ev) {
-  // 'step' events are intentionally ignored — the tracker is a cosmetic timed march (see startProgress).
+  // 'step' events are intentionally ignored – the tracker is a cosmetic timed march (see startProgress).
   if (ev.type === 'error') {
     endProgress(); trackerReset();
     $('#out').innerHTML = '<div class="err">' + esc(ev.message) + '</div>'; $('#out').classList.add('show');
@@ -604,7 +604,7 @@ function render(p) {
   if (p.resolve && p.resolve.length) {
     h += '<div class="acc" id="d-resolve">' + accHead('resolve', 'What would resolve this disagreement?') + '<div class="acc-b"><ul class="resolve">';
     for (const r of p.resolve) h += '<li>' + esc(r) + '</li>';
-    h += '</ul><p class="prov" style="margin-top:8px">Suggested next evidence, derived from the differences above — reasoning about what’s missing, not a claim from the papers.</p></div></div>';
+    h += '</ul><p class="prov" style="margin-top:8px">Suggested next evidence, derived from the differences above – reasoning about what’s missing, not a claim from the papers.</p></div></div>';
   }
   let rows = '';
   for (const row of p.comparison.rows) {
@@ -634,7 +634,7 @@ function render(p) {
     stepDone('Retrieved both papers') + stepDone('Extracted study designs') +
     stepDone('Verified every claim') + stepDone('Compared the designs') + stepDone('Explained the difference') + '</div>';
   s += '<div class="rsec"><h4>Verification</h4><div class="sverify"><b>' + verified +
-    '</b> reported facts verified against the source. Deterministic — no LLM-as-judge; unsupported fields shown as <span class="nr">not reported</span>.</div></div>';
+    '</b> reported facts verified against the source. Deterministic – no LLM-as-judge; unsupported fields shown as <span class="nr">not reported</span>.</div></div>';
   s += '<div class="rsec jump"><h4>Jump to</h4>';
   if (p.resolve && p.resolve.length) s += '<button class="sbtn" data-panel="resolve">What would resolve this?</button>';
   s += '<button class="sbtn" data-panel="full">Full comparison · ' + p.comparison.rows.length + ' dimensions</button>';
@@ -644,7 +644,7 @@ function render(p) {
     '<button class="expbtn" id="dl-report" title="Download Markdown report"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v11m0 0l-4-4m4 4l4-4M5 21h14"/></svg><span class="lbl">Markdown</span></button>' +
     '<button class="expbtn" id="print-report" title="Print or save as PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/></svg><span class="lbl">PDF</span></button>' +
     '<button class="expbtn" id="copy-report" title="Copy report to clipboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="lbl">Copy</span></button>' +
-    '</div><p class="railfoot" style="margin-top:12px">A reproducible record — every value with its verbatim source sentence.</p></div></div>';
+    '</div><p class="railfoot" style="margin-top:12px">A reproducible record – every value with its verbatim source sentence.</p></div></div>';
   const sideR = $('#side-results'); sideR.innerHTML = s; sideR.hidden = false;
   $('#side-default').hidden = true;
 
@@ -656,7 +656,7 @@ function render(p) {
     if (!panel) return;
     const open = panel.classList.toggle('open');
     $$('[data-panel="' + name + '"]').forEach((b) => b.classList.toggle('active', open));
-    // Scroll to the panel on open — standalone only (embed scroll gets reset by the iframe resize).
+    // Scroll to the panel on open – standalone only (embed scroll gets reset by the iframe resize).
     if (open && window.self === window.top) panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
   });
   $('#dl-report', sideR).onclick = () => downloadReport(p);
@@ -667,21 +667,21 @@ function render(p) {
   };
 }
 
-// Build a portable, reproducible Markdown report — every reported value with its
+// Build a portable, reproducible Markdown report – every reported value with its
 // verbatim supporting sentence, so citations map straight back to both papers.
 function buildReport(p) {
   const [a, b] = p.cards;
   const ga = p.grounding.a.results, gb = p.grounding.b.results;
   const depth = { fulltext:'full text', abstract:'abstract', pasted:'pasted text', uploaded:'uploaded PDF' };
   const L = [];
-  L.push('# StudyDiff — why two studies disagree', '');
+  L.push('# StudyDiff – why two studies disagree', '');
   if (p.question) L.push('**Question:** ' + p.question, '');
-  L.push('**Study A:** ' + a.citation + (a.pmid ? ' (PMID ' + a.pmid + ')' : '') + ' — source: ' + (depth[a.sourceDepth] || a.sourceDepth));
-  L.push('**Study B:** ' + b.citation + (b.pmid ? ' (PMID ' + b.pmid + ')' : '') + ' — source: ' + (depth[b.sourceDepth] || b.sourceDepth), '');
+  L.push('**Study A:** ' + a.citation + (a.pmid ? ' (PMID ' + a.pmid + ')' : '') + ' – source: ' + (depth[a.sourceDepth] || a.sourceDepth));
+  L.push('**Study B:** ' + b.citation + (b.pmid ? ' (PMID ' + b.pmid + ')' : '') + ' – source: ' + (depth[b.sourceDepth] || b.sourceDepth), '');
   L.push('## Verdict', p.comparison.findingsConflict ? 'These studies reach different conclusions.' : 'These studies do not clearly differ on this question.', '');
   L.push('## Why they differ', p.synthesis.text + (p.synthesis.grounded ? ' _(verified against source)_' : ''), '');
   L.push('## What’s driving the difference');
-  p.comparison.candidateReasons.forEach((r, i) => { L.push('- **' + (i === 0 ? 'Primary driver' : 'Also differs') + ' — ' + r.label + '**', '  - A: ' + r.a, '  - B: ' + r.b); });
+  p.comparison.candidateReasons.forEach((r, i) => { L.push('- **' + (i === 0 ? 'Primary driver' : 'Also differs') + ' – ' + r.label + '**', '  - A: ' + r.a, '  - B: ' + r.b); });
   if ((p.comparison.sharedDesign || []).length) L.push('- **Ruled out (identical in both):** ' + p.comparison.sharedDesign.join(', '));
   L.push('');
   if (p.resolve && p.resolve.length) { L.push('## What would resolve this'); for (const r of p.resolve) L.push('- ' + r); L.push('_Reasoning about missing evidence, not a claim from the papers._', ''); }
@@ -691,10 +691,10 @@ function buildReport(p) {
     L.push('- **' + tag + '** (' + cite + '): ' + f.value + (g && g.grounded ? ' ✓' : ''));
     if (f.quote) L.push('  > “' + f.quote + '”');
   };
-  for (const row of p.comparison.rows) { L.push('### ' + row.label + (row.diverges ? ' — differs' : '')); fld('A', a.citation, a[row.dimension], ga[row.dimension]); fld('B', b.citation, b[row.dimension], gb[row.dimension]); L.push(''); }
+  for (const row of p.comparison.rows) { L.push('### ' + row.label + (row.diverges ? ' – differs' : '')); fld('A', a.citation, a[row.dimension], ga[row.dimension]); fld('B', b.citation, b[row.dimension], gb[row.dimension]); L.push(''); }
   const unrep = p.gaps.unreported || [];
   if (unrep.length) { L.push('## Not reported by either study'); for (const g of unrep) L.push('- ' + g); L.push(''); }
-  L.push('---', 'Generated by StudyDiff (https://studydiff.pharmatools.ai). Every reported fact is verified against the source text via deterministic grounding — no LLM-as-judge. Fields the source does not support are shown as “not reported”.');
+  L.push('---', 'Generated by StudyDiff (https://studydiff.pharmatools.ai). Every reported fact is verified against the source text via deterministic grounding – no LLM-as-judge. Fields the source does not support are shown as “not reported”.');
   return L.join('\n');
 }
 
@@ -714,14 +714,14 @@ function buildReportHTML(p) {
   const ga = p.grounding.a.results, gb = p.grounding.b.results;
   const depth = { fulltext:'full text', abstract:'abstract', pasted:'pasted text', uploaded:'uploaded PDF' };
   const e = esc;
-  let c = '<h1>StudyDiff — why two studies disagree</h1>';
+  let c = '<h1>StudyDiff – why two studies disagree</h1>';
   if (p.question) c += '<p><b>Question:</b> ' + e(p.question) + '</p>';
-  c += '<p><b>Study A:</b> ' + e(a.citation) + (a.pmid ? ' (PMID ' + e(a.pmid) + ')' : '') + ' — source: ' + (depth[a.sourceDepth] || a.sourceDepth) + '<br>' +
-       '<b>Study B:</b> ' + e(b.citation) + (b.pmid ? ' (PMID ' + e(b.pmid) + ')' : '') + ' — source: ' + (depth[b.sourceDepth] || b.sourceDepth) + '</p>';
+  c += '<p><b>Study A:</b> ' + e(a.citation) + (a.pmid ? ' (PMID ' + e(a.pmid) + ')' : '') + ' – source: ' + (depth[a.sourceDepth] || a.sourceDepth) + '<br>' +
+       '<b>Study B:</b> ' + e(b.citation) + (b.pmid ? ' (PMID ' + e(b.pmid) + ')' : '') + ' – source: ' + (depth[b.sourceDepth] || b.sourceDepth) + '</p>';
   c += '<h2>Verdict</h2><p>' + (p.comparison.findingsConflict ? 'These studies reach different conclusions.' : 'These studies do not clearly differ on this question.') + '</p>';
   c += '<h2>Why they differ</h2><p>' + e(p.synthesis.text) + (p.synthesis.grounded ? ' <span class="ok">(verified against source)</span>' : '') + '</p>';
   c += '<h2>What’s driving the difference</h2><ul>';
-  p.comparison.candidateReasons.forEach((r, i) => { c += '<li><b>' + (i === 0 ? 'Primary driver' : 'Also differs') + ' — ' + e(r.label) + '</b><br>A: ' + e(r.a) + '<br>B: ' + e(r.b) + '</li>'; });
+  p.comparison.candidateReasons.forEach((r, i) => { c += '<li><b>' + (i === 0 ? 'Primary driver' : 'Also differs') + ' – ' + e(r.label) + '</b><br>A: ' + e(r.a) + '<br>B: ' + e(r.b) + '</li>'; });
   if ((p.comparison.sharedDesign || []).length) c += '<li><b>Ruled out (identical in both):</b> ' + e(p.comparison.sharedDesign.join(', ')) + '</li>';
   c += '</ul>';
   if (p.resolve && p.resolve.length) { c += '<h2>What would resolve this</h2><ul>'; for (const r of p.resolve) c += '<li>' + e(r) + '</li>'; c += '</ul><p class="note">Reasoning about missing evidence, not a claim from the papers.</p>'; }
@@ -732,11 +732,11 @@ function buildReportHTML(p) {
     if (f.quote) s += '<blockquote>“' + e(f.quote) + '”</blockquote>';
     return s;
   };
-  for (const row of p.comparison.rows) c += '<div class="dim"><h3>' + e(row.label) + (row.diverges ? ' — differs' : '') + '</h3>' +
+  for (const row of p.comparison.rows) c += '<div class="dim"><h3>' + e(row.label) + (row.diverges ? ' – differs' : '') + '</h3>' +
     fld('A', a.citation, a[row.dimension], ga[row.dimension]) + fld('B', b.citation, b[row.dimension], gb[row.dimension]) + '</div>';
   const unrep = p.gaps.unreported || [];
   if (unrep.length) { c += '<h2>Not reported by either study</h2><ul>'; for (const g of unrep) c += '<li>' + e(g) + '</li>'; c += '</ul>'; }
-  c += '<hr><p class="foot">Generated by StudyDiff · studydiff.pharmatools.ai · Every reported fact is verified against the source via deterministic grounding — no LLM-as-judge. Fields the source does not support are shown as “not reported”.</p>';
+  c += '<hr><p class="foot">Generated by StudyDiff · studydiff.pharmatools.ai · Every reported fact is verified against the source via deterministic grounding – no LLM-as-judge. Fields the source does not support are shown as “not reported”.</p>';
   const css = 'body{font:14px/1.55 -apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#111827;max-width:760px;margin:26px auto;padding:0 22px;}' +
     'h1{font-size:22px;margin:0 0 14px;}h2{font-size:15px;margin:22px 0 8px;border-bottom:1px solid #e5e7eb;padding-bottom:4px;}h3{font-size:13px;margin:14px 0 4px;color:#374151;}' +
     'blockquote{margin:4px 0 10px;padding:6px 12px;border-left:3px solid #0f766e;color:#374151;background:#f6f7f9;font-size:13px;}' +
