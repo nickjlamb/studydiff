@@ -23,8 +23,8 @@ const MAX_EXTRACT_CHARS = Number(process.env.STUDYDIFF_MAX_EXTRACT_CHARS) || 180
 const fieldSchema = {
   type: 'object',
   properties: {
-    value: { type: 'string', description: `concise value, or "${NOT_REPORTED}"` },
-    quote: { type: 'string', description: 'verbatim span copied from the source text, or "" if not reported' },
+    value: { type: 'string', description: `concise value (≤12 words), or "${NOT_REPORTED}"` },
+    quote: { type: 'string', description: 'the SHORTEST verbatim span (≤15 words) copied exactly from the source that supports the value — never a whole sentence or paragraph; "" if not reported' },
   },
   required: ['value', 'quote'],
 };
@@ -42,10 +42,10 @@ const systemPrompt = `You extract the study design of a single research paper in
 
 Rules:
 - Call the record_study_card tool with one entry per dimension.
-- For every field provide "value" (concise) and "quote" (a VERBATIM span copied exactly from the provided text — same characters and numbers — that supports the value).
+- For every field provide "value" (concise, ≤12 words) and "quote" (a VERBATIM span copied exactly from the provided text — same characters and numbers — that supports the value).
+- Keep every quote to the SHORTEST exact span that proves the value — at most ~15 words. Never copy a whole sentence or paragraph; pick the key phrase.
 - If the text does not state a field, set "value" to "${NOT_REPORTED}" and "quote" to "". Never guess or infer beyond the text.
-- "finding" is the paper's main conclusion stated as a direction of effect relevant to the question.
-- Prefer short, exact quotes so they can be located in the source text.`;
+- "finding" is the paper's main conclusion stated as a direction of effect relevant to the question.`;
 
 /**
  * @param {{pmid:string,citation:string,title:string,text:string,sourceDepth:string}} paper
