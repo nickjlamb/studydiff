@@ -161,9 +161,12 @@
   .answer-driver { font-size:15px; font-weight:600; color:var(--ink); margin-bottom:9px; }
   .answer .abline { display:flex; align-items:flex-start; font-size:14px; line-height:1.55; padding:3px 0; color:var(--ink); }
   .answer .abline .hab { margin-top:2px; }
+  .answer-verified { margin-top:16px; padding-top:12px; border-top:1px solid var(--line); font-size:12px; color:var(--green); display:flex; align-items:center; gap:6px; }
+  .answer-verified i { font-style:normal; font-weight:700; }
+  .answer-verified.bad { color:var(--red); }
   .drivers2 { display:flex; flex-direction:column; gap:8px; margin-top:6px; }
   .drow { display:flex; gap:12px; align-items:flex-start; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff; }
-  .drow.primary { border-color:#cbd5e1; background:#f9fafb; }
+  .drow.primary { border-color:#cbd5e1; background:#f9fafb; padding:14px 16px; }
   .drow.ruled { background:#fafafa; }
   .dtag { flex:0 0 auto; min-width:96px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; padding:3px 9px; border-radius:999px; text-align:center; }
   .drow.primary .dtag { background:#374151; color:#fff; }
@@ -175,6 +178,7 @@
   .drow.ruled .dtag { background:#eef0f2; color:#6b7280; }
   .dbody { font-size:13px; }
   .dbody b { font-size:14px; }
+  .drow.primary .dbody b { font-size:16px; }
   .dcmp { display:flex; flex-direction:column; gap:2px; margin-top:4px; color:var(--muted); font-size:12.5px; }
   details.fullcmp { margin:18px 0 6px; }
   details.fullcmp summary { display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none;
@@ -260,7 +264,7 @@
     <div class="hero">
       <div>
         <h2>Why do these two studies <em>disagree</em>?</h2>
-        <p>Pinpoint the methodological differences driving conflicting study conclusions.</p>
+        <p>Find the design difference behind the disagreement — with every claim traced to the source.</p>
       </div>
     </div>
 
@@ -555,13 +559,15 @@ function render(p) {
   const shared = (p.comparison.sharedDesign || []).map((x) => x.toLowerCase());
   const listJoin = (arr) => arr.length <= 1 ? (arr[0] || '') : arr.length === 2 ? arr[0] + ' and ' + arr[1] : arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1];
   const topReason = p.comparison.candidateReasons[0];
-  const vbadge = p.synthesis.grounded ? ' <span class="badge g"><i>✓</i> verified against source</span>' : ' <span class="badge d">✗ unverified</span>';
+  const vnote = p.synthesis.grounded
+    ? '<div class="answer-verified"><i>✓</i> Every claim above is verified against the source</div>'
+    : '<div class="answer-verified bad"><i>✗</i> Some claims could not be verified</div>';
   h += '<h3 class="sec">Why these studies differ</h3><div class="answer">';
   if (!p.comparison.findingsConflict) {
-    h += '<div class="answer-lead">These studies don’t state clearly opposing conclusions, so no contradiction is asserted.' + vbadge + '</div>';
+    h += '<div class="answer-lead">These studies don’t state clearly opposing conclusions, so no contradiction is asserted.</div>';
   } else {
     h += '<div class="answer-lead">These studies reach different conclusions' +
-      (shared.length ? '<span class="answer-shared"> despite sharing the same ' + esc(listJoin(shared)) + '</span>' : '') + vbadge + '</div>';
+      (shared.length ? '<span class="answer-shared"> despite sharing the same ' + esc(listJoin(shared)) + '</span>' : '') + '</div>';
     if (topReason) {
       h += '<div class="answer-block"><div class="answer-label">Most likely reason</div><div class="answer-driver">' + esc(topReason.label) + '</div>' +
         '<div class="abline"><span class="hab a">A</span><span>' + esc(topReason.a) + '</span></div>' +
@@ -573,7 +579,7 @@ function render(p) {
       '<div class="abline"><span class="hab a">A</span><span>' + esc(a.finding.value) + '</span></div>' +
       '<div class="abline"><span class="hab b">B</span><span>' + esc(b.finding.value) + '</span></div></div>';
   }
-  h += '</div>';
+  h += vnote + '</div>';
 
   const drivers = p.comparison.candidateReasons;
   const ruledOut = p.comparison.sharedDesign || [];
