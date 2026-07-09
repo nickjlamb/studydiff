@@ -218,8 +218,12 @@
   .acc.open .chev { transform:rotate(180deg); color:var(--teal); }
   .acc-b { display:none; padding:14px 15px 16px; }
   .acc.open .acc-b { display:block; }
-  .scard.jump { border-color:var(--teal); background:#f7fdfb; }
-  .scard.jump h4 { color:var(--teal); }
+  .rpanel { border:1px solid var(--line); border-radius:12px; background:#fff; overflow:hidden; }
+  .rsec { padding:18px 20px; }
+  .rsec + .rsec { border-top:1px solid var(--line); }
+  .rsec h4 { margin:0 0 14px; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); }
+  .rsec.jump { background:#f7fdfb; }
+  .rsec.jump h4 { color:var(--teal); }
   @media (max-width:820px) { .rgrid { grid-template-columns:1fr; } .rside { position:static; } }
   ul.resolve { list-style:none; margin:6px 0 0; padding:0; display:flex; flex-direction:column; gap:8px; }
   ul.resolve li { position:relative; padding:11px 14px 11px 40px; border:1px solid var(--line); border-radius:10px; background:#fff; font-size:13px; }
@@ -618,24 +622,24 @@ function render(p) {
   const depth = { fulltext:'full text', abstract:'abstract', pasted:'pasted text', uploaded:'uploaded PDF' };
   const srcRow = (tag, c) => '<div class="railrow"><span class="stag ' + tag.toLowerCase() + '">' + tag + '</span><div><b>' +
     esc(c.citation) + '</b><span>' + (depth[c.sourceDepth] || c.sourceDepth) + ' · ' + reportedCount(c) + ' fields extracted</span></div></div>';
-  let s = '<div class="scard"><h4>Sources</h4>' + srcRow('A', a) + srcRow('B', b) + '</div>';
+  let s = '<div class="rpanel"><div class="rsec"><h4>Sources</h4>' + srcRow('A', a) + srcRow('B', b) + '</div>';
 
   const stepDone = (label) => '<div class="sstep"><span class="sc">✓</span>' + label + '</div>';
-  s += '<div class="scard"><h4>How this was produced</h4>' +
+  s += '<div class="rsec"><h4>How this was produced</h4>' +
     stepDone('Retrieved both papers') + stepDone('Extracted study designs') +
     stepDone('Verified every claim') + stepDone('Compared the designs') + stepDone('Explained the difference') + '</div>';
-  s += '<div class="scard"><h4>Verification</h4><div class="sverify"><b>' + verified +
+  s += '<div class="rsec"><h4>Verification</h4><div class="sverify"><b>' + verified +
     '</b> reported facts verified against the source. Deterministic — no LLM-as-judge; unsupported fields shown as <span class="nr">not reported</span>.</div></div>';
-  s += '<div class="scard jump"><h4>Jump to</h4>';
+  s += '<div class="rsec jump"><h4>Jump to</h4>';
   if (p.resolve && p.resolve.length) s += '<button class="sbtn" data-panel="resolve">What would resolve this?</button>';
   s += '<button class="sbtn" data-panel="full">Full comparison · ' + p.comparison.rows.length + ' dimensions</button>';
   if (unrep.length) s += '<button class="sbtn" data-panel="unrep">Not reported by either</button>';
   s += '</div>';
-  s += '<div class="scard"><h4>Export</h4><div class="exprow">' +
+  s += '<div class="rsec"><h4>Export</h4><div class="exprow">' +
     '<button class="expbtn" id="dl-report" title="Download Markdown report"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v11m0 0l-4-4m4 4l4-4M5 21h14"/></svg><span class="lbl">Markdown</span></button>' +
     '<button class="expbtn" id="print-report" title="Print or save as PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/></svg><span class="lbl">PDF</span></button>' +
     '<button class="expbtn" id="copy-report" title="Copy report to clipboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="lbl">Copy</span></button>' +
-    '</div><p class="railfoot" style="margin-top:12px">A reproducible record — every value with its verbatim source sentence.</p></div>';
+    '</div><p class="railfoot" style="margin-top:12px">A reproducible record — every value with its verbatim source sentence.</p></div></div>';
   const sideR = $('#side-results'); sideR.innerHTML = s; sideR.hidden = false;
   $('#side-default').hidden = true;
 
