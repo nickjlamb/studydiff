@@ -153,6 +153,14 @@
   .verified i { font-style:normal; font-weight:700; font-size:15px; }
   .verified .nr { color:#6b7280; }
   .synth { background:#fff; border:1px solid var(--line); border-left:3px solid var(--teal); border-radius:8px; padding:14px 16px; font-size:15px; }
+  .answer { background:#fff; border:1px solid var(--line); border-left:3px solid var(--teal); border-radius:10px; padding:16px 18px; }
+  .answer-lead { font-size:17px; font-weight:600; line-height:1.45; color:var(--ink); }
+  .answer-shared { color:var(--muted); font-weight:400; }
+  .answer-block { margin-top:15px; }
+  .answer-label { font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:7px; }
+  .answer-driver { font-size:15px; font-weight:600; color:var(--ink); margin-bottom:9px; }
+  .answer .abline { display:flex; align-items:flex-start; font-size:14px; line-height:1.55; padding:3px 0; color:var(--ink); }
+  .answer .abline .hab { margin-top:2px; }
   .drivers2 { display:flex; flex-direction:column; gap:8px; margin-top:6px; }
   .drow { display:flex; gap:12px; align-items:flex-start; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff; }
   .drow.primary { border-color:#cbd5e1; background:#f9fafb; }
@@ -541,8 +549,28 @@ function render(p) {
     ? '<div class="banner">These studies reach different conclusions</div>'
     : '<div class="banner agree">These studies do not clearly differ on this question</div>';
 
-  h += '<h3 class="sec">Why these studies differ</h3><div class="synth">' + esc(p.synthesis.text) +
-    (p.synthesis.grounded ? ' <span class="badge g"><i>✓</i> verified against source</span>' : ' <span class="badge d">✗ unverified</span>') + '</div>';
+  const shared = (p.comparison.sharedDesign || []).map((x) => x.toLowerCase());
+  const listJoin = (arr) => arr.length <= 1 ? (arr[0] || '') : arr.length === 2 ? arr[0] + ' and ' + arr[1] : arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1];
+  const topReason = p.comparison.candidateReasons[0];
+  const vbadge = p.synthesis.grounded ? ' <span class="badge g"><i>✓</i> verified against source</span>' : ' <span class="badge d">✗ unverified</span>';
+  h += '<h3 class="sec">Why these studies differ</h3><div class="answer">';
+  if (!p.comparison.findingsConflict) {
+    h += '<div class="answer-lead">These studies don’t state clearly opposing conclusions, so no contradiction is asserted.' + vbadge + '</div>';
+  } else {
+    h += '<div class="answer-lead">These studies reach different conclusions' +
+      (shared.length ? '<span class="answer-shared"> despite sharing the same ' + esc(listJoin(shared)) + '</span>' : '') + vbadge + '</div>';
+    if (topReason) {
+      h += '<div class="answer-block"><div class="answer-label">Most likely reason</div><div class="answer-driver">' + esc(topReason.label) + '</div>' +
+        '<div class="abline"><span class="hab a">A</span><span>' + esc(topReason.a) + '</span></div>' +
+        '<div class="abline"><span class="hab b">B</span><span>' + esc(topReason.b) + '</span></div></div>';
+    } else {
+      h += '<div class="answer-block"><p class="prov" style="margin:0">No design dimension reported in both papers differs, so the source of disagreement can’t be localised from the available text.</p></div>';
+    }
+    h += '<div class="answer-block"><div class="answer-label">Their conclusions</div>' +
+      '<div class="abline"><span class="hab a">A</span><span>' + esc(a.finding.value) + '</span></div>' +
+      '<div class="abline"><span class="hab b">B</span><span>' + esc(b.finding.value) + '</span></div></div>';
+  }
+  h += '</div>';
 
   const drivers = p.comparison.candidateReasons;
   const ruledOut = p.comparison.sharedDesign || [];
