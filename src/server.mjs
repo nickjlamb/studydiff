@@ -72,9 +72,13 @@ async function extractCardsStreaming(res, papers, question, timings = {}) {
     const id = i === 0 ? 'extractA' : 'extractB';
     const s = Date.now();
     step(res, id, 'active', `Extracting study design — ${p.citation}`);
-    const card = await extractCard(p, question);
+    const m = {};
+    const card = await extractCard(p, question, m);
     step(res, id, 'done', `Study card ready — ${p.citation}`);
     timings[`extract_${id}_ms`] = Date.now() - s;
+    timings[`attempts_${id}`] = m.attempts;
+    timings[`outcomes_${id}`] = m.outcomes;
+    timings[`src_chars_${id}`] = p.text.length;
     return card;
   }));
   timings.extract_wall_ms = Date.now() - t0;

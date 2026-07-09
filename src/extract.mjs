@@ -103,7 +103,7 @@ Record every dimension (${DIMENSIONS.join(', ')}) via the record_study_card tool
  * @param {string} question  the biological question being compared across papers
  * @returns {Promise<import('./types.mjs').StudyCard>}
  */
-export async function extractCard(paper, question) {
+export async function extractCard(paper, question, meta = {}) {
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) throw new Error('ANTHROPIC_API_KEY not set — use the offline demo, or add a key for live extraction.');
 
@@ -112,15 +112,21 @@ export async function extractCard(paper, question) {
   // rather than surfacing a blank card that looks like the paper reported nothing.
   const maxAttempts = 3;
   let lastReason = 'unknown';
+  meta.attempts = 0;
+  meta.outcomes = [];   // per-attempt diagnosis, so we can see WHY retries fire
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     // On retries, add an explicit nudge (this model deprecates `temperature`, so
     // we vary the prompt instead of the sampling temperature).
     const hint = attempt === 1 ? '' : ` The "finding" field must state this paper's main conclusion from the text — do not leave it as "${NOT_REPORTED}".`;
     const { input, stopReason } = await callExtract(paper, question, key, hint);
     lastReason = stopReason;
-    if (input) {
+    meta.attempts = attempt;
+    if (!input) {
+      meta.outcomes.push(`${stopReason}:no_tool_use`);
+    } else {
       const card = normalizeCard(input, paper);
-      if (card.finding.value !== NOT_REPORTED) return card;
+      if (card.finding.value !== NOT_REPORTED) { meta.outcomes.push(`${stopReason}:ok`); return card; }
+      meta.outcomes.push(`${stopReason}:finding_not_reported`);
     }
     if (DEBUG) console.error(`[extract] ${paper.citation}: attempt ${attempt} degenerate (no finding), retrying…`);
   }
