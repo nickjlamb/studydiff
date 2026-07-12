@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>StudyDiff — demo hook card</title>
+<style>
+  :root{
+    --teal:#0f766e;        /* Study A — matches StudyDiff */
+    --purple:#7c3aed;      /* Study B — matches StudyDiff */
+    --ink:#111827;
+    --muted:#6b7280;
+    --line:#e5e7eb;
+    --bg:#f4f5f7;          /* matches StudyDiff app background */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    display:flex;align-items:center;justify-content:center;
+    min-height:100%;padding:56px;cursor:pointer;user-select:none;
+  }
+  .wrap{width:100%;max-width:1280px}
+
+  /* reveal 2: the framing line */
+  .framing{
+    text-align:center;margin-bottom:38px;
+    opacity:0;transform:translateY(-6px);
+    transition:opacity .5s ease,transform .5s ease;
+  }
+  body.s2 .framing{opacity:1;transform:none}
+  .framing b{font-size:30px;font-weight:700;letter-spacing:-.01em}
+  .framing span{color:var(--muted);font-weight:400}
+
+  .row{display:grid;grid-template-columns:1fr auto 1fr;gap:32px;align-items:stretch}
+
+  .paper{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:38px 36px;box-shadow:0 1px 3px rgba(16,24,40,.05);
+    display:flex;flex-direction:column;gap:16px;
+    border-top:4px solid transparent;
+  }
+  .paper.a{border-top-color:var(--teal)}
+  .paper.b{border-top-color:var(--purple)}
+
+  .tag{
+    font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  }
+  .a .tag{color:var(--teal)}
+  .b .tag{color:var(--purple)}
+
+  .title{font-size:30px;line-height:1.28;font-weight:600;letter-spacing:-.01em}
+  .title em{font-style:italic}
+
+  /* reveal 1: highlight the contradiction */
+  .key{
+    position:relative;font-weight:800;
+    padding:0 4px;margin:0 -4px;border-radius:5px;
+    background-size:0% 100%;background-repeat:no-repeat;
+    transition:background-size .55s cubic-bezier(.4,0,.2,1),color .55s ease;
+  }
+  .a .key{background-image:linear-gradient(var(--teal),var(--teal))}
+  .b .key{background-image:linear-gradient(var(--purple),var(--purple))}
+  body.s1 .key{background-size:100% 100%;color:#fff}
+
+  .meta{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);
+    font-size:15px;color:var(--muted);line-height:1.6}
+  .meta strong{color:var(--ink);font-weight:600}
+
+  .vs{
+    align-self:center;font-size:16px;font-weight:700;color:var(--muted);
+    letter-spacing:.08em;text-transform:uppercase;
+    border:1px solid var(--line);background:#fff;border-radius:999px;
+    padding:10px 16px;
+  }
+
+  .hint{
+    position:fixed;bottom:20px;left:0;right:0;text-align:center;
+    font-size:12px;color:#9ca3af;transition:opacity .3s;
+  }
+  body.s2 .hint{opacity:0}
+
+  @media (max-width:1100px){
+    .row{grid-template-columns:1fr;gap:20px}
+    .vs{justify-self:center}
+    .title{font-size:25px}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="framing">
+      <b>Same question. <span>Opposite conclusions.</span></b>
+    </div>
+
+    <div class="row">
+
+      <article class="paper a">
+        <div class="tag">Study A</div>
+        <h1 class="title">
+          <span class="key">Instability</span> of the transcription factor Foxp3
+          leads to the generation of pathogenic memory T cells <em>in vivo</em>
+        </h1>
+        <div class="meta">
+          <strong>Zhou et al., 2009</strong><br>
+          Nature Immunology · PMID 19633673
+        </div>
+      </article>
+
+      <div class="vs">vs</div>
+
+      <article class="paper b">
+        <div class="tag">Study B</div>
+        <h1 class="title">
+          <span class="key">Stability</span> of the regulatory T cell lineage <em>in vivo</em>
+        </h1>
+        <div class="meta">
+          <strong>Rubtsov et al., 2010</strong><br>
+          Science · PMID 20929851
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="hint">click / press → to advance · press ← to step back · R to reset</div>
+
+<script>
+  let step = 0;                       // 0 = plain · 1 = highlight · 2 = framing line
+  const body = document.body;
+  const render = () => {
+    body.classList.toggle('s1', step >= 1);
+    body.classList.toggle('s2', step >= 2);
+  };
+  const next = () => { step = Math.min(step + 1, 2); render(); };
+  const back = () => { step = Math.max(step - 1, 0); render(); };
+
+  body.addEventListener('click', next);
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft') back();
+    else if (e.key.toLowerCase() === 'r') { step = 0; render(); }
+  });
+</script>
+</body>
+</html>
