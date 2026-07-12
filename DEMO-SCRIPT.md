@@ -57,7 +57,7 @@ Three clicks, driven live to match the narration: card plain → **click 1** hig
 
 ## Beat 4 — Trust moment (1:35–2:15)
 
-**On screen:** Expand the **Main finding** field in the study-by-study comparison to reveal the **verbatim quote** from each source with a green **✓**. These are the exact sentences on screen — highlight *these*, not any other copy of the abstract:
+**On screen:** Open the **Full study-by-study comparison** accordion. Every grounded value now shows its **supporting sentence in full, on screen**, in a quote block beside a green **✓ verified** — teal for A, purple for B. Scroll to **Main finding**; these are the exact sentences displayed, so highlight *these*, not any other copy of the abstract:
 
 > A (Zhou): *"a substantial percentage of cells had transient or unstable expression of the transcription factor Foxp3"*
 > B (Rubtsov): *"we have demonstrated notable stability of this cell population under physiologic and inflammatory conditions"*

@@ -183,6 +183,12 @@
   .dbody b { font-size:14px; }
   .drow.primary .dbody b { font-size:16px; }
   .dcmp { display:flex; flex-direction:column; gap:2px; margin-top:4px; color:var(--muted); font-size:12.5px; }
+  /* the supporting sentence, shown in full under the value it verifies */
+  blockquote.srcq { margin:8px 0 2px; padding:7px 11px; border-left:3px solid var(--teal);
+    background:#f7f8fa; border-radius:0 6px 6px 0; color:#374151;
+    font-size:12.5px; line-height:1.55; font-style:normal; }
+  blockquote.srcq.b { border-left-color:var(--purple); }
+
   details.fullcmp { margin:18px 0 6px; }
   details.fullcmp summary { display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none;
     font-size:13px; font-weight:600; color:var(--teal); padding:9px 16px; border:1px solid var(--teal); border-radius:8px; background:#fff; list-style:none; }
@@ -548,9 +554,13 @@ function handle(ev) {
 // ---- results ----
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const NR = 'not reported';
-const cell = (f, grounded) => f.value === NR
+// A grounded value shows its supporting sentence in full, on screen – the quote is the
+// evidence, so it must be readable, not buried in a hover tooltip.
+const cell = (f, grounded, side) => f.value === NR
   ? '<span class="nr">not reported</span>'
-  : esc(f.value) + (grounded ? '<span class="badge g" title="Source: '+esc(f.quote||'')+'">✓ verified</span>' : '');
+  : esc(f.value)
+    + (grounded ? '<span class="badge g">✓ verified</span>' : '')
+    + (grounded && f.quote ? '<blockquote class="srcq ' + side + '">“' + esc(f.quote) + '”</blockquote>' : '');
 
 function render(p) {
   const [a, b] = p.cards;
@@ -618,7 +628,7 @@ function render(p) {
   for (const row of p.comparison.rows) {
     const d = row.dimension;
     rows += '<tr class="' + (row.diverges ? 'diverge' : '') + '"><td class="dim">' + esc(row.label) + '</td><td>' +
-      cell(a[d], ga[d] && ga[d].grounded) + '</td><td>' + cell(b[d], gb[d] && gb[d].grounded) + '</td></tr>';
+      cell(a[d], ga[d] && ga[d].grounded, 'a') + '</td><td>' + cell(b[d], gb[d] && gb[d].grounded, 'b') + '</td></tr>';
   }
   h += '<div class="acc" id="d-full">' + accHead('full', 'Full study-by-study comparison') + '<div class="acc-b">' +
     '<table><tr><th>Dimension</th><th class="col-a"><span class="hab a">A</span>' + esc(a.citation) + ' <span class="prov">[' + a.sourceDepth + ']</span></th><th class="col-b"><span class="hab b">B</span>' +
