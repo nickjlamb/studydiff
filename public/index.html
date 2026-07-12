@@ -360,7 +360,7 @@
       <div class="scard">
         <h4>Why trust this</h4>
         <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Every claim verified</b><span>Unsupported fields are shown as <span class="nr">not reported</span>, never guessed.</span></div></div>
-        <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg><div><b>No LLM-as-judge</b><span>Deterministic verification – the same input always gives the same result.</span></div></div>
+        <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg><div><b>No LLM-as-judge</b><span>Verification is deterministic – a quote either exists in the source, or it doesn't.</span></div></div>
         <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg><div><b>Source-first</b><span>Every fact links to the exact supporting sentence in the paper.</span></div></div>
         <div class="railrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V9M9 21V5M15 21v-8M21 21V3"/></svg><div><b>Honest by design</b><span>We show what the source says, and flag what it doesn't.</span></div></div>
       </div>
@@ -657,7 +657,7 @@ function render(p) {
       '<div class="vtile"><span class="num">' + Math.max(0, p.comparison.rows.length * 2 - verified) + '</span><span class="lbl">fields not reported by the papers</span></div>' +
       '<div class="vtile"><span class="num g">0</span><span class="lbl">invented – every claim links to a source sentence</span></div>' +
     '</div>' +
-    '<p class="sverify" style="margin:12px 0 0">Deterministic – no LLM-as-judge. Re-run and you get identical drivers.</p></div>';
+    '<p class="sverify" style="margin:12px 0 0">Deterministic – no LLM-as-judge. The same verified evidence always yields the same drivers.</p></div>';
   s += '<div class="rsec jump"><h4>Jump to</h4>';
   if (p.resolve && p.resolve.length) s += '<button class="sbtn" data-panel="resolve">What would resolve this?</button>';
   s += '<button class="sbtn" data-panel="full">Full comparison · ' + p.comparison.rows.length + ' dimensions</button>';

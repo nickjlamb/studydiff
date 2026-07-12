@@ -80,7 +80,7 @@ flowchart LR
 4. **Compare** — deterministic: which dimensions agree, which diverge, and the divergent *design* dimensions ranked as candidate drivers.
 5. **Explain** — an answer-first synthesis naming the most likely reason, with the shared dimensions explicitly *ruled out*.
 
-The key layer is the API key never leaving the server, and grounding being deterministic — the same inputs always produce the same verdict.
+Two things hold the guarantee up: the API key never leaves the server, and verification is deterministic — grounding, comparison and driver ranking involve no model judgment at all, so the same verified evidence always yields the same drivers.
 
 ## Why Claude?
 
