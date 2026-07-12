@@ -5,3 +5,9 @@ node_modules/
 .DS_Store
 dist/
 coverage/
+
+# working notes — not part of the project
+SUBMISSION-FORM.md
+SUBMISSION-SUMMARY.md
+DEMO-AND-SUBMISSION-HANDOFF.md
+.fuse_hidden*
