@@ -1,6 +1,6 @@
 {
   "name": "studydiff-mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "mcpName": "io.github.nickjlamb/studydiff",
   "description": "Explain why two scientific papers disagree. Extracts each study's design, isolates the methodological differences that likely drive conflicting conclusions, and grounds every claim in the source text. MCP server + web app + CLI.",
   "type": "module",
