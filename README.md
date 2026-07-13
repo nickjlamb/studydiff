@@ -11,6 +11,7 @@
   <a href="https://studydiff.pharmatools.ai"><img alt="Live demo" src="https://img.shields.io/badge/demo-studydiff.pharmatools.ai-0f766e"></a>
   <img alt="Built with Claude" src="https://img.shields.io/badge/built%20with-Claude-d97757">
   <a href="#mcp-server"><img alt="MCP server" src="https://img.shields.io/badge/MCP-server-1c1c1c"></a>
+  <a href="https://www.npmjs.com/package/studydiff-mcp"><img alt="npm" src="https://img.shields.io/npm/v/studydiff-mcp?label=npm&color=cb3837"></a>
   <img alt="Built with Claude: Life Sciences hackathon" src="https://img.shields.io/badge/hackathon-Built%20with%20Claude%3A%20Life%20Sciences-6d28d9">
   <img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-6d28d9">
 </p>
@@ -113,6 +114,8 @@ All three ship as offline demos (`npm run demo` / `npm run demo -- resveratrol-s
 ## MCP server
 
 StudyDiff's engine is also a [Model Context Protocol](https://modelcontextprotocol.io) server, so an agent can ask *why two papers disagree* as a tool call — the same grounded pipeline, no browser.
+
+Published to the [official MCP Registry](https://registry.modelcontextprotocol.io) as **`io.github.nickjlamb/studydiff`**, and to npm as [`studydiff-mcp`](https://www.npmjs.com/package/studydiff-mcp).
 
 | Tool | What it does |
 |---|---|
