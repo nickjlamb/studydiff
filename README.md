@@ -10,6 +10,7 @@
   <img alt="Node 20+" src="https://img.shields.io/badge/node-20%2B-brightgreen">
   <a href="https://studydiff.pharmatools.ai"><img alt="Live demo" src="https://img.shields.io/badge/demo-studydiff.pharmatools.ai-0f766e"></a>
   <img alt="Built with Claude" src="https://img.shields.io/badge/built%20with-Claude-d97757">
+  <a href="#mcp-server"><img alt="MCP server" src="https://img.shields.io/badge/MCP-server-1c1c1c"></a>
   <img alt="Built with Claude: Life Sciences hackathon" src="https://img.shields.io/badge/hackathon-Built%20with%20Claude%3A%20Life%20Sciences-6d28d9">
   <img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-6d28d9">
 </p>
@@ -19,6 +20,7 @@
   <a href="#quick-start">Quick start</a> ·
   <a href="#how-it-works">How it works</a> ·
   <a href="#examples">Examples</a> ·
+  <a href="#mcp-server">MCP server</a> ·
   <a href="ROADMAP.md">Roadmap</a> ·
   <a href="CONTRIBUTING.md">Contributing</a>
 </p>
