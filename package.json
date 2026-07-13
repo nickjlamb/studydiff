@@ -5,22 +5,28 @@
   "type": "module",
   "license": "MIT",
   "bin": {
-    "studydiff": "src/cli.mjs"
+    "studydiff": "src/cli.mjs",
+    "studydiff-mcp": "src/mcp.mjs"
   },
   "scripts": {
     "start": "node src/server.mjs",
     "serve": "node src/server.mjs",
     "demo": "node src/demo.mjs",
-    "cli": "node src/cli.mjs"
+    "cli": "node src/cli.mjs",
+    "mcp": "node src/mcp.mjs"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@pharmatools/opengate": "^0.9.0",
-    "unpdf": "^1.6.2"
+    "unpdf": "^1.6.2",
+    "zod": "^4.4.3"
   },
   "engines": {
     "node": ">=20"
   },
   "keywords": [
+    "mcp",
+    "model-context-protocol",
     "life-sciences",
     "literature",
     "evidence",

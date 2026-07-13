@@ -104,8 +104,47 @@ All three ship as offline demos (`npm run demo` / `npm run demo -- resveratrol-s
 ## Using it
 
 - **Web app** (`npm run serve`) — examples, PMID/DOI lookup, PDF upload, or paste; streams each pipeline step live, and exports a reproducible **Markdown report** with every value's verbatim supporting sentence.
+- **MCP server** (`npm run mcp`) — lets Claude, or any agent, call the contradiction engine directly. See [MCP server](#mcp-server).
 - **CLI** — `node src/cli.mjs --q "Does resveratrol activate SIRT1?" 12939617 19843076`
 - **Deploy** — see [DEPLOY.md](DEPLOY.md) (Railway + custom domain).
+
+## MCP server
+
+StudyDiff's engine is also a [Model Context Protocol](https://modelcontextprotocol.io) server, so an agent can ask *why two papers disagree* as a tool call — the same grounded pipeline, no browser.
+
+| Tool | What it does |
+|---|---|
+| `compare_studies(paperA, paperB, question?)` | The full pipeline on two papers. Each paper is `{id}` (PMID or DOI) or `{citation, text}`. Needs `ANTHROPIC_API_KEY`. |
+| `compare_example(example)` | Runs a cached worked example — **no API key, no network**. The quickest way to see the grounded output. |
+| `list_examples()` | Lists the built-in worked examples. |
+
+It returns the same auditable report the web app exports: the verdict, the ranked drivers (**primary driver** / also differs / **ruled out**), every value with the verbatim sentence that supports it, the verification counts, and what evidence would resolve the disagreement. Ungrounded fields come back as *not reported* — never guessed — and the tool never picks a winner or reports a confidence it didn't compute.
+
+Add it to **Claude Code**:
+
+```bash
+claude mcp add studydiff -- node /absolute/path/to/studydiff/src/mcp.mjs
+```
+
+…or to **Claude Desktop** (`claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "studydiff": {
+      "command": "node",
+      "args": ["/absolute/path/to/studydiff/src/mcp.mjs"],
+      "env": { "ANTHROPIC_API_KEY": "sk-ant-..." }
+    }
+  }
+}
+```
+
+Then just ask:
+
+> Use studydiff to compare PMID 19633673 and 20929851 — why do they disagree?
+
+No key handy? `list_examples`, then `compare_example("treg-stability")` runs entirely offline.
 
 ## Project layout
 
@@ -117,7 +156,9 @@ src/grounding.mjs   deterministic verification (OpenGATE)
 src/compare.mjs     divergence detection + driver ranking
 src/gaps.mjs        bounded "observed across these papers"
 src/pipeline.mjs    orchestration: retrieve → extract → verify → compare
+src/report.mjs      shared Markdown report (answer, drivers, quotes, verification)
 src/server.mjs      web server + streaming API (+ rate limiting, caching)
+src/mcp.mjs         MCP server: compare_studies / compare_example / list_examples
 public/index.html   single-file dashboard UI
 fixtures/           cached real papers for the offline demos
 ```
