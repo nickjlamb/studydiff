@@ -125,7 +125,7 @@ It returns the same auditable report the web app exports: the verdict, the ranke
 Add it to **Claude Code**:
 
 ```bash
-claude mcp add studydiff -- node /absolute/path/to/studydiff/src/mcp.mjs
+claude mcp add studydiff -- npx -y studydiff-mcp
 ```
 
 …or to **Claude Desktop** (`claude_desktop_config.json`):
@@ -134,13 +134,15 @@ claude mcp add studydiff -- node /absolute/path/to/studydiff/src/mcp.mjs
 {
   "mcpServers": {
     "studydiff": {
-      "command": "node",
-      "args": ["/absolute/path/to/studydiff/src/mcp.mjs"],
+      "command": "npx",
+      "args": ["-y", "studydiff-mcp"],
       "env": { "ANTHROPIC_API_KEY": "sk-ant-..." }
     }
   }
 }
 ```
+
+`ANTHROPIC_API_KEY` is only needed for `compare_studies`. Leave it out and `list_examples` / `compare_example` still work — the cached examples run with no key and no network. (To run from a local clone instead, swap the command for `node /absolute/path/to/studydiff/src/mcp.mjs`.)
 
 Then just ask:
 

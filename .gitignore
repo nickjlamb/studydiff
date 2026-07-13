@@ -5,6 +5,7 @@ node_modules/
 .DS_Store
 dist/
 coverage/
+*.tgz
 
 # working notes — not part of the project
 SUBMISSION-FORM.md

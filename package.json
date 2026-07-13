@@ -1,13 +1,30 @@
 {
-  "name": "studydiff",
+  "name": "studydiff-mcp",
   "version": "0.1.0",
-  "description": "Explain why two scientific papers disagree — a contradiction explorer for bench scientists. Extracts each study's design, isolates the methodological differences that likely drive conflicting conclusions, and grounds every claim in the source text.",
+  "mcpName": "io.github.nickjlamb/studydiff",
+  "description": "Explain why two scientific papers disagree. Extracts each study's design, isolates the methodological differences that likely drive conflicting conclusions, and grounds every claim in the source text. MCP server + web app + CLI.",
   "type": "module",
   "license": "MIT",
+  "homepage": "https://studydiff.pharmatools.ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickjlamb/studydiff.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nickjlamb/studydiff/issues"
+  },
+  "author": "Nick Lamb",
   "bin": {
     "studydiff": "src/cli.mjs",
     "studydiff-mcp": "src/mcp.mjs"
   },
+  "files": [
+    "src/",
+    "fixtures/",
+    "public/",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "start": "node src/server.mjs",
     "serve": "node src/server.mjs",
@@ -27,10 +44,12 @@
   "keywords": [
     "mcp",
     "model-context-protocol",
+    "mcp-server",
     "life-sciences",
     "literature",
     "evidence",
     "contradiction",
+    "reproducibility",
     "grounding",
     "claude",
     "pubmed"

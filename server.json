@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.nickjlamb/studydiff",
+  "description": "Explain why two papers disagree: ranks the methodological differences driving the conflict, every claim grounded in a verbatim quote. No API key needed to try.",
+  "repository": {
+    "url": "https://github.com/nickjlamb/studydiff",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "studydiff-mcp",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "ANTHROPIC_API_KEY",
+          "description": "Anthropic API key, used only by compare_studies for live papers. compare_example and list_examples run offline without it.",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "NCBI_EMAIL",
+          "description": "Contact email sent with PubMed/PMC E-utilities requests (NCBI asks callers to identify themselves). Optional.",
+          "isRequired": false,
+          "isSecret": false,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}
