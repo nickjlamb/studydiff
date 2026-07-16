@@ -8,7 +8,15 @@ import { DIMENSIONS, DIMENSION_LABELS, NOT_REPORTED } from './types.mjs';
 const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 const reported = (f) => f && f.value && f.value !== NOT_REPORTED;
 
-// Which design differences most plausibly flip a conclusion, most-to-least.
+// A FIXED PRIOR over which design differences tend to flip a conclusion, most-to-least.
+// This is not an assessment of any particular pair of papers: if `assay` diverges at all,
+// it is always ranked first. The prior is a reasonable default, but it is unmeasured —
+// how often the top-ranked dimension is the established cause is an open question, and
+// building the benchmark to answer it is the next roadmap item. Two known weaknesses:
+//   1. `diverges` below is a string inequality, so two values that share most of their
+//      content ("flow cytometry, ICS, bisulfite seq" vs "flow cytometry (FACS)") count
+//      as fully divergent.
+//   2. `assay` is coarse — a fate-mapping strategy and a staining panel are both "assay".
 // (finding = the conclusion itself; limitations = commentary – both excluded.)
 const DRIVER_RANK = {
   assay: 0,

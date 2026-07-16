@@ -32,7 +32,7 @@
 
 ---
 
-Two well-run papers often reach opposite conclusions. Usually the reason isn't that one is wrong — it's a methodological difference (a cell type, a dose, a follow-up window, an analysis choice) that a reader has to dig out of the methods sections by hand. **StudyDiff does that digging.** Give it two studies and it extracts each one's design, pinpoints the differences that most plausibly explain the disagreement, and — critically — grounds every statement in the source text, so it never invents a finding.
+Two well-run papers often reach opposite conclusions. Usually the reason isn't that one is wrong — it's a methodological difference (a cell type, a dose, a follow-up window, an analysis choice) that a reader has to dig out of the methods sections by hand. **StudyDiff does that digging.** Give it two studies and it extracts each one's design, surfaces the differences that could explain the disagreement, and — critically — grounds every statement in the source text, so it never invents a finding.
 
 It is built for a bench scientist deciding which of two conflicting papers to trust before planning an experiment.
 
@@ -80,8 +80,8 @@ flowchart LR
 1. **Retrieve** — a PubMed/PMC client with a full-text-to-abstract fallback that tags how deep it read (`fulltext` / `abstract` / `pasted`); uploaded PDFs are text-extracted server-side.
 2. **Extract** — Claude turns each paper into a fixed **study card** (species, model, assay, dose, timing, endpoint, sample size, statistic, finding, limitations). Every field carries a verbatim supporting quote; absent fields default to *not reported*.
 3. **Verify** — grounding runs **first**: any value whose quote isn't in the source, or whose numbers don't trace, is downgraded to *not reported*. StudyDiff can't cite a fact it hasn't verified.
-4. **Compare** — deterministic: which dimensions agree, which diverge, and the divergent *design* dimensions ranked as candidate drivers.
-5. **Explain** — an answer-first synthesis naming the most likely reason, with the shared dimensions explicitly *ruled out*.
+4. **Compare** — deterministic: which dimensions agree, which diverge, and the divergent *design* dimensions listed as candidate drivers. **The ordering is a fixed prior**, not an inference: assay and model rank above dose and timing, which rank above sample size and statistics. Which differences exist is read from the papers; the rank they're shown in isn't specific to the pair. Measuring whether that prior is any good is the [next thing on the roadmap](https://github.com/nickjlamb/studydiff/blob/main/ROADMAP.md).
+5. **Explain** — an answer-first synthesis naming the highest-ranked difference, with the shared dimensions explicitly *ruled out*.
 
 Two things hold the guarantee up: the API key never leaves the server, and verification is deterministic — grounding, comparison and driver ranking involve no model judgment at all, so the same verified evidence always yields the same drivers.
 

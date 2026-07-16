@@ -587,7 +587,7 @@ function render(p) {
     h += '<div class="answer-lead">These studies reach different conclusions' +
       (shared.length ? '<span class="answer-shared"> despite sharing the same ' + esc(listJoin(shared)) + '</span>' : '') + '</div>';
     if (topReason) {
-      h += '<div class="answer-block"><div class="answer-label">Most likely reason</div><div class="answer-driver">' + esc(topReason.label) + '</div>' +
+      h += '<div class="answer-block"><div class="answer-label">Highest-ranked difference<span class="prov" style="text-transform:none;letter-spacing:0;font-weight:400"> · ranked by a fixed prior over design dimensions, not by a model\'s judgment</span></div><div class="answer-driver">' + esc(topReason.label) + '</div>' +
         '<div class="abline"><span class="hab a">A</span><span>' + esc(topReason.a) + '</span></div>' +
         '<div class="abline"><span class="hab b">B</span><span>' + esc(topReason.b) + '</span></div></div>';
     } else {
@@ -614,6 +614,9 @@ function render(p) {
         ruledOut.map(esc).join(', ') + '</b></div></div>';
     }
     h += '</div>';
+    h += '<p class="prov" style="margin:8px 2px 0">Which differences are listed is read from the papers. The <i>order</i> is a fixed prior — ' +
+      'assay and model rank above dose and timing, which rank above sample size and statistics — not an assessment of this particular pair. ' +
+      'Treat the ranking as a starting point, and the differences themselves as the evidence.</p>';
   }
 
   const CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>';

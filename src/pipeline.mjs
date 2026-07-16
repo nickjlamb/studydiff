@@ -39,7 +39,7 @@ function synthesize(comparison, cards) {
   text += '. ';
 
   if (top) {
-    text += `The most likely reason is a difference in ${top.label.toLowerCase()} – Study A: ${top.a}; Study B: ${top.b}. `;
+    text += `The highest-ranked difference is in ${top.label.toLowerCase()} – Study A: ${top.a}; Study B: ${top.b}. `;
   } else {
     text += 'No design dimension reported in both papers differs, so the source of disagreement cannot be localised from the available text. ';
   }
