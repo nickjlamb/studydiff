@@ -1,0 +1,62 @@
+{
+  "pmid": "30845820",
+  "caseId": "candidate-gene-power",
+  "depthArm": "abstract",
+  "question": "Does the 5-HTT (5-HTTLPR) polymorphism moderate the effect of stressful life events on risk of depression?",
+  "citation": "Border et al. 2019, Am J Psychiatry",
+  "title": "No Support for Historical Candidate Gene or Candidate Gene-by-Interaction Hypotheses for Major Depression Across Multiple Large Samples.",
+  "sourceDepth": "abstract",
+  "textChars": 1755,
+  "text": "Interest in candidate gene and candidate gene-by-environment interaction hypotheses regarding major depressive disorder remains strong despite controversy surrounding the validity of previous findings. In response to this controversy, the present investigation empirically identified 18 candidate genes for depression that have been studied 10 or more times and examined evidence for their relevance to depression phenotypes.\n\nUtilizing data from large population-based and case-control samples (Ns ranging from 62,138 to 443,264 across subsamples), the authors conducted a series of preregistered analyses examining candidate gene polymorphism main effects, polymorphism-by-environment interactions, and gene-level effects across a number of operational definitions of depression (e.g., lifetime diagnosis, current severity, episode recurrence) and environmental moderators (e.g., sexual or physical abuse during childhood, socioeconomic adversity).\n\nNo clear evidence was found for any candidate gene polymorphism associations with depression phenotypes or any polymorphism-by-environment moderator effects. As a set, depression candidate genes were no more associated with depression phenotypes than noncandidate genes. The authors demonstrate that phenotypic measurement error is unlikely to account for these null findings.\n\nThe study results do not support previous depression candidate gene findings, in which large genetic effects are frequently reported in samples orders of magnitude smaller than those examined here. Instead, the results suggest that early hypotheses about depression candidate genes were incorrect and that the large number of associations reported in the depression candidate gene literature are likely to be false positives.",
+  "card": {
+    "pmid": "30845820",
+    "citation": "Border et al. 2019 Am J Psychiatry",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "No evidence 5-HTTLPR moderates stress effect on depression risk",
+      "quote": "No clear evidence was found for any candidate gene polymorphism associations with depression phenotypes or any polymorphism-by-environment moderator effects."
+    },
+    "species": {
+      "value": "Human",
+      "quote": "population-based and case-control samples"
+    },
+    "model": {
+      "value": "Large population-based and case-control human samples",
+      "quote": "Utilizing data from large population-based and case-control samples"
+    },
+    "intervention": {
+      "value": "Naturalistic exposure to environmental adversity (not experimental manipulation)",
+      "quote": "environmental moderators (e.g., sexual or physical abuse during childhood, socioeconomic adversity)"
+    },
+    "assay": {
+      "value": "Genotyping of candidate gene polymorphisms; preregistered statistical association analyses",
+      "quote": "the authors conducted a series of preregistered analyses examining candidate gene polymorphism main effects, polymorphism-by-environment interactions, and gene-level effects"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "endpoint": {
+      "value": "Depression phenotypes (lifetime diagnosis, current severity, episode recurrence)",
+      "quote": "operational definitions of depression (e.g., lifetime diagnosis, current severity, episode recurrence)"
+    },
+    "sampleSize": {
+      "value": "N ranging from 62,138 to 443,264 across subsamples",
+      "quote": "Ns ranging from 62,138 to 443,264 across subsamples"
+    },
+    "statistic": {
+      "value": "No significant gene, GxE, or gene-set effects vs noncandidate genes",
+      "quote": "As a set, depression candidate genes were no more associated with depression phenotypes than noncandidate genes."
+    },
+    "limitations": {
+      "value": "Authors argue measurement error unlikely explanation; prior small-sample studies likely false positives",
+      "quote": "The authors demonstrate that phenotypic measurement error is unlikely to account for these null findings."
+    }
+  },
+  "extractedAt": "2026-07-17T10:12:07.126Z",
+  "model": "claude-sonnet-5"
+}

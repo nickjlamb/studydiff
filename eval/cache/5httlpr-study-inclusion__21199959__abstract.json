@@ -1,0 +1,62 @@
+{
+  "pmid": "21199959",
+  "caseId": "5httlpr-study-inclusion",
+  "depthArm": "abstract",
+  "question": "Does the 5-HTTLPR serotonin transporter variant moderate the effect of stress on depression?",
+  "citation": "Karg et al. 2011, Arch Gen Psychiatry",
+  "title": "The serotonin transporter promoter variant (5-HTTLPR), stress, and depression meta-analysis revisited: evidence of genetic moderation.",
+  "sourceDepth": "abstract",
+  "textChars": 2017,
+  "text": "Two recent meta-analyses assessed the set of studies exploring the interaction between a serotonin transporter promoter polymorphism (5-HTTLPR) and stress in the development of depression and concluded that the evidence did not support the presence of the interaction. However, even the larger of the meta-analyses included only 14 of the 56 studies that have assessed the relationship between 5-HTTLPR, stress, and depression.\n\nTo perform a meta-analysis including all relevant studies exploring the interaction.\n\nWe identified studies published through November 2009 in PubMed.\n\nWe excluded 2 studies presenting data that were included in other larger studies.\n\nTo perform a more inclusive meta-analysis, we used the Liptak-Stouffer z score method to combine findings of primary studies at the level of significance tests rather than the level of raw data.\n\nWe included 54 studies and found strong evidence that 5-HTTLPR moderates the relationship between stress and depression, with the 5-HTTLPR s allele associated with an increased risk of developing depression under stress (P = .00002). When stratifying our analysis by the type of stressor studied, we found strong evidence for an association between the s allele and increased stress sensitivity in the childhood maltreatment (P = .00007) and the specific medical condition (P = .0004) groups of studies but only marginal evidence for an association in the stressful life events group (P = .03). When restricting our analysis to the studies included in the previous meta-analyses, we found no evidence of association (Munaf&#xf2; et al studies, P = .16; Risch et al studies, P = .11). This suggests that the difference in results between meta-analyses was due to the different set of included studies rather than the meta-analytic technique.\n\nContrary to the results of the smaller earlier meta-analyses, we find strong evidence that the studies published to date support the hypothesis that 5-HTTLPR moderates the relationship between stress and depression.",
+  "card": {
+    "pmid": "21199959",
+    "citation": "Karg et al. 2011 Arch Gen Psychiatry",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "5-HTTLPR moderates stress-depression relationship; s allele increases risk under stress",
+      "quote": "we found strong evidence that 5-HTTLPR moderates the relationship between stress and depression, with the 5-HTTLPR s allele associated with an increased risk of developing depression under stress"
+    },
+    "species": {
+      "value": "Humans",
+      "quote": "the interaction between a serotonin transporter promoter polymorphism (5-HTTLPR) and stress in the development of depression"
+    },
+    "model": {
+      "value": "Meta-analysis of published human studies",
+      "quote": "To perform a meta-analysis including all relevant studies exploring the interaction."
+    },
+    "intervention": {
+      "value": "Naturalistic exposure to stress (childhood maltreatment, medical conditions, stressful life events)",
+      "quote": "we found strong evidence for an association between the s allele and increased stress sensitivity in the childhood maltreatment (P = .00007) and the specific medical condition (P = .0004) groups of studies but only marginal evidence for an association in the stressful life events group (P = .03)"
+    },
+    "assay": {
+      "value": "Liptak-Stouffer z score meta-analytic combination of significance tests",
+      "quote": "we used the Liptak-Stouffer z score method to combine findings of primary studies at the level of significance tests rather than the level of raw data"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "Studies published through November 2009",
+      "quote": "We identified studies published through November 2009 in PubMed."
+    },
+    "endpoint": {
+      "value": "Depression risk as moderated by 5-HTTLPR genotype and stress exposure",
+      "quote": "5-HTTLPR moderates the relationship between stress and depression"
+    },
+    "sampleSize": {
+      "value": "54 studies included (of 56 identified)",
+      "quote": "We included 54 studies and found strong evidence that 5-HTTLPR moderates the relationship between stress and depression"
+    },
+    "statistic": {
+      "value": "Overall P = .00002; subgroup P values .00007, .0004, .03",
+      "quote": "with the 5-HTTLPR s allele associated with an increased risk of developing depression under stress (P = .00002)"
+    },
+    "limitations": {
+      "value": "Restricting to prior meta-analyses' studies showed no association, suggesting sensitivity to study selection",
+      "quote": "When restricting our analysis to the studies included in the previous meta-analyses, we found no evidence of association (Munafò et al studies, P = .16; Risch et al studies, P = .11)"
+    }
+  },
+  "extractedAt": "2026-07-17T10:11:52.661Z",
+  "model": "claude-sonnet-5"
+}

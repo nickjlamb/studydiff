@@ -1,0 +1,62 @@
+{
+  "pmid": "19633673",
+  "caseId": "treg-lineage-fate-mapping",
+  "depthArm": "abstract",
+  "question": "Is the regulatory T cell (Treg) lineage stable in vivo?",
+  "citation": "Zhou et al. 2009, Nat Immunol",
+  "title": "Instability of the transcription factor Foxp3 leads to the generation of pathogenic memory T cells in vivo.",
+  "sourceDepth": "abstract",
+  "textChars": 891,
+  "text": "Regulatory T cells (T(reg) cells) are central to the maintenance of immune homeostasis. However, little is known about the stability of T(reg) cells in vivo. In this study, we demonstrate that a substantial percentage of cells had transient or unstable expression of the transcription factor Foxp3. These 'exFoxp3' T cells had an activated-memory T cell phenotype and produced inflammatory cytokines. Moreover, exFoxp3 cell numbers were higher in inflamed tissues in autoimmune conditions. Adoptive transfer of autoreactive exFoxp3 cells led to the rapid onset of diabetes. Finally, analysis of the T cell receptor repertoire suggested that exFoxp3 cells developed from both natural and adaptive T(reg) cells. Thus, the generation of potentially autoreactive effector T cells as a consequence of Foxp3 instability has important implications for understanding autoimmune disease pathogenesis.",
+  "card": {
+    "pmid": "19633673",
+    "citation": "Zhou et al. 2009 Nat Immunol",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Treg lineage is unstable; Foxp3 loss generates pathogenic exFoxp3 memory T cells",
+      "quote": "a substantial percentage of cells had transient or unstable expression of the transcription factor Foxp3"
+    },
+    "species": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "model": {
+      "value": "exFoxp3 T cells; autoimmune diabetes model",
+      "quote": "Adoptive transfer of autoreactive exFoxp3 cells led to the rapid onset of diabetes"
+    },
+    "intervention": {
+      "value": "Adoptive transfer of autoreactive exFoxp3 cells",
+      "quote": "Adoptive transfer of autoreactive exFoxp3 cells led to the rapid onset of diabetes"
+    },
+    "assay": {
+      "value": "TCR repertoire analysis; cytokine production assays",
+      "quote": "analysis of the T cell receptor repertoire suggested that exFoxp3 cells developed from both natural and adaptive T(reg) cells"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "endpoint": {
+      "value": "Foxp3 stability, exFoxp3 phenotype, diabetes onset",
+      "quote": "Adoptive transfer of autoreactive exFoxp3 cells led to the rapid onset of diabetes"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "Higher exFoxp3 numbers in inflamed autoimmune tissues",
+      "quote": "exFoxp3 cell numbers were higher in inflamed tissues in autoimmune conditions"
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-07-17T10:12:37.341Z",
+  "model": "claude-sonnet-5"
+}

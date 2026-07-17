@@ -1,0 +1,62 @@
+{
+  "pmid": "19066370",
+  "caseId": "selenium-baseline-status",
+  "depthArm": "abstract",
+  "question": "Does selenium supplementation prevent cancer?",
+  "citation": "Lippman et al. 2009, JAMA",
+  "title": "Effect of selenium and vitamin E on risk of prostate cancer and other cancers: the Selenium and Vitamin E Cancer Prevention Trial (SELECT).",
+  "sourceDepth": "abstract",
+  "textChars": 2233,
+  "text": "Secondary analyses of 2 randomized controlled trials and supportive epidemiologic and preclinical data indicated the potential of selenium and vitamin E for preventing prostate cancer.\n\nTo determine whether selenium, vitamin E, or both could prevent prostate cancer and other diseases with little or no toxicity in relatively healthy men.\n\nA randomized, placebo-controlled trial (Selenium and Vitamin E Cancer Prevention Trial [SELECT]) of 35,533 men from 427 participating sites in the United States, Canada, and Puerto Rico randomly assigned to 4 groups (selenium, vitamin E, selenium + vitamin E, and placebo) in a double-blind fashion between August 22, 2001, and June 24, 2004. Baseline eligibility included age 50 years or older (African American men) or 55 years or older (all other men), a serum prostate-specific antigen level of 4 ng/mL or less, and a digital rectal examination not suspicious for prostate cancer.\n\nOral selenium (200 microg/d from L-selenomethionine) and matched vitamin E placebo, vitamin E (400 IU/d of all rac-alpha-tocopheryl acetate) and matched selenium placebo, selenium + vitamin E, or placebo + placebo for a planned follow-up of minimum of 7 years and a maximum of 12 years.\n\nProstate cancer and prespecified secondary outcomes, including lung, colorectal, and overall primary cancer.\n\nAs of October 23, 2008, median overall follow-up was 5.46 years (range, 4.17-7.33 years). Hazard ratios (99% confidence intervals [CIs]) for prostate cancer were 1.13 (99% CI, 0.95-1.35; n = 473) for vitamin E, 1.04 (99% CI, 0.87-1.24; n = 432) for selenium, and 1.05 (99% CI, 0.88-1.25; n = 437) for selenium + vitamin E vs 1.00 (n = 416) for placebo. There were no significant differences (all P&gt;.15) in any other prespecified cancer end points. There were statistically nonsignificant increased risks of prostate cancer in the vitamin E group (P = .06) and type 2 diabetes mellitus in the selenium group (relative risk, 1.07; 99% CI, 0.94-1.22; P = .16) but not in the selenium + vitamin E group.\n\nSelenium or vitamin E, alone or in combination at the doses and formulations used, did not prevent prostate cancer in this population of relatively healthy men.\n\nclinicaltrials.gov identifier: NCT00006392.",
+  "card": {
+    "pmid": "19066370",
+    "citation": "Lippman et al. 2009 JAMA",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Selenium supplementation did not prevent prostate cancer or other cancers",
+      "quote": "Selenium or vitamin E, alone or in combination at the doses and formulations used, did not prevent prostate cancer"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "35,533 men from 427 participating sites"
+    },
+    "model": {
+      "value": "Relatively healthy men at risk for prostate cancer",
+      "quote": "relatively healthy men"
+    },
+    "intervention": {
+      "value": "Selenium, vitamin E, selenium+vitamin E, or placebo",
+      "quote": "randomly assigned to 4 groups (selenium, vitamin E, selenium + vitamin E, and placebo)"
+    },
+    "assay": {
+      "value": "Randomized, double-blind, placebo-controlled clinical trial",
+      "quote": "A randomized, placebo-controlled trial (Selenium and Vitamin E Cancer Prevention Trial [SELECT])"
+    },
+    "dose": {
+      "value": "200 microg/d selenium (L-selenomethionine); 400 IU/d vitamin E",
+      "quote": "Oral selenium (200 microg/d from L-selenomethionine) and matched vitamin E placebo, vitamin E (400 IU/d of all rac-alpha-tocopheryl acetate)"
+    },
+    "timing": {
+      "value": "Median follow-up 5.46 years; planned 7-12 years",
+      "quote": "median overall follow-up was 5.46 years (range, 4.17-7.33 years)"
+    },
+    "endpoint": {
+      "value": "Prostate cancer incidence; secondary cancers (lung, colorectal, overall)",
+      "quote": "Prostate cancer and prespecified secondary outcomes, including lung, colorectal, and overall primary cancer."
+    },
+    "sampleSize": {
+      "value": "35,533 men total, ~8800 per group",
+      "quote": "35,533 men from 427 participating sites"
+    },
+    "statistic": {
+      "value": "HR 1.04 (99% CI 0.87-1.24) for selenium vs placebo",
+      "quote": "1.04 (99% CI, 0.87-1.24; n = 432) for selenium"
+    },
+    "limitations": {
+      "value": "Trial stopped early; no benefit shown, only relatively short follow-up",
+      "quote": "median overall follow-up was 5.46 years (range, 4.17-7.33 years)"
+    }
+  },
+  "extractedAt": "2026-07-17T10:09:41.096Z",
+  "model": "claude-sonnet-5"
+}

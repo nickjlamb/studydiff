@@ -1,0 +1,62 @@
+{
+  "pmid": "19797342",
+  "caseId": "vitamin-d-bolus-falls",
+  "depthArm": "abstract",
+  "question": "Does vitamin D supplementation prevent falls and fractures in older adults?",
+  "citation": "Bischoff-Ferrari et al. 2009, BMJ",
+  "title": "Fall prevention with supplemental and active forms of vitamin D: a meta-analysis of randomised controlled trials.",
+  "sourceDepth": "abstract",
+  "textChars": 2273,
+  "text": "To test the efficacy of supplemental vitamin D and active forms of vitamin D with or without calcium in preventing falls among older individuals.\n\nWe searched Medline, the Cochrane central register of controlled trials, BIOSIS, and Embase up to August 2008 for relevant articles. Further studies were identified by consulting clinical experts, bibliographies, and abstracts. We contacted authors for additional data when necessary. Review methods Only double blind randomised controlled trials of older individuals (mean age 65 years or older) receiving a defined oral dose of supplemental vitamin D (vitamin D(3) (cholecalciferol) or vitamin D(2) (ergocalciferol)) or an active form of vitamin D (1alpha-hydroxyvitamin D(3) (1alpha-hydroxycalciferol) or 1,25-dihydroxyvitamin D(3) (1,25-dihydroxycholecalciferol)) and with sufficiently specified fall assessment were considered for inclusion.\n\nEight randomised controlled trials (n=2426) of supplemental vitamin D met our inclusion criteria. Heterogeneity among trials was observed for dose of vitamin D (700-1000 IU/day v 200-600 IU/day; P=0.02) and achieved 25-hydroxyvitamin D(3) concentration (25(OH)D concentration: &lt;60 nmol/l v &gt;or=60 nmol/l; P=0.005). High dose supplemental vitamin D reduced fall risk by 19% (pooled relative risk (RR) 0.81, 95% CI 0.71 to 0.92; n=1921 from seven trials), whereas achieved serum 25(OH)D concentrations of 60 nmol/l or more resulted in a 23% fall reduction (pooled RR 0.77, 95% CI 0.65 to 0.90). Falls were not notably reduced by low dose supplemental vitamin D (pooled RR 1.10, 95% CI 0.89 to 1.35; n=505 from two trials) or by achieved serum 25-hydroxyvitamin D concentrations of less than 60 nmol/l (pooled RR 1.35, 95% CI 0.98 to 1.84). Two randomised controlled trials (n=624) of active forms of vitamin D met our inclusion criteria. Active forms of vitamin D reduced fall risk by 22% (pooled RR 0.78, 95% CI 0.64 to 0.94).\n\nSupplemental vitamin D in a dose of 700-1000 IU a day reduced the risk of falling among older individuals by 19% and to a similar degree as active forms of vitamin D. Doses of supplemental vitamin D of less than 700 IU or serum 25-hydroxyvitamin D concentrations of less than 60 nmol/l may not reduce the risk of falling among older individuals.",
+  "card": {
+    "pmid": "19797342",
+    "citation": "Bischoff-Ferrari et al. 2009 BMJ",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "High-dose vitamin D reduces falls; low-dose does not",
+      "quote": "High dose supplemental vitamin D reduced fall risk by 19%"
+    },
+    "species": {
+      "value": "Humans",
+      "quote": "older individuals (mean age 65 years or older)"
+    },
+    "model": {
+      "value": "Meta-analysis of RCTs in older adults",
+      "quote": "Only double blind randomised controlled trials of older individuals (mean age 65 years or older)"
+    },
+    "intervention": {
+      "value": "Supplemental vitamin D or active vitamin D forms, ± calcium",
+      "quote": "supplemental vitamin D and active forms of vitamin D with or without calcium in preventing falls"
+    },
+    "assay": {
+      "value": "Fall assessment via RCTs; serum 25(OH)D measurement",
+      "quote": "sufficiently specified fall assessment were considered for inclusion"
+    },
+    "dose": {
+      "value": "700-1000 IU/day (high) vs 200-600 IU/day (low)",
+      "quote": "700-1000 IU/day v 200-600 IU/day; P=0.02"
+    },
+    "timing": {
+      "value": "Search through August 2008; trial durations not specified",
+      "quote": "We searched Medline, the Cochrane central register of controlled trials, BIOSIS, and Embase up to August 2008"
+    },
+    "endpoint": {
+      "value": "Risk of falling (fall incidence)",
+      "quote": "in preventing falls among older individuals"
+    },
+    "sampleSize": {
+      "value": "Supplemental vitamin D n=2426 (8 RCTs); active vitamin D n=624 (2 RCTs)",
+      "quote": "Eight randomised controlled trials (n=2426) of supplemental vitamin D met our inclusion criteria."
+    },
+    "statistic": {
+      "value": "High-dose RR 0.81 (95% CI 0.71-0.92); active vitamin D RR 0.78 (0.64-0.94)",
+      "quote": "pooled relative risk (RR) 0.81, 95% CI 0.71 to 0.92; n=1921 from seven trials"
+    },
+    "limitations": {
+      "value": "Heterogeneity in dose and achieved 25(OH)D levels across trials",
+      "quote": "Heterogeneity among trials was observed for dose of vitamin D"
+    }
+  },
+  "extractedAt": "2026-07-17T10:10:08.858Z",
+  "model": "claude-sonnet-5"
+}

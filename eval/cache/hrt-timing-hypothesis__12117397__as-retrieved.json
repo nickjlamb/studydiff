@@ -1,0 +1,62 @@
+{
+  "pmid": "12117397",
+  "caseId": "hrt-timing-hypothesis",
+  "depthArm": "as-retrieved",
+  "question": "Does postmenopausal hormone therapy prevent coronary heart disease?",
+  "citation": "Rossouw et al. 2002, JAMA",
+  "title": "Risks and benefits of estrogen plus progestin in healthy postmenopausal women: principal results From the Women's Health Initiative randomized controlled trial.",
+  "sourceDepth": "abstract",
+  "textChars": 3153,
+  "text": "Despite decades of accumulated observational evidence, the balance of risks and benefits for hormone use in healthy postmenopausal women remains uncertain.\n\nTo assess the major health benefits and risks of the most commonly used combined hormone preparation in the United States.\n\nEstrogen plus progestin component of the Women's Health Initiative, a randomized controlled primary prevention trial (planned duration, 8.5 years) in which 16608 postmenopausal women aged 50-79 years with an intact uterus at baseline were recruited by 40 US clinical centers in 1993-1998.\n\nParticipants received conjugated equine estrogens, 0.625 mg/d, plus medroxyprogesterone acetate, 2.5 mg/d, in 1 tablet (n = 8506) or placebo (n = 8102).\n\nThe primary outcome was coronary heart disease (CHD) (nonfatal myocardial infarction and CHD death), with invasive breast cancer as the primary adverse outcome. A global index summarizing the balance of risks and benefits included the 2 primary outcomes plus stroke, pulmonary embolism (PE), endometrial cancer, colorectal cancer, hip fracture, and death due to other causes.\n\nOn May 31, 2002, after a mean of 5.2 years of follow-up, the data and safety monitoring board recommended stopping the trial of estrogen plus progestin vs placebo because the test statistic for invasive breast cancer exceeded the stopping boundary for this adverse effect and the global index statistic supported risks exceeding benefits. This report includes data on the major clinical outcomes through April 30, 2002. Estimated hazard ratios (HRs) (nominal 95% confidence intervals [CIs]) were as follows: CHD, 1.29 (1.02-1.63) with 286 cases; breast cancer, 1.26 (1.00-1.59) with 290 cases; stroke, 1.41 (1.07-1.85) with 212 cases; PE, 2.13 (1.39-3.25) with 101 cases; colorectal cancer, 0.63 (0.43-0.92) with 112 cases; endometrial cancer, 0.83 (0.47-1.47) with 47 cases; hip fracture, 0.66 (0.45-0.98) with 106 cases; and death due to other causes, 0.92 (0.74-1.14) with 331 cases. Corresponding HRs (nominal 95% CIs) for composite outcomes were 1.22 (1.09-1.36) for total cardiovascular disease (arterial and venous disease), 1.03 (0.90-1.17) for total cancer, 0.76 (0.69-0.85) for combined fractures, 0.98 (0.82-1.18) for total mortality, and 1.15 (1.03-1.28) for the global index. Absolute excess risks per 10 000 person-years attributable to estrogen plus progestin were 7 more CHD events, 8 more strokes, 8 more PEs, and 8 more invasive breast cancers, while absolute risk reductions per 10 000 person-years were 6 fewer colorectal cancers and 5 fewer hip fractures. The absolute excess risk of events included in the global index was 19 per 10 000 person-years.\n\nOverall health risks exceeded benefits from use of combined estrogen plus progestin for an average 5.2-year follow-up among healthy postmenopausal US women. All-cause mortality was not affected during the trial. The risk-benefit profile found in this trial is not consistent with the requirements for a viable intervention for primary prevention of chronic diseases, and the results indicate that this regimen should not be initiated or continued for primary prevention of CHD.",
+  "card": {
+    "pmid": "12117397",
+    "citation": "Rossouw et al. 2002 JAMA",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "HT increases CHD risk; does not prevent CHD",
+      "quote": "this regimen should not be initiated or continued for primary prevention of CHD"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "postmenopausal women aged 50-79 years"
+    },
+    "model": {
+      "value": "Healthy postmenopausal women, intact uterus, primary prevention",
+      "quote": "16608 postmenopausal women aged 50-79 years with an intact uterus at baseline"
+    },
+    "intervention": {
+      "value": "Conjugated equine estrogens plus medroxyprogesterone acetate vs placebo",
+      "quote": "Participants received conjugated equine estrogens, 0.625 mg/d, plus medroxyprogesterone acetate, 2.5 mg/d, in 1 tablet (n = 8506) or placebo (n = 8102)."
+    },
+    "assay": {
+      "value": "Randomized controlled trial, clinical outcome ascertainment",
+      "quote": "a randomized controlled primary prevention trial (planned duration, 8.5 years)"
+    },
+    "dose": {
+      "value": "CEE 0.625 mg/d + MPA 2.5 mg/d, oral, daily",
+      "quote": "conjugated equine estrogens, 0.625 mg/d, plus medroxyprogesterone acetate, 2.5 mg/d, in 1 tablet"
+    },
+    "timing": {
+      "value": "Mean 5.2 years follow-up; trial stopped early",
+      "quote": "after a mean of 5.2 years of follow-up, the data and safety monitoring board recommended stopping the trial"
+    },
+    "endpoint": {
+      "value": "Primary: CHD (nonfatal MI and CHD death); adverse: invasive breast cancer",
+      "quote": "The primary outcome was coronary heart disease (CHD) (nonfatal myocardial infarction and CHD death), with invasive breast cancer as the primary adverse outcome."
+    },
+    "sampleSize": {
+      "value": "16,608 women (8506 treatment, 8102 placebo)",
+      "quote": "16608 postmenopausal women aged 50-79 years with an intact uterus at baseline"
+    },
+    "statistic": {
+      "value": "CHD HR 1.29 (95% CI 1.02-1.63), 286 cases",
+      "quote": "CHD, 1.29 (1.02-1.63) with 286 cases"
+    },
+    "limitations": {
+      "value": "Trial stopped early; nominal CIs not adjusted for multiple looks",
+      "quote": "Estimated hazard ratios (HRs) (nominal 95% confidence intervals [CIs]) were as follows"
+    }
+  },
+  "extractedAt": "2026-07-17T10:31:59.540Z",
+  "model": "claude-sonnet-5"
+}

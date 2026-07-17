@@ -1,0 +1,62 @@
+{
+  "pmid": "23032549",
+  "caseId": "vitamin-d-bolus-respiratory",
+  "depthArm": "as-retrieved",
+  "question": "Does vitamin D supplementation prevent acute respiratory tract infection?",
+  "citation": "Murdoch et al. 2012, JAMA",
+  "title": "Effect of vitamin D3 supplementation on upper respiratory tract infections in healthy adults: the VIDARIS randomized controlled trial.",
+  "sourceDepth": "abstract",
+  "textChars": 2006,
+  "text": "Observational studies have reported an inverse association between serum 25-hydroxyvitamin D (25-OHD) levels and incidence of upper respiratory tract infections (URTIs). However, results of clinical trials of vitamin D supplementation have been inconclusive.\n\nTo determine the effect of vitamin D supplementation on incidence and severity of URTIs in healthy adults.\n\nRandomized, double-blind, placebo-controlled trial conducted among 322 healthy adults between February 2010 and November 2011 in Christchurch, New Zealand.\n\nParticipants were randomly assigned to receive an initial dose of 200,000 IU oral vitamin D3, then 200,000 IU 1 month later, then 100,000 IU monthly (n = 161), or placebo administered in an identical dosing regimen (n = 161), for a total of 18 months.\n\nThe primary end point was number of URTI episodes. Secondary end points were duration of URTI episodes, severity of URTI episodes, and number of days of missed work due to URTI episodes.\n\nThe mean baseline 25-OHD level of participants was 29 (SD, 9) ng/mL. Vitamin D supplementation resulted in an increase in serum 25-OHD levels that was maintained at greater than 48 ng/mL throughout the study. There were 593 URTI episodes in the vitamin D group and 611 in the placebo group, with no statistically significant differences in the number of URTIs per participant (mean, 3.7 per person in the vitamin D group and 3.8 per person in the placebo group; risk ratio, 0.97; 95% CI, 0.85-1.11), number of days of missed work as a result of URTIs (mean, 0.76 days in each group; risk ratio, 1.03; 95% CI, 0.81-1.30), duration of symptoms per episode (mean, 12 days in each group; risk ratio, 0.96; 95% CI, 0.73-1.25), or severity of URTI episodes. These findings remained unchanged when the analysis was repeated by season and by baseline 25-OHD levels.\n\nIn this trial, monthly administration of 100,000 IU of vitamin D did not reduce the incidence or severity of URTIs in healthy adults.\n\nanzctr.org.au Identifier: ACTRN12609000486224.",
+  "card": {
+    "pmid": "23032549",
+    "citation": "Murdoch et al. 2012 JAMA",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Vitamin D supplementation did not reduce URTI incidence or severity",
+      "quote": "did not reduce the incidence or severity of URTIs in healthy adults"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "healthy adults"
+    },
+    "model": {
+      "value": "Healthy adult volunteers, community-based RCT",
+      "quote": "Randomized, double-blind, placebo-controlled trial conducted among 322 healthy adults"
+    },
+    "intervention": {
+      "value": "Oral vitamin D3 vs placebo, monthly dosing regimen",
+      "quote": "receive an initial dose of 200,000 IU oral vitamin D3, then 200,000 IU 1 month later, then 100,000 IU monthly"
+    },
+    "assay": {
+      "value": "Serum 25-hydroxyvitamin D measurement",
+      "quote": "serum 25-hydroxyvitamin D (25-OHD) levels"
+    },
+    "dose": {
+      "value": "200,000 IU x2 loading, then 100,000 IU monthly",
+      "quote": "200,000 IU oral vitamin D3, then 200,000 IU 1 month later, then 100,000 IU monthly"
+    },
+    "timing": {
+      "value": "18 months total treatment duration",
+      "quote": "for a total of 18 months"
+    },
+    "endpoint": {
+      "value": "Number, duration, severity of URTI episodes; missed workdays",
+      "quote": "The primary end point was number of URTI episodes. Secondary end points were duration of URTI episodes, severity of URTI episodes, and number of days of missed work"
+    },
+    "sampleSize": {
+      "value": "322 adults (161 vitamin D, 161 placebo)",
+      "quote": "conducted among 322 healthy adults"
+    },
+    "statistic": {
+      "value": "No significant difference in URTIs per person (RR 0.97, CI 0.85-1.11)",
+      "quote": "risk ratio, 0.97; 95% CI, 0.85-1.11"
+    },
+    "limitations": {
+      "value": "Baseline vitamin D levels relatively high (not deficient population)",
+      "quote": "The mean baseline 25-OHD level of participants was 29 (SD, 9) ng/mL"
+    }
+  },
+  "extractedAt": "2026-07-17T10:33:23.240Z",
+  "model": "claude-sonnet-5"
+}

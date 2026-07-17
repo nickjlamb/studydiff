@@ -1,0 +1,62 @@
+{
+  "pmid": "9788453",
+  "caseId": "thrombolysis-time-window",
+  "depthArm": "abstract",
+  "question": "Does intravenous thrombolysis with alteplase improve outcome in acute ischaemic stroke?",
+  "citation": "Hacke et al. 1998, Lancet",
+  "title": "Randomised double-blind placebo-controlled trial of thrombolytic therapy with intravenous alteplase in acute ischaemic stroke (ECASS II). Second European-Australasian Acute Stroke Study Investigators.",
+  "sourceDepth": "abstract",
+  "textChars": 1805,
+  "text": "Thrombolysis for acute ischaemic stroke has been investigated in several clinical trials, with variable results. We have assessed the safety and efficacy of intravenous thrombolysis with alteplase (0.9 mg/kg bodyweight) within 6 h of stroke onset.\n\nThis non-angiographic, randomised, double-blind, trial enrolled 800 patients in Europe, Australia, and New Zealand. Computed tomography was used to exclude patients with signs of major infarction. Alteplase (n=409) and placebo (n=391) were randomly assigned with stratification for time since symptom onset (0-3 h or 3-6 h). The primary endpoint was the modified Rankin scale (mRS) at 90 days, dichotomised for favourable (score 0-1) and unfavourable (score 2-6) outcome. Analyses were by intention to treat.\n\n165 (40.3%) alteplase-group patients and 143 (36.6%) placebo-group patients had favourable mRS outcomes (absolute difference 3.7%, p=0.277). In a posthoc analysis of mRS scores dichotomised for death or dependency, 222 (54.3%) alteplase-group and 180 (46.0%) placebo-group patients had favourable outcomes (score 0-2; absolute difference 8.3%, p=0.024). Treatment differences were similar whether patients were treated within 3 h or 3-6 h. 85 (10.6%) patients died, with no difference between treatment groups at day 90+/-14 days (43 alteplase, 42 placebo). Symptomatic intracranial haemorrhage occurred in 36 (8.8%) alteplase-group patients and 13 (3.4%) placebo-group patients.\n\nThe results do not confirm a statistical benefit for alteplase. However, we believe the trend towards efficacy should be interpreted in the light of evidence from previous trials. Despite the increased risk of intracranial haemorrhage, thrombolysis with alteplase at a dose of 0.9 mg/kg in selected patients may lead to a clinically relevant improvement in outcome.",
+  "card": {
+    "pmid": "9788453",
+    "citation": "Hacke et al. 1998 Lancet",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "No significant benefit on primary endpoint; posthoc secondary analysis favoured alteplase",
+      "quote": "The results do not confirm a statistical benefit for alteplase."
+    },
+    "species": {
+      "value": "Human",
+      "quote": "enrolled 800 patients in Europe, Australia, and New Zealand"
+    },
+    "model": {
+      "value": "Acute ischaemic stroke patients, non-angiographic RCT",
+      "quote": "This non-angiographic, randomised, double-blind, trial enrolled 800 patients"
+    },
+    "intervention": {
+      "value": "Intravenous alteplase vs placebo within 6 h of stroke onset",
+      "quote": "intravenous thrombolysis with alteplase (0.9 mg/kg bodyweight) within 6 h of stroke onset"
+    },
+    "assay": {
+      "value": "Modified Rankin Scale assessment at 90 days; CT to exclude major infarction",
+      "quote": "Computed tomography was used to exclude patients with signs of major infarction."
+    },
+    "dose": {
+      "value": "0.9 mg/kg bodyweight alteplase",
+      "quote": "alteplase (0.9 mg/kg bodyweight)"
+    },
+    "timing": {
+      "value": "Treatment within 0-3 h or 3-6 h; outcome assessed at 90 days",
+      "quote": "stratification for time since symptom onset (0-3 h or 3-6 h)"
+    },
+    "endpoint": {
+      "value": "Modified Rankin scale at 90 days, favourable (0-1) vs unfavourable (2-6)",
+      "quote": "The primary endpoint was the modified Rankin scale (mRS) at 90 days, dichotomised for favourable (score 0-1) and unfavourable (score 2-6) outcome."
+    },
+    "sampleSize": {
+      "value": "800 patients (409 alteplase, 391 placebo)",
+      "quote": "Alteplase (n=409) and placebo (n=391) were randomly assigned"
+    },
+    "statistic": {
+      "value": "Primary: 40.3% vs 36.6% favourable, p=0.277; posthoc: 54.3% vs 46.0%, p=0.024",
+      "quote": "165 (40.3%) alteplase-group patients and 143 (36.6%) placebo-group patients had favourable mRS outcomes (absolute difference 3.7%, p=0.277)"
+    },
+    "limitations": {
+      "value": "Primary endpoint not significant; increased symptomatic intracranial haemorrhage with alteplase",
+      "quote": "Symptomatic intracranial haemorrhage occurred in 36 (8.8%) alteplase-group patients and 13 (3.4%) placebo-group patients."
+    }
+  },
+  "extractedAt": "2026-07-17T10:08:30.136Z",
+  "model": "claude-sonnet-5"
+}

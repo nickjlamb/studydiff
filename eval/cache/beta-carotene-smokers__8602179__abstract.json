@@ -1,0 +1,62 @@
+{
+  "pmid": "8602179",
+  "caseId": "beta-carotene-smokers",
+  "depthArm": "abstract",
+  "question": "Does beta-carotene supplementation prevent lung cancer?",
+  "citation": "Hennekens et al. 1996, N Engl J Med",
+  "title": "Lack of effect of long-term supplementation with beta carotene on the incidence of malignant neoplasms and cardiovascular disease.",
+  "sourceDepth": "abstract",
+  "textChars": 2099,
+  "text": "Observational studies suggest that people who consume more fruits and vegetables containing beta carotene have somewhat lower risks of cancer and cardiovascular disease, and earlier basic research suggested plausible mechanisms. Because large randomized trials of long duration were necessary to test this hypothesis directly, we conducted a trial of beta carotene supplementation.\n\nIn a randomized, double-blind, placebo-controlled trial of beta carotene (50 mg on alternate days), we enrolled 22,071 male physicians, 40 to 84 years of age, in the United States; 11 percent were current smokers and 39 percent were former smokers at the beginning of the study in 1982. By December 31, 1995, the scheduled end of the study, fewer than 1 percent had been lost to follow-up, and compliance was 78 percent in the group that received beta carotene.\n\nAmong 11,036 physicians randomly assigned to receive beta carotene and 11,035 assigned to receive placebo, there were virtually no early or late differences in the overall incidence of malignant neoplasms or cardiovascular disease, or in overall mortality. In the beta carotene group, 1273 men had any malignant neoplasm (except nonmelanoma skin cancer), as compared with 1293 in the placebo group (relative risk, 0.98; 95 percent confidence interval, 0.91 to 1.06). There were also no significant differences in the number of cases of lung cancer (82 in the beta carotene group vs. 88 in the placebo group); the number of deaths from cancer (386 vs. 380), deaths from any cause (979 vs. 968), or deaths from cardiovascular disease (338 vs. 313); the number of men with myocardial infarction (468 vs. 489); the number with stroke (367 vs. 382); or the number with any one of the previous three end points (967 vs. 972). Among current and former smokers, there were also no significant early or late differences in any of these end points.\n\nIn this trial among healthy men, 12 years of supplementation with beta carotene produced neither benefit nor harm in terms of the incidence of malignant neoplasms, cardiovascular disease, or death from all causes.",
+  "card": {
+    "pmid": "8602179",
+    "citation": "Hennekens et al. 1996 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Beta carotene supplementation did not prevent lung cancer or other cancers",
+      "quote": "there were also no significant differences in the number of cases of lung cancer"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "22,071 male physicians, 40 to 84 years of age, in the United States"
+    },
+    "model": {
+      "value": "Healthy male physicians (some current/former smokers)",
+      "quote": "In this trial among healthy men"
+    },
+    "intervention": {
+      "value": "Long-term beta carotene supplementation vs placebo",
+      "quote": "a randomized, double-blind, placebo-controlled trial of beta carotene"
+    },
+    "assay": {
+      "value": "Randomized double-blind placebo-controlled clinical trial",
+      "quote": "randomized, double-blind, placebo-controlled trial of beta carotene"
+    },
+    "dose": {
+      "value": "50 mg beta carotene on alternate days",
+      "quote": "beta carotene (50 mg on alternate days)"
+    },
+    "timing": {
+      "value": "12 years, from 1982 to December 31, 1995",
+      "quote": "12 years of supplementation with beta carotene"
+    },
+    "endpoint": {
+      "value": "Incidence of malignant neoplasms (including lung cancer) and cardiovascular disease",
+      "quote": "there were virtually no early or late differences in the overall incidence of malignant neoplasms or cardiovascular disease, or in overall mortality"
+    },
+    "sampleSize": {
+      "value": "22,071 male physicians (11,036 beta carotene; 11,035 placebo)",
+      "quote": "Among 11,036 physicians randomly assigned to receive beta carotene and 11,035 assigned to receive placebo"
+    },
+    "statistic": {
+      "value": "Lung cancer: 82 vs 88 cases; overall neoplasm RR 0.98 (0.91-1.06)",
+      "quote": "82 in the beta carotene group vs. 88 in the placebo group"
+    },
+    "limitations": {
+      "value": "Only male physicians studied; low smoking prevalence limits generalizability",
+      "quote": "11 percent were current smokers and 39 percent were former smokers"
+    }
+  },
+  "extractedAt": "2026-07-17T10:09:22.928Z",
+  "model": "claude-sonnet-5"
+}

@@ -1,0 +1,62 @@
+{
+  "pmid": "32251768",
+  "caseId": "ivermectin-achievable-exposure",
+  "depthArm": "abstract",
+  "question": "Is ivermectin an effective treatment for SARS-CoV-2 infection?",
+  "citation": "Caly et al. 2020, Antiviral Res",
+  "title": "The FDA-approved drug ivermectin inhibits the replication of SARS-CoV-2 in vitro.",
+  "sourceDepth": "abstract",
+  "textChars": 594,
+  "text": "Although several clinical trials are now underway to test possible therapies, the worldwide response to the COVID-19 outbreak has been largely limited to monitoring/containment. We report here that Ivermectin, an FDA-approved anti-parasitic previously shown to have broad-spectrum anti-viral activity in vitro, is an inhibitor of the causative virus (SARS-CoV-2), with a single addition to Vero-hSLAM cells 2&#xa0;h post infection with SARS-CoV-2 able to effect ~5000-fold reduction in viral RNA at 48&#xa0;h. Ivermectin therefore warrants further investigation for possible benefits in humans.",
+  "card": {
+    "pmid": "32251768",
+    "citation": "Caly et al. 2020 Antiviral Res",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Ivermectin inhibits SARS-CoV-2 replication in vitro (cell culture)",
+      "quote": "is an inhibitor of the causative virus (SARS-CoV-2)"
+    },
+    "species": {
+      "value": "Not an animal/human study; monkey-derived cell line used",
+      "quote": "Vero-hSLAM cells"
+    },
+    "model": {
+      "value": "In vitro cell culture (Vero-hSLAM cells)",
+      "quote": "Vero-hSLAM cells 2 h post infection with SARS-CoV-2"
+    },
+    "intervention": {
+      "value": "Single addition of ivermectin to infected cells",
+      "quote": "with a single addition to Vero-hSLAM cells 2 h post infection with SARS-CoV-2"
+    },
+    "assay": {
+      "value": "Viral RNA quantification (implied qPCR)",
+      "quote": "able to effect ~5000-fold reduction in viral RNA at 48 h"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "Added 2h post-infection; measured at 48h",
+      "quote": "2 h post infection with SARS-CoV-2 able to effect ~5000-fold reduction in viral RNA at 48 h"
+    },
+    "endpoint": {
+      "value": "Reduction in viral RNA levels",
+      "quote": "~5000-fold reduction in viral RNA at 48 h"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "~5000-fold reduction in viral RNA",
+      "quote": "~5000-fold reduction in viral RNA at 48 h"
+    },
+    "limitations": {
+      "value": "In vitro only; human relevance/dosing untested",
+      "quote": "Ivermectin therefore warrants further investigation for possible benefits in humans"
+    }
+  },
+  "extractedAt": "2026-07-17T10:10:32.843Z",
+  "model": "claude-sonnet-5"
+}

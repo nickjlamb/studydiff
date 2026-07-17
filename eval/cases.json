@@ -1,0 +1,577 @@
+{
+  "schemaVersion": "1.0",
+  "name": "StudyDiff contradiction benchmark",
+  "license": "CC-BY-4.0",
+  "description": "Documented scientific contradictions where the literature has since established WHY two papers disagreed. Each case is labelled with the StudyDiff design dimension the established cause maps to, and every label carries a citation to the review, commentary, pooled analysis or reanalysis that established it. No label without a source.",
+  "labelPolicy": {
+    "dimension": "The single PRIMARY dimension the established cause maps to. Used for the headline strict top-1 score.",
+    "alsoAcceptable": "Other dimensions that documented sources show contribute to the disagreement. Used ONLY for a secondary lenient score, never for the headline. Empty array means the case is clean/single-cause.",
+    "confidence": "'established' = the cause is settled in the literature. 'contested' = the cause is argued over or the adjudicating source declines to settle it. Contested cases are scored the same; the flag exists so readers can subset.",
+    "causeVisibleInSource": "'yes' = the causal difference is stated in BOTH papers' abstracts. 'partial' = stated in only one. 'no' = stated in neither. StudyDiff reads text, so 'no' cases are UNWINNABLE by construction. They are kept in the headline score and are the basis of the oracle ceiling — the maximum accuracy any text-reading tool could achieve on this set. Excluding them would flatter the number.",
+    "evidence": "Verbatim spans from each paper's abstract showing where the causal difference is (or is not) visible."
+  },
+  "provenance": {
+    "pmidVerification": "Every PMID in this file (46 unique, including those cited in prose) was independently verified by retrieving it from PubMed and confirming the returned title, first author, year and journal match. Titles are recorded exactly as PubMed returned them. Every quoted span in `evidence` and `establishes` was checked against the retrieved abstract text.",
+    "verificationHistory": "An adversarial verification pass over v1.0 of this file found zero wrong PMIDs and zero wrong citation strings, but did find: two fabricated `evidence` spans (resveratrol, copied from a repo fixture's card VALUES rather than quoted from the abstract), two overstated `causeVisibleInSource` values (resveratrol and treg, both 'yes' -> 'partial'), one interpolation inside a quotation ('Vitamin A' misquoted as 'vitamin A/beta-carotene'), and two unmarked elisions. All are corrected here. The failure mode is recorded rather than quietly fixed because it is the same class of error the benchmark exists to measure: a description of a source is not a quote from it.",
+    "sourceDepth": "abstract (pre-registered primary arm)",
+    "sourceDepthNote": "PRE-REGISTERED, before any accuracy number existed. The primary arm reads ABSTRACTS ONLY, for three reasons. (1) REPRODUCIBILITY: src/ncbi.mjs opportunistically upgrades to PMC full text whenever a paper happens to be in the Open Access subset — but OA membership CHANGES OVER TIME, so an as-retrieved benchmark would drift for reasons unrelated to the tool. Abstracts are stable. (2) SYMMETRY: an as-retrieved first run produced 3 asymmetric pairs, e.g. vitamin-d-bolus-falls compared a 2,443-char abstract against a 44,776-char full text. The full-text side reports far more dimensions; the abstract side returns 'not reported', which makes those dimensions non-comparable and drops them from the candidate set entirely. That asymmetry is driven by journal licensing, not by the science. (3) VALIDITY: every causeVisibleInSource annotation in this file was judged against abstracts, so the oracle ceiling is only meaningful against abstracts. A secondary 'as-retrieved' arm is available via `npm run eval:fetch -- --depth as-retrieved` and is reported alongside, never as the headline. Note also that src/extract.mjs truncates input at MAX_EXTRACT_CHARS (18000), so 6 of the full texts were silently truncated anyway — what got extracted depended on where in the paper the fact happened to sit."
+  },
+  "cases": [
+    {
+      "id": "thrombolysis-time-window",
+      "question": "Does intravenous thrombolysis with alteplase improve outcome in acute ischaemic stroke?",
+      "papers": [
+        {
+          "pmid": "7477192",
+          "citation": "NINDS rt-PA Stroke Study Group 1995, N Engl J Med",
+          "title": "Tissue plasminogen activator for acute ischemic stroke.",
+          "conclusion": "t-PA given within 3 hours of stroke onset improved 3-month clinical outcome (global OR 1.7, 95% CI 1.2-2.6) despite increased symptomatic haemorrhage."
+        },
+        {
+          "pmid": "9788453",
+          "citation": "Hacke et al. 1998, Lancet",
+          "title": "Randomised double-blind placebo-controlled trial of thrombolytic therapy with intravenous alteplase in acute ischaemic stroke (ECASS II). Second European-Australasian Acute Stroke Study Investigators.",
+          "conclusion": "Alteplase within 6 hours did not confirm a statistical benefit on the primary endpoint (mRS 0-1: 40.3% vs 36.6%, p=0.277)."
+        }
+      ],
+      "label": {
+        "dimension": "timing",
+        "cause": "Benefit from IV alteplase declines steeply with onset-to-treatment time, so a trial enrolling out to 6 h dilutes the effect that a <=3 h trial captures.",
+        "alsoAcceptable": [],
+        "citation": {
+          "pmid": "20472172",
+          "citation": "Lees et al. 2010, Lancet",
+          "title": "Time to treatment with intravenous alteplase and outcome in stroke: an updated pooled analysis of ECASS, ATLANTIS, NINDS, and EPITHET trials.",
+          "establishes": "Pooled 3,670 patients; adjusted OR for favourable 3-month outcome fell monotonically with onset-to-treatment time (2.55 at 0-90 min to 1.22 at 271-360 min): 'Odds of a favourable 3-month outcome increased as OTT decreased (p=0.0269) and no benefit of alteplase treatment was seen after around 270 min.'"
+        },
+        "confidence": "established",
+        "confidenceNote": "Deliberately chosen over ECASS I, which confounded the time window with a higher alteplase dose (1.1 mg/kg). ECASS II used 0.9 mg/kg, the same as NINDS, isolating timing.",
+        "causeVisibleInSource": "yes",
+        "visibilityNote": "HARD CASE, and valuable for it: ECASS II's own abstract states 'Treatment differences were similar whether patients were treated within 3 h or 3-6 h' — its internal subgroup argues AGAINST the timing explanation. The timing label is established by the cross-trial pooled analysis, not by ECASS II's own underpowered interaction test. A tool that trusts an individual paper over later synthesis will get this wrong for a defensible reason.",
+        "evidence": {
+          "a": "treatment with intravenous t-PA within three hours of the onset of ischemic stroke improved clinical outcome at three months",
+          "b": "the safety and efficacy of intravenous thrombolysis with alteplase (0.9 mg/kg bodyweight) within 6 h of stroke onset"
+        }
+      }
+    },
+    {
+      "id": "hrt-timing-hypothesis",
+      "question": "Does postmenopausal hormone therapy prevent coronary heart disease?",
+      "papers": [
+        {
+          "pmid": "11119394",
+          "citation": "Grodstein et al. 2000, Ann Intern Med",
+          "title": "A prospective, observational study of postmenopausal hormone therapy and primary prevention of cardiovascular disease.",
+          "conclusion": "In the Nurses' Health Study, current hormone users had lower risk of major coronary events than never-users (RR 0.61, 95% CI 0.52-0.71)."
+        },
+        {
+          "pmid": "12117397",
+          "citation": "Rossouw et al. 2002, JAMA",
+          "title": "Risks and benefits of estrogen plus progestin in healthy postmenopausal women: principal results From the Women's Health Initiative randomized controlled trial.",
+          "conclusion": "Oestrogen plus progestin increased CHD risk (HR 1.29, 95% CI 1.02-1.63); the regimen 'should not be initiated or continued for primary prevention of CHD'."
+        }
+      ],
+      "label": {
+        "dimension": "timing",
+        "cause": "The discrepancy is largely attributable to differences in the distribution of time since menopause (WHI enrolled women far more distant from menopause) and in length of follow-up.",
+        "alsoAcceptable": ["model", "statistic"],
+        "citation": {
+          "pmid": "18854702",
+          "citation": "Hernan et al. 2008, Epidemiology",
+          "title": "Observational studies analyzed like randomized experiments: an application to postmenopausal hormone therapy and coronary heart disease.",
+          "establishes": "Re-analysed the SAME Nurses' Health Study cohort emulating WHI's design and intention-to-treat analysis, recovering WHI-like hazard ratios (0.84 within 10 years of menopause vs 1.12 beyond). Concluded 'the discrepancies between the Women's Health Initiative and Nurses' Health Study ITT estimates could be largely explained by differences in the distribution of time since menopause and length of follow-up.' Strongest available label because it holds the cohort constant and varies only design/timing."
+        },
+        "confidence": "contested",
+        "confidenceNote": "Residual healthy-user/adherer bias remains an accepted competing explanation, so 'model' and 'statistic' are listed as alsoAcceptable. The WHI's own age/years-since-menopause analysis (Rossouw et al. 2007, JAMA, PMID 17405972) reported P for trend .02 by years since menopause but only .16 by age, and hedged that the trend 'did not meet our criterion for statistical significance'. The timing effect also does not generalise across endpoints — stroke risk was elevated regardless of years since menopause.",
+        "causeVisibleInSource": "no",
+        "visibilityNote": "UNWINNABLE BY CONSTRUCTION, and kept deliberately. The most famous timing contradiction in medicine is the worst possible fit for a text-reading tool: neither abstract mentions time since menopause or age at initiation at all. WHI says only 'postmenopausal women aged 50-79 years with an intact uterus at baseline'; Grodstein says only '70,533 postmenopausal women'. The causal variable becomes visible only once Hernan 2008 is in the corpus. A tool that confidently 'detects' the timing story from these two abstracts is hallucinating, not reading.",
+        "evidence": {
+          "a": "70 533 postmenopausal women — no mention of time since menopause or age at initiation",
+          "b": "postmenopausal women aged 50-79 years with an intact uterus at baseline — no mention of time since menopause"
+        }
+      }
+    },
+    {
+      "id": "ezetimibe-surrogate-endpoint",
+      "question": "Does adding ezetimibe to statin therapy reduce cardiovascular risk?",
+      "papers": [
+        {
+          "pmid": "18376000",
+          "citation": "Kastelein et al. 2008, N Engl J Med",
+          "title": "Simvastatin with or without ezetimibe in familial hypercholesterolemia.",
+          "conclusion": "Adding ezetimibe produced no significant difference in carotid intima-media thickness change vs simvastatin alone (0.0111 vs 0.0058 mm, P=0.29) despite a 16.5% greater LDL reduction."
+        },
+        {
+          "pmid": "26039521",
+          "citation": "Cannon et al. 2015, N Engl J Med",
+          "title": "Ezetimibe Added to Statin Therapy after Acute Coronary Syndromes.",
+          "conclusion": "Adding ezetimibe reduced the composite of CV death/MI/unstable angina/revascularisation/stroke (32.7% vs 34.7% at 7 yr; HR 0.936, P=0.016)."
+        }
+      ],
+      "label": {
+        "dimension": "endpoint",
+        "cause": "ENHANCE measured an imaging surrogate (carotid intima-media thickness progression) that has never been validated as a predictor of events, whereas IMPROVE-IT measured hard clinical events, so the null surrogate result did not license a null clinical conclusion.",
+        "alsoAcceptable": ["model", "timing", "sampleSize"],
+        "citation": {
+          "pmid": "22541275",
+          "citation": "Lorenz et al. 2012, Lancet",
+          "title": "Carotid intima-media thickness progression to predict cardiovascular events in the general population (the PROG-IMT collaborative project): a meta-analysis of individual participant data.",
+          "establishes": "Individual-participant meta-analysis of 36,984 participants: cIMT progression was NOT associated with events (HR 0.97, 95% CI 0.94-1.00), while absolute cIMT was (HR 1.16). Concluded 'No conclusion can be derived for the use of cIMT progression as a surrogate in clinical trials.'"
+        },
+        "confidence": "established",
+        "confidenceNote": "PROG-IMT is definitive that cIMT progression is an unvalidated surrogate, but it establishes a generic mechanism rather than adjudicating this pair by name; no paper reconciling ENHANCE and IMPROVE-IT by name was found. The pair is also genuinely multi-causal — the trials differ in population (familial hypercholesterolaemia vs post-ACS), duration (24 months vs median 6 years) and size (720 vs 18,144; ENHANCE was not powered for events at all). Endpoint is the headline difference, not the only one.",
+        "causeVisibleInSource": "yes",
+        "visibilityNote": "Both abstracts state their primary endpoint explicitly, and both also expose the confounded dimensions in plain text.",
+        "evidence": {
+          "a": "The primary outcome measure was the change in the mean carotid-artery intima-media thickness",
+          "b": "The primary end point was a composite of cardiovascular death, nonfatal myocardial infarction, unstable angina requiring rehospitalization, coronary revascularization (>=30 days after randomization), or nonfatal stroke. The median follow-up was 6 years."
+        }
+      }
+    },
+    {
+      "id": "beta-carotene-smokers",
+      "question": "Does beta-carotene supplementation prevent lung cancer?",
+      "papers": [
+        {
+          "pmid": "8127329",
+          "citation": "ATBC Cancer Prevention Study Group 1994, N Engl J Med",
+          "title": "The effect of vitamin E and beta carotene on the incidence of lung cancer and other cancers in male smokers.",
+          "conclusion": "In 29,133 male smokers, beta-carotene increased lung cancer incidence by 18% (95% CI 3-36%) and total mortality by 8%."
+        },
+        {
+          "pmid": "8602179",
+          "citation": "Hennekens et al. 1996, N Engl J Med",
+          "title": "Lack of effect of long-term supplementation with beta carotene on the incidence of malignant neoplasms and cardiovascular disease.",
+          "conclusion": "In 22,071 US male physicians (only 11% current smokers), 12 years of beta-carotene produced 'neither benefit nor harm'."
+        }
+      ],
+      "label": {
+        "dimension": "model",
+        "cause": "Beta-carotene increases lung cancer risk specifically in smokers and asbestos-exposed populations, and has no effect in a largely non-smoking population.",
+        "alsoAcceptable": [],
+        "citation": {
+          "pmid": "32130738",
+          "citation": "Cortes-Jofre, Rueda, Asenjo-Lobos, Madrid & Bonfill Cosp 2020, Cochrane Database Syst Rev 2020;3:CD002141",
+          "title": "Drugs for preventing lung cancer in healthy people.",
+          "establishes": "At HIGH-certainty evidence, Cochrane reports that 'Vitamin A' (the pooled smoker/asbestos trials under that heading are ATBC and CARET, both beta-carotene arms) 'results in little to no difference in lung cancer incidence (RR 1.09, 95% CI 1.00 to 1.19)' overall, 'But in smokers or asbestos workers vitamin A increases the risk of lung cancer incidence (RR 1.10, 95% CI 1.01 to 1.20)' and mortality (RR 1.18, 95% CI 1.01 to 1.38). An explicit, graded statement of population effect-modification. NOTE: the review's own term is 'Vitamin A'; the beta-carotene gloss is ours and is kept outside the quotation marks."
+        },
+        "confidence": "established",
+        "confidenceNote": "The strongest case in the set: high-certainty Cochrane evidence naming the population variable explicitly, replicated by a third arm (CARET, Omenn et al. 1996, PMID 8602180: RR 1.28 in smokers/asbestos workers, trial stopped early).",
+        "causeVisibleInSource": "yes",
+        "visibilityNote": "A model reading only the two abstracts has everything it needs. ATBC's title itself says 'in male smokers'.",
+        "evidence": {
+          "a": "A total of 29,133 male smokers 50 to 69 years of age from southwestern Finland",
+          "b": "11 percent were current smokers and 39 percent were former smokers at the beginning of the study in 1982"
+        }
+      }
+    },
+    {
+      "id": "selenium-baseline-status",
+      "question": "Does selenium supplementation prevent cancer?",
+      "papers": [
+        {
+          "pmid": "8971064",
+          "citation": "Clark et al. 1996, JAMA",
+          "title": "Effects of selenium supplementation for cancer prevention in patients with carcinoma of the skin. A randomized controlled trial. Nutritional Prevention of Cancer Study Group.",
+          "conclusion": "Selenium did not prevent skin cancer (primary endpoint), but secondary endpoints showed reduced total cancer mortality (RR 0.50) and incidence (RR 0.63)."
+        },
+        {
+          "pmid": "19066370",
+          "citation": "Lippman et al. 2009, JAMA",
+          "title": "Effect of selenium and vitamin E on risk of prostate cancer and other cancers: the Selenium and Vitamin E Cancer Prevention Trial (SELECT).",
+          "conclusion": "'Selenium or vitamin E, alone or in combination at the doses and formulations used, did not prevent prostate cancer in this population of relatively healthy men.'"
+        }
+      ],
+      "label": {
+        "dimension": "model",
+        "cause": "Baseline selenium status of the enrolled population modifies the effect — NPC enrolled a selenium-deficient population while SELECT enrolled selenium-replete men — though the direction of the modification is disputed.",
+        "alsoAcceptable": ["endpoint", "statistic"],
+        "citation": {
+          "pmid": "12699469",
+          "citation": "Duffield-Lillico et al. 2003, BJU Int",
+          "title": "Selenium supplementation, baseline plasma selenium status and incidence of prostate cancer: an analysis of the complete treatment period of the Nutritional Prevention of Cancer Trial.",
+          "establishes": "Within NPC: 'Participants with baseline plasma selenium concentrations only in the lowest two tertiles (< 123.2 ng/mL) had significant reductions in prostate cancer incidence. A significant interaction between baseline plasma selenium and treatment was detected.'"
+        },
+        "confidence": "contested",
+        "confidenceNote": "IMPORTANT: the popular 'NPC worked because participants were deficient, SELECT failed because they were replete' framing does NOT survive scrutiny. Kristal et al. 2014, JNCI (PMID 24563519) found selenium 'had no effect among men with low selenium status (<60th percentile of toenail selenium) but increased the risk of high-grade PCa among men with higher selenium status by 91% (P = .007)' — i.e. SELECT's low-selenium men got no benefit either. Baseline status clearly modifies the effect but does not cleanly reconcile the trials. Also note NPC's cancer-mortality result was a SECONDARY endpoint (its primary endpoint was null), which is why 'endpoint' and 'statistic' are alsoAcceptable.",
+        "causeVisibleInSource": "no",
+        "visibilityNote": "UNWINNABLE BY CONSTRUCTION, and kept deliberately as a negative control. Neither abstract mentions baseline selenium status. NPC describes its population only as '1312 patients... with a history of basal cell or squamous cell carcinomas of the skin'; SELECT says only 'relatively healthy men'. The causal variable appears in neither text — no amount of model capability fixes that.",
+        "evidence": {
+          "a": "A total of 1312 patients (mean age, 63 years; range, 18-80 years) with a history of basal cell or squamous cell carcinomas of the skin — no mention of baseline selenium status",
+          "b": "relatively healthy men — no mention of baseline selenium status"
+        }
+      }
+    },
+    {
+      "id": "vitamin-d-bolus-falls",
+      "question": "Does vitamin D supplementation prevent falls and fractures in older adults?",
+      "papers": [
+        {
+          "pmid": "20460620",
+          "citation": "Sanders et al. 2010, JAMA",
+          "title": "Annual high-dose oral vitamin D and falls and fractures in older women: a randomized controlled trial.",
+          "conclusion": "A single annual 500,000 IU oral dose of cholecalciferol INCREASED falls (IRR 1.15) and fractures (IRR 1.26) in community-dwelling women aged 70+."
+        },
+        {
+          "pmid": "19797342",
+          "citation": "Bischoff-Ferrari et al. 2009, BMJ",
+          "title": "Fall prevention with supplemental and active forms of vitamin D: a meta-analysis of randomised controlled trials.",
+          "conclusion": "Supplemental vitamin D at 700-1000 IU/day REDUCED falls in older individuals by 19%."
+        }
+      ],
+      "label": {
+        "dimension": "dose",
+        "cause": "The harm is attributed to the intermittent bolus regimen — a single very large annual dose producing a supraphysiological 25(OH)D spike — rather than to vitamin D repletion per se, which is beneficial when given daily.",
+        "alsoAcceptable": ["model"],
+        "citation": {
+          "pmid": "23250508",
+          "citation": "Sanders, Nicholson & Ebeling 2013, Calcif Tissue Int",
+          "title": "Is high dose vitamin D harmful?",
+          "establishes": "Reviews trials using intermittent high doses: 'two recent randomized controlled trials (RCTs) both using annual high-dose vitamin D reported an increase, rather than a decrease, in the primary outcome of fractures', and 'the safety of loading doses of vitamin D should be demonstrated before these regimens become recommended as routine clinical practice.'"
+        },
+        "confidence": "established",
+        "confidenceNote": "The regimen-harm association is replicated across trials AND confirmed within a single randomized dose comparison: in Bischoff-Ferrari et al. 2016, JAMA Intern Med (PMID 26747333), 60,000 IU/month caused more falls (66.9%) than 24,000 IU/month (47.9%, P=.048) — the same first author reversing her own earlier finding. That specific two-arm contrast varies dose only; note the trial had a third arm (24,000 IU + 300 ug calcifediol) which varies more than dose, so 'protocol held constant' is true of the cited comparison, not of the whole trial. The MECHANISM is contested (the label paper says only 'speculative mechanisms are discussed'). Note this pair alone is confounded by population and total dose; PMID 26747333 is what removes the confound.",
+        "causeVisibleInSource": "yes",
+        "visibilityNote": "Both abstracts state their dosing regimen explicitly.",
+        "evidence": {
+          "a": "a single annual dose of 500,000 IU of cholecalciferol administered orally to older women",
+          "b": "Supplemental vitamin D in a dose of 700-1000 IU a day reduced the risk of falling among older individuals by 19%"
+        }
+      }
+    },
+    {
+      "id": "vitamin-d-bolus-respiratory",
+      "question": "Does vitamin D supplementation prevent acute respiratory tract infection?",
+      "papers": [
+        {
+          "pmid": "23032549",
+          "citation": "Murdoch et al. 2012, JAMA",
+          "title": "Effect of vitamin D3 supplementation on upper respiratory tract infections in healthy adults: the VIDARIS randomized controlled trial.",
+          "conclusion": "Monthly 100,000 IU vitamin D3 did NOT reduce incidence or severity of upper respiratory tract infections in healthy adults."
+        },
+        {
+          "pmid": "20219962",
+          "citation": "Urashima et al. 2010, Am J Clin Nutr",
+          "title": "Randomized trial of vitamin D supplementation to prevent seasonal influenza A in schoolchildren.",
+          "conclusion": "Daily 1200 IU vitamin D3 REDUCED influenza A incidence (RR 0.58, P = 0.04)."
+        }
+      ],
+      "label": {
+        "dimension": "dose",
+        "cause": "Daily or weekly dosing protects against acute respiratory infection while bolus dosing does not, confirmed by a formal interaction test in a pooled individual-participant analysis that included both of these trials.",
+        "alsoAcceptable": ["model"],
+        "citation": {
+          "pmid": "28202713",
+          "citation": "Martineau et al. 2017, BMJ",
+          "title": "Vitamin D supplementation to prevent acute respiratory tract infections: systematic review and meta-analysis of individual participant data.",
+          "establishes": "'protective effects were seen in those receiving daily or weekly vitamin D without additional bolus doses (adjusted odds ratio 0.81, 0.72 to 0.91) but not in those receiving one or more bolus doses (adjusted odds ratio 0.97, 0.86 to 1.10; P for interaction=0.05).' The strongest label in the set structurally: an IPD meta-analysis with a prespecified subgroup and an explicit interaction test, on which the authors of BOTH contradicting trials are co-authors."
+        },
+        "confidence": "established",
+        "confidenceNote": "The interaction P = 0.05 is borderline, and the same analysis found a second, STRONGER effect modifier (baseline 25(OH)D <25 nmol/L, P for interaction = 0.006). So regimen is an established modifier but not the only one. This pair is also population-confounded (NZ healthy adults vs Japanese schoolchildren) — the regimen label is carried by the IPD meta-analysis pooling 25 trials, not by this pair in isolation.",
+        "causeVisibleInSource": "yes",
+        "visibilityNote": "Both abstracts state their dosing regimen explicitly.",
+        "evidence": {
+          "a": "an initial dose of 200,000 IU oral vitamin D3, then 200,000 IU 1 month later, then 100,000 IU monthly",
+          "b": "comparing vitamin D(3) supplements (1200 IU/d) with placebo in schoolchildren"
+        }
+      }
+    },
+    {
+      "id": "ivermectin-achievable-exposure",
+      "question": "Is ivermectin an effective treatment for SARS-CoV-2 infection?",
+      "papers": [
+        {
+          "pmid": "32251768",
+          "citation": "Caly et al. 2020, Antiviral Res",
+          "title": "The FDA-approved drug ivermectin inhibits the replication of SARS-CoV-2 in vitro.",
+          "conclusion": "Ivermectin produced a ~5000-fold reduction in SARS-CoV-2 viral RNA at 48h in Vero-hSLAM cells and 'warrants further investigation for possible benefits in humans'."
+        },
+        {
+          "pmid": "35353979",
+          "citation": "Reis et al. 2022, N Engl J Med",
+          "title": "Effect of Early Treatment with Ivermectin among Patients with Covid-19.",
+          "conclusion": "Ivermectin 400 ug/kg daily for 3 days did NOT reduce hospitalization or prolonged ED observation in outpatients with early Covid-19 (RR 0.90, 95% BCI 0.70-1.16)."
+        }
+      ],
+      "label": {
+        "dimension": "dose",
+        "cause": "The in vitro antiviral effect occurs at a concentration (IC50 ~2 uM) more than 35-fold above the peak plasma concentration achievable at the approved oral dose — and unreachable even at 10x that dose — so the clinical trials never tested the exposure at which the in vitro effect exists.",
+        "alsoAcceptable": ["model"],
+        "citation": {
+          "pmid": "32378737",
+          "citation": "Schmith, Zhou & Lohmer 2020, Clin Pharmacol Ther",
+          "title": "The Approved Dose of Ivermectin Alone is not the Ideal Dose for the Treatment of COVID-19.",
+          "establishes": "Quantitatively, and by name against Caly et al.: 'The concentration resulting in 50% inhibition (IC50; 2 uM) was > 35x higher than the maximum plasma concentration (Cmax) after oral administration of the approved dose... Plasma ivermectin concentrations... do not reach the IC50, even for a dose level 10x higher than the approved dose... the likelihood of a successful clinical trial using the approved dose of ivermectin is low.' Published in 2020, PREDICTING the negative trials two years before TOGETHER reported."
+        },
+        "confidence": "established",
+        "confidenceNote": "The cleanest concentration-driven case available: the PK modelling is quantitative, was published prospectively, and its prediction was borne out. 'model' is alsoAcceptable because the in vitro / in vivo gap is a genuine co-cause.",
+        "causeVisibleInSource": "partial",
+        "visibilityNote": "Reis states its dose ('ivermectin (400 ug per kilogram of body weight) once daily for 3 days'), but Caly's ABSTRACT does NOT state the concentration used — the 5 uM figure appears only in the full text. A tool reading only abstracts cannot recover this contradiction's cause from side A. Kept as a difficulty gradient.",
+        "evidence": {
+          "a": "a single addition to Vero-hSLAM cells 2 h post infection — concentration NOT stated in abstract",
+          "b": "ivermectin (400 ug per kilogram of body weight) once daily for 3 days"
+        }
+      }
+    },
+    {
+      "id": "mouse-models-gene-selection",
+      "question": "Do genomic responses in mouse models mimic human inflammatory diseases?",
+      "papers": [
+        {
+          "pmid": "23401516",
+          "citation": "Seok et al. 2013, PNAS",
+          "title": "Genomic responses in mouse models poorly mimic human inflammatory diseases.",
+          "conclusion": "Murine orthologs of human inflammation-response genes match their human counterparts close to randomly (R2 0.0-0.1), so mouse models should not be relied on to study human inflammatory disease."
+        },
+        {
+          "pmid": "25092317",
+          "citation": "Takao & Miyakawa 2015, PNAS",
+          "title": "Genomic responses in mouse models greatly mimic human inflammatory diseases.",
+          "conclusion": "Reanalysing the SAME datasets, mouse and human responses correlate strongly (Spearman 0.43-0.68), supporting mouse models' utility."
+        }
+      ],
+      "label": {
+        "dimension": "statistic",
+        "cause": "Seok et al. correlated across genes significantly changed IN HUMANS, whereas Takao & Miyakawa restricted to genes significantly changed IN BOTH SPECIES — a gene-selection choice on identical data that flips the sign of the conclusion.",
+        "alsoAcceptable": [],
+        "citation": {
+          "pmid": "25092317",
+          "citation": "Takao & Miyakawa 2015, PNAS (paper B is itself the label source)",
+          "title": "Genomic responses in mouse models greatly mimic human inflammatory diseases.",
+          "establishes": "Demonstrates the cause by explicit reanalysis of the same public datasets: 'we reevaluated the same gene expression datasets used in the previous study by focusing on genes whose expression levels were significantly changed in both humans and mice.' Independently corroborated by Shay, Lederer & Benoist 2015, PNAS (PMID 25540423), 'Genomic responses to inflammation in mouse models mimic humans: we concur, apples to oranges comparisons won't do', whose title asserts the comparison-choice framing (note: that letter has no abstract text in PubMed, so only its existence and title are verified)."
+        },
+        "confidence": "established",
+        "confidenceNote": "The two papers use the same public datasets and Paper B states the differing selection rule explicitly, so the CAUSE of divergence is not disputed — even though WHICH analysis is right remains argued.",
+        "causeVisibleInSource": "yes",
+        "visibilityNote": "The cleanest ground-truth item in the set: both abstracts state their gene-selection rule verbatim. NOTE: this pair currently ships as the 'mouse-inflammation' fixture, whose example extraction packs the gene-selection rule into the ASSAY field. That is why StudyDiff has appeared to get this case right — it ranks assay first and the analytic choice was filed under assay. The established cause is an analytic choice, not an assay.",
+        "evidence": {
+          "a": "Among genes changed significantly in humans, the murine orthologs are close to random in matching their human counterparts (e.g., R(2) between 0.0 and 0.1)",
+          "b": "we reevaluated the same gene expression datasets used in the previous study by focusing on genes whose expression levels were significantly changed in both humans and mice"
+        }
+      }
+    },
+    {
+      "id": "vitamin-e-meta-analytic-model",
+      "question": "Does high-dose vitamin E supplementation increase all-cause mortality?",
+      "papers": [
+        {
+          "pmid": "15537682",
+          "citation": "Miller et al. 2005, Ann Intern Med",
+          "title": "Meta-analysis: high-dosage vitamin E supplementation may increase all-cause mortality.",
+          "conclusion": "High-dosage (>=400 IU/d) vitamin E may increase all-cause mortality and should be avoided."
+        },
+        {
+          "pmid": "19254931",
+          "citation": "Berry, Wathen & Newell 2009, Clin Trials",
+          "title": "Bayesian model averaging in meta-analysis: vitamin E supplementation and mortality.",
+          "conclusion": "Vitamin E intake is unlikely to affect mortality regardless of dose."
+        }
+      ],
+      "label": {
+        "dimension": "statistic",
+        "cause": "Berry et al. reanalysed essentially Miller's trial set using Bayesian hierarchical model averaging that propagates model uncertainty and between-trial variability, rather than Miller's single fixed dose-response model — the meta-analytic model choice, not the evidence, drives the reversal.",
+        "alsoAcceptable": ["dose"],
+        "citation": {
+          "pmid": "19254931",
+          "citation": "Berry, Wathen & Newell 2009, Clin Trials (paper B is itself the label source)",
+          "title": "Bayesian model averaging in meta-analysis: vitamin E supplementation and mortality.",
+          "establishes": "States its own premise: 'The strength and relevance of a meta-analysis depends on the validity of the statistical methods used... Illuminating and resolving these disparities requires addressing study variability and model uncertainty.' Its Data Sources confirm it reuses 'Studies used in a previously published meta-analysis' (Miller's)."
+        },
+        "confidence": "established",
+        "confidenceNote": "A useful trap: this LOOKS like a dose contradiction and is not — the dose-response relationship is itself the disputed claim, so dose cannot be the established cause. Data overlap is near-total but not identical (Berry appends post-Aug-2004 studies and applies its own inclusion criteria), so model choice is dominant but not perfectly isolated.",
+        "causeVisibleInSource": "yes",
+        "visibilityNote": "Both abstracts name their analytic approach, though B's is the more explicit.",
+        "evidence": {
+          "a": "A dose-response analysis showed a statistically significant relationship between vitamin E dosage and all-cause mortality, with increased risk of dosages greater than 150 IU/d",
+          "b": "We combined study results using Bayesian hierarchical model averaging... Vitamin E intake is unlikely to affect mortality regardless of dose"
+        }
+      }
+    },
+    {
+      "id": "reproducibility-project-psychology",
+      "question": "Is psychological science reproducible?",
+      "papers": [
+        {
+          "pmid": "26315443",
+          "citation": "Open Science Collaboration 2015, Science",
+          "title": "PSYCHOLOGY. Estimating the reproducibility of psychological science.",
+          "conclusion": "Only 36% of 100 replications reached statistical significance versus 97% of originals, indicating low reproducibility."
+        },
+        {
+          "pmid": "26941311",
+          "citation": "Gilbert et al. 2016, Science",
+          "title": "Comment on \"Estimating the reproducibility of psychological science\".",
+          "conclusion": "The OSC article contains three statistical errors and its data are actually consistent with reproducibility being quite high."
+        }
+      ],
+      "label": {
+        "dimension": "statistic",
+        "cause": "Gilbert et al. reanalyse the identical RPP dataset and attribute the opposite conclusion to OSC's statistical choices — handling of replication error/power, treatment of low-fidelity replication protocols, and confidence-interval logic — not to any difference in data.",
+        "alsoAcceptable": [],
+        "citation": {
+          "pmid": "26941311",
+          "citation": "Gilbert et al. 2016, Science (paper B is itself the label source)",
+          "title": "Comment on \"Estimating the reproducibility of psychological science\".",
+          "establishes": "'We show that this article contains three statistical errors and provides no support for such a conclusion. Indeed, the data are consistent with the opposite conclusion, namely, that the reproducibility of psychological science is quite high.'"
+        },
+        "confidence": "contested",
+        "confidenceNote": "GENUINELY UNSETTLED and included as such. Both sides analyse the same data and each accuses the other of statistical error. The counter-label — Anderson et al. 2016, Science (PMID 26941312), 'Response to Comment on \"Estimating the reproducibility of psychological science\"' — holds Gilbert's assessment is 'limited by statistical misconceptions and by causal inferences from selectively interpreted, correlational data', and explicitly declines to settle it: 'both optimistic and pessimistic conclusions about reproducibility are possible, and neither are yet warranted.' The DIMENSION (statistic) is not in doubt even though the verdict is.",
+        "causeVisibleInSource": "yes",
+        "visibilityNote": "Both abstracts foreground the statistical dispute.",
+        "evidence": {
+          "a": "Thirty-six percent of replications had statistically significant results; 47% of original effect sizes were in the 95% confidence interval of the replication effect size",
+          "b": "We show that this article contains three statistical errors and provides no support for such a conclusion. Indeed, the data are consistent with the opposite conclusion."
+        }
+      }
+    },
+    {
+      "id": "5httlpr-study-inclusion",
+      "question": "Does the 5-HTTLPR serotonin transporter variant moderate the effect of stress on depression?",
+      "papers": [
+        {
+          "pmid": "19531786",
+          "citation": "Risch et al. 2009, JAMA",
+          "title": "Interaction between the serotonin transporter gene (5-HTTLPR), stressful life events, and risk of depression: a meta-analysis.",
+          "conclusion": "No evidence that 5-HTTLPR genotype alone or interacting with stressful life events raises depression risk (14 studies, 14,250 participants)."
+        },
+        {
+          "pmid": "21199959",
+          "citation": "Karg et al. 2011, Arch Gen Psychiatry",
+          "title": "The serotonin transporter promoter variant (5-HTTLPR), stress, and depression meta-analysis revisited: evidence of genetic moderation.",
+          "conclusion": "Across 54 studies, strong evidence that 5-HTTLPR moderates the stress-depression relationship (P = .00002)."
+        }
+      ],
+      "label": {
+        "dimension": "statistic",
+        "cause": "The reversal is driven by study inclusion — which of the 56 available studies enter the pool — and NOT by the meta-analytic technique, a distinction Karg et al. establish by direct test.",
+        "alsoAcceptable": [],
+        "citation": {
+          "pmid": "21199959",
+          "citation": "Karg et al. 2011, Arch Gen Psychiatry (paper B is itself the label source)",
+          "title": "The serotonin transporter promoter variant (5-HTTLPR), stress, and depression meta-analysis revisited: evidence of genetic moderation.",
+          "establishes": "Unusually rigorous — it ran the discriminating experiment rather than merely asserting the cause: 'When restricting our analysis to the studies included in the previous meta-analyses, we found no evidence of association (Munafo et al studies, P = .16; Risch et al studies, P = .11). This suggests that the difference in results between meta-analyses was due to the different set of included studies rather than the meta-analytic technique.' That sentence isolates inclusion choice as the cause and explicitly RULES OUT technique."
+        },
+        "confidence": "established",
+        "confidenceNote": "Established for the CAUSE, contested for the VERDICT: the mechanism of disagreement is demonstrated rather than asserted, but the field has since moved against Karg's conclusion (see candidate-gene-power). Note Karg also switched to Liptak-Stouffer z-score combination, so technique did change — Karg's own restriction analysis is what shows technique alone doesn't produce the flip.",
+        "causeVisibleInSource": "yes",
+        "visibilityNote": "Both abstracts name the study-count difference explicitly.",
+        "evidence": {
+          "a": "Search of PubMed, EMBASE, and PsycINFO databases through March 2009 yielded 26 studies of which 14 met criteria for the meta-analysis",
+          "b": "even the larger of the meta-analyses included only 14 of the 56 studies that have assessed the relationship between 5-HTTLPR, stress, and depression"
+        }
+      }
+    },
+    {
+      "id": "candidate-gene-power",
+      "question": "Does the 5-HTT (5-HTTLPR) polymorphism moderate the effect of stressful life events on risk of depression?",
+      "questionNote": "REWORDED after a real extraction failure. The original wording — 'Do candidate gene polymorphisms predict major depression?' — asked about a MAIN EFFECT. Caspi et al. report a gene-by-environment MODERATION effect and make no main-effect prediction claim, so extraction correctly returned 'not reported' for `finding` on three consecutive attempts and the pipeline refused to emit a blank card. The failure was in the question, not the model: it asked both papers something only one of them answers. Recorded rather than silently fixed, because 'the benchmark asked a bad question' is a failure mode worth knowing about.",
+      "papers": [
+        {
+          "pmid": "12869766",
+          "citation": "Caspi et al. 2003, Science",
+          "title": "Influence of life stress on depression: moderation by a polymorphism in the 5-HTT gene.",
+          "conclusion": "The 5-HTT promoter short allele moderates the effect of stressful life events on depression — evidence of a gene-by-environment interaction."
+        },
+        {
+          "pmid": "30845820",
+          "citation": "Border et al. 2019, Am J Psychiatry",
+          "title": "No Support for Historical Candidate Gene or Candidate Gene-by-Interaction Hypotheses for Major Depression Across Multiple Large Samples.",
+          "conclusion": "Across samples of 62,138-443,264, no candidate gene polymorphism association or polymorphism-by-environment effect survives; the historical literature is likely false positives."
+        }
+      ],
+      "label": {
+        "dimension": "sampleSize",
+        "cause": "The original positive findings came from samples orders of magnitude smaller than those required to detect effects of plausible size, so they are best explained as underpowered false positives rather than real effects.",
+        "alsoAcceptable": ["statistic"],
+        "citation": {
+          "pmid": "30845820",
+          "citation": "Border et al. 2019, Am J Psychiatry (paper B is itself the label source)",
+          "title": "No Support for Historical Candidate Gene or Candidate Gene-by-Interaction Hypotheses for Major Depression Across Multiple Large Samples.",
+          "establishes": "States the attribution outright: 'large genetic effects are frequently reported in samples orders of magnitude smaller than those examined here... the large number of associations reported in the depression candidate gene literature are likely to be false positives.' Also pre-empts a rival explanation — 'The authors demonstrate that phenotypic measurement error is unlikely to account for these null findings' — which helps rule out an assay/measurement cause."
+        },
+        "confidence": "established",
+        "confidenceNote": "The current mainstream position, reinforced by Risch et al. 2009 (PMID 19531786). Two caveats: these are NOT the same data (Border uses independent biobank cohorts, so design differs, not just analysis), and the cause is multi-causal — sample size/power is primary, but publication bias and analytic flexibility are co-contributors Border's design cannot fully separate.",
+        "causeVisibleInSource": "partial",
+        "visibilityNote": "Caspi's abstract describes the cohort only qualitatively ('a prospective-longitudinal study of a representative birth cohort') and gives NO N, so a tool comparing abstracts cannot see the size gap from side A. Border's side is explicit. A good difficulty gradient: the causal dimension is recoverable from only one abstract.",
+        "evidence": {
+          "a": "a prospective-longitudinal study of a representative birth cohort — no sample size stated in abstract",
+          "b": "Ns ranging from 62,138 to 443,264 across subsamples... samples orders of magnitude smaller than those examined here"
+        }
+      }
+    },
+    {
+      "id": "resveratrol-sirt1-substrate",
+      "question": "Does resveratrol directly activate the SIRT1 enzyme?",
+      "papers": [
+        {
+          "pmid": "12939617",
+          "citation": "Howitz et al. 2003, Nature",
+          "title": "Small molecule activators of sirtuins extend Saccharomyces cerevisiae lifespan.",
+          "conclusion": "Resveratrol is a potent direct activator of SIRT1."
+        },
+        {
+          "pmid": "19843076",
+          "citation": "Beher et al. 2009, Chem Biol Drug Des",
+          "title": "Resveratrol is not a direct activator of SIRT1 enzyme activity.",
+          "conclusion": "Resveratrol does not directly activate SIRT1; the apparent activation is an artifact of the fluorophore-tagged substrate."
+        }
+      ],
+      "label": {
+        "dimension": "assay",
+        "cause": "The apparent activation is an artifact of the Fluor de Lys assay's fluorophore-tagged peptide substrate; with native substrates resveratrol shows no direct activation.",
+        "alsoAcceptable": [],
+        "citation": {
+          "pmid": "15749705",
+          "citation": "Borra, Smith & Denu 2005, J Biol Chem",
+          "title": "Mechanism of human SIRT1 activation by resveratrol.",
+          "establishes": "Established that 'resveratrol activation was completely dependent on the presence of a covalently attached fluorophore' — i.e. the effect is an artifact of the tagged substrate used to measure SIRT1 activity."
+        },
+        "confidence": "established",
+        "confidenceNote": "A genuine assay-artifact case and one of only two in the set. The mechanism is settled: the substrate, not the enzyme, produced the signal.",
+        "causeVisibleInSource": "partial",
+        "visibilityNote": "CORRECTED from 'yes' after verification. Only Beher names the causal variable. Howitz identifies its substrate merely as 'the acetylated substrate' and never names Fluor de Lys — which is the entire causal variable — so side A does not state what a tool would need to localise the disagreement.",
+        "evidence": {
+          "a": "the potent activator resveratrol, a polyphenol found in red wine, lowers the Michaelis constant of SIRT1 for both the acetylated substrate and NAD(+) — substrate identified only as 'the acetylated substrate'; Fluor de Lys is never named",
+          "b": "(i) the Fluor de Lys-SIRT1 peptide is an artificial SIRT1 substrate because in the absence of the covalently linked fluorophore the peptide itself is not a substrate of the enzyme, (ii) resveratrol does not activate SIRT1 in vitro in the presence of either a p53-derived peptide substrate or acetylated PGC-1alpha isolated from cells"
+        }
+      }
+    },
+    {
+      "id": "treg-lineage-fate-mapping",
+      "question": "Is the regulatory T cell (Treg) lineage stable in vivo?",
+      "papers": [
+        {
+          "pmid": "19633673",
+          "citation": "Zhou et al. 2009, Nat Immunol",
+          "title": "Instability of the transcription factor Foxp3 leads to the generation of pathogenic memory T cells in vivo.",
+          "conclusion": "Regulatory T cells are unstable — a substantial fraction lose Foxp3 and become pathogenic effector cells."
+        },
+        {
+          "pmid": "20929851",
+          "citation": "Rubtsov et al. 2010, Science",
+          "title": "Stability of the regulatory T cell lineage in vivo.",
+          "conclusion": "The regulatory T cell lineage is notably stable in vivo."
+        }
+      ],
+      "label": {
+        "dimension": "assay",
+        "cause": "Foxp3 expression is not lineage-specific — a reporter that scores cells by Foxp3 expression also captures activated non-Treg cells expressing Foxp3 transiently, whereas an inducible pulse-label tags only cells committed at the time of labelling.",
+        "alsoAcceptable": ["endpoint"],
+        "citation": {
+          "pmid": "24712465",
+          "citation": "Hori 2014, Immunol Rev",
+          "title": "Lineage stability and phenotypic plasticity of Foxp3+ regulatory T cells.",
+          "establishes": "'It has also become evident that Foxp3 can be promiscuously and transiently expressed in activated T cells. Here, I argue that the current controversy stems partly from the lack of the lineage specificity of Foxp3 expression and also from the confusion between phenotypic plasticity and lineage plasticity.'"
+        },
+        "confidence": "contested",
+        "confidenceNote": "The adjudicating review calls Treg lineage plasticity 'a notion that remains highly contentious'. Hori attributes the controversy to TWO causes: the fate-mapping/reporter specificity problem (assay) AND 'confusion between phenotypic plasticity and lineage plasticity' — a definitional disagreement about what is being measured, which maps to endpoint. Hence endpoint is alsoAcceptable. Hori is also not a neutral adjudicator: he reports his own laboratory's findings in the same review.",
+        "causeVisibleInSource": "partial",
+        "visibilityNote": "CORRECTED from 'yes' after verification, and the correction is informative. Zhou's abstract describes NO labelling strategy whatsoever — no reporter, no GFP/YFP, no flow cytometry, nothing. It offers only 'transient or unstable expression of the transcription factor Foxp3'. Rubtsov's side does state its strategy. So the assay contrast that the established cause turns on is visible on ONE side only. This directly explains the known extraction-variance incident on this pair: the same pair has yielded both 'Genetic fate-mapping with flow cytometry' and 'Flow cytometry (FACS) for Foxp3, GFP, YFP...' as Study A's extracted assay value across runs — unsurprising, because side A's abstract contains no assay information for the extractor to anchor on. It is a priority pair for the variance harness.",
+        "evidence": {
+          "a": "we demonstrate that a substantial percentage of cells had transient or unstable expression of the transcription factor Foxp3 — NO labelling or fate-mapping strategy is stated anywhere in this abstract",
+          "b": "By using inducible labeling and tracking of T(reg) cell fate in vivo"
+        }
+      }
+    }
+  ]
+}

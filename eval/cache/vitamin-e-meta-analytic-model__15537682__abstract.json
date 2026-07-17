@@ -1,0 +1,62 @@
+{
+  "pmid": "15537682",
+  "caseId": "vitamin-e-meta-analytic-model",
+  "depthArm": "abstract",
+  "question": "Does high-dose vitamin E supplementation increase all-cause mortality?",
+  "citation": "Miller et al. 2005, Ann Intern Med",
+  "title": "Meta-analysis: high-dosage vitamin E supplementation may increase all-cause mortality.",
+  "sourceDepth": "abstract",
+  "textChars": 2039,
+  "text": "Experimental models and observational studies suggest that vitamin E supplementation may prevent cardiovascular disease and cancer. However, several trials of high-dosage vitamin E supplementation showed non-statistically significant increases in total mortality.\n\nTo perform a meta-analysis of the dose-response relationship between vitamin E supplementation and total mortality by using data from randomized, controlled trials.\n\n135,967 participants in 19 clinical trials. Of these trials, 9 tested vitamin E alone and 10 tested vitamin E combined with other vitamins or minerals. The dosages of vitamin E ranged from 16.5 to 2000 IU/d (median, 400 IU/d).\n\nPubMed search from 1966 through August 2004, complemented by a search of the Cochrane Clinical Trials Database and review of citations of published reviews and meta-analyses. No language restrictions were applied.\n\n3 investigators independently abstracted study reports. The investigators of the original publications were contacted if required information was not available.\n\n9 of 11 trials testing high-dosage vitamin E (&gt; or =400 IU/d) showed increased risk (risk difference &gt; 0) for all-cause mortality in comparisons of vitamin E versus control. The pooled all-cause mortality risk difference in high-dosage vitamin E trials was 39 per 10,000 persons (95% CI, 3 to 74 per 10,000 persons; P = 0.035). For low-dosage vitamin E trials, the risk difference was -16 per 10,000 persons (CI, -41 to 10 per 10,000 persons; P &gt; 0.2). A dose-response analysis showed a statistically significant relationship between vitamin E dosage and all-cause mortality, with increased risk of dosages greater than 150 IU/d.\n\nHigh-dosage (&gt; or =400 IU/d) trials were often small and were performed in patients with chronic diseases. The generalizability of the findings to healthy adults is uncertain. Precise estimation of the threshold at which risk increases is difficult.\n\nHigh-dosage (&gt; or =400 IU/d) vitamin E supplements may increase all-cause mortality and should be avoided.",
+  "card": {
+    "pmid": "15537682",
+    "citation": "Miller et al. 2005 Ann Intern Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "High-dose vitamin E (≥400 IU/d) increases all-cause mortality risk",
+      "quote": "High-dosage (>or=400 IU/d) vitamin E supplements may increase all-cause mortality and should be avoided."
+    },
+    "species": {
+      "value": "Humans",
+      "quote": "135,967 participants in 19 clinical trials."
+    },
+    "model": {
+      "value": "Meta-analysis of randomized controlled trials",
+      "quote": "meta-analysis of the dose-response relationship between vitamin E supplementation and total mortality by using data from randomized, controlled trials."
+    },
+    "intervention": {
+      "value": "Vitamin E supplementation, alone or with other vitamins/minerals",
+      "quote": "9 tested vitamin E alone and 10 tested vitamin E combined with other vitamins or minerals."
+    },
+    "assay": {
+      "value": "Systematic literature search and meta-analysis of trial data",
+      "quote": "PubMed search from 1966 through August 2004, complemented by a search of the Cochrane Clinical Trials Database"
+    },
+    "dose": {
+      "value": "16.5 to 2000 IU/d (median 400 IU/d); high-dose defined as ≥400 IU/d",
+      "quote": "The dosages of vitamin E ranged from 16.5 to 2000 IU/d (median, 400 IU/d)."
+    },
+    "timing": {
+      "value": "Trials published 1966 through August 2004",
+      "quote": "PubMed search from 1966 through August 2004"
+    },
+    "endpoint": {
+      "value": "All-cause mortality",
+      "quote": "the dose-response relationship between vitamin E supplementation and total mortality"
+    },
+    "sampleSize": {
+      "value": "135,967 participants across 19 trials",
+      "quote": "135,967 participants in 19 clinical trials."
+    },
+    "statistic": {
+      "value": "Pooled risk difference 39/10,000 in high-dose trials, P=0.035",
+      "quote": "The pooled all-cause mortality risk difference in high-dosage vitamin E trials was 39 per 10,000 persons (95% CI, 3 to 74 per 10,000 persons; P = 0.035)."
+    },
+    "limitations": {
+      "value": "High-dose trials small, in chronically ill patients; uncertain generalizability",
+      "quote": "High-dosage (>or=400 IU/d) trials were often small and were performed in patients with chronic diseases. The generalizability of the findings to healthy adults is uncertain."
+    }
+  },
+  "extractedAt": "2026-07-17T10:11:10.795Z",
+  "model": "claude-sonnet-5"
+}

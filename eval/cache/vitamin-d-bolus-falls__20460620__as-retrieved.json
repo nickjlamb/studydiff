@@ -1,0 +1,62 @@
+{
+  "pmid": "20460620",
+  "caseId": "vitamin-d-bolus-falls",
+  "depthArm": "as-retrieved",
+  "question": "Does vitamin D supplementation prevent falls and fractures in older adults?",
+  "citation": "Sanders et al. 2010, JAMA",
+  "title": "Annual high-dose oral vitamin D and falls and fractures in older women: a randomized controlled trial.",
+  "sourceDepth": "abstract",
+  "textChars": 2443,
+  "text": "Improving vitamin D status may be an important modifiable risk factor to reduce falls and fractures; however, adherence to daily supplementation is typically poor.\n\nTo determine whether a single annual dose of 500,000 IU of cholecalciferol administered orally to older women in autumn or winter would improve adherence and reduce the risk of falls and fracture.\n\nA double-blind, placebo-controlled trial of 2256 community-dwelling women, aged 70 years or older, considered to be at high risk of fracture were recruited from June 2003 to June 2005 and were randomly assigned to receive cholecalciferol or placebo each autumn to winter for 3 to 5 years. The study concluded in 2008.\n\n500,000 IU of cholecalciferol or placebo.\n\nFalls and fractures were ascertained using monthly calendars; details were confirmed by telephone interview. Fractures were radiologically confirmed. In a substudy, 137 randomly selected participants underwent serial blood sampling for 25-hydroxycholecalciferol and parathyroid hormone levels.\n\nWomen in the cholecalciferol (vitamin D) group had 171 fractures vs 135 in the placebo group; 837 women in the vitamin D group fell 2892 times (rate, 83.4 per 100 person-years) while 769 women in the placebo group fell 2512 times (rate, 72.7 per 100 person-years; incidence rate ratio [RR], 1.15; 95% confidence interval [CI], 1.02-1.30; P = .03). The incidence RR for fracture in the vitamin D group was 1.26 (95% CI, 1.00-1.59; P = .047) vs the placebo group (rates per 100 person-years, 4.9 vitamin D vs 3.9 placebo). A temporal pattern was observed in a post hoc analysis of falls. The incidence RR of falling in the vitamin D group vs the placebo group was 1.31 in the first 3 months after dosing and 1.13 during the following 9 months (test for homogeneity; P = .02). In the substudy, the median baseline serum 25-hydroxycholecalciferol was 49 nmol/L. Less than 3% of the substudy participants had 25-hydroxycholecalciferol levels lower than 25 nmol/L. In the vitamin D group, 25-hydroxycholecalciferol levels increased at 1 month after dosing to approximately 120 nmol/L, were approximately 90 nmol/L at 3 months, and remained higher than the placebo group 12 months after dosing.\n\nAmong older community-dwelling women, annual oral administration of high-dose cholecalciferol resulted in an increased risk of falls and fractures.\n\nanzctr.org.au Identifier: ACTRN12605000658617; isrctn.org Identifier: ISRCTN83409867.",
+  "card": {
+    "pmid": "20460620",
+    "citation": "Sanders et al. 2010 JAMA",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Annual high-dose vitamin D increased falls and fractures",
+      "quote": "resulted in an increased risk of falls and fractures"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "older women"
+    },
+    "model": {
+      "value": "Community-dwelling older women at high fracture risk",
+      "quote": "community-dwelling women, aged 70 years or older, considered to be at high risk of fracture"
+    },
+    "intervention": {
+      "value": "Annual oral cholecalciferol vs placebo, autumn/winter, 3-5 years",
+      "quote": "randomly assigned to receive cholecalciferol or placebo each autumn to winter for 3 to 5 years"
+    },
+    "assay": {
+      "value": "Monthly fall calendars, telephone confirmation, radiologic fracture confirmation; serum 25(OH)D and PTH in substudy",
+      "quote": "Falls and fractures were ascertained using monthly calendars; details were confirmed by telephone interview. Fractures were radiologically confirmed."
+    },
+    "dose": {
+      "value": "500,000 IU cholecalciferol annually",
+      "quote": "500,000 IU of cholecalciferol or placebo."
+    },
+    "timing": {
+      "value": "Recruited 2003-2005, followed through 2008 (3-5 years)",
+      "quote": "recruited from June 2003 to June 2005 and were randomly assigned to receive cholecalciferol or placebo each autumn to winter for 3 to 5 years. The study concluded in 2008."
+    },
+    "endpoint": {
+      "value": "Incidence of falls and fractures",
+      "quote": "reduce the risk of falls and fracture"
+    },
+    "sampleSize": {
+      "value": "2256 women total; substudy n=137",
+      "quote": "A double-blind, placebo-controlled trial of 2256 community-dwelling women"
+    },
+    "statistic": {
+      "value": "Falls RR 1.15 (95% CI 1.02-1.30, P=.03); Fracture RR 1.26 (95% CI 1.00-1.59, P=.047)",
+      "quote": "incidence rate ratio [RR], 1.15; 95% confidence interval [CI], 1.02-1.30; P = .03"
+    },
+    "limitations": {
+      "value": "Post hoc temporal analysis of falls; annual bolus dosing pattern may not generalize",
+      "quote": "A temporal pattern was observed in a post hoc analysis of falls."
+    }
+  },
+  "extractedAt": "2026-07-17T10:33:03.580Z",
+  "model": "claude-sonnet-5"
+}

@@ -1,0 +1,62 @@
+{
+  "pmid": "23401516",
+  "caseId": "mouse-models-gene-selection",
+  "depthArm": "abstract",
+  "question": "Do genomic responses in mouse models mimic human inflammatory diseases?",
+  "citation": "Seok et al. 2013, PNAS",
+  "title": "Genomic responses in mouse models poorly mimic human inflammatory diseases.",
+  "sourceDepth": "abstract",
+  "textChars": 1008,
+  "text": "A cornerstone of modern biomedical research is the use of mouse models to explore basic pathophysiological mechanisms, evaluate new therapeutic approaches, and make go or no-go decisions to carry new drug candidates forward into clinical trials. Systematic studies evaluating how well murine models mimic human inflammatory diseases are nonexistent. Here, we show that, although acute inflammatory stresses from different etiologies result in highly similar genomic responses in humans, the responses in corresponding mouse models correlate poorly with the human conditions and also, one another. Among genes changed significantly in humans, the murine orthologs are close to random in matching their human counterparts (e.g., R(2) between 0.0 and 0.1). In addition to improvements in the current animal model systems, our study supports higher priority for translational medical research to focus on the more complex human conditions rather than relying on mouse models to study human inflammatory diseases.",
+  "card": {
+    "pmid": "23401516",
+    "citation": "Seok et al. 2013 Proc Natl Acad Sci U S A",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Mouse models poorly mimic human inflammatory disease genomic responses",
+      "quote": "the responses in corresponding mouse models correlate poorly with the human conditions and also, one another"
+    },
+    "species": {
+      "value": "Humans and mice (comparative)",
+      "quote": "highly similar genomic responses in humans, the responses in corresponding mouse models"
+    },
+    "model": {
+      "value": "Murine models of acute inflammatory stress",
+      "quote": "corresponding mouse models"
+    },
+    "intervention": {
+      "value": "Acute inflammatory stresses of different etiologies",
+      "quote": "acute inflammatory stresses from different etiologies"
+    },
+    "assay": {
+      "value": "Genomic (transcriptomic) response profiling",
+      "quote": "highly similar genomic responses in humans"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "endpoint": {
+      "value": "Correlation of gene expression changes (human vs mouse orthologs)",
+      "quote": "Among genes changed significantly in humans, the murine orthologs are close to random in matching their human counterparts"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "R2 between 0.0 and 0.1 for human-mouse gene matching",
+      "quote": "R(2) between 0.0 and 0.1"
+    },
+    "limitations": {
+      "value": "Systematic prior evaluations of mouse-human mimicry nonexistent; supports need for human-focused research",
+      "quote": "Systematic studies evaluating how well murine models mimic human inflammatory diseases are nonexistent"
+    }
+  },
+  "extractedAt": "2026-07-17T10:10:49.747Z",
+  "model": "claude-sonnet-5"
+}

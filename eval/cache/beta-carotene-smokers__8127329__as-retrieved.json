@@ -1,0 +1,62 @@
+{
+  "pmid": "8127329",
+  "caseId": "beta-carotene-smokers",
+  "depthArm": "as-retrieved",
+  "question": "Does beta-carotene supplementation prevent lung cancer?",
+  "citation": "ATBC Cancer Prevention Study Group 1994, N Engl J Med",
+  "title": "The effect of vitamin E and beta carotene on the incidence of lung cancer and other cancers in male smokers.",
+  "sourceDepth": "abstract",
+  "textChars": 2315,
+  "text": "Epidemiologic evidence indicates that diets high in carotenoid-rich fruits and vegetables, as well as high serum levels of vitamin E (alpha-tocopherol) and beta carotene, are associated with a reduced risk of lung cancer.\n\nWe performed a randomized, double-blind, placebo-controlled primary-prevention trial to determine whether daily supplementation with alpha-tocopherol, beta carotene, or both would reduce the incidence of lung cancer and other cancers. A total of 29,133 male smokers 50 to 69 years of age from southwestern Finland were randomly assigned to one of four regimens: alpha-tocopherol (50 mg per day) alone, beta carotene (20 mg per day) alone, both alpha-tocopherol and beta carotene, or placebo. Follow-up continued for five to eight years.\n\nAmong the 876 new cases of lung cancer diagnosed during the trial, no reduction in incidence was observed among the men who received alpha-tocopherol (change in incidence as compared with those who did not, -2 percent; 95 percent confidence interval, -14 to 12 percent). Unexpectedly, we observed a higher incidence of lung cancer among the men who received beta carotene than among those who did not (change in incidence, 18 percent; 95 percent confidence interval, 3 to 36 percent). We found no evidence of an interaction between alpha-tocopherol and beta carotene with respect to the incidence of lung cancer. Fewer cases of prostate cancer were diagnosed among those who received alpha-tocopherol than among those who did not. Beta carotene had little or no effect on the incidence of cancer other than lung cancer. Alpha-tocopherol had no apparent effect on total mortality, although more deaths from hemorrhagic stroke were observed among the men who received this supplement than among those who did not. Total mortality was 8 percent higher (95 percent confidence interval, 1 to 16 percent) among the participants who received beta carotene than among those who did not, primarily because there were more deaths from lung cancer and ischemic heart disease.\n\nWe found no reduction in the incidence of lung cancer among male smokers after five to eight years of dietary supplementation with alpha-tocopherol or beta carotene. In fact, this trial raises the possibility that these supplements may actually have harmful as well as beneficial effects.",
+  "card": {
+    "pmid": "8127329",
+    "citation": "1994 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Beta-carotene supplementation increased, not decreased, lung cancer incidence",
+      "quote": "higher incidence of lung cancer among the men who received beta carotene than among those who did not"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "29,133 male smokers 50 to 69 years of age from southwestern Finland"
+    },
+    "model": {
+      "value": "Male smokers, randomized controlled trial cohort",
+      "quote": "male smokers 50 to 69 years of age from southwestern Finland"
+    },
+    "intervention": {
+      "value": "Alpha-tocopherol, beta carotene, both, or placebo",
+      "quote": "alpha-tocopherol (50 mg per day) alone, beta carotene (20 mg per day) alone, both alpha-tocopherol and beta carotene, or placebo"
+    },
+    "assay": {
+      "value": "Randomized double-blind placebo-controlled clinical trial",
+      "quote": "randomized, double-blind, placebo-controlled primary-prevention trial"
+    },
+    "dose": {
+      "value": "Beta carotene 20 mg/day; alpha-tocopherol 50 mg/day",
+      "quote": "beta carotene (20 mg per day) alone"
+    },
+    "timing": {
+      "value": "5 to 8 years of follow-up",
+      "quote": "Follow-up continued for five to eight years."
+    },
+    "endpoint": {
+      "value": "Incidence of lung cancer and other cancers",
+      "quote": "reduce the incidence of lung cancer and other cancers"
+    },
+    "sampleSize": {
+      "value": "29,133 male smokers; 876 lung cancer cases",
+      "quote": "A total of 29,133 male smokers 50 to 69 years of age"
+    },
+    "statistic": {
+      "value": "18% higher lung cancer incidence with beta carotene (95% CI 3-36%)",
+      "quote": "change in incidence, 18 percent; 95 percent confidence interval, 3 to 36 percent"
+    },
+    "limitations": {
+      "value": "Only male smokers studied; unexpected harmful effect observed",
+      "quote": "this trial raises the possibility that these supplements may actually have harmful as well as beneficial effects"
+    }
+  },
+  "extractedAt": "2026-07-17T10:32:28.920Z",
+  "model": "claude-sonnet-5"
+}

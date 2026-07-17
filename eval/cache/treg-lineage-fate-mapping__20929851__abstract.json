@@ -1,0 +1,62 @@
+{
+  "pmid": "20929851",
+  "caseId": "treg-lineage-fate-mapping",
+  "depthArm": "abstract",
+  "question": "Is the regulatory T cell (Treg) lineage stable in vivo?",
+  "citation": "Rubtsov et al. 2010, Science",
+  "title": "Stability of the regulatory T cell lineage in vivo.",
+  "sourceDepth": "abstract",
+  "textChars": 906,
+  "text": "Tissue maintenance and homeostasis can be achieved through the replacement of dying cells by differentiating precursors or self-renewal of terminally differentiated cells or relies heavily on cellular longevity in poorly regenerating tissues. Regulatory T cells (T(reg) cells) represent an actively dividing cell population with critical function in suppression of lethal immune-mediated inflammation. The plasticity of T(reg) cells has been actively debated because it could factor importantly in protective immunity or autoimmunity. By using inducible labeling and tracking of T(reg) cell fate in vivo, or transfers of highly purified T(reg) cells, we have demonstrated notable stability of this cell population under physiologic and inflammatory conditions. Our results suggest that self-renewal of mature T(reg) cells serves as a major mechanism of maintenance of the T(reg) cell lineage in adult mice.",
+  "card": {
+    "pmid": "20929851",
+    "citation": "Rubtsov et al. 2010 Science",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Treg lineage is stable in vivo, not plastic",
+      "quote": "we have demonstrated notable stability of this cell population under physiologic and inflammatory conditions"
+    },
+    "species": {
+      "value": "Mice",
+      "quote": "maintenance of the T(reg) cell lineage in adult mice"
+    },
+    "model": {
+      "value": "Adult mice, physiologic and inflammatory conditions",
+      "quote": "under physiologic and inflammatory conditions"
+    },
+    "intervention": {
+      "value": "Inducible labeling/tracking of Treg fate; adoptive transfer of purified Tregs",
+      "quote": "By using inducible labeling and tracking of T(reg) cell fate in vivo, or transfers of highly purified T(reg) cells"
+    },
+    "assay": {
+      "value": "Fate-mapping via inducible genetic labeling; cell transfer tracking",
+      "quote": "inducible labeling and tracking of T(reg) cell fate in vivo"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "endpoint": {
+      "value": "Stability/lineage fate of Treg cells over time",
+      "quote": "notable stability of this cell population under physiologic and inflammatory conditions"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-07-17T10:12:44.168Z",
+  "model": "claude-sonnet-5"
+}

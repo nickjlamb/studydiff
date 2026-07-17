@@ -1,0 +1,62 @@
+{
+  "pmid": "35353979",
+  "caseId": "ivermectin-achievable-exposure",
+  "depthArm": "abstract",
+  "question": "Is ivermectin an effective treatment for SARS-CoV-2 infection?",
+  "citation": "Reis et al. 2022, N Engl J Med",
+  "title": "Effect of Early Treatment with Ivermectin among Patients with Covid-19.",
+  "sourceDepth": "abstract",
+  "textChars": 2328,
+  "text": "The efficacy of ivermectin in preventing hospitalization or extended observation in an emergency setting among outpatients with acutely symptomatic coronavirus disease 2019 (Covid-19), the disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), is unclear.\n\nWe conducted a double-blind, randomized, placebo-controlled, adaptive platform trial involving symptomatic SARS-CoV-2-positive adults recruited from 12 public health clinics in Brazil. Patients who had had symptoms of Covid-19 for up to 7 days and had at least one risk factor for disease progression were randomly assigned to receive ivermectin (400 &#x3bc;g per kilogram of body weight) once daily for 3 days or placebo. (The trial also involved other interventions that are not reported here.) The primary composite outcome was hospitalization due to Covid-19 within 28 days after randomization or an emergency department visit due to clinical worsening of Covid-19 (defined as the participant remaining under observation for &gt;6 hours) within 28 days after randomization.\n\nA total of 3515 patients were randomly assigned to receive ivermectin (679 patients), placebo (679), or another intervention (2157). Overall, 100 patients (14.7%) in the ivermectin group had a primary-outcome event, as compared with 111 (16.3%) in the placebo group (relative risk, 0.90; 95% Bayesian credible interval, 0.70 to 1.16). Of the 211 primary-outcome events, 171 (81.0%) were hospital admissions. Findings were similar to the primary analysis in a modified intention-to-treat analysis that included only patients who received at least one dose of ivermectin or placebo (relative risk, 0.89; 95% Bayesian credible interval, 0.69 to 1.15) and in a per-protocol analysis that included only patients who reported 100% adherence to the assigned regimen (relative risk, 0.94; 95% Bayesian credible interval, 0.67 to 1.35). There were no significant effects of ivermectin use on secondary outcomes or adverse events.\n\nTreatment with ivermectin did not result in a lower incidence of medical admission to a hospital due to progression of Covid-19 or of prolonged emergency department observation among outpatients with an early diagnosis of Covid-19. (Funded by FastGrants and the Rainwater Charitable Foundation; TOGETHER ClinicalTrials.gov number, NCT04727424.).",
+  "card": {
+    "pmid": "35353979",
+    "citation": "Reis et al. 2022 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Ivermectin not effective; no reduction in hospitalization/ED observation for Covid-19",
+      "quote": "Treatment with ivermectin did not result in a lower incidence of medical admission to a hospital due to progression of Covid-19"
+    },
+    "species": {
+      "value": "Humans",
+      "quote": "symptomatic SARS-CoV-2-positive adults recruited from 12 public health clinics in Brazil"
+    },
+    "model": {
+      "value": "Outpatients with acute symptomatic Covid-19 and risk factors",
+      "quote": "Patients who had had symptoms of Covid-19 for up to 7 days and had at least one risk factor for disease progression"
+    },
+    "intervention": {
+      "value": "Ivermectin vs placebo, part of adaptive platform trial",
+      "quote": "randomly assigned to receive ivermectin (400 &#x3bc;g per kilogram of body weight) once daily for 3 days or placebo"
+    },
+    "assay": {
+      "value": "Randomized double-blind placebo-controlled adaptive platform trial",
+      "quote": "double-blind, randomized, placebo-controlled, adaptive platform trial"
+    },
+    "dose": {
+      "value": "400 μg/kg once daily for 3 days",
+      "quote": "ivermectin (400 &#x3bc;g per kilogram of body weight) once daily for 3 days"
+    },
+    "timing": {
+      "value": "Within 28 days after randomization; treatment started within 7 days of symptoms",
+      "quote": "hospitalization due to Covid-19 within 28 days after randomization"
+    },
+    "endpoint": {
+      "value": "Hospitalization or prolonged ED observation due to Covid-19 progression",
+      "quote": "The primary composite outcome was hospitalization due to Covid-19 within 28 days after randomization or an emergency department visit due to clinical worsening of Covid-19"
+    },
+    "sampleSize": {
+      "value": "679 ivermectin, 679 placebo (of 3515 total randomized)",
+      "quote": "3515 patients were randomly assigned to receive ivermectin (679 patients), placebo (679), or another intervention (2157)"
+    },
+    "statistic": {
+      "value": "RR 0.90, 95% Bayesian CrI 0.70-1.16 (no significant effect)",
+      "quote": "relative risk, 0.90; 95% Bayesian credible interval, 0.70 to 1.16"
+    },
+    "limitations": {
+      "value": "Only patients with risk factors; other interventions in same trial not reported here",
+      "quote": "The trial also involved other interventions that are not reported here."
+    }
+  },
+  "extractedAt": "2026-07-17T10:10:41.605Z",
+  "model": "claude-sonnet-5"
+}

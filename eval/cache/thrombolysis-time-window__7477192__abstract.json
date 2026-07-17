@@ -1,0 +1,62 @@
+{
+  "pmid": "7477192",
+  "caseId": "thrombolysis-time-window",
+  "depthArm": "abstract",
+  "question": "Does intravenous thrombolysis with alteplase improve outcome in acute ischaemic stroke?",
+  "citation": "NINDS rt-PA Stroke Study Group 1995, N Engl J Med",
+  "title": "Tissue plasminogen activator for acute ischemic stroke.",
+  "sourceDepth": "abstract",
+  "textChars": 2109,
+  "text": "Thrombolytic therapy for acute ischemic stroke has been approached cautiously because there were high rates of intracerebral hemorrhage in early clinical trials. We performed a randomized, double-blind trial of intravenous recombinant tissue plasminogen activator (t-PA) for ischemic stroke after recent pilot studies suggested that t-PA was beneficial when treatment was begun within three hours of the onset of stroke.\n\nThe trial had two parts. Part 1 (in which 291 patients were enrolled) tested whether t-PA had clinical activity, as indicated by an improvement of 4 points over base-line values in the score of the National Institutes of Health stroke scale (NIHSS) or the resolution of the neurologic deficit within 24 hours of the onset of stroke. Part 2 (in which 333 patients were enrolled) used a global test statistic to assess clinical outcome at three months, according to scores on the Barthel index, modified Rankin scale, Glasgow outcome scale, and NIHSS:\n\nIn part 1, there was no significant difference between the group given t-PA and that given placebo in the percentages of patients with neurologic improvement at 24 hours, although a benefit was observed for the t-PA group at three months for all four outcome measures. In part 2, the long-term clinical benefit of t-PA predicted by the results of part 1 was confirmed (global odds ratio for a favorable outcome, 1.7; 95 percent confidence interval, 1.2 to 2.6). As compared with patients given placebo, patients treated with t-PA were at least 30 percent more likely to have minimal or no disability at three months on the assessment scales. Symptomatic intracerebral hemorrhage within 36 hours after the onset of stroke occurred in 6.4 percent of patients given t-PA but only 0.6 percent of patients given placebo (P &lt; 0.001). Mortality at three months was 17 percent in the t-PA group and 21 percent in the placebo group (P = 0.30).\n\nDespite an increased incidence of symptomatic intracerebral hemorrhage, treatment with intravenous t-PA within three hours of the onset of ischemic stroke improved clinical outcome at three months.",
+  "card": {
+    "pmid": "7477192",
+    "citation": "1995 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "IV t-PA within 3h improves clinical outcome at 3 months despite more hemorrhage",
+      "quote": "treatment with intravenous t-PA within three hours of the onset of ischemic stroke improved clinical outcome at three months"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "acute ischemic stroke"
+    },
+    "model": {
+      "value": "Randomized double-blind clinical trial patients with acute ischemic stroke",
+      "quote": "randomized, double-blind trial of intravenous recombinant tissue plasminogen activator (t-PA) for ischemic stroke"
+    },
+    "intervention": {
+      "value": "Intravenous recombinant tissue plasminogen activator (t-PA) vs placebo",
+      "quote": "randomized, double-blind trial of intravenous recombinant tissue plasminogen activator (t-PA) for ischemic stroke"
+    },
+    "assay": {
+      "value": "Clinical neurologic and functional outcome scales",
+      "quote": "scores on the Barthel index, modified Rankin scale, Glasgow outcome scale, and NIHSS"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "Treatment within 3 hours of stroke onset; outcomes at 24h and 3 months",
+      "quote": "t-PA was beneficial when treatment was begun within three hours of the onset of stroke"
+    },
+    "endpoint": {
+      "value": "NIHSS improvement at 24h (Part1); global functional outcome at 3 months (Part2)",
+      "quote": "used a global test statistic to assess clinical outcome at three months, according to scores on the Barthel index, modified Rankin scale, Glasgow outcome scale, and NIHSS"
+    },
+    "sampleSize": {
+      "value": "Part1: 291 patients; Part2: 333 patients",
+      "quote": "Part 1 (in which 291 patients were enrolled)... Part 2 (in which 333 patients were enrolled)"
+    },
+    "statistic": {
+      "value": "Global OR 1.7 (95% CI 1.2-2.6) for favorable outcome; hemorrhage 6.4% vs 0.6%",
+      "quote": "global odds ratio for a favorable outcome, 1.7; 95 percent confidence interval, 1.2 to 2.6"
+    },
+    "limitations": {
+      "value": "Increased symptomatic intracerebral hemorrhage with t-PA",
+      "quote": "Symptomatic intracerebral hemorrhage within 36 hours after the onset of stroke occurred in 6.4 percent of patients given t-PA but only 0.6 percent of patients given placebo"
+    }
+  },
+  "extractedAt": "2026-07-17T10:08:21.469Z",
+  "model": "claude-sonnet-5"
+}

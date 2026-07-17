@@ -1,0 +1,62 @@
+{
+  "pmid": "20219962",
+  "caseId": "vitamin-d-bolus-respiratory",
+  "depthArm": "abstract",
+  "question": "Does vitamin D supplementation prevent acute respiratory tract infection?",
+  "citation": "Urashima et al. 2010, Am J Clin Nutr",
+  "title": "Randomized trial of vitamin D supplementation to prevent seasonal influenza A in schoolchildren.",
+  "sourceDepth": "abstract",
+  "textChars": 1475,
+  "text": "To our knowledge, no rigorously designed clinical trials have evaluated the relation between vitamin D and physician-diagnosed seasonal influenza.\n\nWe investigated the effect of vitamin D supplements on the incidence of seasonal influenza A in schoolchildren.\n\nFrom December 2008 through March 2009, we conducted a randomized, double-blind, placebo-controlled trial comparing vitamin D(3) supplements (1200 IU/d) with placebo in schoolchildren. The primary outcome was the incidence of influenza A, diagnosed with influenza antigen testing with a nasopharyngeal swab specimen.\n\nInfluenza A occurred in 18 of 167 (10.8%) children in the vitamin D(3) group compared with 31 of 167 (18.6%) children in the placebo group [relative risk (RR), 0.58; 95% CI: 0.34, 0.99; P = 0.04]. The reduction in influenza A was more prominent in children who had not been taking other vitamin D supplements (RR: 0.36; 95% CI: 0.17, 0.79; P = 0.006) and who started nursery school after age 3 y (RR: 0.36; 95% CI: 0.17, 0.78; P = 0.005). In children with a previous diagnosis of asthma, asthma attacks as a secondary outcome occurred in 2 children receiving vitamin D(3) compared with 12 children receiving placebo (RR: 0.17; 95% CI: 0.04, 0.73; P = 0.006).\n\nThis study suggests that vitamin D(3) supplementation during the winter may reduce the incidence of influenza A, especially in specific subgroups of schoolchildren. This trial was registered at https://center.umin.ac.jp as UMIN000001373.",
+  "card": {
+    "pmid": "20219962",
+    "citation": "Urashima et al. 2010 Am J Clin Nutr",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Vitamin D3 supplementation reduced influenza A incidence in schoolchildren",
+      "quote": "vitamin D(3) supplementation during the winter may reduce the incidence of influenza A"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "schoolchildren"
+    },
+    "model": {
+      "value": "Schoolchildren, randomized controlled trial",
+      "quote": "we conducted a randomized, double-blind, placebo-controlled trial comparing vitamin D(3) supplements (1200 IU/d) with placebo in schoolchildren"
+    },
+    "intervention": {
+      "value": "Vitamin D3 supplementation vs placebo",
+      "quote": "vitamin D(3) supplements (1200 IU/d) with placebo in schoolchildren"
+    },
+    "assay": {
+      "value": "Influenza antigen testing via nasopharyngeal swab",
+      "quote": "diagnosed with influenza antigen testing with a nasopharyngeal swab specimen"
+    },
+    "dose": {
+      "value": "1200 IU/day vitamin D3",
+      "quote": "vitamin D(3) supplements (1200 IU/d)"
+    },
+    "timing": {
+      "value": "December 2008 through March 2009 (winter season)",
+      "quote": "From December 2008 through March 2009, we conducted a randomized, double-blind, placebo-controlled trial"
+    },
+    "endpoint": {
+      "value": "Incidence of physician-diagnosed influenza A",
+      "quote": "The primary outcome was the incidence of influenza A, diagnosed with influenza antigen testing with a nasopharyngeal swab specimen."
+    },
+    "sampleSize": {
+      "value": "167 vitamin D group, 167 placebo group",
+      "quote": "18 of 167 (10.8%) children in the vitamin D(3) group compared with 31 of 167 (18.6%) children in the placebo group"
+    },
+    "statistic": {
+      "value": "RR 0.58 (95% CI 0.34–0.99), P = 0.04",
+      "quote": "relative risk (RR), 0.58; 95% CI: 0.34, 0.99; P = 0.04"
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-07-17T10:10:24.825Z",
+  "model": "claude-sonnet-5"
+}

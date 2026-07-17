@@ -1,0 +1,62 @@
+{
+  "pmid": "18376000",
+  "caseId": "ezetimibe-surrogate-endpoint",
+  "depthArm": "abstract",
+  "question": "Does adding ezetimibe to statin therapy reduce cardiovascular risk?",
+  "citation": "Kastelein et al. 2008, N Engl J Med",
+  "title": "Simvastatin with or without ezetimibe in familial hypercholesterolemia.",
+  "sourceDepth": "abstract",
+  "textChars": 2196,
+  "text": "Ezetimibe, a cholesterol-absorption inhibitor, reduces levels of low-density lipoprotein (LDL) cholesterol when added to statin treatment. However, the effect of ezetimibe on the progression of atherosclerosis remains unknown.\n\nWe conducted a double-blind, randomized, 24-month trial comparing the effects of daily therapy with 80 mg of simvastatin either with placebo or with 10 mg of ezetimibe in 720 patients with familial hypercholesterolemia. Patients underwent B-mode ultrasonography to assess the intima-media thickness of the walls of the carotid and femoral arteries. The primary outcome measure was the change in the mean carotid-artery intima-media thickness, which was defined as the average of the means of the far-wall intima-media thickness of the right and left common carotid arteries, carotid bulbs, and internal carotid arteries.\n\nThe primary outcome, the mean (+/-SE) change in the carotid-artery intima-media thickness, was 0.0058+/-0.0037 mm in the simvastatin-only group and 0.0111+/-0.0038 mm in the simvastatin-plus-ezetimibe (combined-therapy) group (P=0.29). Secondary outcomes (consisting of other variables regarding the intima-media thickness of the carotid and femoral arteries) did not differ significantly between the two groups. At the end of the study, the mean (+/-SD) LDL cholesterol level was 192.7+/-60.3 mg per deciliter (4.98+/-1.56 mmol per liter) in the simvastatin group and 141.3+/-52.6 mg per deciliter (3.65+/-1.36 mmol per liter) in the combined-therapy group (a between-group difference of 16.5%, P&lt;0.01). The differences between the two groups in reductions in levels of triglycerides and C-reactive protein were 6.6% and 25.7%, respectively, with greater reductions in the combined-therapy group (P&lt;0.01 for both comparisons). Side-effect and safety profiles were similar in the two groups.\n\nIn patients with familial hypercholesterolemia, combined therapy with ezetimibe and simvastatin did not result in a significant difference in changes in intima-media thickness, as compared with simvastatin alone, despite decreases in levels of LDL cholesterol and C-reactive protein. (ClinicalTrials.gov number, NCT00552097 [ClinicalTrials.gov].).",
+  "card": {
+    "pmid": "18376000",
+    "citation": "Kastelein et al. 2008 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Ezetimibe+statin did not reduce atherosclerosis progression despite lower LDL",
+      "quote": "did not result in a significant difference in changes in intima-media thickness, as compared with simvastatin alone"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "720 patients with familial hypercholesterolemia"
+    },
+    "model": {
+      "value": "Patients with familial hypercholesterolemia",
+      "quote": "720 patients with familial hypercholesterolemia"
+    },
+    "intervention": {
+      "value": "Simvastatin plus ezetimibe vs simvastatin plus placebo",
+      "quote": "daily therapy with 80 mg of simvastatin either with placebo or with 10 mg of ezetimibe"
+    },
+    "assay": {
+      "value": "B-mode ultrasonography of carotid/femoral arteries",
+      "quote": "Patients underwent B-mode ultrasonography to assess the intima-media thickness of the walls of the carotid and femoral arteries."
+    },
+    "dose": {
+      "value": "Simvastatin 80 mg + ezetimibe 10 mg daily",
+      "quote": "80 mg of simvastatin either with placebo or with 10 mg of ezetimibe"
+    },
+    "timing": {
+      "value": "24-month double-blind randomized trial",
+      "quote": "double-blind, randomized, 24-month trial"
+    },
+    "endpoint": {
+      "value": "Change in mean carotid-artery intima-media thickness",
+      "quote": "The primary outcome measure was the change in the mean carotid-artery intima-media thickness"
+    },
+    "sampleSize": {
+      "value": "720 patients with familial hypercholesterolemia",
+      "quote": "720 patients with familial hypercholesterolemia"
+    },
+    "statistic": {
+      "value": "IMT change 0.0058 vs 0.0111 mm, P=0.29; LDL diff 16.5%, P<0.01",
+      "quote": "0.0058+/-0.0037 mm in the simvastatin-only group and 0.0111+/-0.0038 mm in the simvastatin-plus-ezetimibe (combined-therapy) group (P=0.29)"
+    },
+    "limitations": {
+      "value": "Surrogate imaging endpoint, not clinical cardiovascular events",
+      "quote": "The primary outcome measure was the change in the mean carotid-artery intima-media thickness"
+    }
+  },
+  "extractedAt": "2026-07-17T10:08:57.803Z",
+  "model": "claude-sonnet-5"
+}

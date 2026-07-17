@@ -1,0 +1,62 @@
+{
+  "pmid": "19254931",
+  "caseId": "vitamin-e-meta-analytic-model",
+  "depthArm": "abstract",
+  "question": "Does high-dose vitamin E supplementation increase all-cause mortality?",
+  "citation": "Berry, Wathen & Newell 2009, Clin Trials",
+  "title": "Bayesian model averaging in meta-analysis: vitamin E supplementation and mortality.",
+  "sourceDepth": "abstract",
+  "textChars": 1741,
+  "text": "The strength and relevance of a meta-analysis depends on the validity of the statistical methods used. Of special importance is appropriately assessing different sources of variability. Many studies including meta-analyses have evaluated the efficacy and safety of vitamin E and have yielded varying results. Illuminating and resolving these disparities requires addressing study variability and model uncertainty.\n\nTo describe Bayesian meta-analysis methods for combining data from clinical trials, using recent studies that analyzed the relationship between vitamin E dose and all-cause mortality.\n\nStudies used in a previously published meta-analysis appended by studies identified by a search of MEDLINE from August 2004 to December 2005 using the MeSH terms vitamin e and alpha tocopherol.\n\nmen and nonpregnant women; use of vitamin E alone or in combination with other vitamins or minerals; random allocation of participants to either vitamin E or a placebo or other control group; intervention and follow-up duration greater than 1 year; 10 or more deaths.\n\nIndependent data extraction by one author was reviewed and confirmed by a second author. Corresponding authors of the original publications were contacted when questions arose.\n\nData collection included the number of patients and deaths, percent men, use of other vitamins or minerals, mean age, and length of follow-up. We combined study results using Bayesian hierarchical model averaging. Analyses used Markov chain Monte Carlo computational techniques.\n\nVitamin E intake is unlikely to affect mortality regardless of dose. The Bayesian meta-analyses presented here are ideal for incorporating disparate sources of variability, including trial effect and model uncertainty.",
+  "card": {
+    "pmid": "19254931",
+    "citation": "Berry et al. 2009 Clin Trials",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Vitamin E does not affect mortality regardless of dose",
+      "quote": "Vitamin E intake is unlikely to affect mortality regardless of dose."
+    },
+    "species": {
+      "value": "Humans",
+      "quote": "men and nonpregnant women"
+    },
+    "model": {
+      "value": "Meta-analysis of randomized clinical trials",
+      "quote": "random allocation of participants to either vitamin E or a placebo or other control group"
+    },
+    "intervention": {
+      "value": "Vitamin E alone or combined with other vitamins/minerals vs placebo/control",
+      "quote": "use of vitamin E alone or in combination with other vitamins or minerals"
+    },
+    "assay": {
+      "value": "Bayesian hierarchical model averaging meta-analysis",
+      "quote": "We combined study results using Bayesian hierarchical model averaging."
+    },
+    "dose": {
+      "value": "Varying vitamin E doses across trials (dose-response examined)",
+      "quote": "the relationship between vitamin E dose and all-cause mortality"
+    },
+    "timing": {
+      "value": "Follow-up duration greater than 1 year",
+      "quote": "intervention and follow-up duration greater than 1 year"
+    },
+    "endpoint": {
+      "value": "All-cause mortality",
+      "quote": "all-cause mortality"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "limitations": {
+      "value": "Model uncertainty and study variability across trials",
+      "quote": "addressing study variability and model uncertainty"
+    }
+  },
+  "extractedAt": "2026-07-17T10:11:18.610Z",
+  "model": "claude-sonnet-5"
+}

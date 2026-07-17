@@ -1,0 +1,62 @@
+{
+  "pmid": "19531786",
+  "caseId": "5httlpr-study-inclusion",
+  "depthArm": "abstract",
+  "question": "Does the 5-HTTLPR serotonin transporter variant moderate the effect of stress on depression?",
+  "citation": "Risch et al. 2009, JAMA",
+  "title": "Interaction between the serotonin transporter gene (5-HTTLPR), stressful life events, and risk of depression: a meta-analysis.",
+  "sourceDepth": "abstract",
+  "textChars": 2775,
+  "text": "Substantial resources are being devoted to identify candidate genes for complex mental and behavioral disorders through inclusion of environmental exposures following the report of an interaction between the serotonin transporter linked polymorphic region (5-HTTLPR) and stressful life events on an increased risk of major depression.\n\nTo conduct a meta-analysis of the interaction between the serotonin transporter gene and stressful life events on depression using both published data and individual-level original data.\n\nSearch of PubMed, EMBASE, and PsycINFO databases through March 2009 yielded 26 studies of which 14 met criteria for the meta-analysis.\n\nCriteria for studies for the meta-analyses included published data on the association between 5-HTTLPR genotype (SS, SL, or LL), number of stressful life events (0, 1, 2, &gt; or = 3) or equivalent, and a categorical measure of depression defined by the Diagnostic and Statistical Manual of Mental Disorders (Fourth Edition) or the International Statistical Classification of Diseases, 10th Revision (ICD-10) or use of a cut point to define depression from standardized rating scales. To maximize our ability to use a common framework for variable definition, we also requested original data from all studies published prior to 2008 that met inclusion criteria. Of the 14 studies included in the meta-analysis, 10 were also included in a second sex-specific meta-analysis of original individual-level data.\n\nLogistic regression was used to estimate the effects of the number of short alleles at 5-HTTLPR, the number of stressful life events, and their interaction on depression. Odds ratios (ORs) and 95% confidence intervals (CIs) were calculated separately for each study and then weighted averages of the individual estimates were obtained using random-effects meta-analysis. Both sex-combined and sex-specific meta-analyses were conducted. Of a total of 14,250 participants, 1769 were classified as having depression; 12,481 as not having depression.\n\nIn the meta-analysis of published data, the number of stressful life events was significantly associated with depression (OR, 1.41; 95% CI,1.25-1.57). No association was found between 5-HTTLPR genotype and depression in any of the individual studies nor in the weighted average (OR, 1.05; 95% CI, 0.98-1.13) and no interaction effect between genotype and stressful life events on depression was observed (OR, 1.01; 95% CI, 0.94-1.10). Comparable results were found in the sex-specific meta-analysis of individual-level data.\n\nThis meta-analysis yielded no evidence that the serotonin transporter genotype alone or in interaction with stressful life events is associated with an elevated risk of depression in men alone, women alone, or in both sexes combined.",
+  "card": {
+    "pmid": "19531786",
+    "citation": "Risch et al. 2009 JAMA",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "No evidence 5-HTTLPR moderates stress effect on depression risk",
+      "quote": "no evidence that the serotonin transporter genotype alone or in interaction with stressful life events is associated with an elevated risk of depression"
+    },
+    "species": {
+      "value": "Humans",
+      "quote": "Of a total of 14,250 participants"
+    },
+    "model": {
+      "value": "Meta-analysis of human observational studies",
+      "quote": "Search of PubMed, EMBASE, and PsycINFO databases through March 2009 yielded 26 studies of which 14 met criteria for the meta-analysis."
+    },
+    "intervention": {
+      "value": "Naturalistic exposure: stressful life events (not experimental intervention)",
+      "quote": "number of stressful life events (0, 1, 2, &gt; or = 3) or equivalent"
+    },
+    "assay": {
+      "value": "5-HTTLPR genotyping (SS, SL, LL) and depression diagnosis via DSM-IV/ICD-10 or standardized rating scale cutpoints",
+      "quote": "5-HTTLPR genotype (SS, SL, or LL), number of stressful life events (0, 1, 2, &gt; or = 3) or equivalent, and a categorical measure of depression defined by the Diagnostic and Statistical Manual of Mental Disorders (Fourth Edition) or the International Statistical Classification of Diseases, 10th Revision (ICD-10)"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "Cross-sectional/retrospective; studies published prior to 2008 requested for original data",
+      "quote": "we also requested original data from all studies published prior to 2008 that met inclusion criteria"
+    },
+    "endpoint": {
+      "value": "Categorical depression diagnosis (odds ratio for depression)",
+      "quote": "a categorical measure of depression defined by the Diagnostic and Statistical Manual of Mental Disorders (Fourth Edition) or the International Statistical Classification of Diseases, 10th Revision (ICD-10) or use of a cut point to define depression from standardized rating scales"
+    },
+    "sampleSize": {
+      "value": "14,250 participants (1769 depressed, 12,481 not)",
+      "quote": "Of a total of 14,250 participants, 1769 were classified as having depression; 12,481 as not having depression."
+    },
+    "statistic": {
+      "value": "Interaction OR 1.01 (95% CI 0.94-1.10), not significant",
+      "quote": "no interaction effect between genotype and stressful life events on depression was observed (OR, 1.01; 95% CI, 0.94-1.10)"
+    },
+    "limitations": {
+      "value": "Relied on subset of published studies meeting strict inclusion criteria; heterogeneity across original studies",
+      "quote": "Criteria for studies for the meta-analyses included published data on the association between 5-HTTLPR genotype"
+    }
+  },
+  "extractedAt": "2026-07-17T10:11:43.951Z",
+  "model": "claude-sonnet-5"
+}

@@ -1,0 +1,62 @@
+{
+  "pmid": "26941311",
+  "caseId": "reproducibility-project-psychology",
+  "depthArm": "as-retrieved",
+  "question": "Is psychological science reproducible?",
+  "citation": "Gilbert et al. 2016, Science",
+  "title": "Comment on \"Estimating the reproducibility of psychological science\".",
+  "sourceDepth": "abstract",
+  "textChars": 456,
+  "text": "A paper from the Open Science Collaboration (Research Articles, 28 August 2015, aac4716) attempting to replicate 100 published studies suggests that the reproducibility of psychological science is surprisingly low. We show that this article contains three statistical errors and provides no support for such a conclusion. Indeed, the data are consistent with the opposite conclusion, namely, that the reproducibility of psychological science is quite high.",
+  "card": {
+    "pmid": "26941311",
+    "citation": "Gilbert et al. 2016 Science",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Reproducibility of psychological science is actually high, not low",
+      "quote": "the data are consistent with the opposite conclusion, namely, that the reproducibility of psychological science is quite high"
+    },
+    "species": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "model": {
+      "value": "Re-analysis/critique of Open Science Collaboration replication dataset",
+      "quote": "A paper from the Open Science Collaboration ... attempting to replicate 100 published studies"
+    },
+    "intervention": {
+      "value": "Statistical critique/comment, no new intervention",
+      "quote": "We show that this article contains three statistical errors"
+    },
+    "assay": {
+      "value": "Statistical/methodological error analysis of replication study",
+      "quote": "this article contains three statistical errors"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "endpoint": {
+      "value": "Reproducibility of psychological science (validity of OSC's conclusion)",
+      "quote": "the reproducibility of psychological science is surprisingly low"
+    },
+    "sampleSize": {
+      "value": "100 published studies (original OSC replication attempt)",
+      "quote": "attempting to replicate 100 published studies"
+    },
+    "statistic": {
+      "value": "Three statistical errors identified invalidating low-reproducibility conclusion",
+      "quote": "this article contains three statistical errors and provides no support for such a conclusion"
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-07-17T10:34:47.872Z",
+  "model": "claude-sonnet-5"
+}

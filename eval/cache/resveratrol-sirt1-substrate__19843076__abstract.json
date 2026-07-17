@@ -1,0 +1,62 @@
+{
+  "pmid": "19843076",
+  "caseId": "resveratrol-sirt1-substrate",
+  "depthArm": "abstract",
+  "question": "Does resveratrol directly activate the SIRT1 enzyme?",
+  "citation": "Beher et al. 2009, Chem Biol Drug Des",
+  "title": "Resveratrol is not a direct activator of SIRT1 enzyme activity.",
+  "sourceDepth": "abstract",
+  "textChars": 1266,
+  "text": "Resveratrol is a plant polyphenol capable of exerting beneficial metabolic effects which are thought to be mediated in large by the activation of the NAD(+)-dependent protein deacetylase SIRT1. Although resveratrol has been claimed to be a bona fide SIRT1 activator using a peptide substrate (Fluor de Lys-SIRT1 peptide substrate), recent reports indicate that this finding might be an experimental artifact and need to be clarified. Here, we show that: (i) the Fluor de Lys-SIRT1 peptide is an artificial SIRT1 substrate because in the absence of the covalently linked fluorophore the peptide itself is not a substrate of the enzyme, (ii) resveratrol does not activate SIRT1 in vitro in the presence of either a p53-derived peptide substrate or acetylated PGC-1alpha isolated from cells, and (iii) although SIRT1 deacetylates PGC-1alpha in both in vitro and cell-based assays, resveratrol did not activate SIRT1 under these conditions. Based on these observations, we conclude that the pharmacological effects of resveratrol in various models are unlikely to be mediated by a direct enhancement of the catalytic activity of the SIRT1 enzyme. In consequence, our data challenge the overall utility of resveratrol as a pharmacological tool to directly activate SIRT1.",
+  "card": {
+    "pmid": "19843076",
+    "citation": "Beher et al. 2010 Chem Biol Drug Des",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Resveratrol does not directly activate SIRT1 enzymatic activity",
+      "quote": "resveratrol does not activate SIRT1 in vitro in the presence of either a p53-derived peptide substrate or acetylated PGC-1alpha"
+    },
+    "species": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "model": {
+      "value": "In vitro enzymatic and cell-based assays",
+      "quote": "resveratrol does not activate SIRT1 in vitro in the presence of either a p53-derived peptide substrate or acetylated PGC-1alpha isolated from cells"
+    },
+    "intervention": {
+      "value": "Resveratrol treatment of SIRT1 enzyme assays",
+      "quote": "resveratrol has been claimed to be a bona fide SIRT1 activator using a peptide substrate"
+    },
+    "assay": {
+      "value": "SIRT1 deacetylation assay using peptide and PGC-1alpha substrates",
+      "quote": "SIRT1 deacetylates PGC-1alpha in both in vitro and cell-based assays"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "endpoint": {
+      "value": "SIRT1 deacetylase activity on p53 peptide or PGC-1alpha",
+      "quote": "resveratrol does not activate SIRT1 in vitro in the presence of either a p53-derived peptide substrate or acetylated PGC-1alpha isolated from cells"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "limitations": {
+      "value": "Fluor de Lys-SIRT1 peptide substrate is an artificial substrate causing artifacts",
+      "quote": "the Fluor de Lys-SIRT1 peptide is an artificial SIRT1 substrate because in the absence of the covalently linked fluorophore the peptide itself is not a substrate of the enzyme"
+    }
+  },
+  "extractedAt": "2026-07-17T10:12:30.575Z",
+  "model": "claude-sonnet-5"
+}

@@ -1,0 +1,62 @@
+{
+  "pmid": "11119394",
+  "caseId": "hrt-timing-hypothesis",
+  "depthArm": "abstract",
+  "question": "Does postmenopausal hormone therapy prevent coronary heart disease?",
+  "citation": "Grodstein et al. 2000, Ann Intern Med",
+  "title": "A prospective, observational study of postmenopausal hormone therapy and primary prevention of cardiovascular disease.",
+  "sourceDepth": "abstract",
+  "textChars": 2635,
+  "text": "Most primary prevention studies have found that long-term users of postmenopausal hormone therapy are at lower risk for coronary events, but numerous questions remain. An adverse influence of hormone therapy on cardiovascular risk has been suggested during the initial year of use; however, few data are available on short-term hormone therapy. In addition, the cardiovascular effects of daily doses of oral conjugated estrogen lower than 0.625 mg are unknown, and few studies have examined estrogen plus progestin in this regard.\n\nTo investigate duration, dose, and type of postmenopausal hormone therapy and primary prevention of cardiovascular disease.\n\nProspective, observational cohort study.\n\nNurses' Health Study, with follow-up from 1976 to 1996.\n\n70 533 postmenopausal women, in whom 1258 major coronary events (nonfatal myocardial infarction or fatal coronary disease) and 767 strokes were identified.\n\nDetails of postmenopausal hormone use were ascertained by using biennial questionnaires. Cardiovascular disease was established by using a questionnaire and was confirmed by medical record review. Logistic regression models were used to calculate relative risks and 95% CIs, adjusted for confounders.\n\nWhen all cardiovascular risk factors were considered, the risk for major coronary events was lower among current users of hormone therapy, including short-term users, compared with never-users (relative risk, 0.61 [95% CI, 0.52 to 0.71]). Among women taking oral conjugated estrogen, the risk for coronary events was similarly reduced in those currently taking 0.625 mg daily (relative risk, 0.54 [CI, 0.44 to 0.67]) and those taking 0.3 mg daily (relative risk, 0.58 [CI, 0. 37 to 0.92]) compared with never-users. However, the risk for stroke was statistically significantly increased among women taking 0.625 mg or more of oral conjugated estrogen daily (relative risk, 1.35 [CI, 1.08 to 1.68] for 0.625 mg/d and 1.63 [CI, 1.18 to 2.26] for &gt;/=1.25 mg/d) and those taking estrogen plus progestin (relative risk, 1.45 [CI, 1.10 to 1.92]). Overall, little relation was observed between combination hormone therapy and risk for cardiovascular disease (major coronary heart disease plus stroke) (relative risk, 0.91 [CI, 0.75 to 1.11]).\n\nPostmenopausal hormone use appears to decrease risk for major coronary events in women without previous heart disease. Furthermore, 0.3 mg of oral conjugated estrogen daily is associated with a reduction similar to that seen with the standard dose of 0.625 mg. However, estrogen at daily doses of 0.625 mg or greater and in combination with progestin may increase risk for stroke.",
+  "card": {
+    "pmid": "11119394",
+    "citation": "Grodstein et al. 2000 Ann Intern Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Hormone therapy lowers risk of major coronary events (primary prevention)",
+      "quote": "Postmenopausal hormone use appears to decrease risk for major coronary events in women without previous heart disease."
+    },
+    "species": {
+      "value": "Human",
+      "quote": "70 533 postmenopausal women"
+    },
+    "model": {
+      "value": "Postmenopausal women, primary prevention cohort",
+      "quote": "70 533 postmenopausal women, in whom 1258 major coronary events (nonfatal myocardial infarction or fatal coronary disease) and 767 strokes were identified."
+    },
+    "intervention": {
+      "value": "Postmenopausal hormone therapy (estrogen alone or with progestin)",
+      "quote": "duration, dose, and type of postmenopausal hormone therapy and primary prevention of cardiovascular disease"
+    },
+    "assay": {
+      "value": "Biennial questionnaires with medical record confirmation; logistic regression",
+      "quote": "Details of postmenopausal hormone use were ascertained by using biennial questionnaires. Cardiovascular disease was established by using a questionnaire and was confirmed by medical record review. Logistic regression models were used to calculate relative risks and 95% CIs, adjusted for confounders."
+    },
+    "dose": {
+      "value": "Oral conjugated estrogen 0.3 mg vs 0.625 mg vs ≥1.25 mg/day; also estrogen+progestin",
+      "quote": "those currently taking 0.625 mg daily (relative risk, 0.54 [CI, 0.44 to 0.67]) and those taking 0.3 mg daily (relative risk, 0.58 [CI, 0. 37 to 0.92])"
+    },
+    "timing": {
+      "value": "Follow-up 1976 to 1996 (20 years)",
+      "quote": "Nurses' Health Study, with follow-up from 1976 to 1996."
+    },
+    "endpoint": {
+      "value": "Major coronary events and stroke",
+      "quote": "1258 major coronary events (nonfatal myocardial infarction or fatal coronary disease) and 767 strokes were identified"
+    },
+    "sampleSize": {
+      "value": "70,533 postmenopausal women",
+      "quote": "70 533 postmenopausal women"
+    },
+    "statistic": {
+      "value": "RR 0.61 (CI 0.52-0.71) for coronary events in current users",
+      "quote": "the risk for major coronary events was lower among current users of hormone therapy, including short-term users, compared with never-users (relative risk, 0.61 [95% CI, 0.52 to 0.71])"
+    },
+    "limitations": {
+      "value": "Observational design; possible confounding; increased stroke risk at higher doses",
+      "quote": "estrogen at daily doses of 0.625 mg or greater and in combination with progestin may increase risk for stroke"
+    }
+  },
+  "extractedAt": "2026-07-17T10:08:40.274Z",
+  "model": "claude-sonnet-5"
+}

@@ -1,0 +1,62 @@
+{
+  "pmid": "25092317",
+  "caseId": "mouse-models-gene-selection",
+  "depthArm": "as-retrieved",
+  "question": "Do genomic responses in mouse models mimic human inflammatory diseases?",
+  "citation": "Takao & Miyakawa 2015, PNAS",
+  "title": "Genomic responses in mouse models greatly mimic human inflammatory diseases.",
+  "sourceDepth": "abstract",
+  "textChars": 1099,
+  "text": "The use of mice as animal models has long been considered essential in modern biomedical research, but the role of mouse models in research was challenged by a recent report that genomic responses in mouse models poorly mimic human inflammatory diseases. Here we reevaluated the same gene expression datasets used in the previous study by focusing on genes whose expression levels were significantly changed in both humans and mice. Contrary to the previous findings, the gene expression levels in the mouse models showed extraordinarily significant correlations with those of the human conditions (Spearman's rank correlation coefficient: 0.43-0.68; genes changed in the same direction: 77-93%; P = 6.5 &#xd7; 10(-11) to 1.2 &#xd7; 10(-35)). Moreover, meta-analysis of those datasets revealed a number of pathways/biogroups commonly regulated by multiple conditions in humans and mice. These findings demonstrate that gene expression patterns in mouse models closely recapitulate those in human inflammatory conditions and strongly argue for the utility of mice as animal models of human disorders.",
+  "card": {
+    "pmid": "25092317",
+    "citation": "Takao et al. 2015 Proc Natl Acad Sci U S A",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Mouse genomic responses closely mimic human inflammatory diseases, contrary to prior claims",
+      "quote": "gene expression patterns in mouse models closely recapitulate those in human inflammatory conditions"
+    },
+    "species": {
+      "value": "Mice and humans (comparative)",
+      "quote": "genomic responses in mouse models poorly mimic human inflammatory diseases"
+    },
+    "model": {
+      "value": "Mouse models of human inflammatory diseases (reanalysis of prior datasets)",
+      "quote": "reevaluated the same gene expression datasets used in the previous study"
+    },
+    "intervention": {
+      "value": "Reanalysis focusing on genes significantly changed in both species (no new intervention)",
+      "quote": "focusing on genes whose expression levels were significantly changed in both humans and mice"
+    },
+    "assay": {
+      "value": "Gene expression profiling with correlation and meta-analysis of pathways",
+      "quote": "meta-analysis of those datasets revealed a number of pathways/biogroups commonly regulated"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "endpoint": {
+      "value": "Correlation of gene expression changes between human and mouse inflammatory conditions",
+      "quote": "gene expression levels in the mouse models showed extraordinarily significant correlations with those of the human conditions"
+    },
+    "sampleSize": {
+      "value": "Same gene expression datasets as previous study (not specified further)",
+      "quote": "reevaluated the same gene expression datasets used in the previous study"
+    },
+    "statistic": {
+      "value": "Spearman's rho 0.43-0.68; 77-93% same-direction genes; P=6.5×10⁻¹¹ to 1.2×10⁻³⁵",
+      "quote": "Spearman's rank correlation coefficient: 0.43-0.68; genes changed in the same direction: 77-93%; P = 6.5 × 10(-11) to 1.2 × 10(-35)"
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-07-17T10:34:15.947Z",
+  "model": "claude-sonnet-5"
+}

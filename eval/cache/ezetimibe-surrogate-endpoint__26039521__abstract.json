@@ -1,0 +1,62 @@
+{
+  "pmid": "26039521",
+  "caseId": "ezetimibe-surrogate-endpoint",
+  "depthArm": "abstract",
+  "question": "Does adding ezetimibe to statin therapy reduce cardiovascular risk?",
+  "citation": "Cannon et al. 2015, N Engl J Med",
+  "title": "Ezetimibe Added to Statin Therapy after Acute Coronary Syndromes.",
+  "sourceDepth": "abstract",
+  "textChars": 2084,
+  "text": "Statin therapy reduces low-density lipoprotein (LDL) cholesterol levels and the risk of cardiovascular events, but whether the addition of ezetimibe, a nonstatin drug that reduces intestinal cholesterol absorption, can reduce the rate of cardiovascular events further is not known.\n\nWe conducted a double-blind, randomized trial involving 18,144 patients who had been hospitalized for an acute coronary syndrome within the preceding 10 days and had LDL cholesterol levels of 50 to 100 mg per deciliter (1.3 to 2.6 mmol per liter) if they were receiving lipid-lowering therapy or 50 to 125 mg per deciliter (1.3 to 3.2 mmol per liter) if they were not receiving lipid-lowering therapy. The combination of simvastatin (40 mg) and ezetimibe (10 mg) (simvastatin-ezetimibe) was compared with simvastatin (40 mg) and placebo (simvastatin monotherapy). The primary end point was a composite of cardiovascular death, nonfatal myocardial infarction, unstable angina requiring rehospitalization, coronary revascularization (&#x2265;30 days after randomization), or nonfatal stroke. The median follow-up was 6 years.\n\nThe median time-weighted average LDL cholesterol level during the study was 53.7 mg per deciliter (1.4 mmol per liter) in the simvastatin-ezetimibe group, as compared with 69.5 mg per deciliter (1.8 mmol per liter) in the simvastatin-monotherapy group (P&lt;0.001). The Kaplan-Meier event rate for the primary end point at 7 years was 32.7% in the simvastatin-ezetimibe group, as compared with 34.7% in the simvastatin-monotherapy group (absolute risk difference, 2.0 percentage points; hazard ratio, 0.936; 95% confidence interval, 0.89 to 0.99; P=0.016). Rates of prespecified muscle, gallbladder, and hepatic adverse effects and cancer were similar in the two groups.\n\nWhen added to statin therapy, ezetimibe resulted in incremental lowering of LDL cholesterol levels and improved cardiovascular outcomes. Moreover, lowering LDL cholesterol to levels below previous targets provided additional benefit. (Funded by Merck; IMPROVE-IT ClinicalTrials.gov number, NCT00202878.).",
+  "card": {
+    "pmid": "26039521",
+    "citation": "Cannon et al. 2015 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Adding ezetimibe to statin therapy reduced cardiovascular risk further",
+      "quote": "ezetimibe resulted in incremental lowering of LDL cholesterol levels and improved cardiovascular outcomes"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "18,144 patients who had been hospitalized for an acute coronary syndrome"
+    },
+    "model": {
+      "value": "Patients post-acute coronary syndrome with elevated LDL cholesterol",
+      "quote": "had been hospitalized for an acute coronary syndrome within the preceding 10 days and had LDL cholesterol levels of 50 to 100 mg per deciliter"
+    },
+    "intervention": {
+      "value": "Simvastatin plus ezetimibe vs simvastatin plus placebo",
+      "quote": "The combination of simvastatin (40 mg) and ezetimibe (10 mg) (simvastatin-ezetimibe) was compared with simvastatin (40 mg) and placebo"
+    },
+    "assay": {
+      "value": "Double-blind randomized controlled trial",
+      "quote": "We conducted a double-blind, randomized trial"
+    },
+    "dose": {
+      "value": "Simvastatin 40 mg + ezetimibe 10 mg",
+      "quote": "simvastatin (40 mg) and ezetimibe (10 mg)"
+    },
+    "timing": {
+      "value": "Median follow-up of 6 years, event rate assessed at 7 years",
+      "quote": "The median follow-up was 6 years."
+    },
+    "endpoint": {
+      "value": "Composite of cardiovascular death, MI, unstable angina, revascularization, stroke",
+      "quote": "a composite of cardiovascular death, nonfatal myocardial infarction, unstable angina requiring rehospitalization, coronary revascularization (≥30 days after randomization), or nonfatal stroke"
+    },
+    "sampleSize": {
+      "value": "18,144 patients",
+      "quote": "involving 18,144 patients"
+    },
+    "statistic": {
+      "value": "HR 0.936 (95% CI 0.89–0.99), P=0.016 for primary endpoint",
+      "quote": "hazard ratio, 0.936; 95% confidence interval, 0.89 to 0.99; P=0.016"
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-07-17T10:09:06.587Z",
+  "model": "claude-sonnet-5"
+}

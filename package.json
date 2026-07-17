@@ -21,6 +21,7 @@
   "files": [
     "src/",
     "fixtures/",
+    "eval/",
     "public/",
     "README.md",
     "LICENSE"
@@ -30,7 +31,12 @@
     "serve": "node src/server.mjs",
     "demo": "node src/demo.mjs",
     "cli": "node src/cli.mjs",
-    "mcp": "node src/mcp.mjs"
+    "mcp": "node src/mcp.mjs",
+    "eval": "node eval/score.mjs",
+    "eval:fetch": "node eval/fetch.mjs",
+    "eval:variance": "node eval/variance.mjs",
+    "eval:diagnose": "node eval/diagnose.mjs",
+    "eval:selftest": "node eval/selftest.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",

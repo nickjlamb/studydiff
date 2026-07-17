@@ -1,0 +1,62 @@
+{
+  "pmid": "12939617",
+  "caseId": "resveratrol-sirt1-substrate",
+  "depthArm": "abstract",
+  "question": "Does resveratrol directly activate the SIRT1 enzyme?",
+  "citation": "Howitz et al. 2003, Nature",
+  "title": "Small molecule activators of sirtuins extend Saccharomyces cerevisiae lifespan.",
+  "sourceDepth": "abstract",
+  "textChars": 1117,
+  "text": "In diverse organisms, calorie restriction slows the pace of ageing and increases maximum lifespan. In the budding yeast Saccharomyces cerevisiae, calorie restriction extends lifespan by increasing the activity of Sir2 (ref. 1), a member of the conserved sirtuin family of NAD(+)-dependent protein deacetylases. Included in this family are SIR-2.1, a Caenorhabditis elegans enzyme that regulates lifespan, and SIRT1, a human deacetylase that promotes cell survival by negatively regulating the p53 tumour suppressor. Here we report the discovery of three classes of small molecules that activate sirtuins. We show that the potent activator resveratrol, a polyphenol found in red wine, lowers the Michaelis constant of SIRT1 for both the acetylated substrate and NAD(+), and increases cell survival by stimulating SIRT1-dependent deacetylation of p53. In yeast, resveratrol mimics calorie restriction by stimulating Sir2, increasing DNA stability and extending lifespan by 70%. We discuss possible evolutionary origins of this phenomenon and suggest new lines of research into the therapeutic use of sirtuin activators.",
+  "card": {
+    "pmid": "12939617",
+    "citation": "Howitz et al. 2003 Nature",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Resveratrol directly activates SIRT1, extending yeast lifespan",
+      "quote": "potent activator resveratrol ... lowers the Michaelis constant of SIRT1 for both the acetylated substrate and NAD(+)"
+    },
+    "species": {
+      "value": "Saccharomyces cerevisiae (yeast); human SIRT1 enzyme also tested",
+      "quote": "budding yeast Saccharomyces cerevisiae"
+    },
+    "model": {
+      "value": "Yeast lifespan assay and human SIRT1 enzymatic/cell survival assay",
+      "quote": "SIRT1, a human deacetylase that promotes cell survival by negatively regulating the p53 tumour suppressor"
+    },
+    "intervention": {
+      "value": "Treatment with resveratrol, a small-molecule sirtuin activator",
+      "quote": "the potent activator resveratrol, a polyphenol found in red wine"
+    },
+    "assay": {
+      "value": "Enzyme kinetics (Michaelis constant) and cell survival/deacetylation assays",
+      "quote": "lowers the Michaelis constant of SIRT1 for both the acetylated substrate and NAD(+)"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "endpoint": {
+      "value": "Yeast lifespan extension and SIRT1-dependent p53 deacetylation/cell survival",
+      "quote": "extending lifespan by 70%"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "Yeast lifespan extended by 70% with resveratrol",
+      "quote": "extending lifespan by 70%"
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-07-17T10:12:23.073Z",
+  "model": "claude-sonnet-5"
+}

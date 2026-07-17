@@ -1,0 +1,62 @@
+{
+  "pmid": "26315443",
+  "caseId": "reproducibility-project-psychology",
+  "depthArm": "abstract",
+  "question": "Is psychological science reproducible?",
+  "citation": "Open Science Collaboration 2015, Science",
+  "title": "PSYCHOLOGY. Estimating the reproducibility of psychological science.",
+  "sourceDepth": "abstract",
+  "textChars": 1040,
+  "text": "Reproducibility is a defining feature of science, but the extent to which it characterizes current research is unknown. We conducted replications of 100 experimental and correlational studies published in three psychology journals using high-powered designs and original materials when available. Replication effects were half the magnitude of original effects, representing a substantial decline. Ninety-seven percent of original studies had statistically significant results. Thirty-six percent of replications had statistically significant results; 47% of original effect sizes were in the 95% confidence interval of the replication effect size; 39% of effects were subjectively rated to have replicated the original result; and if no bias in original results is assumed, combining original and replication results left 68% with statistically significant effects. Correlational tests suggest that replication success was better predicted by the strength of original evidence than by characteristics of the original and replication teams.",
+  "card": {
+    "pmid": "26315443",
+    "citation": "Aarts et al. 2016 Science",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Psychological science shows low reproducibility; replication effects much weaker than originals",
+      "quote": "Replication effects were half the magnitude of original effects, representing a substantial decline."
+    },
+    "species": {
+      "value": "Human",
+      "quote": "100 experimental and correlational studies"
+    },
+    "model": {
+      "value": "Published psychology studies (experimental and correlational)",
+      "quote": "replications of 100 experimental and correlational studies published in three psychology journals"
+    },
+    "intervention": {
+      "value": "Direct replication using original study materials when available",
+      "quote": "using high-powered designs and original materials when available"
+    },
+    "assay": {
+      "value": "Replication of original experimental/correlational designs",
+      "quote": "We conducted replications of 100 experimental and correlational studies"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "endpoint": {
+      "value": "Statistical significance and effect size comparison between original and replication studies",
+      "quote": "Ninety-seven percent of original studies had statistically significant results. Thirty-six percent of replications had statistically significant results"
+    },
+    "sampleSize": {
+      "value": "100 studies replicated from 3 psychology journals",
+      "quote": "replications of 100 experimental and correlational studies published in three psychology journals"
+    },
+    "statistic": {
+      "value": "36% of replications significant vs 97% of originals; 47% originals within replication CI",
+      "quote": "Thirty-six percent of replications had statistically significant results; 47% of original effect sizes were in the 95% confidence interval of the replication effect size"
+    },
+    "limitations": {
+      "value": "Assumes no bias in original results when combining effect estimates",
+      "quote": "if no bias in original results is assumed, combining original and replication results left 68% with statistically significant effects"
+    }
+  },
+  "extractedAt": "2026-07-17T10:11:25.670Z",
+  "model": "claude-sonnet-5"
+}

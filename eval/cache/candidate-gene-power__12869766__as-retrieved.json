@@ -1,0 +1,62 @@
+{
+  "pmid": "12869766",
+  "caseId": "candidate-gene-power",
+  "depthArm": "as-retrieved",
+  "question": "Does the 5-HTT (5-HTTLPR) polymorphism moderate the effect of stressful life events on risk of depression?",
+  "citation": "Caspi et al. 2003, Science",
+  "title": "Influence of life stress on depression: moderation by a polymorphism in the 5-HTT gene.",
+  "sourceDepth": "abstract",
+  "textChars": 769,
+  "text": "In a prospective-longitudinal study of a representative birth cohort, we tested why stressful experiences lead to depression in some people but not in others. A functional polymorphism in the promoter region of the serotonin transporter (5-HT T) gene was found to moderate the influence of stressful life events on depression. Individuals with one or two copies of the short allele of the 5-HT T promoter polymorphism exhibited more depressive symptoms, diagnosable depression, and suicidality in relation to stressful life events than individuals homozygous for the long allele. This epidemiological study thus provides evidence of a gene-by-environment interaction, in which an individual's response to environmental insults is moderated by his or her genetic makeup.",
+  "card": {
+    "pmid": "12869766",
+    "citation": "Caspi et al. 2003 Science",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "5-HTTLPR short allele carriers show stronger stress-depression link than long/long",
+      "quote": "Individuals with one or two copies of the short allele of the 5-HT T promoter polymorphism exhibited more depressive symptoms, diagnosable depression, and suicidality in relation to stressful life events than individuals homozygous for the long allele."
+    },
+    "species": {
+      "value": "Humans",
+      "quote": "representative birth cohort"
+    },
+    "model": {
+      "value": "Prospective-longitudinal birth cohort study",
+      "quote": "prospective-longitudinal study of a representative birth cohort"
+    },
+    "intervention": {
+      "value": "Naturalistic exposure to stressful life events (not experimental)",
+      "quote": "we tested why stressful experiences lead to depression in some people but not in others"
+    },
+    "assay": {
+      "value": "Genotyping of 5-HTT promoter polymorphism; depression/suicidality assessment",
+      "quote": "A functional polymorphism in the promoter region of the serotonin transporter (5-HT T) gene"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "endpoint": {
+      "value": "Depressive symptoms, diagnosable depression, and suicidality",
+      "quote": "exhibited more depressive symptoms, diagnosable depression, and suicidality in relation to stressful life events"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "Gene-by-environment interaction on depression outcomes",
+      "quote": "This epidemiological study thus provides evidence of a gene-by-environment interaction, in which an individual's response to environmental insults is moderated by his or her genetic makeup."
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-07-17T10:35:19.875Z",
+  "model": "claude-sonnet-5"
+}
