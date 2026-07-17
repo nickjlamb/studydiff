@@ -211,20 +211,23 @@ Grounding rejected 29 fields across the set (8.8% of all fields), for two reason
 | quote not an exact substring of source | 18 |
 | a number in the value did not trace | 11 |
 
-Inspected individually, these are **not all the same thing**:
+> **CORRECTION (Phase 2 audit).** An earlier version of this file claimed the OSC card's
+> `"97% of originals"` was a true catch because "97 appears nowhere in that abstract".
+> **That was wrong.** The abstract says *"Ninety-seven percent of original studies had
+> statistically significant results"* — spelled out. The value is a faithful
+> restatement; grounding rejected it because it scans for digits only. It is a
+> **false positive**, and it was the flagship example used to argue against loosening
+> grounding. A second claim — that `"5-HTTLPR"` being parsed as the digit `5` was a
+> false positive — was also **backwards**: that rejection was a **true catch**. Both
+> errors were found by independent adjudication and are corrected below. See
+> `PHASE2.md` for the pre-registered predictions this falsified.
 
-- **True catches.** The OSC card claimed "97% of originals" — `97` appears nowhere in
-  that abstract. OpenGATE caught a real fabrication. This is the trust layer working.
-- **False positives.** `"5-HTTLPR"` contains the digit `5`, which is checked as if it
-  were a numeric claim and fails when the other paper never writes it. A source that
-  spells `"Thirty-six percent"` fails a value written as `"36%"`.
-- **Quote formatting.** The model inserts ellipses to join non-contiguous spans
-  (`"potent activator resveratrol ... lowers the Michaelis constant"`) or lightly
-  reformats — so the quote is honest but not a substring.
+The rejections were adjudicated individually against the source text (Phase 2, step 1).
+See "Grounding audit" below for the measured rates.
 
 **Do not loosen grounding by feel.** It is the trust layer; relaxing it trades a
-*measured* false-positive rate for an *unmeasured* false-negative rate. The next
-measurement should be grounding's false-positive/false-negative rate, not a patch.
+*measured* false-positive rate for an *unmeasured* false-negative rate. So both rates
+were measured before anything was touched.
 
 ### Extraction variance (3 pairs x 5 identical runs)
 

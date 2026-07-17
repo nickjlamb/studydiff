@@ -10,6 +10,8 @@
 // subset returns full text; everything else falls back to the abstract, and we
 // surface that honestly rather than pretending we read the methods.
 
+import { normalizeText } from './normalize.mjs';
+
 const EUTILS = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils';
 const EMAIL = process.env.NCBI_EMAIL || 'studydiff@example.com';
 const API_KEY = process.env.NCBI_API_KEY || '';
@@ -47,15 +49,23 @@ export async function resolveDoiToPmid(doi) {
   return ids[0];
 }
 
+// Stripping tags is not enough: efetch returns entity-ENCODED text, so "2 h" comes
+// back as "2&#xa0;h" and "≥" as "&#x2265;". Left encoded, the model reads the
+// entities, sensibly writes its quote decoded, and grounding then rejects a
+// perfectly honest quote. The Phase 2 audit measured this as 10 of 26 false
+// positives — the largest single cause, and a retrieval bug rather than a
+// trust-layer one. Decode here, at the boundary, so nothing downstream ever sees it.
+const clean = (s) => normalizeText(s.replace(/<[^>]+>/g, ' '));
+
 const firstTag = (xml, tag) => {
   const m = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`, 'i'));
-  return m ? m[1].replace(/<[^>]+>/g, '').trim() : '';
+  return m ? clean(m[1]) : '';
 };
 const allTags = (xml, tag) => {
   const out = [];
   const re = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`, 'gi');
   let m;
-  while ((m = re.exec(xml))) out.push(m[1].replace(/<[^>]+>/g, '').trim());
+  while ((m = re.exec(xml))) out.push(clean(m[1]));
   return out;
 };
 
@@ -90,7 +100,7 @@ export async function fullText(pmcid) {
   const xml = await getText(url);
   const body = xml.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
   if (!body) return null;
-  const text = body[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const text = clean(body[1]);
   return text.length > 200 ? text : null;
 }
 

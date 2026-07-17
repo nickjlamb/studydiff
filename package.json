@@ -36,6 +36,8 @@
     "eval:fetch": "node eval/fetch.mjs",
     "eval:variance": "node eval/variance.mjs",
     "eval:diagnose": "node eval/diagnose.mjs",
+    "eval:audit": "node eval/audit-grounding.mjs",
+    "eval:normtest": "node eval/normalize.test.mjs",
     "eval:selftest": "node eval/selftest.mjs"
   },
   "dependencies": {

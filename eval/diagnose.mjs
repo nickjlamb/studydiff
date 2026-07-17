@@ -118,12 +118,17 @@ console.log('\n' + YELLOW('  Number-not-traceable examples') + DIM(' (some are T
 for (const x of examples.number) console.log(DIM(`    ${x.id} / ${x.dim}\n      value: ${JSON.stringify(x.v).slice(0, 90)}\n      ${x.why.slice(0, 100)}`));
 
 console.log('\n' + BOLD('  Read this carefully before "fixing" grounding'));
-console.log(DIM('    Grounding is the trust layer. Some of these rejections are CORRECT —'));
-console.log(DIM('    e.g. the OSC card claimed "97% of originals" and 97 appears nowhere in'));
-console.log(DIM('    that abstract. That is OpenGATE doing its job and catching a real'));
-console.log(DIM('    fabrication. Others look like false positives: "5-HTTLPR" contains the'));
-console.log(DIM('    digit 5 and is checked as if it were a numeric claim, and a source that'));
-console.log(DIM('    spells "Thirty-six percent" fails a value written as "36%".'));
-console.log(DIM('    Loosening this trades a measured false-positive rate for an UNMEASURED'));
-console.log(DIM('    false-negative rate. Do not do it by feel — measure both.'));
+console.log(DIM('    Grounding is the trust layer. `npm run eval:audit` adjudicated every'));
+console.log(DIM('    rejection against the source text. Measured: 26/29 (90%) are FALSE'));
+console.log(DIM('    POSITIVES — values the source genuinely supports. Only 2 are true'));
+console.log(DIM('    catches, and both are worth knowing:'));
+console.log(DIM('      - Lippman sampleSize "35,533 men total, ~8800 per group" — 8800 and'));
+console.log(DIM('        "per group" appear nowhere; the model divided 35,533 by 4.'));
+console.log(DIM('      - Border finding "No evidence 5-HTTLPR moderates..." — that abstract'));
+console.log(DIM('        never names 5-HTTLPR; it says "18 candidate genes".'));
+console.log(DIM('    The single biggest FP cause is NOT a strictness problem: src/ncbi.mjs'));
+console.log(DIM('    never decodes HTML entities, so sourceText stores "2&#xa0;h" while the'));
+console.log(DIM('    model quotes "2 h". 10 of 26 FPs are that one bug.'));
+console.log(DIM('    Loosening this trades a measured FP rate for a measured FN rate (3.3%).'));
+console.log(DIM('    Fix encoding first — it is ~40% of the loss at zero FN risk.'));
 console.log('');
