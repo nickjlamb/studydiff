@@ -292,6 +292,28 @@ Had it oscillated, this set would now be burned. It is intact — but the honest
 description of the post-Phase-2 figure remains *"development-set accuracy after four
 looks"*, not a blind measurement.
 
+## Re-measured after the fixes (both stale numbers refreshed)
+
+Two Phase-1 numbers were taken before the fixes and had to be re-run:
+
+**Extraction variance (3 pairs x 5 runs), post-fix:** `0/3` pairs changed their top
+driver, down from `1/3`. The extracted assay STRING is still unstable (mean 4.5
+distinct values per 5 runs; 3 slots differ every run) — extraction is as noisy as
+ever — but the graded divergence test now absorbs that noise: two papers share little
+assay content however the methods are paraphrased, so `assay` diverges on every run and
+the prior fires on every run. **The driver stability is real, and it is still the
+stability of a prior that always picks assay because assay genuinely almost always
+differs.** Stable and wrong. (The Phase-1 script text claiming a "string inequality"
+was describing code that no longer exists; corrected.)
+
+**As-retrieved arm, post-fix:** top-1 `21.4%` [3/14] vs baseline `14.3%` [2/14] — the
+ranker appears to "beat" baseline for the first time. **This is one discordant case**
+(`beta-carotene` -> `model`), on the secondary/confounded arm, with 3 asymmetric pairs,
+and the harness's own guard applies: the CIs overlap almost entirely, so a 1-case gap
+is unresolved, not an effect. It is a footnote, not a result: the divergence fix let a
+non-assay cause win *once*. The headline remains the abstract arm, 13.3%, tied, 0/15
+discordant.
+
 ## What Phase 2 established
 
 1. **Grounding was broken, and fixing it doubled the ceiling** (33.3% -> 66.7%) at no

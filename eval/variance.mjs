@@ -168,13 +168,15 @@ async function main() {
     `across ${slots.length} paper-slots; ${totallyUnstable} slot(s) produced a DIFFERENT value every run.`,
   );
   console.log('');
-  console.log(DIM('  Why the driver looks stable anyway — this is the important part:'));
-  console.log(DIM('  compare.mjs decides divergence with a STRING INEQUALITY (norm(a) !== norm(b)).'));
-  console.log(DIM('  Every paraphrase is a new string, so `assay` "diverges" no matter what the'));
-  console.log(DIM('  model wrote. The ranking is stable BECAUSE the divergence test is trivially'));
-  console.log(DIM('  satisfied — not because extraction is reliable. It is stably wrong.'));
-  console.log(DIM('  e.g. "Flow cytometry, ICS, bisulfite sequencing" vs "Genetic fate-mapping with'));
-  console.log(DIM('  flow cytometry" — both say flow cytometry; scored as fully divergent.'));
+  console.log(DIM('  Why the driver is stable despite unstable extraction:'));
+  console.log(DIM('  Post-Phase-2, compare.mjs uses graded token overlap (Jaccard < 0.5), not a'));
+  console.log(DIM('  string inequality. Two papers genuinely use mostly-different methods, so the'));
+  console.log(DIM('  assay values share little content on EVERY run, however they are paraphrased —'));
+  console.log(DIM('  so `assay` diverges every run, and DRIVER_RANK (assay first) fires every run.'));
+  console.log(DIM('  The stability is real now, but it is the stability of a prior that always'));
+  console.log(DIM('  picks assay because assay genuinely almost always differs — not a sign the'));
+  console.log(DIM('  ranker is reasoning about the pair. Cross-check the top-1 accuracy: stable'));
+  console.log(DIM('  and wrong is still wrong.'));
   console.log('');
 }
 
