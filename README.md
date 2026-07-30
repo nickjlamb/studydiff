@@ -12,6 +12,7 @@
   <img alt="Built with Claude" src="https://img.shields.io/badge/built%20with-Claude-d97757">
   <a href="#mcp-server"><img alt="MCP server" src="https://img.shields.io/badge/MCP-server-1c1c1c"></a>
   <a href="https://www.npmjs.com/package/studydiff-mcp"><img alt="npm" src="https://img.shields.io/npm/v/studydiff-mcp?label=npm&color=0f766e"></a>
+  <a href="https://www.npmjs.com/package/studydiff-mcp"><img alt="npm downloads" src="https://img.shields.io/npm/dm/studydiff-mcp?color=0f766e"></a>
   <img alt="Built with Claude: Life Sciences hackathon" src="https://img.shields.io/badge/hackathon-Built%20with%20Claude%3A%20Life%20Sciences-6d28d9">
   <img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-6d28d9">
 </p>
