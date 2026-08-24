@@ -1,7 +1,10 @@
-// Comparison logic: given two study cards, decide where they agree and where
-// they diverge, and rank the divergent DESIGN dimensions as candidate reasons
-// the papers reach different conclusions. This is deterministic; the LLM's job
-// was extraction, not adjudication.
+// Comparison logic: given two study cards, decide where they agree and where they
+// diverge, and return the divergent DESIGN dimensions as candidate reasons the papers
+// reach different conclusions. This is deterministic; the LLM's job was extraction, not
+// adjudication.
+//
+// The candidates are deliberately UNRANKED. StudyDiff used to nominate one as the
+// primary driver; that ranking was benchmarked and retired — see RETIRED_DRIVER_PRIOR.
 
 import { DIMENSIONS, DIMENSION_LABELS, NOT_REPORTED } from './types.mjs';
 
@@ -60,17 +63,26 @@ export const DIVERGENCE_THRESHOLD = 0.5;
 // differently" — which is exactly what the overlap test is for.
 const POLARITY_FIELDS = new Set(['finding', 'limitations']);
 
-// A FIXED PRIOR over which design differences tend to flip a conclusion, most-to-least.
-// This is not an assessment of any particular pair of papers: if `assay` diverges at all,
-// it is always ranked first. The prior is a reasonable default, but it is unmeasured —
-// how often the top-ranked dimension is the established cause is an open question, and
-// building the benchmark to answer it is the next roadmap item. Two known weaknesses:
-//   1. `diverges` below is a string inequality, so two values that share most of their
-//      content ("flow cytometry, ICS, bisulfite seq" vs "flow cytometry (FACS)") count
-//      as fully divergent.
-//   2. `assay` is coarse — a fate-mapping strategy and a staining panel are both "assay".
-// (finding = the conclusion itself; limitations = commentary – both excluded.)
-const DRIVER_RANK = {
+// RETIRED — a fixed prior over which design differences tend to flip a conclusion.
+//
+// StudyDiff used to sort `candidateReasons` by this and present [0] as the "primary
+// driver". It was measured against 15 documented contradictions (`eval/`) and it does
+// not work:
+//
+//   top-1 accuracy    13.3% [2/15]      identical to "always guess assay"
+//   discordant         0/15             not similar to the baseline — the SAME as it
+//   non-assay labels   0.0% [0/13]
+//
+// The mechanism is now understood. Two papers almost always use somewhat different
+// methods, so `assay` almost always diverges, so a prior that ranks `assay` first fires
+// almost every time (13/15). Fixing grounding first doubled the oracle ceiling 33% -> 67%
+// and top-1 did not move: handed the right answer five more times, the prior took none.
+//
+// It is exported ONLY so `eval/score.mjs` can keep regenerating the published number —
+// the benchmark's subject is this prior, so the prior has to survive somewhere. It is no
+// longer applied to anything a user sees. Do not reintroduce it into the product path;
+// if ordering ever returns it must be because something measurably beats this.
+export const RETIRED_DRIVER_PRIOR = {
   assay: 0,
   model: 1,
   intervention: 2,
@@ -81,6 +93,12 @@ const DRIVER_RANK = {
   sampleSize: 7,
   statistic: 8,
 };
+
+/** Order candidates by the retired prior. Benchmark use only — see above. */
+export const rankByRetiredPrior = (candidates) =>
+  [...candidates].sort(
+    (x, y) => (RETIRED_DRIVER_PRIOR[x.dimension] ?? 99) - (RETIRED_DRIVER_PRIOR[y.dimension] ?? 99),
+  );
 
 /**
  * @param {import('./types.mjs').StudyCard} a
@@ -116,9 +134,13 @@ export function compareCards(a, b) {
     .filter((r) => r.dimension !== 'finding' && r.dimension !== 'limitations' && r.comparable && !r.diverges)
     .map((r) => r.label);
 
+  // UNRANKED, in canonical schema order. Nothing downstream may treat [0] as special:
+  // the ordering that used to live here was measured and retired (see above). What the
+  // benchmark did establish is that this LIST is worth showing — the established cause
+  // is somewhere in it for 10 of 15 cases. Choosing among them needs domain knowledge
+  // StudyDiff does not have, so it presents them and stops.
   const candidateReasons = rows
     .filter((r) => r.dimension !== 'finding' && r.dimension !== 'limitations' && r.diverges)
-    .sort((x, y) => (DRIVER_RANK[x.dimension] ?? 99) - (DRIVER_RANK[y.dimension] ?? 99))
     .map((r) => ({ dimension: r.dimension, label: r.label, a: r.a, b: r.b }));
 
   return { rows, findingsConflict, sharedDesign, candidateReasons };

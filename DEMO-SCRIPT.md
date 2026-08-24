@@ -1,8 +1,23 @@
 # StudyDiff — 3-Minute Demo Video Script
 
-**Runtime target:** ~180s · **Record on:** `https://studydiff.pharmatools.ai` (prod) · **Example:** cached "Treg lineage stability" chip (instant, reliable, no API cost)
+> **Historical — July 2026.** This is the script for the hackathon submission video, kept
+> as a record of what was recorded. **It is out of date on one substantive point:** Beats 3
+> and 4 narrate a "most likely driver" and a "primary driver", because at the time
+> StudyDiff ranked the divergent dimensions and nominated the top one.
+>
+> That ranking has since been benchmarked against 15 documented contradictions and
+> [retired](https://github.com/nickjlamb/studydiff#does-it-work-a-measured-answer) — it
+> scored 13.3%, identical to always guessing "assay". The app now presents the divergent
+> dimensions unranked. Any future recording should drop the primary-driver framing and
+> lead with the evidence instead: what differs, what's ruled out, and the sentence behind
+> every value.
 
-**Tone note:** Honesty is the product. Nothing in the voiceover claims a winner, a confidence score, or that anything is verified unless it traces to a verbatim quote. Lean on the real signals: ranked drivers, "ruled out," "0 invented," "not reported — never guessed," deterministic re-runs.
+**Runtime:** ~180s (VO ≈ 2m10s–2m30s spoken, leaving headroom for pauses and the live pipeline run)
+**Record on:** `https://studydiff.pharmatools.ai` · **Papers:** Zhou 2009 vs Rubtsov 2010, uploaded as PDFs (final journal versions)
+
+**Shape:** one continuous downward scroll. Hook → run the pipeline → the answer → what's driving it → the receipt → close. The camera never travels back up the page.
+
+**Tone:** honesty is the product. No confidence scores, no winner, nothing called verified that isn't traced to a verbatim quote.
 
 ---
 
@@ -10,88 +25,96 @@
 
 | # | Beat | Time | On screen |
 |---|------|------|-----------|
-| 1 | Hook / problem | 0:00–0:20 | Two paper title cards side by side; opposite conclusions highlighted |
-| 2 | Input | 0:20–0:40 | StudyDiff landing (hero + "Why trust this" rail); click the Treg example chip; 5-step pipeline lights up |
-| 3 | The answer | 0:40–1:35 | "Why these studies differ" card — verdict → most likely reason → each conclusion |
-| 4 | Trust moment | 1:35–2:15 | Expand a field to reveal verbatim quote + ✓; verification tiles in right rail |
-| 5 | Depth | 2:15–2:40 | Ranked drivers, "What would resolve this?", full comparison, export |
-| 6 | Claude + close | 2:40–3:00 | Five-step pipeline recap; tagline |
+| 1 | Hook | 0:00–0:25 | `demo/hook-card.html` — two titles, *Instability* vs *Stability* |
+| 2 | Run it | 0:25–0:50 | StudyDiff landing → drop both PDFs → 5 steps run live |
+| 3 | The answer | 0:50–1:20 | "Why these studies differ" card |
+| 4 | What's driving it | 1:20–1:50 | Ranked drivers: primary · also differs · ruled out · what would resolve this |
+| 5 | The receipt | 1:50–2:35 | Full comparison — verbatim quotes + ✓ · verification tiles · export |
+| 6 | Close | 2:35–3:00 | Pipeline recap; tagline |
 
 ---
 
-## Beat 1 — Hook / problem (0:00–0:20)
+## Beat 1 — Hook (0:00–0:25)
 
-**On screen:** `demo/hook-card.html` — two paper **titles** side by side, nothing else. Reading order is left → right, and the VO follows it:
-
-> **Study A** (teal, left) — Zhou et al. 2009, *Nat Immunol* — **Instability** of the transcription factor Foxp3 leads to the generation of pathogenic memory T cells *in vivo*
-> **Study B** (purple, right) — Rubtsov et al. 2010, *Science* — **Stability** of the regulatory T cell lineage *in vivo*
-
-Three clicks, driven live to match the narration: card plain → **click 1** highlights *Instability* / *Stability* → **click 2** drops in "Same question. Opposite conclusions."
+**On screen:** `demo/hook-card.html`. Two titles, left to right; the VO follows the eye. Study A (teal) = Zhou = **Instability**. Study B (purple) = Rubtsov = **Stability**.
 
 **Voiceover:**
-> You're a bench scientist planning an experiment. You find two credible, peer-reviewed papers on regulatory T cells — from two of the best labs in the field — and they reach opposite conclusions.
-> *[click 1 — highlights land]* One finds the T-reg lineage is **unstable**: cells lose Foxp3 and turn pathogenic. The other finds it's **stable**.
-> *[click 2 — framing line]* Same question. Opposite answers. Before you commit reagents and months of work, you need to know: *why* do they disagree?
-
-**Note:** titles only — nobody reads a paragraph of abstract in twenty seconds, but *Instability / Stability* lands in two. Save the abstract text for Beat 4, where it's the receipt rather than the hook. Read A before B so the VO tracks the eye across the screen; don't describe the stable paper first while the viewer is looking at the unstable one.
+> You're a bench scientist planning an experiment. You find two papers from leading labs. They ask the same question about regulatory T cells, but reach opposite conclusions.
+> *[click 1 — highlights land]* One says the T-reg lineage is unstable. The other says it's stable.
+> *[click 2 — framing line]* Before you spend months in the lab, you need to answer one question: **why do these studies disagree?**
+> That's what StudyDiff does.
 
 ---
 
-## Beat 2 — Input (0:20–0:40)
+## Beat 2 — Run it (0:25–0:50)
 
-**On screen:** The StudyDiff landing screen. Let the hero sit for a beat — headline *"Why do these two studies disagree?"* and subhead *"The difference is usually in the methods. StudyDiff finds it."* The **"Why trust this"** rail is visible from the start (Every claim verified · No LLM-as-judge · Source-first · Honest by design). Cursor clicks the **"Treg lineage stability"** example chip. The five-step pipeline lights up: **Add studies → Extract evidence → Verify claims → Compare → Explain why.**
+**On screen:** Switch tabs to StudyDiff. Hero sits for a beat — *"The difference is usually in the methods. StudyDiff finds it."* — with the **Why trust this** rail already visible. Drop both PDFs on the drop zone. The five steps run **live**: Add studies → Extract evidence → Verify claims → Compare → Explain why.
 
 **Voiceover:**
-> Here's the premise, and it's right on the page: the difference is usually in the methods — StudyDiff finds it. Two well-run papers often disagree not because one is wrong, but because of a design choice buried in the methods section. Drop in two papers, or start from a worked example, and StudyDiff runs five steps: extract each study's design, verify every claim against the source, compare, and explain why.
+> Just drop in the two PDFs. Claude reads each paper and fills a fixed schema — a quote required for every field — turning it into a structured study card where every extracted finding is linked to a verbatim quote from the source.
+> Before anything is compared, a deterministic grounding check verifies every quote against the original paper.
+
+**Note:** don't cut the wait — it's your only on-screen proof Claude is doing real work, and this paragraph is ≈18s of speech against a ≈11s run. Make sure the cache is cold (push a commit to restart the dyno) or the tracker will snap straight to done.
 
 ---
 
-## Beat 3 — The answer (0:40–1:35)
+## Beat 3 — The answer (0:50–1:20)
 
-**On screen:** The **"Why these studies differ"** card fills the main column. Read top to bottom: the verdict line ("These studies reach different conclusions"), then **Most likely reason** with a Study A line (teal) and a Study B line (purple), then **Their conclusions** — each study's finding. The subtle caption at the foot: "✓ Every claim above is verified against the source."
+**On screen:** The **"Why these studies differ"** card. Verdict → **Most likely reason** (Study A teal / Study B purple) → **Their conclusions**. Caption at the foot: *"✓ Every claim above is verified against the source."*
 
 **Voiceover:**
-> Here's the answer. Same question, opposite conclusions — and StudyDiff points to the most likely reason: the two labs used different **fate-mapping methods** to track whether Treg cells kept their identity over time. That methodological choice, buried in the methods section, is what most plausibly drives the disagreement. Not that one lab was wrong — that they measured the same thing two different ways.
+> Here's the result.
+> StudyDiff identifies the most likely driver of the disagreement: the two studies used different **fate-mapping methods** to track whether T-reg cells retained their identity over time.
+> The difference isn't that one lab was wrong. It's that they measured the same biological question in different ways — and the methodology changed the conclusion.
 
 ---
 
-## Beat 4 — Trust moment (1:35–2:15)
+## Beat 4 — What's driving it (1:20–1:50)
 
-**On screen:** Open the **Full study-by-study comparison** accordion. Every grounded value now shows its **supporting sentence in full, on screen**, in a quote block beside a green **✓ verified** — teal for A, purple for B. Scroll to **Main finding**; these are the exact sentences displayed, so highlight *these*, not any other copy of the abstract:
+**On screen:** Scroll to **"What's driving the difference."** Ranked: **Primary driver** (dominant), **Also differs**, **Ruled out (identical in both)**. Then open **"What would resolve this?"**
+
+**Voiceover:**
+> Below that, StudyDiff ranks the evidence. It highlights the primary methodological difference, shows the factors that also differ, and rules out variables that are identical across both studies — so you can focus on what actually explains the disagreement.
+> It even suggests what evidence would resolve it: apply both fate-mapping methods to the same experimental system, and see whether the difference remains.
+
+---
+
+## Beat 5 — The receipt (1:50–2:35)
+
+**On screen:** Open **Full study-by-study comparison**. Every value shows its **supporting sentence in full**, in a quote block beside a green **✓ verified** — teal A, purple B. Land on **Main finding**. These are the exact sentences displayed:
 
 > A (Zhou): *"a substantial percentage of cells had transient or unstable expression of the transcription factor Foxp3"*
 > B (Rubtsov): *"we have demonstrated notable stability of this cell population under physiologic and inflammatory conditions"*
 
-Then pan to the right rail's **Verification** tiles: *N claims verified against the source · M fields not reported · 0 invented*, and the line "Deterministic — no LLM-as-judge. Re-run and you get identical drivers."
-
-**⚠ Source-text discipline:** any abstract text shown on screen must be the **final published version** (as in `fixtures/treg-stability.json` / PubMed) — *not* the PMC author-manuscript wording, which differs ("remarkable" vs "notable", "significant…exhibited" vs "substantial…had"). If the highlighted sentence doesn't match the quote beside the ✓, the one claim the whole product rests on looks broken.
+Scroll past the **not reported** rows. Then the right rail: **Verification** tiles (*N verified · M not reported · **0 invented***) and *"Deterministic — no LLM-as-judge."* Finish on **Export**.
 
 **Voiceover:**
-> This is the part that matters. Every field traces back to a verbatim quote from the paper — you can see the exact sentence, checked with a green tick. The grounding step is deterministic: it's not a language model grading itself. Every quote has to be a real substring of the source; every number has to trace back. If a paper doesn't report something, StudyDiff says "not reported" — it never guesses. Zero invented claims. Run it again, you get the same drivers.
+> But the most important part is trust.
+> Every finding links back to the exact sentence it came from. Not a paraphrase. The original sentence.
+> Verification is deterministic: every quote must exist as an exact substring of the paper. This isn't a language model grading its own homework.
+> If a paper doesn't report something, StudyDiff simply says "not reported." It never fills in the gaps. **Zero invented claims.**
+> Same evidence in, same drivers out — no randomness, no model grading another model. Then export the report and take it straight into your lab meeting.
+
+**⚠ Source-text discipline:** any abstract text you highlight on screen must be the **final published wording** — not the PMC author-manuscript version, which differs ("notable" vs "remarkable"). If a highlight doesn't match the quote beside the ✓, the one claim the product rests on looks broken.
 
 ---
 
-## Beat 5 — Depth (2:15–2:40)
+## Beat 6 — Close (2:35–3:00)
 
-**On screen:** Scroll the ranked drivers — **Primary driver** (dominant), **Also differs**, **Ruled out** (identical in both → not the cause). Open **"What would resolve this?"**, then the **Full study-by-study comparison**. Click **Export** → Markdown/PDF.
-
-**Voiceover:**
-> Underneath, drivers are ranked: the primary one, others that also differ, and the factors that are *identical* in both papers — ruled out, so you know they're not the cause. It suggests what evidence would actually resolve the conflict, shows the full dimension-by-dimension comparison, and exports the whole thing as a report you can take to your team.
-
----
-
-## Beat 6 — Claude + close (2:40–3:00)
-
-**On screen:** The five-step pipeline recaps. Closing card with the tagline.
+**On screen:** Pipeline recap; closing card.
 
 **Voiceover:**
-> Under the hood: Claude turns each paper into a structured study card through forced tool-use, returning a verbatim quote for every field. A deterministic grounding check verifies it. Then StudyDiff compares only the evidence that passed. The result isn't a summary — it's an explanation of *why* two papers conflict, grounded in the text, and it never picks a winner. That's StudyDiff.
+> Claude structures the evidence. Deterministic verification checks every claim. StudyDiff compares only what survives.
+> It never tells scientists which paper is right. It helps them understand why the papers reached different conclusions.
+> Most AI tools summarize papers. StudyDiff explains why they disagree.
 
 ---
 
 ## Recording checklist
 
-- Record against **prod** with the cached **Treg** chip — instant, no live wait, no API cost.
-- Have the **Mouse models & inflammation** example (Seok 2013 vs Takao 2015) ready as a backup "same data, opposite conclusions" beat if you want a second example.
-- Keep cursor movements deliberate at the trust moment (Beat 4) — the verbatim quote + ✓ is the differentiator; let it breathe.
-- Do not add any on-screen text implying a confidence percentage, a winner, or a driver-strength bar. If a lower-third is needed, use the honest signals only.
+- **One continuous take.** Start on the hook card tab, switch to StudyDiff, scroll straight down. No splicing — Screen Studio can't append takes.
+- **Record silent, add VO after** via imported audio. Screen Studio can't record voiceover in the editor.
+- **Cold cache**: push a commit (restarts the dyno) so the five steps actually animate. Don't rehearse the same PDFs on prod right before the keeper take.
+- **Pronunciation**: T-reg (*tee-reg*, never "treg") · Foxp3 (*fox-pee-three*) · Rubtsov (*ROOB-tsov*) · Zhou (*joe*) · *in vivo* (*in VEE-voh*).
+- **Never** put a confidence score, a percentage, a driver-strength bar, or a "winner" on screen. The honest signals carry it.
+- **Don't say** "run it again tomorrow and you'll get the same answer" — the extraction is an LLM call and the cache expires after 6 hours. Determinism is scoped to grounding, ranking and comparison. Say *"same evidence in, same drivers out."*

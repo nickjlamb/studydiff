@@ -82,8 +82,8 @@ server.registerTool(
       'Explain WHY two scientific papers reach different conclusions. Extracts each study design ' +
       '(species, model, intervention, assay, dose, timing, endpoint, sample size, statistic, finding, limitations), ' +
       'verifies every extracted value against the source text with deterministic grounding, then lists the design ' +
-      'differences that could drive the disagreement (primary driver / also differs / ruled out – ordered by a fixed ' +
-      'prior over dimensions, not by an assessment of this pair) and suggests ' +
+      'differences that could drive the disagreement (unranked, plus the dimensions that are identical in both and so ' +
+      'ruled out) and suggests ' +
       'what evidence would resolve it. Every claim is traced to a verbatim quote; unsupported fields are returned as ' +
       '"not reported" rather than guessed. Never picks a winner. Each paper is given as {id} (PMID or DOI) or {text}. ' +
       'Requires ANTHROPIC_API_KEY – use compare_example for a no-key demonstration.',

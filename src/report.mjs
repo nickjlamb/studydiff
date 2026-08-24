@@ -1,8 +1,8 @@
 // Markdown rendering of a grounded StudyDiff result. Kept separate from the
 // transports (web, CLI, MCP) so every surface emits the same, auditable report:
-// the answer first, then the ranked drivers, then every value with the verbatim
-// sentence that supports it. Nothing here invents a number – each count is derived
-// from fields that already survived grounding.
+// the verdict first, then the divergent design dimensions (unranked) and the shared
+// ones, then every value with the verbatim sentence that supports it. Nothing here
+// invents a number – each count is derived from fields that already survived grounding.
 
 import { DIMENSIONS, DIMENSION_LABELS, NOT_REPORTED } from './types.mjs';
 
@@ -25,7 +25,6 @@ export function toMarkdown(result) {
   const [a, b] = result.cards;
   const { comparison: cmp, synthesis, resolve, gaps } = result;
   const { verified, notReported } = verificationCounts(result);
-  const top = cmp.candidateReasons[0];
   const L = [];
 
   L.push('# StudyDiff – why these studies differ', '');
@@ -54,14 +53,19 @@ export function toMarkdown(result) {
   }
 
   if (cmp.candidateReasons.length || (cmp.sharedDesign || []).length) {
-    L.push("## What's driving the difference", '');
-    cmp.candidateReasons.forEach((r, i) => {
-      L.push(`**${i === 0 ? 'Primary driver' : 'Also differs'} – ${r.label}**`);
+    L.push("## What differs, and what doesn't", '');
+    cmp.candidateReasons.forEach((r) => {
+      L.push(`**Differs – ${r.label}**`);
       L.push(`- Study A: ${r.a}`);
       L.push(`- Study B: ${r.b}`, '');
     });
     if ((cmp.sharedDesign || []).length) {
       L.push(`**Ruled out** – identical in both studies, so not the cause: ${cmp.sharedDesign.join(', ')}.`, '');
+    }
+    if (cmp.candidateReasons.length > 1) {
+      L.push('_Listed in schema order, not priority order. StudyDiff does not nominate a primary driver: the ranking it' +
+        ' used to apply was benchmarked against 15 documented contradictions and scored no better than always guessing' +
+        ' "assay". See <https://github.com/nickjlamb/studydiff#does-it-work-a-measured-answer>._', '');
     }
   }
 

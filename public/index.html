@@ -287,7 +287,7 @@
       <li id="t1"><span class="tnum">2</span><div><b>Extract evidence</b><i>Claude structures each</i></div></li>
       <li id="t2"><span class="tnum">3</span><div><b>Verify claims</b><i>grounded to source</i></div></li>
       <li id="t3"><span class="tnum">4</span><div><b>Compare</b><i>Find key differences</i></div></li>
-      <li id="t4"><span class="tnum">5</span><div><b>Explain why</b><i>Rank drivers</i></div></li>
+      <li id="t4"><span class="tnum">5</span><div><b>Show the differences</b><i>with their sources</i></div></li>
     </ol>
 
     <p class="audience" style="margin-top:22px">For researchers planning experiments, interpreting literature, and writing reviews.</p>
@@ -576,7 +576,7 @@ function render(p) {
 
   const shared = (p.comparison.sharedDesign || []).map((x) => x.toLowerCase());
   const listJoin = (arr) => arr.length <= 1 ? (arr[0] || '') : arr.length === 2 ? arr[0] + ' and ' + arr[1] : arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1];
-  const topReason = p.comparison.candidateReasons[0];
+  const diffs = p.comparison.candidateReasons;   // unranked — see src/compare.mjs
   const vnote = p.synthesis.grounded
     ? '<div class="answer-verified"><i>✓</i> Every claim above is verified against the source</div>'
     : '<div class="answer-verified bad"><i>✗</i> Some claims could not be verified</div>';
@@ -586,10 +586,14 @@ function render(p) {
   } else {
     h += '<div class="answer-lead">These studies reach different conclusions' +
       (shared.length ? '<span class="answer-shared"> despite sharing the same ' + esc(listJoin(shared)) + '</span>' : '') + '</div>';
-    if (topReason) {
-      h += '<div class="answer-block"><div class="answer-label">Highest-ranked difference<span class="prov" style="text-transform:none;letter-spacing:0;font-weight:400"> · ranked by a fixed prior over design dimensions, not by a model\'s judgment</span></div><div class="answer-driver">' + esc(topReason.label) + '</div>' +
-        '<div class="abline"><span class="hab a">A</span><span>' + esc(topReason.a) + '</span></div>' +
-        '<div class="abline"><span class="hab b">B</span><span>' + esc(topReason.b) + '</span></div></div>';
+    if (diffs.length) {
+      h += '<div class="answer-block"><div class="answer-label">Where their designs differ' +
+        '<span class="prov" style="text-transform:none;letter-spacing:0;font-weight:400"> · ' + diffs.length +
+        (diffs.length === 1 ? ' dimension, read from the papers' : ' dimensions, read from the papers — not ranked') + '</span></div>' +
+        '<div class="answer-driver">' + esc(listJoin(diffs.map((r) => r.label.toLowerCase()))) + '</div>' +
+        '<p class="prov" style="margin:6px 0 0">StudyDiff doesn\'t nominate one of these as the cause. ' +
+        '<a href="https://github.com/nickjlamb/studydiff#does-it-work-a-measured-answer" target="_blank" rel="noopener">It was measured</a> ' +
+        'against 15 documented contradictions and scored no better than always guessing “assay”. Which one matters here is a judgment your field makes, not this tool.</p></div>';
     } else {
       h += '<div class="answer-block"><p class="prov" style="margin:0">No design dimension reported in both papers differs, so the source of disagreement can’t be localised from the available text.</p></div>';
     }
@@ -599,14 +603,11 @@ function render(p) {
   }
   h += vnote + '</div>';
 
-  const drivers = p.comparison.candidateReasons;
   const ruledOut = p.comparison.sharedDesign || [];
-  if (drivers.length || ruledOut.length) {
-    h += '<h3 class="sec">What’s driving the difference</h3><div class="drivers2">';
-    drivers.forEach((r, i) => {
-      const cls = i === 0 ? 'primary' : 'secondary';
-      const tag = i === 0 ? 'Primary driver' : 'Also differs';
-      h += '<div class="drow ' + cls + '"><span class="dtag">' + tag + '</span><div class="dbody"><b>' + esc(r.label) +
+  if (diffs.length || ruledOut.length) {
+    h += '<h3 class="sec">What differs, and what doesn’t</h3><div class="drivers2">';
+    diffs.forEach((r) => {
+      h += '<div class="drow secondary"><span class="dtag">Differs</span><div class="dbody"><b>' + esc(r.label) +
         '</b><div class="dcmp"><span><span class="ab a">A</span> · ' + esc(r.a) + '</span><span><span class="ab b">B</span> · ' + esc(r.b) + '</span></div></div></div>';
     });
     if (ruledOut.length) {
@@ -614,9 +615,9 @@ function render(p) {
         ruledOut.map(esc).join(', ') + '</b></div></div>';
     }
     h += '</div>';
-    h += '<p class="prov" style="margin:8px 2px 0">Which differences are listed is read from the papers. The <i>order</i> is a fixed prior — ' +
-      'assay and model rank above dose and timing, which rank above sample size and statistics — not an assessment of this particular pair. ' +
-      'Treat the ranking as a starting point, and the differences themselves as the evidence.</p>';
+    h += '<p class="prov" style="margin:8px 2px 0">Listed in schema order, not priority order. Every value above is read from the papers and ' +
+      'carries the sentence that supports it; <i>which</i> of these differences explains the disagreement is the part StudyDiff leaves to you — ' +
+      '<a href="https://github.com/nickjlamb/studydiff#does-it-work-a-measured-answer" target="_blank" rel="noopener">and here is why</a>.</p>';
   }
 
   const CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>';
@@ -707,10 +708,10 @@ function buildReport(p) {
   L.push('**Study B:** ' + b.citation + (b.pmid ? ' (PMID ' + b.pmid + ')' : '') + ' – source: ' + (depth[b.sourceDepth] || b.sourceDepth), '');
   L.push('## Verdict', p.comparison.findingsConflict ? 'These studies reach different conclusions.' : 'These studies do not clearly differ on this question.', '');
   L.push('## Why they differ', p.synthesis.text + (p.synthesis.grounded ? ' _(verified against source)_' : ''), '');
-  L.push('## What’s driving the difference');
-  p.comparison.candidateReasons.forEach((r, i) => { L.push('- **' + (i === 0 ? 'Primary driver' : 'Also differs') + ' – ' + r.label + '**', '  - A: ' + r.a, '  - B: ' + r.b); });
+  L.push('## What differs, and what doesn’t');
+  p.comparison.candidateReasons.forEach((r) => { L.push('- **Differs – ' + r.label + '**', '  - A: ' + r.a, '  - B: ' + r.b); });
   if ((p.comparison.sharedDesign || []).length) L.push('- **Ruled out (identical in both):** ' + p.comparison.sharedDesign.join(', '));
-  L.push('');
+  L.push('', '_Listed in schema order, not priority order. StudyDiff does not nominate a primary driver: the ranking it used to apply was benchmarked against 15 documented contradictions and scored no better than always guessing "assay" (github.com/nickjlamb/studydiff#does-it-work-a-measured-answer)._', '');
   if (p.resolve && p.resolve.length) { L.push('## What would resolve this'); for (const r of p.resolve) L.push('- ' + r); L.push('_Reasoning about missing evidence, not a claim from the papers._', ''); }
   L.push('## Full comparison', '_Every reported value is verified against the source; the supporting sentence is quoted._', '');
   const fld = (tag, cite, f, g) => {
@@ -747,10 +748,10 @@ function buildReportHTML(p) {
        '<b>Study B:</b> ' + e(b.citation) + (b.pmid ? ' (PMID ' + e(b.pmid) + ')' : '') + ' – source: ' + (depth[b.sourceDepth] || b.sourceDepth) + '</p>';
   c += '<h2>Verdict</h2><p>' + (p.comparison.findingsConflict ? 'These studies reach different conclusions.' : 'These studies do not clearly differ on this question.') + '</p>';
   c += '<h2>Why they differ</h2><p>' + e(p.synthesis.text) + (p.synthesis.grounded ? ' <span class="ok">(verified against source)</span>' : '') + '</p>';
-  c += '<h2>What’s driving the difference</h2><ul>';
-  p.comparison.candidateReasons.forEach((r, i) => { c += '<li><b>' + (i === 0 ? 'Primary driver' : 'Also differs') + ' – ' + e(r.label) + '</b><br>A: ' + e(r.a) + '<br>B: ' + e(r.b) + '</li>'; });
+  c += '<h2>What differs, and what doesn’t</h2><ul>';
+  p.comparison.candidateReasons.forEach((r) => { c += '<li><b>Differs – ' + e(r.label) + '</b><br>A: ' + e(r.a) + '<br>B: ' + e(r.b) + '</li>'; });
   if ((p.comparison.sharedDesign || []).length) c += '<li><b>Ruled out (identical in both):</b> ' + e(p.comparison.sharedDesign.join(', ')) + '</li>';
-  c += '</ul>';
+  c += '</ul><p class="note">Listed in schema order, not priority order. StudyDiff does not nominate a primary driver — the ranking it used to apply scored no better than always guessing “assay” against 15 documented contradictions.</p>';
   if (p.resolve && p.resolve.length) { c += '<h2>What would resolve this</h2><ul>'; for (const r of p.resolve) c += '<li>' + e(r) + '</li>'; c += '</ul><p class="note">Reasoning about missing evidence, not a claim from the papers.</p>'; }
   c += '<h2>Full comparison</h2><p class="note">Every reported value is verified against the source; the supporting sentence is quoted.</p>';
   const fld = (tag, cite, f, g) => {

@@ -41,9 +41,58 @@ It is built for a bench scientist deciding which of two conflicting papers to tr
 
 Most "AI literature" tools generate a fluent answer and ask you to trust it. StudyDiff inverts that:
 
-- **It leads with the answer, then proves it.** A plain-language explanation up top; the evidence table underneath.
+- **It shows the evidence, then gets out of the way.** The design differences up top; every value with the verbatim sentence that supports it underneath.
 - **It refuses to guess.** Any field the source doesn't state is shown as *not reported*, never inferred.
 - **It verifies itself.** A deterministic grounding check (no second LLM acting as judge) confirms every extracted value and every explanation is backed by a verbatim quote and traceable numbers. Anything that fails is downgraded *before* it can be used as a reason.
+- **It knows what it can't do**, because it was measured — see below.
+
+## Does it work? A measured answer
+
+StudyDiff used to rank the divergent design dimensions and present the top one as the
+likely driver of a disagreement. **We built a benchmark to test that, and it doesn't work.**
+
+15 documented contradictions where the literature has since established *why* the papers
+disagreed — each label carrying its own citation, the set built blind before any accuracy
+number existed. Scored against StudyDiff's top-ranked driver:
+
+```
+Top-1 accuracy (strict)      13.3%  (95% CI 3.7-37.9%)   [2/15]
+Baseline "always say assay"  13.3%  (95% CI 3.7-37.9%)   [2/15]
+                             → discordant on 0 of 15 cases
+Oracle ceiling (reachable)   66.7%  (95% CI 41.7-84.8%)  [10/15]
+Non-assay-labelled cases      0.0%  (95% CI 0.0-22.8%)   [0/13]
+```
+
+The ranking was a fixed prior (`DRIVER_RANK` in `src/compare.mjs`) in which `assay`
+outranks everything. Two papers almost always use somewhat different methods, so `assay`
+almost always diverges, so it was picked 13 times out of 15 — and the two hits are exactly
+the two assay-labelled cases. **It is not merely as good as guessing a constant; it is
+behaviourally identical to it on every case in the set.**
+
+Fixing grounding first (Phase 2) removed that excuse. Recovering 20 of 26 false-positive
+rejections **doubled the oracle ceiling from 33% to 67%** — the established cause is now an
+available candidate in 10 of 15 cases instead of 5 — and top-1 accuracy did not move at
+all. The ranker was handed the right answer five more times and took none of them.
+
+**What changed as a result:** the app no longer nominates a primary driver. It presents the
+divergent dimensions as an unranked list, because that list is informative (it contains the
+established cause 10 times in 15) while the ordering is not. Choosing among them needs
+domain knowledge the tool doesn't have.
+
+**What still holds:** which dimensions differ, which are identical (*ruled out*), and the
+verbatim sentence behind every value. None of that depends on the ranking.
+
+Full method, the pre-registered decisions, and every prediction that turned out wrong:
+[`eval/README.md`](eval/README.md) and [`eval/PHASE2.md`](eval/PHASE2.md). The benchmark
+set is [`eval/cases.json`](eval/cases.json).
+
+```bash
+npm run eval            # offline, free, no API key — regenerates the numbers above
+npm run eval:selftest   # validates the harness maths and set integrity
+```
+
+`eval/cache/` is committed on purpose. It isn't build output, it's evidence: the published
+number is reproducible from artefacts in the repo rather than taken on faith.
 
 ## Quick start
 
@@ -75,16 +124,16 @@ flowchart LR
   E --> V["Verify<br/>deterministic grounding"]
   V -- "ungrounded → not reported" --> E
   V --> C["Compare<br/>divergent vs. shared design"]
-  C --> X["Explain<br/>ranked drivers + synthesis"]
+  C --> X["Present<br/>divergent dimensions + ruled out"]
 ```
 
 1. **Retrieve** — a PubMed/PMC client with a full-text-to-abstract fallback that tags how deep it read (`fulltext` / `abstract` / `pasted`); uploaded PDFs are text-extracted server-side.
 2. **Extract** — Claude turns each paper into a fixed **study card** (species, model, assay, dose, timing, endpoint, sample size, statistic, finding, limitations). Every field carries a verbatim supporting quote; absent fields default to *not reported*.
 3. **Verify** — grounding runs **first**: any value whose quote isn't in the source, or whose numbers don't trace, is downgraded to *not reported*. StudyDiff can't cite a fact it hasn't verified.
-4. **Compare** — deterministic: which dimensions agree, which diverge, and the divergent *design* dimensions listed as candidate drivers. **The ordering is a fixed prior**, not an inference: assay and model rank above dose and timing, which rank above sample size and statistics. Which differences exist is read from the papers; the rank they're shown in isn't specific to the pair. Measuring whether that prior is any good is the [next thing on the roadmap](https://github.com/nickjlamb/studydiff/blob/main/ROADMAP.md).
-5. **Explain** — an answer-first synthesis naming the highest-ranked difference, with the shared dimensions explicitly *ruled out*.
+4. **Compare** — deterministic: which design dimensions are reported by both papers, which of those diverge, and which are identical. Divergence is a token-overlap test on design dimensions and strict inequality on the conclusion itself, because a conclusion's *polarity* matters where a method list's *content* does.
+5. **Present** — the divergent dimensions **unranked**, each with both papers' values and the verbatim sentence behind them, and the identical ones explicitly *ruled out*. StudyDiff does not nominate one as the cause: [it was measured and it doesn't work](#does-it-work-a-measured-answer).
 
-Two things hold the guarantee up: the API key never leaves the server, and verification is deterministic — grounding, comparison and driver ranking involve no model judgment at all, so the same verified evidence always yields the same drivers.
+Two things hold the guarantee up: the API key never leaves the server, and verification is deterministic — grounding and comparison involve no model judgment at all, so the same verified evidence always yields the same divergent dimensions.
 
 ## Why Claude?
 
@@ -124,7 +173,7 @@ Published to the [official MCP Registry](https://registry.modelcontextprotocol.i
 | `compare_example(example)` | Runs a cached worked example — **no API key, no network**. The quickest way to see the grounded output. |
 | `list_examples()` | Lists the built-in worked examples. |
 
-It returns the same auditable report the web app exports: the verdict, the ranked drivers (**primary driver** / also differs / **ruled out**), every value with the verbatim sentence that supports it, the verification counts, and what evidence would resolve the disagreement. Ungrounded fields come back as *not reported* — never guessed — and the tool never picks a winner or reports a confidence it didn't compute.
+It returns the same auditable report the web app exports: the verdict, the divergent design dimensions (unranked) and the identical ones (**ruled out**), every value with the verbatim sentence that supports it, the verification counts, and what evidence would resolve the disagreement. Ungrounded fields come back as *not reported* — never guessed — and the tool never picks a winner, never nominates a primary driver, and never reports a confidence it didn't compute.
 
 Add it to **Claude Code**:
 
@@ -161,7 +210,8 @@ src/ncbi.mjs        PubMed / PMC retrieval (+ DOI resolution, source-depth taggi
 src/pdf.mjs         PDF text extraction (pure JS)
 src/extract.mjs     Claude tool-use → structured study cards
 src/grounding.mjs   deterministic verification (OpenGATE)
-src/compare.mjs     divergence detection + driver ranking
+src/compare.mjs     divergence detection (divergent vs. shared design dimensions)
+eval/               driver-ranking benchmark: 15 cited contradictions + scorer
 src/gaps.mjs        bounded "observed across these papers"
 src/pipeline.mjs    orchestration: retrieve → extract → verify → compare
 src/report.mjs      shared Markdown report (answer, drivers, quotes, verification)
