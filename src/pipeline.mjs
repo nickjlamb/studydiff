@@ -26,11 +26,16 @@ function synthesize(comparison, cards) {
     };
   }
   const [a, b] = cards;
-  const top = comparison.candidateReasons[0];
+  const diffs = comparison.candidateReasons;   // unranked — see src/compare.mjs
 
-  // Answer-first: lead with the plain-language reason, then let the table prove it.
-  // Every clause is built from already-grounded fields, so the paragraph itself
-  // survives the grounding check (numbers trace to the source).
+  // Evidence-first: state what differs, then let the table prove it. Every clause is
+  // built from already-grounded fields, so the paragraph itself survives the grounding
+  // check (numbers trace to the source).
+  //
+  // This used to name candidateReasons[0] as "the most likely reason". That ranking was
+  // benchmarked (eval/) and retired: it scored 13.3% against 15 documented
+  // contradictions, identical to always guessing "assay". Naming one is the claim we
+  // cannot support; listing them is the claim we can.
   let text = 'These studies reach different conclusions';
   const shared = comparison.sharedDesign;
   if (shared.length) {
@@ -38,8 +43,16 @@ function synthesize(comparison, cards) {
   }
   text += '. ';
 
-  if (top) {
-    text += `The highest-ranked difference is in ${top.label.toLowerCase()} – Study A: ${top.a}; Study B: ${top.b}. `;
+  // NB: state NO count here. The synthesis paragraph is itself grounded, and a tally
+  // ("differ on 4 dimensions") is a number that appears in neither paper, so the
+  // grounding check rejects the whole paragraph. Caught by `npm run demo`. Name the
+  // dimensions instead — every one of those strings came from a grounded field.
+  if (diffs.length === 1) {
+    const d = diffs[0];
+    text += `Their designs differ on one dimension reported by both: ${d.label.toLowerCase()} – Study A: ${d.a}; Study B: ${d.b}. `;
+  } else if (diffs.length) {
+    text += `Their designs differ on several dimensions reported by both: ${listWords(diffs.map((d) => d.label.toLowerCase()))}. `;
+    text += `StudyDiff does not rank these – which one explains the disagreement is a judgment it leaves to the reader. `;
   } else {
     text += 'No design dimension reported in both papers differs, so the source of disagreement cannot be localised from the available text. ';
   }

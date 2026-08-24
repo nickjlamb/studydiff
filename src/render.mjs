@@ -62,10 +62,11 @@ export function renderResult(result) {
   for (const line of wrap(synthesis.text, 88)) out.push('  ' + line);
   out.push('');
   if (comparison.candidateReasons.length) {
-    out.push(DIM('  Ranked candidate drivers (differing design dimensions):'));
-    comparison.candidateReasons.forEach((r, i) => {
-      out.push(`    ${i + 1}. ${BOLD(r.label)} – A: ${r.a}  |  B: ${r.b}`);
+    out.push(DIM('  Differing design dimensions (unranked — schema order):'));
+    comparison.candidateReasons.forEach((r) => {
+      out.push(`    • ${BOLD(r.label)} – A: ${r.a}  |  B: ${r.b}`);
     });
+    out.push(DIM('    StudyDiff does not nominate a primary driver; see eval/ for why.'));
     out.push('');
   }
 

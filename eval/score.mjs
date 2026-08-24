@@ -12,9 +12,16 @@
 //
 // If (1) ties (2), the ranker adds nothing over a constant guess. That is a
 // real result and it gets published as-is. See EVAL.md.
+//
+// NOTE (post-Phase-2): it did tie, so the ranking was removed from the product.
+// `compareCards` now returns candidates UNRANKED, and the prior it used to sort by
+// lives on as `RETIRED_DRIVER_PRIOR`, applied here and nowhere else. The benchmark's
+// subject is that prior, so scoring it here keeps the published number regenerable
+// while the app no longer nominates a driver. This file is the prior's only caller.
 
 import { DIMENSIONS } from '../src/types.mjs';
 import { buildResult } from '../src/pipeline.mjs';
+import { rankByRetiredPrior } from '../src/compare.mjs';
 import { loadCases, readCache, withCI, pct, cell, SCORED_DIMENSIONS, parseDepth } from './lib.mjs';
 
 const depth = parseDepth(process.argv.slice(2));
@@ -49,7 +56,9 @@ function scoreCase(caseDef) {
 
   const asymmetric = new Set(assembled.depths).size > 1;
   const result = buildResult(caseDef.question, assembled.cards, assembled.texts);
-  const candidates = result.comparison.candidateReasons.map((r) => r.dimension);
+  // The product no longer ranks these. Apply the retired prior HERE — it is the thing
+  // under test — so the published number stays regenerable from committed artefacts.
+  const candidates = rankByRetiredPrior(result.comparison.candidateReasons).map((r) => r.dimension);
   const top = candidates[0] ?? null;
 
   const label = caseDef.label;

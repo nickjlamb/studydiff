@@ -6,10 +6,51 @@ All notable changes to StudyDiff are documented here. Format based on
 
 ## [Unreleased]
 
+### Removed
+
+- **The primary driver.** StudyDiff no longer nominates one divergent dimension as the
+  likely cause of a disagreement, anywhere: web answer card, Markdown and HTML exports,
+  CLI, and MCP. It presents the divergent dimensions **unranked**, in schema order.
+
+  This is a measured decision, not a stylistic one. The ordering came from a fixed prior
+  (`DRIVER_RANK`) in which `assay` outranked everything. Benchmarked against 15 documented
+  contradictions with cited labels, it scored **13.3% [2/15]** — identical to always
+  guessing `assay`, **discordant on 0 of 15 cases**, and **0/13** on non-assay-labelled
+  cases. Fixing grounding first (recovering 20 of 26 false-positive rejections) doubled the
+  oracle ceiling from 33% to 67% and top-1 accuracy did not move at all: handed the right
+  answer five more times, the prior took none of them.
+
+  What survived intact: which dimensions differ, which are identical (*ruled out*), and the
+  verbatim sentence behind every value. None of it depended on the ranking.
+
+### Added
+
+- **Driver-ranking benchmark** (`eval/`): 15 documented contradictions, each label carrying
+  its own citation; scorer with Wilson 95% intervals, a constant-guess baseline, an oracle
+  ceiling and a confusion matrix. `npm run eval` regenerates the published numbers offline
+  from committed cache — no API key, nothing taken on faith.
+- **"Does it work?" section in the README** reporting the result, including the parts that
+  reflect badly on the tool.
+- `RETIRED_DRIVER_PRIOR` / `rankByRetiredPrior` in `src/compare.mjs`, exported solely so the
+  benchmark can keep scoring its own subject. Not applied to anything a user sees.
+
+### Fixed
+
+- Grounding false positives: guarded ellipsis handling, thousands separators, spelled-out
+  numbers via a closed lexicon. FP rate on rejected fields fell from 90% to 21% while both
+  true catches were preserved (`npm run eval:normtest` fails loudly if either starts passing).
+- Divergence is now graded (Jaccard over content tokens, threshold 0.5) rather than string
+  inequality — scoped to design dimensions only, because token overlap is blind to antonyms
+  and applying it to `finding` broke contradiction detection.
+- The synthesis paragraph no longer states a count of differing dimensions: a tally is a
+  number appearing in neither paper, so grounding correctly rejected the whole paragraph.
+
 ### Planned
 
-- Keyword search with a results picker (currently PMID/DOI only).
 - Source viewer that highlights each grounded quote in the original text.
+- Raising the oracle ceiling through better extraction — the only thing that can now move
+  accuracy, since re-ranking provably cannot.
+- Keyword search with a results picker (currently PMID/DOI only).
 
 ## [0.2.0] — 2026-07-13
 
