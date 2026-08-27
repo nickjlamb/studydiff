@@ -745,7 +745,7 @@ function render(p) {
         '<div class="answer-driver">' + esc(listJoin(diffs.map((r) => r.label.toLowerCase()))) + '</div>' +
         '<p class="prov" style="margin:6px 0 0">StudyDiff doesn\'t nominate one of these as the cause. ' +
         '<a href="https://github.com/nickjlamb/studydiff#does-it-work-a-measured-answer" target="_blank" rel="noopener">It was measured</a> ' +
-        'against 15 documented contradictions and scored no better than always guessing “assay”. Which one matters here is a judgment your field makes, not this tool.</p></div>';
+        'against two independent sets of 15 documented contradictions — the second held out and measured once — and scored no better than always guessing “assay”. Which one matters here is a judgment your field makes, not this tool.</p></div>';
     } else {
       h += '<div class="answer-block"><p class="prov" style="margin:0">No design dimension reported in both papers differs, so the source of disagreement can’t be localised from the available text.</p></div>';
     }
@@ -863,7 +863,7 @@ function buildReport(p) {
   L.push('## What differs, and what doesn’t');
   p.comparison.candidateReasons.forEach((r) => { L.push('- **Differs – ' + r.label + '**', '  - A: ' + r.a, '  - B: ' + r.b); });
   if ((p.comparison.sharedDesign || []).length) L.push('- **Ruled out (identical in both):** ' + p.comparison.sharedDesign.join(', '));
-  L.push('', '_Listed in schema order, not priority order. StudyDiff does not nominate a primary driver: the ranking it used to apply was benchmarked against 15 documented contradictions and scored no better than always guessing "assay" (github.com/nickjlamb/studydiff#does-it-work-a-measured-answer)._', '');
+  L.push('', '_Listed in schema order, not priority order. StudyDiff does not nominate a primary driver: the ranking it used to apply was benchmarked against two independent sets of 15 documented contradictions — the second held out and measured once — and scored no better than always guessing "assay" (github.com/nickjlamb/studydiff#does-it-work-a-measured-answer)._', '');
   if (p.resolve && p.resolve.length) { L.push('## What would resolve this'); for (const r of p.resolve) L.push('- ' + r); L.push('_Reasoning about missing evidence, not a claim from the papers._', ''); }
   L.push('## Full comparison', '_Every reported value is verified against the source; the supporting sentence is quoted._', '');
   const fld = (tag, cite, f, g) => {
@@ -903,7 +903,7 @@ function buildReportHTML(p) {
   c += '<h2>What differs, and what doesn’t</h2><ul>';
   p.comparison.candidateReasons.forEach((r) => { c += '<li><b>Differs – ' + e(r.label) + '</b><br>A: ' + e(r.a) + '<br>B: ' + e(r.b) + '</li>'; });
   if ((p.comparison.sharedDesign || []).length) c += '<li><b>Ruled out (identical in both):</b> ' + e(p.comparison.sharedDesign.join(', ')) + '</li>';
-  c += '</ul><p class="note">Listed in schema order, not priority order. StudyDiff does not nominate a primary driver — the ranking it used to apply scored no better than always guessing “assay” against 15 documented contradictions.</p>';
+  c += '</ul><p class="note">Listed in schema order, not priority order. StudyDiff does not nominate a primary driver — the ranking it used to apply scored no better than always guessing “assay” against two independent sets of 15 documented contradictions, the second held out and measured once.</p>';
   if (p.resolve && p.resolve.length) { c += '<h2>What would resolve this</h2><ul>'; for (const r of p.resolve) c += '<li>' + e(r) + '</li>'; c += '</ul><p class="note">Reasoning about missing evidence, not a claim from the papers.</p>'; }
   c += '<h2>Full comparison</h2><p class="note">Every reported value is verified against the source; the supporting sentence is quoted.</p>';
   const fld = (tag, cite, f, g) => {

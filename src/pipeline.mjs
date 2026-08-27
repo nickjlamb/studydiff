@@ -35,8 +35,9 @@ function synthesize(comparison, cards) {
   //
   // This used to name candidateReasons[0] as "the most likely reason". That ranking was
   // benchmarked (eval/) and retired: it scored 13.3% against 15 documented
-  // contradictions, identical to always guessing "assay". Naming one is the claim we
-  // cannot support; listing them is the claim we can.
+  // contradictions, identical to always guessing "assay" — and 13.3% again on a blind
+  // held-out set of 15 more, where the constant guess scored 20%. Naming one is the claim
+  // we cannot support; listing them is the claim we can.
   let text = 'These studies reach different conclusions';
   const shared = comparison.sharedDesign;
   if (shared.length) {

@@ -64,7 +64,8 @@ export function toMarkdown(result) {
     }
     if (cmp.candidateReasons.length > 1) {
       L.push('_Listed in schema order, not priority order. StudyDiff does not nominate a primary driver: the ranking it' +
-        ' used to apply was benchmarked against 15 documented contradictions and scored no better than always guessing' +
+        ' used to apply was benchmarked against two independent sets of 15 documented contradictions — the second held' +
+        ' out and measured once — and scored no better than always guessing' +
         ' "assay". See <https://github.com/nickjlamb/studydiff#does-it-work-a-measured-answer>._', '');
     }
   }
