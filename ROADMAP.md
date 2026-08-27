@@ -15,12 +15,17 @@ shown unless it's grounded in the source.** Suggestions welcome via
 - ~~**Quantify extraction variance.**~~ Measured (`npm run eval:variance`): the extracted
   assay string differs on ~90% of re-runs, and the top-ranked driver changed on 1 pair in 3.
   A contributing reason the ranking was never as stable as it looked.
+- ~~**Source viewer.**~~ Shipped. Click any grounded field to open the paper's own text with
+  the supporting sentence highlighted in place. The highlight spans are computed server-side by
+  the *same* matcher that earns the ✓ badge (`locateQuote` in [`src/grounding.mjs`](src/grounding.mjs),
+  which `containsAllowingEllipsis` now derives from), so the viewer can never contradict the
+  badge — ellipsis-joined quotes highlight each fragment, and both true catches in
+  `npm run eval:normtest` still reject. `buildResult` now returns each paper's normalised
+  source text and per-field match spans in the payload (no second endpoint). The part that
+  survived the benchmark, now visible in the source rather than taken on faith.
 
 ## Next
 
-- **Source viewer.** Click any grounded field to open the paper text with the supporting
-  sentence highlighted — make the verification tangible. Now the highest-value UI work,
-  since verification is what survived the benchmark intact.
 - **Raise the ceiling, not the ranking.** The established cause is a candidate in 10/15
   cases; in the other 5 it is absent from the extraction (2 of those are absent from the
   abstracts entirely and are unwinnable by construction). Better extraction is the only
