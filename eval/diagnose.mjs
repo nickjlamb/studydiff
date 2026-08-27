@@ -20,9 +20,10 @@ import { buildResult } from '../src/pipeline.mjs';
 import { groundField } from '../src/grounding.mjs';
 import { contains } from '@pharmatools/opengate/grounding';
 import { readFileSync, existsSync } from 'node:fs';
-import { loadCases, cachePath, parseDepth, cell } from './lib.mjs';
+import { loadCases, cachePath, parseDepth, cell, parseSet } from './lib.mjs';
 
 const depth = parseDepth(process.argv.slice(2));
+const set = parseSet(process.argv.slice(2));
 
 const BOLD = (s) => `\x1b[1m${s}\x1b[0m`;
 const DIM = (s) => `\x1b[2m${s}\x1b[0m`;
@@ -34,11 +35,11 @@ const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 const NR = 'not reported';
 
 function load(caseId, pmid) {
-  const p = cachePath(caseId, pmid, depth);
+  const p = cachePath(caseId, pmid, depth, set);
   return existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : null;
 }
 
-const data = loadCases();
+const data = loadCases(set);
 let preGround = 0, postGround = 0, killed = 0, total = 0;
 const rows = [];
 

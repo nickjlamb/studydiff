@@ -22,9 +22,10 @@
 import { DIMENSIONS } from '../src/types.mjs';
 import { buildResult } from '../src/pipeline.mjs';
 import { rankByRetiredPrior } from '../src/compare.mjs';
-import { loadCases, readCache, withCI, pct, cell, SCORED_DIMENSIONS, parseDepth } from './lib.mjs';
+import { loadCases, readCache, withCI, pct, cell, SCORED_DIMENSIONS, parseDepth, parseSet, SET_LABELS } from './lib.mjs';
 
 const depth = parseDepth(process.argv.slice(2));
+const set = parseSet(process.argv.slice(2));
 
 const BOLD = (s) => `\x1b[1m${s}\x1b[0m`;
 const DIM = (s) => `\x1b[2m${s}\x1b[0m`;
@@ -39,7 +40,7 @@ function assembleCards(caseDef) {
   const texts = [];
   const depths = [];
   for (const p of caseDef.papers) {
-    const cached = readCache(caseDef.id, p.pmid, depth);
+    const cached = readCache(caseDef.id, p.pmid, depth, set);
     if (!cached) return null;
     const card = { pmid: p.pmid, citation: p.citation, sourceDepth: cached.sourceDepth ?? 'abstract' };
     for (const d of DIMENSIONS) card[d] = cached.card[d];
@@ -110,7 +111,7 @@ function confusionMatrix(rows) {
 }
 
 function main() {
-  const data = loadCases();
+  const data = loadCases(set);
   const rows = data.cases.map(scoreCase);
   const missing = rows.filter((r) => r.missing);
   const scored = rows.filter((r) => !r.missing);
@@ -118,6 +119,15 @@ function main() {
   console.log('');
   console.log(BOLD('  StudyDiff driver-ranking benchmark'));
   console.log(DIM(`  ${data.cases.length} documented contradictions · ${data.name}`));
+  // Printed loudly, every run: the two sets mean different things and a number
+  // read out of context is worse than no number. See eval/HELDOUT-PROTOCOL.md.
+  console.log(
+    (set === 'heldout' ? BOLD : DIM)('  set:       ') +
+      (set === 'heldout' ? BOLD(SET_LABELS[set]) : DIM(SET_LABELS[set])),
+  );
+  if (set === 'heldout') {
+    console.log(DIM('  Report this separately from the dev-set number. Never sum the two.'));
+  }
   console.log(
     DIM('  depth arm: ') +
       (depth === 'abstract'
@@ -129,7 +139,8 @@ function main() {
   if (missing.length) {
     console.log(YELLOW(`  ${missing.length} case(s) have no cached extraction for this arm:`));
     for (const m of missing) console.log(DIM(`    - ${m.id}`));
-    console.log(DIM(`    Run \`npm run eval:fetch${depth === 'abstract' ? '' : ' -- --depth as-retrieved'}\`.`));
+    const fflags = [set === 'dev' ? '' : `--set ${set}`, depth === 'abstract' ? '' : `--depth ${depth}`].filter(Boolean).join(' ');
+    console.log(DIM(`    Run \`npm run eval:fetch${fflags ? ` -- ${fflags}` : ''}\`.`));
     console.log('');
   }
   if (!scored.length) {
