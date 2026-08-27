@@ -183,11 +183,47 @@
   .dbody b { font-size:14px; }
   .drow.primary .dbody b { font-size:16px; }
   .dcmp { display:flex; flex-direction:column; gap:2px; margin-top:4px; color:var(--muted); font-size:12.5px; }
-  /* the supporting sentence, shown in full under the value it verifies */
-  blockquote.srcq { margin:8px 0 2px; padding:7px 11px; border-left:3px solid var(--teal);
+  /* the supporting sentence, shown in full under the value it verifies. It is a
+     button: clicking opens the paper's own text with this sentence highlighted in
+     place, so the reader can see it sits in a real paper and wasn't assembled. */
+  button.srcq { display:block; width:100%; text-align:left; cursor:pointer; font:inherit;
+    margin:8px 0 2px; padding:7px 11px; border:1px solid var(--line); border-left:3px solid var(--teal);
     background:#f7f8fa; border-radius:0 6px 6px 0; color:#374151;
-    font-size:12.5px; line-height:1.55; font-style:normal; }
-  blockquote.srcq.b { border-left-color:var(--purple); }
+    font-size:12.5px; line-height:1.55; transition:background .12s, border-color .12s; }
+  button.srcq.b { border-left-color:var(--purple); }
+  button.srcq:hover { background:#f0fdfa; border-color:var(--teal); }
+  button.srcq.b:hover { border-color:var(--purple); background:#faf5ff; }
+  button.srcq .srcq-q { display:block; }
+  button.srcq .srcq-cta { display:inline-flex; align-items:center; gap:4px; margin-top:6px;
+    font-size:11.5px; font-weight:600; color:var(--teal); }
+  button.srcq.b .srcq-cta { color:var(--purple); }
+  button.srcq:hover .srcq-cta { text-decoration:underline; }
+
+  /* source viewer – the paper's own text, with the supporting sentence highlighted */
+  .srcmodal[hidden] { display:none; }
+  .srcmodal { position:fixed; inset:0; z-index:50; display:flex; align-items:center; justify-content:center; padding:24px; }
+  .srcmodal-backdrop { position:absolute; inset:0; background:rgba(17,24,39,.55); }
+  .srcmodal-panel { position:relative; background:#fff; border:1px solid var(--line); border-radius:14px;
+    width:min(760px,100%); max-height:min(86vh,860px); display:flex; flex-direction:column; overflow:hidden;
+    box-shadow:0 24px 60px rgba(17,24,39,.28); animation:rise .2s ease-out; }
+  .srcmodal-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px;
+    padding:18px 20px 12px; border-bottom:1px solid var(--line); }
+  .srcmodal-kicker { display:inline-flex; align-items:center; gap:7px; font-size:11px; font-weight:600;
+    text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:5px; }
+  .srcmodal-kicker .stag { width:20px; height:20px; }
+  .srcmodal-head h3 { margin:0; font-size:16px; line-height:1.3; color:var(--ink); }
+  .srcmodal-x { flex:0 0 auto; border:1px solid var(--line); background:#fff; color:var(--muted);
+    width:30px; height:30px; border-radius:8px; cursor:pointer; font-size:15px; line-height:1; }
+  .srcmodal-x:hover { border-color:var(--teal); color:var(--teal); background:#f0fdfa; }
+  .srcmodal-sub { padding:10px 20px 0; font-size:12.5px; color:var(--muted); }
+  .srcmodal-sub .val { color:var(--ink); font-weight:600; }
+  .srcmodal-body { position:relative; overflow:auto; margin:12px 6px 6px; padding:4px 14px;
+    font-size:13.5px; line-height:1.7; color:#374151; white-space:normal; overflow-wrap:break-word; }
+  .srcmodal-body mark.shl { background:#fde68a; color:#111827; border-radius:3px; padding:1px 2px;
+    box-shadow:0 0 0 1px #f59e0b33; scroll-margin:80px; }
+  .srcmodal-foot { padding:11px 20px 15px; border-top:1px solid var(--line); font-size:11.5px; color:var(--muted); line-height:1.5; }
+  .srcmodal-foot.nohl { color:#b45309; }
+  @media (max-width:560px) { .srcmodal { padding:0; } .srcmodal-panel { border-radius:0; max-height:100vh; height:100vh; width:100vw; } }
 
   details.fullcmp { margin:18px 0 6px; }
   details.fullcmp summary { display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none;
@@ -374,6 +410,25 @@
     Open source (MIT) on <a href="https://github.com/nickjlamb/studydiff" target="_blank" rel="noopener">GitHub</a> · Built for Anthropic's <a href="https://cerebralvalley.ai/e/built-with-claude-life-sciences">Built with Claude: Life Sciences</a> hackathon.</p>
 </div>
 
+<!-- Source viewer: opens a paper's own text with the supporting sentence highlighted in
+     place. The highlight ranges are computed server-side by the SAME matcher that earns the
+     ✓ badge (src/grounding.mjs locateQuote), so the viewer can never contradict the badge. -->
+<div id="srcModal" class="srcmodal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="srcModalTitle">
+  <div class="srcmodal-backdrop" data-close></div>
+  <div class="srcmodal-panel" role="document">
+    <div class="srcmodal-head">
+      <div>
+        <div class="srcmodal-kicker" id="srcModalKicker"></div>
+        <h3 id="srcModalTitle">In the source</h3>
+      </div>
+      <button class="srcmodal-x" id="srcModalClose" type="button" aria-label="Close source viewer">✕</button>
+    </div>
+    <div class="srcmodal-sub" id="srcModalSub"></div>
+    <div class="srcmodal-body" id="srcModalBody" tabindex="0"></div>
+    <div class="srcmodal-foot" id="srcModalFoot">Highlighted in the paper’s own text, exactly where StudyDiff verified it — the same match that earned the ✓, not a separate lookup.</div>
+  </div>
+</div>
+
 <script>
 const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
@@ -401,6 +456,96 @@ $$('.paper').forEach((paper) => {
 
 $('#go').onclick = runCompare;
 $$('.exchip').forEach((c) => c.onclick = () => run({ mode:'demo', fixture:c.dataset.fixture }));
+
+// ---- Source viewer ----
+// The last rendered payload, so the (once-attached) viewer handler can read the source
+// text and pre-computed highlight spans without re-plumbing them through the DOM.
+let lastPayload = null;
+const srcModal = $('#srcModal');
+let srcLastFocus = null;
+
+// Open the paper's text with the field's supporting sentence highlighted. `spans` are
+// [start,end) offsets into p.sources[side] (the normalised text grounding verified),
+// computed by src/grounding.mjs — the viewer renders them, it does not re-match.
+function openSrc(side, dim) {
+  const p = lastPayload; if (!p) return;
+  const idx = side === 'a' ? 0 : 1;
+  const card = p.cards[idx];
+  const text = (p.sources && p.sources[side]) || '';
+  const g = p.grounding[side].results[dim] || {};
+  const spans = g.spans || [];
+  const row = p.comparison.rows.find((r) => r.dimension === dim);
+  const label = row ? row.label : dim;
+
+  $('#srcModalKicker').innerHTML = '<span class="stag ' + side + '">' + side.toUpperCase() + '</span> ' + esc(label);
+  $('#srcModalTitle').textContent = card.citation || ('Study ' + side.toUpperCase());
+  $('#srcModalSub').innerHTML = 'Verified value: <span class="val">“' + esc(card[dim] ? card[dim].value : '') + '”</span>';
+
+  const built = highlightSource(text, spans);
+  const body = $('#srcModalBody');
+  body.innerHTML = built.html || '<span class="nr">Source text unavailable.</span>';
+  const foot = $('#srcModalFoot');
+  if (built.n > 0) {
+    foot.className = 'srcmodal-foot';
+    foot.textContent = 'Highlighted in the paper’s own text, exactly where StudyDiff verified it — the same match that earned the ✓, not a separate lookup.';
+  } else {
+    // Grounded, but the exact offsets weren't available — show the full source rather
+    // than a highlight we can't place. Never a contradiction of the ✓: the field is
+    // still verified; we just couldn't pinpoint the span for display.
+    foot.className = 'srcmodal-foot nohl';
+    foot.textContent = 'Showing the paper’s full source text. The value is verified against it; the exact sentence couldn’t be pinpointed for highlighting here.';
+  }
+
+  srcLastFocus = document.activeElement;
+  srcModal.hidden = false;
+  srcModal.setAttribute('aria-hidden', 'false');
+  $('#srcModalClose').focus();
+  // Scroll the first highlight to the middle of the (own-scrolling) body.
+  requestAnimationFrame(() => {
+    const m = body.querySelector('mark.shl');
+    if (m) body.scrollTop = Math.max(0, m.offsetTop - body.clientHeight / 2);
+    else body.scrollTop = 0;
+  });
+}
+
+function closeSrc() {
+  if (srcModal.hidden) return;
+  srcModal.hidden = true;
+  srcModal.setAttribute('aria-hidden', 'true');
+  if (srcLastFocus && srcLastFocus.focus) srcLastFocus.focus();
+}
+
+// Build source HTML with <mark> at the given spans. Escaping is done per-segment so the
+// offsets (which index the raw text) always line up with what is rendered.
+function highlightSource(text, spans) {
+  if (!text) return { html: '', n: 0 };
+  if (!spans || !spans.length) return { html: esc(text), n: 0 };
+  const sorted = [...spans].filter((s) => Array.isArray(s) && s[1] > s[0]).sort((x, y) => x[0] - y[0]);
+  const merged = [];
+  for (const s of sorted) {
+    const last = merged[merged.length - 1];
+    if (last && s[0] <= last[1]) last[1] = Math.max(last[1], s[1]);
+    else merged.push([s[0], s[1]]);
+  }
+  let html = '', cur = 0;
+  for (const [s, e] of merged) {
+    if (s > cur) html += esc(text.slice(cur, s));
+    html += '<mark class="shl">' + esc(text.slice(s, e)) + '</mark>';
+    cur = e;
+  }
+  html += esc(text.slice(cur));
+  return { html, n: merged.length };
+}
+
+// One delegated handler covers every grounded sentence in the results (they are
+// re-rendered on each run, so binding per-element would leak listeners).
+$('#out').addEventListener('click', (e) => {
+  const btn = e.target.closest('.srcq');
+  if (btn && btn.dataset.side && btn.dataset.dim) openSrc(btn.dataset.side, btn.dataset.dim);
+});
+$('#srcModalClose').onclick = closeSrc;
+$$('[data-close]', srcModal).forEach((el) => el.onclick = closeSrc);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSrc(); });
 
 // Enter submits from any single-line input (the paste textarea keeps Enter for newlines).
 $$('.in-id, .in-cite').forEach((el) => el.addEventListener('keydown', (e) => {
@@ -554,15 +699,22 @@ function handle(ev) {
 // ---- results ----
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const NR = 'not reported';
+const SRC_ARROW = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true" style="vertical-align:-1px"><path d="M7 17L17 7M9 7h8v8"/></svg>';
 // A grounded value shows its supporting sentence in full, on screen – the quote is the
-// evidence, so it must be readable, not buried in a hover tooltip.
-const cell = (f, grounded, side) => f.value === NR
+// evidence, so it must be readable, not buried in a hover tooltip. The sentence is a
+// button: it opens the paper's own text with this sentence highlighted in place.
+const cell = (f, grounded, side, dim) => f.value === NR
   ? '<span class="nr">not reported</span>'
   : esc(f.value)
     + (grounded ? '<span class="badge g">✓ verified</span>' : '')
-    + (grounded && f.quote ? '<blockquote class="srcq ' + side + '">“' + esc(f.quote) + '”</blockquote>' : '');
+    + (grounded && f.quote
+        ? '<button type="button" class="srcq ' + side + '" data-side="' + side + '" data-dim="' + esc(dim) + '">'
+          + '<span class="srcq-q">“' + esc(f.quote) + '”</span>'
+          + '<span class="srcq-cta">See it in the paper ' + SRC_ARROW + '</span></button>'
+        : '');
 
 function render(p) {
+  lastPayload = p;   // the source viewer reads this for text + highlight spans
   const [a, b] = p.cards;
   const ga = p.grounding.a.results, gb = p.grounding.b.results;
   const reportedCount = (c) => p.comparison.rows.filter((r) => c[r.dimension].value !== NR).length;
@@ -632,7 +784,7 @@ function render(p) {
   for (const row of p.comparison.rows) {
     const d = row.dimension;
     rows += '<tr class="' + (row.diverges ? 'diverge' : '') + '"><td class="dim">' + esc(row.label) + '</td><td>' +
-      cell(a[d], ga[d] && ga[d].grounded, 'a') + '</td><td>' + cell(b[d], gb[d] && gb[d].grounded, 'b') + '</td></tr>';
+      cell(a[d], ga[d] && ga[d].grounded, 'a', d) + '</td><td>' + cell(b[d], gb[d] && gb[d].grounded, 'b', d) + '</td></tr>';
   }
   h += '<div class="acc" id="d-full">' + accHead('full', 'Full study-by-study comparison') + '<div class="acc-b">' +
     '<table><tr><th>Dimension</th><th class="col-a"><span class="hab a">A</span>' + esc(a.citation) + ' <span class="prov">[' + a.sourceDepth + ']</span></th><th class="col-b"><span class="hab b">B</span>' +

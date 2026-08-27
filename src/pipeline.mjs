@@ -10,6 +10,7 @@ import { compareCards } from './compare.mjs';
 import { findGaps } from './gaps.mjs';
 import { resolvingEvidence } from './resolve.mjs';
 import { groundCard, groundSynthesis } from './grounding.mjs';
+import { normalizeText } from './normalize.mjs';
 
 /** Join words as "a", "a and b", or "a, b and c". */
 function listWords(words) {
@@ -91,7 +92,26 @@ export function buildResult(question, cards, texts) {
   const g = groundSynthesis(synth.text, combined);
   const synthesis = { ...synth, grounded: g.grounded, issues: g.issues };
   const resolve = resolvingEvidence(comparison);
-  return { question, cards: clean, comparison, gaps, grounding, synthesis, resolve };
+
+  // Phase 3 (source viewer): ship each paper's own text to the client so a grounded
+  // field can be shown highlighted in place, not just as a detached quote. Two
+  // deliberate decisions, recorded because the repo records decisions:
+  //
+  //   1. IN THE PAYLOAD, not a separate on-demand endpoint. The text is small —
+  //      MAX_EXTRACT_CHARS caps extraction at 18KB and abstracts are far under that;
+  //      full-text bodies run larger but still tens of KB. The result cache is
+  //      in-memory (guard.mjs: LRU max 200, 6h TTL), so the ceiling is ~200 × two
+  //      papers of source held in server RAM — single-digit MB for a single-instance
+  //      portfolio app. A second endpoint would buy a leaner payload at the cost of a
+  //      second cache key and its own rate-limit surface; not worth it at this size.
+  //   2. The NORMALISED text (what grounding actually verified against), so the span
+  //      offsets below index straight into what the viewer displays. Same normaliser,
+  //      same string — the highlight cannot drift from the source it was checked on.
+  //
+  // Spans live on each grounding result (grounding.a.results[dim].spans); the client
+  // renders exactly those, so the highlight can never contradict the ✓ badge.
+  const sources = { a: normalizeText(texts[0]), b: normalizeText(texts[1]) };
+  return { question, cards: clean, comparison, gaps, grounding, synthesis, resolve, sources };
 }
 
 /** Return a copy of the card with each ungrounded dimension reset to "not reported". */

@@ -6,6 +6,30 @@ All notable changes to StudyDiff are documented here. Format based on
 
 ## [Unreleased]
 
+### Added
+
+- **Source viewer.** Every grounded value in the full comparison is now a button — click
+  it to open the paper's own text with the supporting sentence highlighted in place, in
+  surrounding context. This closes the last gap between *"we verified this"* and *"see for
+  yourself"*: the reader no longer takes on faith that the quoted sentence sits in a real
+  paper and wasn't assembled.
+
+  The highlight ranges are computed **server-side by the same matcher that earns the ✓
+  badge** (`locateQuote` in `src/grounding.mjs`, which `containsAllowingEllipsis` is now
+  derived from). The viewer renders those ranges; it never re-matches. So the highlight
+  cannot drift from the badge — a viewer that said "sentence not found" beside a ✓ would be
+  the worst bug this product could ship, and this design makes it structurally impossible.
+  Ellipsis-joined quotes highlight each fragment (not the gap between them); the guards
+  that stop ellipsis-joining becoming a fabrication licence are unchanged, and both true
+  catches in `eval:normtest` still reject.
+
+  Plumbing: `buildResult` now returns each paper's normalised source text (`sources`) and
+  per-field match spans (on `grounding.*.results[dim].spans`) in the payload. The text is
+  carried in the result payload rather than a second endpoint — it is small (extraction is
+  capped at 18 KB; the in-memory result cache is LRU 200 / 6 h), so a leaner payload wasn't
+  worth a second cache key and rate-limit surface. Purely additive: CLI, Markdown/HTML
+  exports and the MCP server are unaffected.
+
 ### Removed
 
 - **The primary driver.** StudyDiff no longer nominates one divergent dimension as the
