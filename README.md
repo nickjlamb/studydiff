@@ -82,17 +82,63 @@ domain knowledge the tool doesn't have.
 **What still holds:** which dimensions differ, which are identical (*ruled out*), and the
 verbatim sentence behind every value. None of that depends on the ranking.
 
+### Confirmed blind, on a second set
+
+Those 15 cases had by then been read across two phases — failures analysed, spans re-audited —
+so every post-fix figure from them is *development-set* accuracy, not a blind measurement. So we
+built a second set and measured it once.
+
+`eval/cases-heldout.json` is 15 further documented contradictions, curated to a protocol written
+and committed *before any case was selected* ([`eval/HELDOUT-PROTOCOL.md`](eval/HELDOUT-PROTOCOL.md)),
+by a curator kept blind to the dev set's per-case failures, in deliberately different fields:
+microbiome, marine ecology, toxicology, psychology, critical care, oncology, infectious disease.
+No paper and no contradiction is shared with the dev set — `selftest` enforces that mechanically.
+
+```
+Top-1 accuracy (strict)      13.3%  (95% CI 3.7-37.9%)   [2/15]
+Baseline "always say assay"  20.0%  (95% CI 7.0-45.2%)   [3/15]
+                             → discordant on 1 of 15 cases
+Oracle ceiling (reachable)   73.3%  (95% CI 48.0-89.1%)  [11/15]
+Non-assay-labelled cases      0.0%  (95% CI 0.0-24.3%)   [0/12]
+```
+
+On unseen data the prior scores **below** the constant guess — by exactly one case. The intervals
+overlap almost entirely and the two strategies disagree on 1 of 15, so the honest statement is
+that it remains indistinguishable from guessing `assay` every time, not that it is worse.
+
+The line that does not move is the last one. **Across both sets, 25 cases where the established
+cause was something other than `assay`, the prior identified none of them.** And the ceiling here
+is *higher* than on the dev set — 73.3% against 66.7% — so extraction put the right answer in
+front of the ranker more often, and it was taken no more often. That is the Phase 1–2 conclusion
+reproduced on data the development loop never saw, which is the only way it could have been
+strengthened.
+
+The number is reported as-is, and is never pooled with the dev-set number: summing them into an
+"n=30" figure would relaunder read data as blind data. Nothing in `src/` was changed on the basis
+of it. The set was fetched once on a single pre-registered arm, but the scoring was not one clean
+pass — the first run reported n=14 after one paper failed to fetch, and the full set was scored
+after retrieving it. Both figures, the sixteen defects an adversarial verification pass found and
+corrected *before* any scoring, and the reasoning behind each label are recorded in the file's own
+provenance block rather than summarised away.
+
+```bash
+npm run eval:heldout            # the blind number, offline and free
+npm run eval:selftest:heldout   # set integrity, incl. zero overlap with the dev set
+```
+
 Full method, the pre-registered decisions, and every prediction that turned out wrong:
 [`eval/README.md`](eval/README.md) and [`eval/PHASE2.md`](eval/PHASE2.md). The benchmark
-set is [`eval/cases.json`](eval/cases.json).
+sets are [`eval/cases.json`](eval/cases.json) (development) and
+[`eval/cases-heldout.json`](eval/cases-heldout.json) (held-out).
 
 ```bash
 npm run eval            # offline, free, no API key — regenerates the numbers above
 npm run eval:selftest   # validates the harness maths and set integrity
 ```
 
-`eval/cache/` is committed on purpose. It isn't build output, it's evidence: the published
-number is reproducible from artefacts in the repo rather than taken on faith.
+`eval/cache/` and `eval/cache-heldout/` are committed on purpose. They aren't build output,
+they're evidence: the published numbers are reproducible from artefacts in the repo rather than
+taken on faith.
 
 ## Quick start
 
