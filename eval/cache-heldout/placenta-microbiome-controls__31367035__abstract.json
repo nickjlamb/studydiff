@@ -1,0 +1,63 @@
+{
+  "pmid": "31367035",
+  "caseId": "placenta-microbiome-controls",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does the human placenta harbour a resident microbiome?",
+  "citation": "de Goffau et al. 2019, Nature",
+  "title": "Human placenta has no microbiome but can contain potential pathogens.",
+  "sourceDepth": "abstract",
+  "textChars": 994,
+  "text": "We sought to determine whether pre-eclampsia, spontaneous preterm birth or the delivery of infants who are small for gestational age were associated with the presence of bacterial DNA in the human placenta. Here we show that there was no evidence for the presence of bacteria in the large majority of placental samples, from both complicated and uncomplicated pregnancies. Almost all signals were related either to the acquisition of bacteria during labour and delivery, or to contamination of laboratory reagents with bacterial DNA. The exception was Streptococcus agalactiae (group B Streptococcus), for which non-contaminant signals were detected in approximately 5% of samples collected before the onset of labour. We conclude that bacterial infection of the placenta is not a common cause of adverse pregnancy outcome and that the human placenta does not have a microbiome, but it does represent a potential site of perinatal acquisition of S. agalactiae, a major cause of neonatal sepsis.",
+  "card": {
+    "pmid": "31367035",
+    "citation": "de Goffau et al. 2019 Nature",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Human placenta lacks a resident microbiome; bacteria mostly contaminants except GBS",
+      "quote": "the human placenta does not have a microbiome, but it does represent a potential site of perinatal acquisition of S. agalactiae"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "human placenta"
+    },
+    "model": {
+      "value": "Human pregnancies (complicated and uncomplicated)",
+      "quote": "from both complicated and uncomplicated pregnancies"
+    },
+    "intervention": {
+      "value": "Comparison of pregnancy complications (pre-eclampsia, preterm birth, SGA) vs uncomplicated pregnancies",
+      "quote": "whether pre-eclampsia, spontaneous preterm birth or the delivery of infants who are small for gestational age were associated with the presence of bacterial DNA in the human placenta"
+    },
+    "assay": {
+      "value": "Detection of bacterial DNA in placental samples",
+      "quote": "the presence of bacterial DNA in the human placenta"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "Before onset of labour vs during labour and delivery",
+      "quote": "acquisition of bacteria during labour and delivery"
+    },
+    "endpoint": {
+      "value": "Presence/absence of bacterial DNA signal, contaminant vs non-contaminant",
+      "quote": "there was no evidence for the presence of bacteria in the large majority of placental samples"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "~5% of pre-labour samples had non-contaminant S. agalactiae signal",
+      "quote": "non-contaminant signals were detected in approximately 5% of samples collected before the onset of labour"
+    },
+    "limitations": {
+      "value": "Contamination of laboratory reagents confounds bacterial DNA signals",
+      "quote": "contamination of laboratory reagents with bacterial DNA"
+    }
+  },
+  "extractedAt": "2026-08-27T21:51:24.003Z",
+  "model": "claude-sonnet-5"
+}

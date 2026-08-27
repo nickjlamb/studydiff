@@ -1,0 +1,607 @@
+{
+  "schemaVersion": "1.0",
+  "name": "StudyDiff held-out contradiction benchmark",
+  "set": "heldout",
+  "license": "CC-BY-4.0",
+  "description": "A SECOND, BLIND set of documented scientific contradictions, curated to a protocol pre-registered before any case was selected (eval/HELDOUT-PROTOCOL.md) and fetched once and scored on a single pre-registered arm (see provenance.result for the scoring history, which was two passes because one paper initially failed to fetch). Same schema and same standard as eval/cases.json. It exists because the 15 dev-set cases have been read across two phases - failures analysed, spans re-audited - so every post-fix figure from them is development-set accuracy rather than a blind measurement. The two sets are always reported separately and never pooled.",
+  "labelPolicy": {
+    "dimension": "The single PRIMARY dimension the established cause maps to. Used for the headline strict top-1 score.",
+    "alsoAcceptable": "Other dimensions that documented sources show contribute to the disagreement. Used ONLY for a secondary lenient score, never for the headline. Empty array means the case is clean/single-cause.",
+    "confidence": "'established' = the cause is settled in the literature. 'contested' = the cause is argued over, or the adjudicating source hedges it, or the original authors dispute it. Contested cases are scored the same; the flag exists so readers can subset. This set is 7/15 contested, higher than the dev set - a real property of the material, since for many modern contradictions the leading explanation is still disputed by the original authors.",
+    "causeVisibleInSource": "'yes' = the causal difference is stated in BOTH papers' abstracts. 'partial' = stated in only one. 'no' = stated in neither. StudyDiff reads text, so 'no' cases are UNWINNABLE by construction. They are kept in the headline score and are the basis of the oracle ceiling. Excluding them would flatter the number.",
+    "evidence": "Verbatim spans from each paper's abstract showing where the causal difference is (or is not) visible."
+  },
+  "provenance": {
+    "preRegistration": "eval/HELDOUT-PROTOCOL.md, written and committed BEFORE any candidate was selected. It fixes n=15, the selection criteria, the composition constraints, the no-tuning rule, the implementation shape, and a list of things that would invalidate the set.",
+    "blinding": "Curated without reading eval/README.md or eval/PHASE2.md beyond method and schema, and without running eval/score.mjs, all of which carry per-case dev-set pass/fail and a failure taxonomy. Cases were selected on structure alone - a documented contradiction, an adjudicating source with a PMID and a quotable establishing sentence, and a cause mapping to one design dimension. No case was chosen or rejected on any expectation of how StudyDiff would score it.",
+    "pmidVerification": "The 45 structural PMIDs in this file (15 cases x 2 papers + 15 label citations, all distinct) were retrieved from PubMed and their titles, first authors, years and journals confirmed. Titles are recorded as PubMed returns them. Every span in `evidence` and `establishes` was copied from the retrieved abstract text, not from any secondhand summary - the v1.0 audit of cases.json found two fabricated spans that had been copied from a fixture's card VALUES rather than quoted from the abstract, and that is precisely the error class this benchmark measures. Six further PMIDs are cited in prose within confidenceNote fields (19318387, 23257945, 27826272, 33061866, 33087909, 36434649, 38926587 - 38926587 being a retraction notice that carries no abstract); these were also resolved, and are named here because the original wording of this field wrongly implied a count of 45 covered them.",
+    "selection": "Twenty candidates were verified; five were dropped and are recorded in eval/HELDOUT-SHORTLIST.md rather than quietly discarded: cell-line pharmacogenomics (no adjudicator abstract establishes the cause), CRISPR off-target genetic background (paper A and all five rebuttals have no PubMed abstracts), bevacizumab endpoint (the two papers do not actually contradict - both report a PFS gain and no OS gain), EGDT usual care (the only source stating comparator drift is coauthored by the original trialist, and PRISM argues against it), and neonicotinoid field-realistic dose (the natural adjudicator is not indexed in PubMed). Two papers were substituted at the paper level because the famous option had no abstract: Yao et al. 2020 in place of Wang et al. 2020 Cell Research, and Scott 1977 / Delahunt 1964 in place of the unindexed 1960s thalidomide literature.",
+    "composition": "Eight distinct dimensions carry primary labels: assay 3, sampleSize 3, intervention 3, species 2, model 1, endpoint 1, timing 1, dose 1. assay is 3/15 (20.0%), against a constraint of no more than one third. NOTE, recorded because it is a consequence of the post-curation audit and not of curation: the set as shortlisted covered all nine scorable dimensions, but the audit moved the tumour-microbiome case from 'statistic' to 'assay' (its adjudicating sentence names contamination first in an unranked list), which leaves 'statistic' with no primary label. It survives as alsoAcceptable on three cases. Correcting a label to match its source was judged more important than preserving full dimension coverage - coverage was an aim in the protocol, never a constraint, and trading a defensible label for a tidier distribution is the kind of move the protocol exists to prevent. Visibility: 3 yes, 9 partial, 3 no, giving an a priori ceiling of 80%. Domain mix deliberately widened beyond the dev set's supplement-and-trial weighting: microbiome, marine ecology, toxicology, psychology, critical care, oncology, infectious disease.",
+    "sourceDepth": "abstract (pre-registered primary arm, matching the dev set)",
+    "sourceDepthNote": "The primary arm reads ABSTRACTS ONLY, for the same three reasons recorded in cases.json: reproducibility (PMC Open Access membership drifts over time, so an as-retrieved number would change for reasons unrelated to the tool), symmetry (a full-text paper reports far more dimensions than an abstract-only one, which silently removes dimensions from contention for reasons of journal licensing), and validity (every causeVisibleInSource annotation here was judged against abstracts, so the oracle ceiling is only meaningful against abstracts).",
+    "verificationHistory": "Before this set was fetched or scored, four independent adversarial verifiers re-retrieved all 45 abstracts and checked every quoted span character-by-character against the returned text, testing HTML-entity decoding both ways, splitting marked elisions and checking fragment order. WHAT HELD: all 45 spans verbatim; all elisions genuine and correctly ordered; all 45 PMIDs resolving to the right paper with correct first author, year and journal, corporate authors included; no overlap of any kind with the dev set; no circular label citations. The fabricated-span failure found in cases.json v1.0 is absent here. WHAT IT CAUGHT, all since corrected: one FACTUAL INVERSION (aflatoxin paper B's conclusion had susceptibility tracking 'inversely' with both GST and DNA adduct formation; the abstract and the paper's own title say adducts run the other way); one DERIVED NUMBER presented as a paper's stated finding ('123 evaluable patients' for Creagan, correct as 60+63 but absent from an abstract that says 150); one MISQUOTATION in a note (Sandroni 2022 rendered as '32-34 degrees C' where the source has a degree sign and a non-breaking space; now described rather than quoted); one UNSUPPORTED DESCRIPTOR ('low-abundance' for Aagaard, true of the full text but absent from the abstract); one CURATOR'S LABEL presented as a paper's finding ('a J-shaped association' for PURE, whose abstract never uses the term); two ESTABLISHING QUOTES THAT DID NOT ESTABLISH THE LABELLED CAUSE (the obesity power figure was computed for alpha diversity rather than the Firmicutes-to-Bacteroidetes ratio the case is built on, and the omega-3 quote was truncated immediately before the lipid and C-reactive-protein clause carrying half the cause); two INCONSISTENT GRADINGS (the tumour-microbiome case was labelled 'statistic' although its adjudicating sentence is an unranked list naming contamination first - now 'assay' with 'statistic' alsoAcceptable; and thalidomide's visibility was graded 'yes' under a looser test than the structurally identical aflatoxin case's 'partial' - now 'partial'); one UNDISCLOSED NON-INDEPENDENCE (the sodium adjudicator shares its last author and its entire dataset with paper B); one SCORING DEFECT (a system correctly identifying route in the vitamin C case and filing it under intervention scored zero on both metrics; 'intervention' is now alsoAcceptable); one UNVERIFIABLE CLAIM (the grounds for the Poore retraction, whose notice carries no abstract - now marked as inferred); and one WRONG COUNT in this provenance block. This history is recorded rather than quietly absorbed, for the same reason cases.json records its own: a file that documents the errors caught in it is more trustworthy than one that looks as though it never had any. A second pass over the corrections themselves confirmed all seven edited fields against freshly retrieved abstracts, found no new factual error, and caught one further misattribution in the hypothermia note - Sandroni 2022 is a narrative review reporting a systematic review of 32 trials, not itself that systematic review - which is corrected here.",
+    "result": "MEASURED 27 August 2026, abstract arm. Top-1 accuracy (strict) 13.3% (95% CI 3.7-37.9%) [2/15]; baseline 'always say assay' 20.0% (95% CI 7.0-45.2%) [3/15]; lenient 13.3% [2/15]; oracle ceiling 73.3% (95% CI 48.0-89.1%) [11/15]; accuracy among reachable 18.2% [2/11]; non-assay-labelled cases 0.0% [0/12]. The retired prior scores BELOW the constant guess here, by one case out of fifteen - the two disagree on 1/15, and the intervals overlap almost entirely, so the honest reading is that the prior is indistinguishable from a constant guess, not that it is worse than one. SCORING HISTORY, recorded because it was not a single clean pass: the first scoring run reported n=14, because one paper (obesity-microbiome-power / 19498350) had failed to fetch and score.mjs correctly excluded the case rather than silently scoring around it. That paper was then fetched - which touched no existing cache entry, since fetch.mjs skips what is already cached - and the full 15 scored, giving the figures above. The n=14 pass reported 14.3% [2/14] against a 21.4% [3/14] baseline. Both are on the record; the n=15 figures are the result. This `result` field and this note were added AFTER scoring and are the only post-score change to this file: no case was added, removed, relabelled or re-fetched, which protocol section 6 would have treated as invalidating. Nothing in src/ was changed on the basis of these numbers."
+  },
+  "cases": [
+    {
+      "id": "hydroxychloroquine-cell-line",
+      "question": "Does chloroquine or hydroxychloroquine inhibit SARS-CoV-2 effectively enough to treat Covid-19?",
+      "papers": [
+        {
+          "pmid": "32150618",
+          "citation": "Yao et al. 2020, Clin Infect Dis",
+          "title": "In Vitro Antiviral Activity and Projection of Optimized Dosing Design of Hydroxychloroquine for the Treatment of Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2).",
+          "conclusion": "Hydroxychloroquine inhibited SARS-CoV-2 in Vero cells and was more potent than chloroquine in vitro, supporting a proposed oral dosing regimen for treatment."
+        },
+        {
+          "pmid": "33031652",
+          "citation": "RECOVERY Collaborative Group 2020, N Engl J Med",
+          "title": "Effect of Hydroxychloroquine in Hospitalized Patients with Covid-19.",
+          "conclusion": "Hydroxychloroquine did not lower 28-day mortality in hospitalised Covid-19 patients (27.0% vs 25.0%; rate ratio 1.09)."
+        }
+      ],
+      "label": {
+        "dimension": "model",
+        "cause": "The in vitro effect belongs to the cell system rather than the drug: chloroquine blocks the endosomal entry route used in TMPRSS2-deficient Vero kidney cells, but not the TMPRSS2-dependent route by which SARS-CoV-2 enters human lung cells.",
+        "alsoAcceptable": [],
+        "citation": {
+          "pmid": "32698190",
+          "citation": "Hoffmann et al. 2020, Nature",
+          "title": "Chloroquine does not inhibit infection of human lung cells with SARS-CoV-2.",
+          "establishes": "Chloroquine is an anti-malaria drug that is used for the treatment of COVID-19 as it inhibits the spread of SARS-CoV-2 in the African green monkey kidney-derived cell line Vero. Here we show that engineered expression of TMPRSS2, a cellular protease that activates SARS-CoV-2 for entry into lung cells, renders SARS-CoV-2 infection of Vero cells insensitive to chloroquine. Moreover, we report that chloroquine does not block infection with SARS-CoV-2 in the TMPRSS2-expressing human lung cell line Calu-3."
+        },
+        "confidence": "established",
+        "confidenceNote": "Paper A is Yao et al. rather than the more famous Wang et al. 2020 Cell Research or Liu et al. 2020 Cell Discovery: neither of those has a retrievable PubMed abstract, and this benchmark reads abstracts. Note that dose is a live competing explanation - Yao pairs its EC50 values with a PBPK argument that those exposures are clinically achievable - but the adjudicating source dissociates the two by showing that TMPRSS2-expressing Vero cells become chloroquine-insensitive, which no dose account predicts.",
+        "causeVisibleInSource": "partial",
+        "visibilityNote": "Yao's abstract names the cell system verbatim ('SARS-CoV-2-infected Vero cells'). RECOVERY's abstract names no cell system at all - its only gesture at the divide is 'on the basis of in vitro activity'. The mechanism itself (TMPRSS2-dependent entry) is recoverable only from the adjudicating source.",
+        "evidence": {
+          "a": "The pharmacological activity of chloroquine and hydroxychloroquine was tested using SARS-CoV-2-infected Vero cells.",
+          "b": "Hydroxychloroquine and chloroquine have been proposed as treatments for coronavirus disease 2019 (Covid-19) on the basis of in vitro activity and data from uncontrolled studies and small, randomized trials."
+        }
+      }
+    },
+    {
+      "id": "placenta-microbiome-controls",
+      "question": "Does the human placenta harbour a resident microbiome?",
+      "papers": [
+        {
+          "pmid": "24848255",
+          "citation": "Aagaard et al. 2014, Sci Transl Med",
+          "title": "The placenta harbors a unique microbiome.",
+          "conclusion": "Placental specimens from 320 subjects contained a unique commensal microbiome, composed of nonpathogenic microbiota and most similar to the oral microbiome, associated with antenatal infection and preterm birth."
+        },
+        {
+          "pmid": "31367035",
+          "citation": "de Goffau et al. 2019, Nature",
+          "title": "Human placenta has no microbiome but can contain potential pathogens.",
+          "conclusion": "No evidence of bacteria in the large majority of placental samples; almost all signals traced to acquisition during labour or to reagent contamination."
+        }
+      ],
+      "label": {
+        "dimension": "assay",
+        "cause": "The reported placental microbiome is the contamination background of low-biomass sequencing: without negative and reagent controls, DNA from kits and dust is indistinguishable from a resident bacterial community.",
+        "alsoAcceptable": [],
+        "citation": {
+          "pmid": "27338728",
+          "citation": "Lauder et al. 2016, Microbiome",
+          "title": "Comparison of placenta samples with contamination controls does not provide evidence for a distinct placenta microbiota.",
+          "establishes": "However, a challenge in working with specimens with low bacterial biomass, such as placental samples, is that some or all of the bacterial DNA may derive from contamination in dust or commercial reagents. [...] We conclude that for this sample set, using the methods described, we could not distinguish between placental samples and contamination introduced during DNA purification."
+        },
+        "confidence": "established",
+        "causeVisibleInSource": "partial",
+        "visibilityNote": "de Goffau states the contamination explanation outright. Aagaard's abstract states only that specimens were 'collected under sterile conditions' - sterile collection is not the same as a sequencing contamination control, and no negative control is mentioned.",
+        "evidence": {
+          "a": "A population-based cohort of placental specimens collected under sterile conditions from 320 subjects with extensive clinical data was established for comparative 16S ribosomal DNA-based and whole-genome shotgun (WGS) metagenomic studies.",
+          "b": "Almost all signals were related either to the acquisition of bacteria during labour and delivery, or to contamination of laboratory reagents with bacterial DNA."
+        }
+      }
+    },
+    {
+      "id": "obesity-microbiome-power",
+      "question": "Is human obesity associated with a consistent shift in the gut Firmicutes-to-Bacteroidetes ratio?",
+      "papers": [
+        {
+          "pmid": "17183309",
+          "citation": "Ley et al. 2006, Nature",
+          "title": "Microbial ecology: human gut microbes associated with obesity.",
+          "conclusion": "The relative proportion of Bacteroidetes is decreased in obese people compared with lean people and increases with weight loss."
+        },
+        {
+          "pmid": "19498350",
+          "citation": "Schwiertz et al. 2010, Obesity (Silver Spring)",
+          "title": "Microbiota and SCFA in lean and overweight healthy subjects.",
+          "conclusion": "In 98 subjects the Firmicutes-to-Bacteroidetes ratio shifted in favour of Bacteroidetes in overweight and obese subjects - the opposite direction to earlier reports."
+        }
+      ],
+      "label": {
+        "dimension": "sampleSize",
+        "cause": "The association between the Firmicutes-to-Bacteroidetes ratio and obesity is far smaller than cohorts of a few dozen subjects are powered to detect, so the direction of the reported difference flips between underpowered studies.",
+        "alsoAcceptable": [
+          "statistic"
+        ],
+        "citation": {
+          "pmid": "27555308",
+          "citation": "Sze & Schloss 2016, mBio",
+          "title": "Looking for a Signal in the Noise: Revisiting Obesity and the Microbiome.",
+          "establishes": "They were not observed for the ratio of Bacteroidetes and Firmicutes or their individual relative abundances. [...] A power analysis demonstrated that only one of the studies had sufficient power to detect a 5% difference in diversity. [...] Although there was support for a relationship between the microbial communities found in human feces and obesity status, this association was relatively weak and its detection is confounded by large interpersonal variation and insufficient sample sizes."
+        },
+        "confidence": "established",
+        "confidenceNote": "'Established' refers to the power/effect-size finding, which is settled. The underlying directional claim about the F/B ratio remains contested in the literature - which is the point of the case.",
+        "causeVisibleInSource": "partial",
+        "visibilityNote": "Schwiertz states its own sample size and explicitly criticises prior work for relying on 'rather small and defined groups of volunteers'. Ley's abstract states no sample size, no effect magnitude and no power consideration.",
+        "evidence": {
+          "a": "Here we show that the relative proportion of Bacteroidetes is decreased in obese people by comparison with lean people, and that this proportion increases with weight loss on two types of low-calorie diet.",
+          "b": "A total of 98 subjects volunteered to take part in this study."
+        }
+      }
+    },
+    {
+      "id": "omega3-placebo-comparator",
+      "question": "Do high-dose omega-3 fatty acids added to statin therapy reduce major adverse cardiovascular events?",
+      "papers": [
+        {
+          "pmid": "30415628",
+          "citation": "Bhatt et al. 2019, N Engl J Med",
+          "title": "Cardiovascular Risk Reduction with Icosapent Ethyl for Hypertriglyceridemia.",
+          "conclusion": "Icosapent ethyl 4 g daily reduced the primary composite ischaemic endpoint versus placebo (17.2% vs 22.0%; hazard ratio 0.75)."
+        },
+        {
+          "pmid": "33190147",
+          "citation": "Nicholls et al. 2020, JAMA",
+          "title": "Effect of High-Dose Omega-3 Fatty Acids vs Corn Oil on Major Adverse Cardiovascular Events in Patients at High Cardiovascular Risk: The STRENGTH Randomized Clinical Trial.",
+          "conclusion": "Omega-3 carboxylic acid 4 g daily versus corn oil produced no difference in major adverse cardiovascular events (hazard ratio 0.99); the trial was halted for futility."
+        }
+      ],
+      "label": {
+        "dimension": "intervention",
+        "cause": "The trials used different comparators - mineral oil in REDUCE-IT versus corn oil in STRENGTH - and the mineral-oil comparator arm shows adverse changes in lipids and C-reactive protein that inflate the apparent treatment effect.",
+        "alsoAcceptable": [],
+        "citation": {
+          "pmid": "34455435",
+          "citation": "Doi et al. 2021, Eur Heart J",
+          "title": "A possible explanation for the contrasting results of REDUCE-IT vs. STRENGTH: cohort study mimicking trial designs.",
+          "establishes": "The contrasting results of REDUCE-IT vs. STRENGTH can partly be explained by a difference in the effect of comparator oils (mineral vs. corn), but not of active oils [...] on lipid traits and C-reactive protein."
+        },
+        "confidence": "contested",
+        "confidenceNote": "The adjudicating source itself says 'partly' and attributes a further unexplained 13% risk reduction to other effects. The REDUCE-IT investigators reject the mineral-oil account directly (Olshansky et al. 2020, PMID 33061866: 'mineral oil does not appear to impact medication absorption or efficacy'). Scored the same as any other case; the flag exists so the set can be subset honestly.",
+        "causeVisibleInSource": "partial",
+        "visibilityNote": "STRENGTH names its comparator and even flags the assumption ('corn oil, which was intended to serve as an inert comparator'). REDUCE-IT's abstract says only 'placebo' and never names mineral oil, so the contrast cannot be recovered from paper A.",
+        "evidence": {
+          "a": "The patients were randomly assigned to receive 2 g of icosapent ethyl twice daily (total daily dose, 4 g) or placebo.",
+          "b": "corn oil, which was intended to serve as an inert comparator"
+        }
+      }
+    },
+    {
+      "id": "hypothermia-control-temperature",
+      "question": "Does induced mild hypothermia after resuscitated cardiac arrest improve survival and neurological outcome?",
+      "papers": [
+        {
+          "pmid": "11856793",
+          "citation": "Hypothermia after Cardiac Arrest Study Group 2002, N Engl J Med",
+          "title": "Mild therapeutic hypothermia to improve the neurologic outcome after cardiac arrest.",
+          "conclusion": "Cooling to 32-34 degrees C improved favourable neurologic outcome (55% vs 39%) and reduced six-month mortality versus standard treatment with normothermia."
+        },
+        {
+          "pmid": "24237006",
+          "citation": "Nielsen et al. 2013, N Engl J Med",
+          "title": "Targeted temperature management at 33°C versus 36°C after cardiac arrest.",
+          "conclusion": "A target of 33°C conferred no mortality or neurologic benefit over a target of 36°C (hazard ratio 1.06)."
+        }
+      ],
+      "label": {
+        "dimension": "intervention",
+        "cause": "The comparator changed: the 2002 trial compared cooling against uncontrolled normothermia in which control patients could become febrile, whereas the 2013 trial compared 33°C against an actively controlled 36°C - that is, against fever prevention rather than against no temperature control.",
+        "alsoAcceptable": [
+          "sampleSize"
+        ],
+        "citation": {
+          "pmid": "22520518",
+          "citation": "Nielsen et al. 2012, Am Heart J",
+          "title": "Target Temperature Management after out-of-hospital cardiac arrest--a randomized, parallel-group, assessor-blinded clinical trial--rationale and design.",
+          "establishes": "Previous trials were small, with high risk of bias, evaluated select populations, and did not treat hyperthermia in the control groups."
+        },
+        "confidence": "established",
+        "confidenceNote": "Weakness stated rather than buried: the adjudicating source is the TTM trial's own rationale-and-design paper, not an independent review, so it is the trialists' framing of the earlier trials. The contrast is corroborated independently by Sandroni et al. 2022 (PMID 36434649), a narrative review which reports a systematic review of 32 trials framing the comparison as a target of 32-34 degrees Celsius versus fever prevention - described here rather than quoted, because the source's own wording uses a degree sign and a non-breaking space that no quotation of it could reproduce faithfully in this file. 'sampleSize' is alsoAcceptable because the same sentence calls the previous trials small.",
+        "causeVisibleInSource": "partial",
+        "visibilityNote": "The 2013 abstract states plainly that both its arms were 'intended to prevent fever'. The 2002 abstract discloses only 'standard treatment with normothermia' and says nothing about whether fever was treated in that arm.",
+        "evidence": {
+          "a": "randomly assigned to undergo therapeutic hypothermia (target temperature, 32 degrees C to 34 degrees C, measured in the bladder) over a period of 24 hours or to receive standard treatment with normothermia",
+          "b": "Our objective was to compare two target temperatures, both intended to prevent fever."
+        }
+      }
+    },
+    {
+      "id": "remdesivir-endpoint-choice",
+      "question": "Does remdesivir benefit adults hospitalised with Covid-19?",
+      "papers": [
+        {
+          "pmid": "32445440",
+          "citation": "Beigel et al. 2020, N Engl J Med",
+          "title": "Remdesivir for the Treatment of Covid-19 - Final Report.",
+          "conclusion": "Remdesivir shortened median time to recovery from 15 to 10 days; the mortality difference was not statistically significant (hazard ratio 0.73)."
+        },
+        {
+          "pmid": "33264556",
+          "citation": "WHO Solidarity Trial Consortium 2021, N Engl J Med",
+          "title": "Repurposed Antiviral Drugs for Covid-19 - Interim WHO Solidarity Trial Results.",
+          "conclusion": "Remdesivir had little or no effect on in-hospital mortality (rate ratio 0.95), initiation of ventilation, or duration of hospital stay."
+        }
+      ],
+      "label": {
+        "dimension": "endpoint",
+        "cause": "The two trials were powered for and reported different primary endpoints - time to clinical recovery versus in-hospital mortality - so a drug that shortens recovery without altering survival produces both results.",
+        "alsoAcceptable": [
+          "timing"
+        ],
+        "citation": {
+          "pmid": "34259182",
+          "citation": "Bose et al. 2021, Lung India",
+          "title": "Placing the results of the SOLIDARITY trial with regards to remdesivir in perspective.",
+          "establishes": "The SOLIDARITY trial was fundamentally different from other clinical trials on remdesivir with respect to its design, adaptive nature, and selection of endpoints. Moreover, the success of antiviral therapy also depends on the timing of initiation and combination with other drugs."
+        },
+        "confidence": "contested",
+        "confidenceNote": "Named rather than smoothed over: Solidarity's own abstract reports that no drug 'reduced initiation of ventilation or hospitalization duration', which cuts against a pure endpoint explanation, and the adjudicating source gives equal weight to trial design, adaptive nature and timing of initiation. 'timing' is therefore alsoAcceptable and the case is flagged contested rather than presented as settled.",
+        "causeVisibleInSource": "yes",
+        "visibilityNote": "Both abstracts state their primary outcome in their own words - ACTT-1 'The primary outcome was the time to recovery', Solidarity 'The intention-to-treat primary analyses examined in-hospital mortality' - so the endpoint difference is recoverable from the sources alone, unusually for this set. Solidarity does not use the phrase 'primary endpoint' itself.",
+        "evidence": {
+          "a": "The primary outcome was the time to recovery, defined by either discharge from the hospital or hospitalization for infection-control purposes only.",
+          "b": "The intention-to-treat primary analyses examined in-hospital mortality in the four pairwise comparisons of each trial drug and its control"
+        }
+      }
+    },
+    {
+      "id": "ocean-acidification-fish-behaviour",
+      "question": "Does end-of-century ocean acidification impair the behaviour of coral reef fishes?",
+      "papers": [
+        {
+          "pmid": "19188596",
+          "citation": "Munday et al. 2009, Proc Natl Acad Sci U S A",
+          "title": "Ocean acidification impairs olfactory discrimination and homing ability of a marine fish.",
+          "conclusion": "Clownfish larvae reared at pH 7.8 became attracted to olfactory cues they normally avoided, and at pH 7.6 no longer responded to olfactory cues at all."
+        },
+        {
+          "pmid": "31915382",
+          "citation": "Clark et al. 2020, Nature",
+          "title": "Ocean acidification does not impair the behaviour of coral reef fishes.",
+          "conclusion": "End-of-century acidification levels had negligible effects on predator-cue avoidance, activity and lateralization; the previously reported effects were not reproducible."
+        }
+      ],
+      "label": {
+        "dimension": "sampleSize",
+        "cause": "The large early effects came from studies with very low sample sizes, and effect sizes in this literature have declined to near zero as larger studies accumulated - a decline effect rather than a biological signal.",
+        "alsoAcceptable": [
+          "statistic"
+        ],
+        "citation": {
+          "pmid": "35113875",
+          "citation": "Clements et al. 2022, PLoS Biol",
+          "title": "Meta-analysis reveals an extreme \"decline effect\" in the impacts of ocean acidification on fish behavior.",
+          "establishes": "Furthermore, the vast majority of studies with large effect sizes in this field tend to be characterized by low sample sizes, yet are published in high-impact journals and have a disproportionate influence on the field in terms of citations."
+        },
+        "confidence": "contested",
+        "confidenceNote": "The decline-effect account is widely accepted but the original authors dispute the replication and its interpretation (Munday et al., 'Methods matter in repeating ocean acidification studies', answered by Clark et al. 2020, PMID 33087909). The adjudicating source also embeds sample size in a broader publication-bias framing - which is not one of the scorable dimensions.",
+        "causeVisibleInSource": "no",
+        "visibilityNote": "Unwinnable by construction and kept for exactly that reason. Neither abstract states a sample size, power, or blinding. The nearest signal is Clark's claim about implausible effect sizes and within-group variances, which points at a statistical rather than an explicitly sample-size dimension.",
+        "evidence": {
+          "a": "Larvae became strongly attracted to olfactory stimuli they normally avoided when reared at levels of ocean pH that could occur ca. 2100 (pH 7.8)",
+          "b": "Using data simulations, we additionally show that the large effect sizes and small within-group variances that have been reported in several previous studies are highly improbable."
+        }
+      }
+    },
+    {
+      "id": "glycaemic-control-nutrition",
+      "question": "Does tight glycaemic control with intensive insulin therapy reduce mortality in critically ill adults?",
+      "papers": [
+        {
+          "pmid": "11794168",
+          "citation": "van den Berghe et al. 2001, N Engl J Med",
+          "title": "Intensive insulin therapy in critically ill patients.",
+          "conclusion": "In a surgical ICU, targeting blood glucose 80-110 mg/dl reduced mortality during intensive care from 8.0% to 4.6% and reduced bloodstream infections and renal failure."
+        },
+        {
+          "pmid": "19318384",
+          "citation": "NICE-SUGAR Study Investigators 2009, N Engl J Med",
+          "title": "Intensive versus conventional glucose control in critically ill patients.",
+          "conclusion": "Intensive glucose control increased 90-day mortality versus a conventional target of 180 mg/dl or less (27.5% vs 24.9%; odds ratio 1.14)."
+        }
+      ],
+      "label": {
+        "dimension": "intervention",
+        "cause": "The trials differed in a co-intervention: the Leuven patients received a large proportion of their calories parenterally, and the mortality benefit of tight control tracks the parenteral calorie load rather than the glucose target itself.",
+        "alsoAcceptable": [
+          "model"
+        ],
+        "citation": {
+          "pmid": "20018803",
+          "citation": "Marik & Preiser 2010, Chest",
+          "title": "Toward understanding tight glycemic control in the ICU: a systematic review and metaanalysis.",
+          "establishes": "Metaregression demonstrated a significant relationship between the treatment effect (28-day mortality) and the proportion of calories provided parenterally (P = .005). This suggests that the difference in outcome between the two Leuven Intensive Insulin Therapy Trials and the subsequent trials could be related to the use of parenteral nutrition."
+        },
+        "confidence": "contested",
+        "confidenceNote": "The attribution rests on metaregression and the source hedges it ('could be related'). A competing account attributes the difference to the patient population - surgical-only versus mixed medical-surgical ICU - and is supported by a separate indexed meta-analysis (Griesdale et al. 2009, PMID 19318387), which is why 'model' is alsoAcceptable.",
+        "causeVisibleInSource": "no",
+        "visibilityNote": "Unwinnable by construction and kept. Neither abstract mentions nutrition, feeding route or caloric delivery. What is recoverable from the abstracts is the conventional-arm target difference and the surgical-versus-mixed population - neither of which is the dominant adjudicated cause.",
+        "evidence": {
+          "a": "patients were randomly assigned to receive intensive insulin therapy (maintenance of blood glucose at a level between 80 and 110 mg per deciliter [4.4 and 6.1 mmol per liter]) or conventional treatment",
+          "b": "adults who were expected to require treatment in the ICU on 3 or more consecutive days were randomly assigned to undergo either intensive glucose control, with a target blood glucose range of 81 to 108 mg per deciliter (4.5 to 6.0 mmol per liter), or conventional glucose control, with a target of 180 mg or less per deciliter"
+        }
+      }
+    },
+    {
+      "id": "tumour-microbiome-pipeline",
+      "question": "Do tumour and blood sequencing datasets contain genuine cancer-type-specific microbial signatures?",
+      "papers": [
+        {
+          "pmid": "32214244",
+          "citation": "Poore et al. 2020, Nature",
+          "title": "Microbiome analyses of blood and tissues suggest cancer diagnostic approach.",
+          "conclusion": "Re-examination of TCGA whole-genome and whole-transcriptome data across 33 cancer types found unique microbial signatures in tissue and blood that discriminated cancer types and separated cancer patients from healthy individuals."
+        },
+        {
+          "pmid": "37811944",
+          "citation": "Gihawi et al. 2023, mBio",
+          "title": "Major data analysis errors invalidate cancer microbiome findings.",
+          "conclusion": "Re-analysis showed most microbes reported as cancer-associated were not present in the samples at all, rendering the original report and more than a dozen follow-up studies likely invalid."
+        }
+      ],
+      "label": {
+        "dimension": "assay",
+        "cause": "The reported signal is an artefact of how the sequence data were handled - contaminating and misclassified reads counted as microbial presence, compounded by batch-effect handling and the machine-learning setup - rather than microbial biology.",
+        "alsoAcceptable": [
+          "statistic"
+        ],
+        "citation": {
+          "pmid": "37555750",
+          "citation": "Gihawi et al. 2023, Microb Genom",
+          "title": "Caution regarding the specificities of pan-cancer microbial structure.",
+          "establishes": "We believe there are issues in the areas of the contribution of contamination, handling of batch effects, false positive classifications and limitations in the machine learning approaches used."
+        },
+        "confidence": "established",
+        "confidenceNote": "Primary label follows what the adjudicating source actually establishes rather than what the critique's title suggests: the quoted sentence is a flat, unranked four-item list that names contamination FIRST, and paper B's own re-analysis finding is that the reported microbes 'were not present at all in the samples' - a sequence-classification failure, which is assay. 'statistic' is a genuine co-cause, not a distant second, because the same sentence names batch effects and machine learning alongside. Paper A was retracted by Nature in 2024; the retraction notice (PMID 38926587) carries no abstract and no PMC full text, so the grounds are inferred from the published critique rather than confirmed from the notice. Retained deliberately: the critique is of analytical error, which is a design cause and not data fabrication, so the case still measures what this benchmark is for.",
+        "causeVisibleInSource": "partial",
+        "visibilityNote": "Gihawi states the analytical-error cause plainly. Poore's abstract describes only its decontamination step - and asserts that step was stringent - while the batch-correction and classification choices at issue appear nowhere in it.",
+        "evidence": {
+          "a": "despite the use of very stringent decontamination analyses that discarded up to 92.3% of total sequence data",
+          "b": "The re-analysis conducted here shows that most of the microbes originally reported as associated with cancer were not present at all in the samples."
+        }
+      }
+    },
+    {
+      "id": "thalidomide-species-sensitivity",
+      "question": "Is thalidomide teratogenic when given during the window of limb formation?",
+      "papers": [
+        {
+          "pmid": "594913",
+          "citation": "Scott et al. 1977, Teratology",
+          "title": "Non-confirmation of thalidomide induced teratogenesis in rats and mice.",
+          "conclusion": "Attempts to reproduce reported thalidomide-induced malformations in pregnant rats and mice failed, yielding only a low level of non-specific malformations."
+        },
+        {
+          "pmid": "14207455",
+          "citation": "Delahunt & Lassen 1964, Science",
+          "title": "THALIDOMIDE SYNDROME IN MONKEYS.",
+          "conclusion": "Pregnant monkeys treated with thalidomide before limb formation produced fetuses with amelia, phocomelia, hydrocephaly and other malformations."
+        }
+      ],
+      "label": {
+        "dimension": "species",
+        "cause": "Thalidomide's teratogenicity is species-dependent - rodents are resistant while primates and humans are sensitive - so rodent testing could not reproduce the human limb syndrome.",
+        "alsoAcceptable": [
+          "model"
+        ],
+        "citation": {
+          "pmid": "26903378",
+          "citation": "Kazuki et al. 2016, Sci Rep",
+          "title": "Thalidomide-induced limb abnormalities in a humanized CYP3A mouse model.",
+          "establishes": "Thalidomide is a teratogen in humans but not in rodents. [...] However, the species-specific mechanism of thalidomide teratogenicity is not completely understood. Reproduction of the human teratogenicity of thalidomide in rodents has previously failed because of the lack of a model reflecting human drug metabolism."
+        },
+        "confidence": "established",
+        "confidenceNote": "The 1960s primary literature usually cited for this contradiction (Somers 1962, Lenz 1962, Fratta 1965) has no PubMed abstracts and McBride 1961 is not indexed at all, so this pair was chosen for being readable rather than for being the most famous. 'model' is alsoAcceptable because the adjudicating source locates the species difference in drug metabolism.",
+        "causeVisibleInSource": "partial",
+        "visibilityNote": "Graded on the same test as the sibling aflatoxin case - is species flagged as causally relevant, not merely named. Delahunt names its species in the title and abstract. Scott's abstract names only 'rodent' in the quoted span and, far from pointing at species, offers two competing explanations of its own null result: strain ('the rodent strains used were not the same', a within-species confound) and vehicle toxicity from Tween 20. A tool reading paper A faithfully cannot recover species as the cause, and may attribute the disagreement elsewhere for a defensible reason.",
+        "evidence": {
+          "a": "The studies reported herein attempted to confirm these findings without success although the rodent strains used were not the same.",
+          "b": "Pregnant monkeys were treated with thalidomide after implantation but before formation of the fetal limbs."
+        }
+      }
+    },
+    {
+      "id": "aflatoxin-species-susceptibility",
+      "question": "Does aflatoxin B1 exposure cause liver cancer in rodents?",
+      "papers": [
+        {
+          "pmid": "24662598",
+          "citation": "Johnson et al. 2014, Cancer Prev Res (Phila)",
+          "title": "Complete protection against aflatoxin B(1)-induced liver cancer with a triterpenoid: DNA adduct dosimetry, molecular signature, and genotoxicity threshold.",
+          "conclusion": "In a lifetime bioassay, aflatoxin B1 induced hepatocellular carcinoma in 96% of F344 rats, and CDDO-Im co-treatment gave complete protection."
+        },
+        {
+          "pmid": "15019083",
+          "citation": "Shupe & Sell 2004, Toxicol Lett",
+          "title": "Low hepatic glutathione S-transferase and increased hepatic DNA adduction contribute to increased tumorigenicity of aflatoxin B1 in newborn and partially hepatectomized mice.",
+          "conclusion": "Adult mice are highly resistant to aflatoxin B1 hepatocarcinogenesis; susceptibility rises where hepatic glutathione S-transferase is low and AFB1-DNA adduct formation is high, as in newborn and partially hepatectomised mice."
+        }
+      ],
+      "label": {
+        "dimension": "species",
+        "cause": "Mice constitutively express an alpha-class glutathione S-transferase that efficiently detoxifies the aflatoxin B1-8,9-epoxide, which rats express only at low levels - so the same carcinogen produces tumours in rats and not in adult mice.",
+        "alsoAcceptable": [
+          "model"
+        ],
+        "citation": {
+          "pmid": "8042848",
+          "citation": "Eaton & Gallagher 1994, Annu Rev Pharmacol Toxicol",
+          "title": "Mechanisms of aflatoxin carcinogenesis.",
+          "establishes": "Detoxification of AFB-8,9-epoxide by a specific alpha class glutathione S-transferase is an important protective mechanism in mice, and it accounts for the resistance of this species to the carcinogenic effects of AFB. This particular form of GST is expressed constitutively only at low levels in rats"
+        },
+        "confidence": "established",
+        "causeVisibleInSource": "partial",
+        "visibilityNote": "Both abstracts name their species, so the difference is technically recoverable, and Shupe supplies the mechanistic reason (hepatic GST levels). Johnson's abstract presents aflatoxin B1 as a general carcinogen - 'In experimental animals and humans' - with no species qualifier, so a reader of paper A alone cannot recover the cause.",
+        "evidence": {
+          "a": "A lifetime cancer bioassay was undertaken in F344 rats dosed with AFB1",
+          "b": "At about this time, the mice become highly resistant to AFB1."
+        }
+      }
+    },
+    {
+      "id": "convalescent-plasma-timing",
+      "question": "Does convalescent plasma improve clinical outcomes in Covid-19?",
+      "papers": [
+        {
+          "pmid": "33406353",
+          "citation": "Libster et al. 2021, N Engl J Med",
+          "title": "Early High-Titer Plasma Therapy to Prevent Severe Covid-19 in Older Adults.",
+          "conclusion": "High-titre convalescent plasma given within 72 hours of mild symptom onset in older outpatients reduced progression to severe respiratory disease (16% vs 31%)."
+        },
+        {
+          "pmid": "34000257",
+          "citation": "RECOVERY Collaborative Group 2021, Lancet",
+          "title": "Convalescent plasma in patients admitted to hospital with COVID-19 (RECOVERY): a randomised controlled, open-label, platform trial.",
+          "conclusion": "In 11,558 hospitalised patients, high-titre convalescent plasma produced no difference in 28-day mortality (24% vs 24%) or any other prespecified outcome."
+        }
+      ],
+      "label": {
+        "dimension": "timing",
+        "cause": "Plasma was given at different points in the disease course - within 72 hours of symptom onset versus after hospital admission - and the benefit is confined to early transfusion, before endogenous antibodies and inflammatory injury dominate.",
+        "alsoAcceptable": [
+          "dose"
+        ],
+        "citation": {
+          "pmid": "36809473",
+          "citation": "Levine et al. 2023, Clin Infect Dis",
+          "title": "Coronavirus Disease 2019 Convalescent Plasma Outpatient Therapy to Prevent Outpatient Hospitalization: A Meta-Analysis of Individual Participant Data From 5 Randomized Trials.",
+          "establishes": "No significant reduction in hospitalization was seen with treatment >5 days after symptom onset or in those receiving CCP with antibody titers below the median titer."
+        },
+        "confidence": "contested",
+        "confidenceNote": "That timing modifies the effect is well supported; the size and reliability of the early-outpatient benefit is not settled, since several other outpatient plasma trials were null. The adjudicating source also pools outpatient trials only - it establishes that timing and titre determine effect, but does not itself contrast outpatient with hospitalised trials. Antibody titre is a genuine co-cause, hence 'dose' as alsoAcceptable.",
+        "causeVisibleInSource": "yes",
+        "visibilityNote": "Libster states the 72-hour window in its methods and states the timing hypothesis outright in its background; RECOVERY states its hospitalised population in the title and aim. Both describe their plasma as high-titre, which neutralises titre as a visible difference.",
+        "evidence": {
+          "a": "We conducted a randomized, double-blind, placebo-controlled trial of convalescent plasma with high IgG titers against severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) in older adult patients within 72 hours after the onset of mild Covid-19 symptoms.",
+          "b": "We aimed to evaluate the safety and efficacy of convalescent plasma therapy in patients admitted to hospital with COVID-19."
+        }
+      }
+    },
+    {
+      "id": "sodium-measurement-method",
+      "question": "Is the association between habitual sodium intake and cardiovascular events J-shaped or monotonically positive?",
+      "papers": [
+        {
+          "pmid": "25119607",
+          "citation": "O'Donnell et al. 2014, N Engl J Med",
+          "title": "Urinary sodium and potassium excretion, mortality, and cardiovascular events.",
+          "conclusion": "In 101,945 people, both a higher estimated sodium excretion (7.00 g or more per day) and one below 3.00 g per day were associated with an increased risk of the composite outcome of death and major cardiovascular events, relative to 4.00-5.99 g per day."
+        },
+        {
+          "pmid": "24415713",
+          "citation": "Cook et al. 2014, Circulation",
+          "title": "Lower levels of sodium intake and reduced cardiovascular risk.",
+          "conclusion": "Using multiple 24-hour urine collections in TOHP, cardiovascular risk rose linearly with sodium excretion (17% per 1000 mg/d), with no evidence of harm at low intake."
+        }
+      ],
+      "label": {
+        "dimension": "assay",
+        "cause": "Estimating 24-hour sodium from a spot urine sample using a formula is systematically biased - overestimating at low intake and underestimating at high - and that measurement bias alone converts a linear sodium-mortality relationship into a J- or U-shaped one.",
+        "alsoAcceptable": [
+          "statistic"
+        ],
+        "citation": {
+          "pmid": "31352828",
+          "citation": "He et al. 2019, Hypertension",
+          "title": "Formulas to Estimate Dietary Sodium Intake From Spot Urine Alter Sodium-Mortality Relationship.",
+          "establishes": "All estimated values, including those with constant sodium concentration, were systematically biased with overestimation at lower levels and underestimation at higher levels. There was a significant linear association between the average measured sodium intake (ie, gold standard method) and mortality. This relationship was altered by using the estimated sodium intakes. There appeared to be a J- or U-shaped relationship for the average estimated sodium by all formulas."
+        },
+        "confidence": "contested",
+        "confidenceNote": "An unusually strong adjudication in design - both methods applied within a single cohort, so the assay is the only thing that varies - but two limits are disclosed rather than left to be discovered. First, the cohort is paper B's own TOHP dataset, and the adjudicating paper's last author, Nancy R. Cook, is paper B's first author; this is a re-analysis by an overlapping group, not a wholly independent third source. Second, the opposing side genuinely disputes the interpretation: the PURE investigators (O'Donnell, Mente, Smyth & Yusuf 2013, Eur Heart J, PMID 23257945) argue the controversy is likely to remain unresolved until large-scale randomised trials are conducted. Flagged contested for both reasons.",
+        "causeVisibleInSource": "yes",
+        "visibilityNote": "PURE states the fasting spot-urine-plus-estimation design; TOHP states its multiple 24-hour collections and names 'suboptimal measurement of sodium' as a candidate explanation for the paradoxical findings. The specific estimating formula is not named in either abstract.",
+        "evidence": {
+          "a": "We obtained morning fasting urine samples from 101,945 persons in 17 countries and estimated 24-hour sodium and potassium excretion (used as a surrogate for intake).",
+          "b": "Phases 1 and 2 of the Trials of Hypertension Prevention (TOHP) collected multiple 24-hour urine specimens among prehypertensive individuals."
+        }
+      }
+    },
+    {
+      "id": "ego-depletion-replication",
+      "question": "Does exerting self-control deplete a limited resource, impairing self-control on a subsequent task?",
+      "papers": [
+        {
+          "pmid": "9599441",
+          "citation": "Baumeister et al. 1998, J Pers Soc Psychol",
+          "title": "Ego depletion: is the active self a limited resource?",
+          "conclusion": "Across four experiments, an initial act of self-control reduced persistence, performance or active responding on a subsequent task, indicating a shared limited volitional resource."
+        },
+        {
+          "pmid": "27474142",
+          "citation": "Hagger et al. 2016, Perspect Psychol Sci",
+          "title": "A Multilab Preregistered Replication of the Ego-Depletion Effect.",
+          "conclusion": "A 23-laboratory preregistered replication (total N = 2,141) found an ego-depletion effect of d = 0.04, with a confidence interval encompassing zero."
+        }
+      ],
+      "label": {
+        "dimension": "sampleSize",
+        "cause": "The original effect was estimated from small, individually underpowered samples subject to publication bias; bias-corrected and large preregistered multilab estimates are indistinguishable from zero.",
+        "alsoAcceptable": [
+          "intervention",
+          "statistic"
+        ],
+        "citation": {
+          "pmid": "25126083",
+          "citation": "Carter & McCullough 2014, Front Psychol",
+          "title": "Publication bias and the limited strength model of self-control: has the evidence for ego depletion been overestimated?",
+          "establishes": "However, when we applied methods for estimating and correcting for small-study effects (such as publication bias) to the data from this previous meta-analysis effort, we found very strong signals of publication bias, along with an indication that the depletion effect is actually no different from zero."
+        },
+        "confidence": "established",
+        "confidenceNote": "Dissent on the record: Cunningham & Baumeister 2016 (PMID 27826272) published a direct rebuttal to the Carter meta-analyses. The 2015 Carter paper often cited for this point establishes only the null result and never mentions publication bias or power, so the 2014 Frontiers paper is cited instead - the one whose abstract actually states the cause. Note the label does inferential work the quote does not do on its face: the quoted sentence establishes publication bias and small-study effects, and the words 'sample size' and 'power' do not appear in it. Small-study effects are a sample-size phenomenon and the replication's own contrast is total N, so 'sampleSize' stands as primary - but 'statistic' is alsoAcceptable for exactly this reason.",
+        "causeVisibleInSource": "partial",
+        "visibilityNote": "Hagger states its multilab design, total N, preregistration and the prior bias concern. Baumeister's abstract states no sample size or power information at all. Note also that the replication used the Sripada sequential-task paradigm rather than Baumeister's radish and emotion-suppression tasks - a paradigm change stated in Hagger's abstract that competes with the sample-size attribution, which is why 'intervention' is alsoAcceptable.",
+        "evidence": {
+          "a": "In Experiment 1, people who forced themselves to eat radishes instead of tempting chocolates subsequently quit faster on unsolvable puzzles than people who had not had to exert self-control over eating.",
+          "b": "Multiple laboratories (k = 23, total N = 2,141) conducted replications of a standardized ego-depletion protocol based on a sequential-task paradigm by Sripada et al."
+        }
+      }
+    },
+    {
+      "id": "vitamin-c-route-exposure",
+      "question": "Does high-dose vitamin C prolong survival in patients with advanced cancer?",
+      "papers": [
+        {
+          "pmid": "279931",
+          "citation": "Cameron & Pauling 1978, Proc Natl Acad Sci U S A",
+          "title": "Supplemental ascorbate in the supportive treatment of cancer: reevaluation of prolongation of survival times in terminal human cancer.",
+          "conclusion": "100 terminal cancer patients given supplemental ascorbate had a mean survival time about 300 days greater than 1000 matched controls."
+        },
+        {
+          "pmid": "384241",
+          "citation": "Creagan et al. 1979, N Engl J Med",
+          "title": "Failure of high-dose vitamin C (ascorbic acid) therapy to benefit patients with advanced cancer. A controlled trial.",
+          "conclusion": "In a randomised double-blind trial of 150 patients (60 evaluable on vitamin C, 63 on placebo), 10 g/day vitamin C produced no difference from placebo in symptoms, performance status, appetite, weight or survival."
+        }
+      ],
+      "label": {
+        "dimension": "dose",
+        "cause": "Route determines achievable exposure: oral ascorbate is absorption-limited to plasma concentrations far below those reached intravenously, so the oral trials never tested the concentration at which the reported effect is claimed to exist.",
+        "alsoAcceptable": [
+          "intervention",
+          "statistic",
+          "model"
+        ],
+        "citation": {
+          "pmid": "15068981",
+          "citation": "Padayatty et al. 2004, Ann Intern Med",
+          "title": "Vitamin C pharmacokinetics: implications for oral and intravenous use.",
+          "establishes": "Early clinical studies of vitamin C in patients with terminal cancer suggested clinical benefit, but 2 double-blind, placebo-controlled trials showed none. However, these studies used different routes of administration. [...] Only intravenous administration of vitamin C produces high plasma and urine concentrations that might have antitumor activity. Because efficacy of vitamin C treatment cannot be judged from clinical trials that use only oral dosing, the role of vitamin C in cancer treatment should be reevaluated."
+        },
+        "confidence": "contested",
+        "confidenceNote": "The weakest case in this set, kept with its weakness stated. The route account is respectable and is stated by the adjudicating source, but a sufficient competing explanation is visible in paper A's own abstract: Cameron and Pauling used 1000 matched controls drawn retrospectively, against Creagan's randomised double-blind design. The adjudicating source also concedes that patient data are not available to confirm its pharmacokinetic modelling in patients with cancer, and asks only that the question be reevaluated. 'statistic' and 'model' are alsoAcceptable for that reason. The primary label is 'dose' because what the source establishes is a concentration gap - 134.8 micromol/L oral against 885 micromol/L intravenous at the same nominal dose - and 'dose / concentration' is the dimension that names it; route is the mechanism producing that gap. An adversarial reviewer argued for relabelling to 'intervention' (defined as intervention / comparator / exposure), which is why 'intervention' is alsoAcceptable: a system that reads the adjudicator, correctly identifies the different routes of administration and files them there has found the documented cause and should not score zero for it.",
+        "causeVisibleInSource": "no",
+        "visibilityNote": "Unwinnable by construction, and instructively so: neither abstract states a route, and both state the same nominal 10 g/day dose, so a reader confined to the two abstracts would conclude the studies tested the same exposure - the opposite of the adjudicated cause. The only route-adjacent trace is the word 'flavored' in Creagan, which is inference, not evidence.",
+        "evidence": {
+          "a": "A study has been made of the survival times of 100 terminal cancer patients who were given supplemental ascorbate, usually 10 g/day, as part of their routine management and 1000 matched controls",
+          "b": "Patients were divided randomly into a group that received vitamin C (10 g per day) and one that received a comparably flavored lactose placebo."
+        }
+      }
+    }
+  ]
+}

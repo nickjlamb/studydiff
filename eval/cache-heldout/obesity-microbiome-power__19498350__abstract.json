@@ -1,0 +1,63 @@
+{
+  "pmid": "19498350",
+  "caseId": "obesity-microbiome-power",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Is human obesity associated with a consistent shift in the gut Firmicutes-to-Bacteroidetes ratio?",
+  "citation": "Schwiertz et al. 2010, Obesity (Silver Spring)",
+  "title": "Microbiota and SCFA in lean and overweight healthy subjects.",
+  "sourceDepth": "abstract",
+  "textChars": 1619,
+  "text": "Obesity has recently been linked to the composition of human microbiota and the production of short chain fatty acids (SCFAs). However, these findings rely on experimental studies carried out using rather small and defined groups of volunteers or model animals. Our aim was to evaluate differences within the human intestinal microbiota and fecal SCFA concentration of lean and obese subjects. A total of 98 subjects volunteered to take part in this study. The BMI in kg/m(2) of 30 volunteers was within the lean range, 35 were overweight and 33 were obese. The fecal microbiota was characterized by real-time PCR analyses. With the primers used herein we were able to cover 82.3% (interquartile range of 68.3-91.4%) of the total microbiota detectable with a universal primer. In addition, the concentration of SCFA was evaluated. The total amount of SCFA was higher in the obese subject group (P = 0.024) than in the lean subject group. The proportion of individual SCFA changed in favor of propionate in overweight (P = 0.019) and obese subjects (P = 0.028). The most abundant bacterial groups in faeces of lean and obese subjects belonged to the phyla Firmicutes and Bacteroidetes. The ratio of Firmicutes to Bacteroidetes changed in favor of the Bacteroidetes in overweight (P = 0.001) and obese subjects (P = 0.005). Our results are in line with previous reports suggesting that SCFA metabolism might play a considerable role in obesity. However, our results contradict previous reports with regard to the contribution of various bacterial groups to the development of obesity and this issue remains controversial.",
+  "card": {
+    "pmid": "19498350",
+    "citation": "Schwiertz et al. 2010 Obesity (Silver Spring)",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Obesity linked to LOWER Firmicutes/Bacteroidetes ratio, not higher",
+      "quote": "The ratio of Firmicutes to Bacteroidetes changed in favor of the Bacteroidetes in overweight (P = 0.001) and obese subjects (P = 0.005)."
+    },
+    "species": {
+      "value": "Human",
+      "quote": "98 subjects volunteered to take part in this study"
+    },
+    "model": {
+      "value": "Lean, overweight, and obese healthy human volunteers",
+      "quote": "The BMI in kg/m(2) of 30 volunteers was within the lean range, 35 were overweight and 33 were obese."
+    },
+    "intervention": {
+      "value": "None; observational comparison across BMI groups",
+      "quote": "Our aim was to evaluate differences within the human intestinal microbiota and fecal SCFA concentration of lean and obese subjects."
+    },
+    "assay": {
+      "value": "Real-time PCR for fecal microbiota; SCFA measurement",
+      "quote": "The fecal microbiota was characterized by real-time PCR analyses."
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "Single fecal sample per subject, cross-sectional",
+      "quote": "A total of 98 subjects volunteered to take part in this study."
+    },
+    "endpoint": {
+      "value": "Firmicutes/Bacteroidetes ratio and fecal SCFA concentrations",
+      "quote": "The ratio of Firmicutes to Bacteroidetes changed in favor of the Bacteroidetes in overweight"
+    },
+    "sampleSize": {
+      "value": "98 total: 30 lean, 35 overweight, 33 obese",
+      "quote": "The BMI in kg/m(2) of 30 volunteers was within the lean range, 35 were overweight and 33 were obese."
+    },
+    "statistic": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "limitations": {
+      "value": "Contradicts prior reports; bacterial contribution to obesity remains controversial",
+      "quote": "our results contradict previous reports with regard to the contribution of various bacterial groups to the development of obesity and this issue remains controversial."
+    }
+  },
+  "extractedAt": "2026-08-27T21:58:59.859Z",
+  "model": "claude-sonnet-5"
+}

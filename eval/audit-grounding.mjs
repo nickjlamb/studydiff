@@ -20,10 +20,11 @@ import { join } from 'node:path';
 import { groundField } from '../src/grounding.mjs';
 import { contains } from '@pharmatools/opengate/grounding';
 import { DIMENSIONS } from '../src/types.mjs';
-import { loadCases, cachePath, parseDepth, EVAL_DIR } from './lib.mjs';
+import { loadCases, cachePath, parseDepth, EVAL_DIR, parseSet } from './lib.mjs';
 
 const depth = parseDepth(process.argv.slice(2));
-const OUT_DIR = join(EVAL_DIR, 'audit');
+const set = parseSet(process.argv.slice(2));
+const OUT_DIR = join(EVAL_DIR, set === 'dev' ? 'audit' : `audit-${set}`);
 const NR = 'not reported';
 
 const BOLD = (s) => `\x1b[1m${s}\x1b[0m`;
@@ -36,13 +37,13 @@ function hash(s) {
   return Math.abs(h);
 }
 
-const data = loadCases();
+const data = loadCases(set);
 const rejections = [];
 const accepted = [];
 
 for (const c of data.cases) {
   for (const p of c.papers) {
-    const f = cachePath(c.id, p.pmid, depth);
+    const f = cachePath(c.id, p.pmid, depth, set);
     if (!existsSync(f)) continue;
     const e = JSON.parse(readFileSync(f, 'utf8'));
     // Iterate DIMENSIONS only. An earlier version walked Object.entries(card),

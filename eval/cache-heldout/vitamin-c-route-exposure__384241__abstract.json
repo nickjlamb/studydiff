@@ -1,0 +1,63 @@
+{
+  "pmid": "384241",
+  "caseId": "vitamin-c-route-exposure",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does high-dose vitamin C prolong survival in patients with advanced cancer?",
+  "citation": "Creagan et al. 1979, N Engl J Med",
+  "title": "Failure of high-dose vitamin C (ascorbic acid) therapy to benefit patients with advanced cancer. A controlled trial.",
+  "sourceDepth": "abstract",
+  "textChars": 841,
+  "text": "One hundred and fifty patients with advanced cancer participated in a controlled double-blind study to evaluate the effects of high-dose vitamin C on symptoms and survival. Patients were divided randomly into a group that received vitamin C (10 g per day) and one that received a comparably flavored lactose placebo. Sixty evaluable patients received vitamin C and 63 received a placebo. Both groups were similar in age, sex, site of primary tumor, performance score, tumor grade and previous chemotherapy. The two groups showed no appreciable difference in changes in symptoms, performance status, appetite or weight. The median survival for all patients was about seven weeks, and the survival curves essentially overlapped. In this selected group of patients, we were unable to show a therapeutic benefit of high-dose vitamin C treatment.",
+  "card": {
+    "pmid": "384241",
+    "citation": "Creagan et al. 1979 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "High-dose vitamin C showed no survival or symptom benefit vs placebo in advanced cancer",
+      "quote": "we were unable to show a therapeutic benefit of high-dose vitamin C treatment"
+    },
+    "species": {
+      "value": "Humans",
+      "quote": "One hundred and fifty patients with advanced cancer participated"
+    },
+    "model": {
+      "value": "Patients with advanced (end-stage) cancer, randomized controlled trial",
+      "quote": "One hundred and fifty patients with advanced cancer participated in a controlled double-blind study"
+    },
+    "intervention": {
+      "value": "Oral high-dose vitamin C vs lactose placebo, double-blind randomized",
+      "quote": "received vitamin C and one that received a comparably flavored lactose placebo"
+    },
+    "assay": {
+      "value": "Clinical monitoring of symptoms, performance status, appetite, weight, survival",
+      "quote": "no appreciable difference in changes in symptoms, performance status, appetite or weight"
+    },
+    "dose": {
+      "value": "10 g vitamin C per day",
+      "quote": "received vitamin C (10 g per day)"
+    },
+    "timing": {
+      "value": "Followed until death; median survival ~7 weeks",
+      "quote": "The median survival for all patients was about seven weeks"
+    },
+    "endpoint": {
+      "value": "Survival and symptom/performance changes",
+      "quote": "evaluate the effects of high-dose vitamin C on symptoms and survival"
+    },
+    "sampleSize": {
+      "value": "60 vitamin C, 63 placebo (123 evaluable of 150)",
+      "quote": "Sixty evaluable patients received vitamin C and 63 received a placebo"
+    },
+    "statistic": {
+      "value": "Survival curves essentially overlapped between groups",
+      "quote": "the survival curves essentially overlapped"
+    },
+    "limitations": {
+      "value": "Selected patient population with advanced, likely treatment-resistant cancer",
+      "quote": "In this selected group of patients, we were unable to show a therapeutic benefit"
+    }
+  },
+  "extractedAt": "2026-08-27T21:55:14.301Z",
+  "model": "claude-sonnet-5"
+}

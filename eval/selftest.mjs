@@ -6,7 +6,9 @@
 
 import { DIMENSIONS, NOT_REPORTED, field } from '../src/types.mjs';
 import { compareCards } from '../src/compare.mjs';
-import { wilson, loadCases, SCORED_DIMENSIONS } from './lib.mjs';
+import { wilson, loadCases, SCORED_DIMENSIONS, parseSet, SET_LABELS } from './lib.mjs';
+
+const set = parseSet(process.argv.slice(2));
 
 let failures = 0;
 const GREEN = (s) => `\x1b[32m${s}\x1b[0m`;
@@ -90,9 +92,10 @@ console.log('\n' + BOLD('  DRIVER_RANK prior behaviour'));
 }
 
 // --- 3. Benchmark file integrity ---------------------------------------------
-console.log('\n' + BOLD('  cases.json integrity'));
+console.log('\n' + BOLD(`  ${set === 'dev' ? 'cases.json' : `cases-${set}.json`} integrity`));
+console.log(DIM(`       set: ${SET_LABELS[set]}`));
 {
-  const data = loadCases();
+  const data = loadCases(set);
   const cases = data.cases;
   check('file parses and has cases', cases.length > 0);
   check('15-20 cases as specified', cases.length >= 15 && cases.length <= 20, `got ${cases.length}`);
@@ -136,11 +139,50 @@ console.log('\n' + BOLD('  cases.json integrity'));
 
   // A priori ceiling from the annotations. The measured ceiling comes from real
   // extraction in score.mjs; this is the paper-side bound.
+  // --- Contamination check -------------------------------------------------
+  // The held-out set's whole value is that the development loop has never seen
+  // it. Overlap is checked mechanically rather than trusted to the curator's
+  // memory: a shared PMID is enough to compromise the blindness, and it is the
+  // easiest thing in the world to reuse a famous paper by accident.
+  if (set !== 'dev') {
+    const dev = loadCases('dev');
+    const devIds = new Set(dev.cases.map((c) => c.id));
+    const devPmids = new Set(dev.cases.flatMap((c) => [
+      ...c.papers.map((p) => p.pmid),
+      c.label?.citation?.pmid,
+    ].filter(Boolean)));
+
+    const idClash = cases.filter((c) => devIds.has(c.id)).map((c) => c.id);
+    check('no case id is reused from the dev set', idClash.length === 0, idClash.join(', '));
+
+    const pmidClash = [];
+    for (const c of cases) {
+      for (const pm of [...c.papers.map((p) => p.pmid), c.label?.citation?.pmid].filter(Boolean)) {
+        if (devPmids.has(pm)) pmidClash.push(`${c.id}:${pm}`);
+      }
+    }
+    check('no paper or citation PMID is reused from the dev set', pmidClash.length === 0,
+      pmidClash.join(', '));
+
+    const selfPmids = cases.flatMap((c) => c.papers.map((p) => p.pmid));
+    check('no paper appears in two held-out cases', new Set(selfPmids).size === selfPmids.length);
+
+    // A label whose citation is one of the two papers under test is circular:
+    // the case would be labelled by its own evidence.
+    const circular = cases.filter((c) => c.papers.some((p) => p.pmid === c.label?.citation?.pmid))
+      .map((c) => c.id);
+    check('no label is cited to one of its own two papers (circularity)', circular.length === 0,
+      circular.join(', '));
+  }
+
   const invisible = cases.filter((c) => c.label.causeVisibleInSource === 'no').length;
   const partial = cases.filter((c) => c.label.causeVisibleInSource === 'partial').length;
   console.log(DIM(`       cause visible in neither abstract: ${invisible}/${cases.length} (unwinnable by construction)`));
   console.log(DIM(`       cause visible in only one:         ${partial}/${cases.length} (likely unwinnable)`));
   console.log(DIM(`       a priori ceiling <= ${(((cases.length - invisible) / cases.length) * 100).toFixed(1)}%`));
+  // Zero hard cases is not a triumph, it is a selection-bias warning light.
+  check('set contains at least one no/partial visibility case (selection did not drift to easy wins)',
+    invisible + partial > 0, 'every case has its cause visible in both abstracts');
 }
 
 console.log('');

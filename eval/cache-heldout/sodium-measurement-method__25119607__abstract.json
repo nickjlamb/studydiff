@@ -1,0 +1,63 @@
+{
+  "pmid": "25119607",
+  "caseId": "sodium-measurement-method",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Is the association between habitual sodium intake and cardiovascular events J-shaped or monotonically positive?",
+  "citation": "O'Donnell et al. 2014, N Engl J Med",
+  "title": "Urinary sodium and potassium excretion, mortality, and cardiovascular events.",
+  "sourceDepth": "abstract",
+  "textChars": 2123,
+  "text": "The optimal range of sodium intake for cardiovascular health is controversial.\n\nWe obtained morning fasting urine samples from 101,945 persons in 17 countries and estimated 24-hour sodium and potassium excretion (used as a surrogate for intake). We examined the association between estimated urinary sodium and potassium excretion and the composite outcome of death and major cardiovascular events.\n\nThe mean estimated sodium and potassium excretion was 4.93 g per day and 2.12 g per day, respectively. With a mean follow-up of 3.7 years, the composite outcome occurred in 3317 participants (3.3%). As compared with an estimated sodium excretion of 4.00 to 5.99 g per day (reference range), a higher estimated sodium excretion (≥ 7.00 g per day) was associated with an increased risk of the composite outcome (odds ratio, 1.15; 95% confidence interval [CI], 1.02 to 1.30), as well as increased risks of death and major cardiovascular events considered separately. The association between a high estimated sodium excretion and the composite outcome was strongest among participants with hypertension (P=0.02 for interaction), with an increased risk at an estimated sodium excretion of 6.00 g or more per day. As compared with the reference range, an estimated sodium excretion that was below 3.00 g per day was also associated with an increased risk of the composite outcome (odds ratio, 1.27; 95% CI, 1.12 to 1.44). As compared with an estimated potassium excretion that was less than 1.50 g per day, higher potassium excretion was associated with a reduced risk of the composite outcome.\n\nIn this study in which sodium intake was estimated on the basis of measured urinary excretion, an estimated sodium intake between 3 g per day and 6 g per day was associated with a lower risk of death and cardiovascular events than was either a higher or lower estimated level of intake. As compared with an estimated potassium excretion that was less than 1.50 g per day, higher potassium excretion was associated with a lower risk of death and cardiovascular events. (Funded by the Population Health Research Institute and others.).",
+  "card": {
+    "pmid": "25119607",
+    "citation": "O'Donnell et al. 2014 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "J-shaped association: both high and low sodium excretion increase risk",
+      "quote": "an estimated sodium intake between 3 g per day and 6 g per day was associated with a lower risk of death and cardiovascular events than was either a higher or lower estimated level of intake"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "101,945 persons in 17 countries"
+    },
+    "model": {
+      "value": "Multinational population cohort across 17 countries",
+      "quote": "101,945 persons in 17 countries"
+    },
+    "intervention": {
+      "value": "Observational study of habitual sodium/potassium intake (no intervention)",
+      "quote": "We examined the association between estimated urinary sodium and potassium excretion and the composite outcome of death and major cardiovascular events."
+    },
+    "assay": {
+      "value": "Estimated 24-hour excretion from morning fasting urine samples",
+      "quote": "We obtained morning fasting urine samples from 101,945 persons in 17 countries and estimated 24-hour sodium and potassium excretion"
+    },
+    "dose": {
+      "value": "Mean sodium excretion 4.93 g/day; categories <3.00, 3.00-5.99, 6.00-6.99, ≥7.00 g/day",
+      "quote": "The mean estimated sodium and potassium excretion was 4.93 g per day and 2.12 g per day, respectively."
+    },
+    "timing": {
+      "value": "Mean follow-up 3.7 years",
+      "quote": "With a mean follow-up of 3.7 years, the composite outcome occurred in 3317 participants (3.3%)."
+    },
+    "endpoint": {
+      "value": "Composite of death and major cardiovascular events",
+      "quote": "the composite outcome of death and major cardiovascular events"
+    },
+    "sampleSize": {
+      "value": "101,945 participants; 3317 composite events",
+      "quote": "101,945 persons in 17 countries"
+    },
+    "statistic": {
+      "value": "High sodium (≥7g) OR 1.15 (1.02-1.30); low sodium (<3g) OR 1.27 (1.12-1.44) vs reference 4-5.99g",
+      "quote": "a higher estimated sodium excretion (≥ 7.00 g per day) was associated with an increased risk of the composite outcome (odds ratio, 1.15; 95% confidence interval [CI], 1.02 to 1.30)... an estimated sodium excretion that was below 3.00 g per day was also associated with an increased risk of the composite outcome (odds ratio, 1.27; 95% CI, 1.12 to 1.44)."
+    },
+    "limitations": {
+      "value": "Sodium/potassium intake estimated from single urine sample, not directly measured",
+      "quote": "used as a surrogate for intake"
+    }
+  },
+  "extractedAt": "2026-08-27T21:54:26.583Z",
+  "model": "claude-sonnet-5"
+}

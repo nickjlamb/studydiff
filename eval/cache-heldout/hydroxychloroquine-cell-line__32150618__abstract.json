@@ -1,0 +1,63 @@
+{
+  "pmid": "32150618",
+  "caseId": "hydroxychloroquine-cell-line",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does chloroquine or hydroxychloroquine inhibit SARS-CoV-2 effectively enough to treat Covid-19?",
+  "citation": "Yao et al. 2020, Clin Infect Dis",
+  "title": "In Vitro Antiviral Activity and Projection of Optimized Dosing Design of Hydroxychloroquine for the Treatment of Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2).",
+  "sourceDepth": "abstract",
+  "textChars": 1648,
+  "text": "The severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) first broke out in 2019 and subsequently spread worldwide. Chloroquine has been sporadically used in treating SARS-CoV-2 infection. Hydroxychloroquine shares the same mechanism of action as chloroquine, but its more tolerable safety profile makes it the preferred drug to treat malaria and autoimmune conditions. We propose that the immunomodulatory effect of hydroxychloroquine also may be useful in controlling the cytokine storm that occurs late phase in critically ill patients with SARS-CoV-2. Currently, there is no evidence to support the use of hydroxychloroquine in SARS-CoV-2 infection.\n\nThe pharmacological activity of chloroquine and hydroxychloroquine was tested using SARS-CoV-2-infected Vero cells. Physiologically based pharmacokinetic (PBPK) models were implemented for both drugs separately by integrating their in vitro data. Using the PBPK models, hydroxychloroquine concentrations in lung fluid were simulated under 5 different dosing regimens to explore the most effective regimen while considering the drug's safety profile.\n\nHydroxychloroquine (EC50 = 0.72 μM) was found to be more potent than chloroquine (EC50 = 5.47 μM) in vitro. Based on PBPK models results, a loading dose of 400 mg twice daily of hydroxychloroquine sulfate given orally, followed by a maintenance dose of 200 mg given twice daily for 4 days is recommended for SARS-CoV-2 infection, as it reached 3 times the potency of chloroquine phosphate when given 500 mg twice daily 5 days in advance.\n\nHydroxychloroquine was found to be more potent than chloroquine to inhibit SARS-CoV-2 in vitro.",
+  "card": {
+    "pmid": "32150618",
+    "citation": "Yao et al. 2020 Clin Infect Dis",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "HCQ more potent than CQ in vitro; supports HCQ dosing for COVID-19",
+      "quote": "Hydroxychloroquine was found to be more potent than chloroquine to inhibit SARS-CoV-2 in vitro."
+    },
+    "species": {
+      "value": "Not an animal/human study; Vero cell line (monkey-derived)",
+      "quote": "SARS-CoV-2-infected Vero cells"
+    },
+    "model": {
+      "value": "Vero cells infected with SARS-CoV-2; PBPK modeling",
+      "quote": "The pharmacological activity of chloroquine and hydroxychloroquine was tested using SARS-CoV-2-infected Vero cells."
+    },
+    "intervention": {
+      "value": "Chloroquine vs hydroxychloroquine; simulated dosing regimens",
+      "quote": "Physiologically based pharmacokinetic (PBPK) models were implemented for both drugs separately"
+    },
+    "assay": {
+      "value": "In vitro antiviral potency assay (EC50) plus PBPK simulation",
+      "quote": "hydroxychloroquine concentrations in lung fluid were simulated under 5 different dosing regimens"
+    },
+    "dose": {
+      "value": "HCQ 400 mg loading, 200 mg maintenance BID; CQ 500 mg BID",
+      "quote": "a loading dose of 400 mg twice daily of hydroxychloroquine sulfate given orally, followed by a maintenance dose of 200 mg given twice daily for 4 days"
+    },
+    "timing": {
+      "value": "4-day maintenance HCQ regimen; CQ dosed 5 days in advance",
+      "quote": "given 500 mg twice daily 5 days in advance"
+    },
+    "endpoint": {
+      "value": "In vitro EC50 potency and simulated lung fluid drug concentration",
+      "quote": "EC50 = 0.72 μM"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "HCQ EC50 0.72 μM vs CQ EC50 5.47 μM; ~3x potency",
+      "quote": "Hydroxychloroquine (EC50 = 0.72 μM) was found to be more potent than chloroquine (EC50 = 5.47 μM) in vitro."
+    },
+    "limitations": {
+      "value": "Based on in vitro data and PBPK simulation, no clinical efficacy evidence",
+      "quote": "Currently, there is no evidence to support the use of hydroxychloroquine in SARS-CoV-2 infection."
+    }
+  },
+  "extractedAt": "2026-08-27T21:51:00.285Z",
+  "model": "claude-sonnet-5"
+}

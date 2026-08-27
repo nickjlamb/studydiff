@@ -33,12 +33,15 @@
     "cli": "node src/cli.mjs",
     "mcp": "node src/mcp.mjs",
     "eval": "node eval/score.mjs",
+    "eval:heldout": "node eval/score.mjs --set heldout",
     "eval:fetch": "node eval/fetch.mjs",
+    "eval:fetch:heldout": "node eval/fetch.mjs --set heldout",
     "eval:variance": "node eval/variance.mjs",
     "eval:diagnose": "node eval/diagnose.mjs",
     "eval:audit": "node eval/audit-grounding.mjs",
     "eval:normtest": "node eval/normalize.test.mjs",
-    "eval:selftest": "node eval/selftest.mjs"
+    "eval:selftest": "node eval/selftest.mjs",
+    "eval:selftest:heldout": "node eval/selftest.mjs --set heldout"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",

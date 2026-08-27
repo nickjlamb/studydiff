@@ -1,0 +1,63 @@
+{
+  "pmid": "11856793",
+  "caseId": "hypothermia-control-temperature",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does induced mild hypothermia after resuscitated cardiac arrest improve survival and neurological outcome?",
+  "citation": "Hypothermia after Cardiac Arrest Study Group 2002, N Engl J Med",
+  "title": "Mild therapeutic hypothermia to improve the neurologic outcome after cardiac arrest.",
+  "sourceDepth": "abstract",
+  "textChars": 1690,
+  "text": "Cardiac arrest with widespread cerebral ischemia frequently leads to severe neurologic impairment. We studied whether mild systemic hypothermia increases the rate of neurologic recovery after resuscitation from cardiac arrest due to ventricular fibrillation.\n\nIn this multicenter trial with blinded assessment of the outcome, patients who had been resuscitated after cardiac arrest due to ventricular fibrillation were randomly assigned to undergo therapeutic hypothermia (target temperature, 32 degrees C to 34 degrees C, measured in the bladder) over a period of 24 hours or to receive standard treatment with normothermia. The primary end point was a favorable neurologic outcome within six months after cardiac arrest; secondary end points were mortality within six months and the rate of complications within seven days.\n\nSeventy-five of the 136 patients in the hypothermia group for whom data were available (55 percent) had a favorable neurologic outcome (cerebral-performance category, 1 [good recovery] or 2 [moderate disability]), as compared with 54 of 137 (39 percent) in the normothermia group (risk ratio, 1.40; 95 percent confidence interval, 1.08 to 1.81). Mortality at six months was 41 percent in the hypothermia group (56 of 137 patients died), as compared with 55 percent in the normothermia group (76 of 138 patients; risk ratio, 0.74; 95 percent confidence interval, 0.58 to 0.95). The complication rate did not differ significantly between the two groups.\n\nIn patients who have been successfully resuscitated after cardiac arrest due to ventricular fibrillation, therapeutic mild hypothermia increased the rate of a favorable neurologic outcome and reduced mortality.",
+  "card": {
+    "pmid": "11856793",
+    "citation": "2002 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Mild hypothermia improved neurologic outcome and reduced mortality after cardiac arrest",
+      "quote": "therapeutic mild hypothermia increased the rate of a favorable neurologic outcome and reduced mortality"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "patients who had been resuscitated after cardiac arrest due to ventricular fibrillation"
+    },
+    "model": {
+      "value": "Cardiac arrest survivors due to ventricular fibrillation",
+      "quote": "resuscitation from cardiac arrest due to ventricular fibrillation"
+    },
+    "intervention": {
+      "value": "Therapeutic hypothermia vs standard normothermia treatment",
+      "quote": "randomly assigned to undergo therapeutic hypothermia (target temperature, 32 degrees C to 34 degrees C, measured in the bladder) over a period of 24 hours or to receive standard treatment with normothermia"
+    },
+    "assay": {
+      "value": "Multicenter randomized controlled trial with blinded outcome assessment",
+      "quote": "multicenter trial with blinded assessment of the outcome"
+    },
+    "dose": {
+      "value": "Target bladder temperature 32-34°C for 24 hours",
+      "quote": "target temperature, 32 degrees C to 34 degrees C, measured in the bladder) over a period of 24 hours"
+    },
+    "timing": {
+      "value": "6-month follow-up; complications assessed within 7 days",
+      "quote": "favorable neurologic outcome within six months after cardiac arrest; secondary end points were mortality within six months and the rate of complications within seven days"
+    },
+    "endpoint": {
+      "value": "Favorable neurologic outcome (cerebral-performance category 1-2) at 6 months",
+      "quote": "favorable neurologic outcome (cerebral-performance category, 1 [good recovery] or 2 [moderate disability])"
+    },
+    "sampleSize": {
+      "value": "136 hypothermia vs 137-138 normothermia patients",
+      "quote": "Seventy-five of the 136 patients in the hypothermia group for whom data were available"
+    },
+    "statistic": {
+      "value": "55% vs 39% favorable outcome; RR 1.40 (1.08-1.81); mortality RR 0.74",
+      "quote": "risk ratio, 1.40; 95 percent confidence interval, 1.08 to 1.81"
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-08-27T21:52:18.372Z",
+  "model": "claude-sonnet-5"
+}

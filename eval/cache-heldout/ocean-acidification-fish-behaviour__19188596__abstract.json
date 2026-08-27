@@ -1,0 +1,63 @@
+{
+  "pmid": "19188596",
+  "caseId": "ocean-acidification-fish-behaviour",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does end-of-century ocean acidification impair the behaviour of coral reef fishes?",
+  "citation": "Munday et al. 2009, Proc Natl Acad Sci U S A",
+  "title": "Ocean acidification impairs olfactory discrimination and homing ability of a marine fish.",
+  "sourceDepth": "abstract",
+  "textChars": 1173,
+  "text": "The persistence of most coastal marine species depends on larvae finding suitable adult habitat at the end of an offshore dispersive stage that can last weeks or months. We tested the effects that ocean acidification from elevated levels of atmospheric carbon dioxide (CO(2)) could have on the ability of larvae to detect olfactory cues from adult habitats. Larval clownfish reared in control seawater (pH 8.15) discriminated between a range of cues that could help them locate reef habitat and suitable settlement sites. This discriminatory ability was disrupted when larvae were reared in conditions simulating CO(2)-induced ocean acidification. Larvae became strongly attracted to olfactory stimuli they normally avoided when reared at levels of ocean pH that could occur ca. 2100 (pH 7.8) and they no longer responded to any olfactory cues when reared at pH levels (pH 7.6) that might be attained later next century on a business-as-usual carbon-dioxide emissions trajectory. If acidification continues unabated, the impairment of sensory ability will reduce population sustainability of many marine species, with potentially profound consequences for marine diversity.",
+  "card": {
+    "pmid": "19188596",
+    "citation": "Munday et al. 2009 Proc Natl Acad Sci U S A",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Ocean acidification impairs olfactory discrimination and homing ability in clownfish larvae",
+      "quote": "Ocean acidification impairs olfactory discrimination and homing ability of a marine fish"
+    },
+    "species": {
+      "value": "Clownfish (larval)",
+      "quote": "Larval clownfish reared in control seawater"
+    },
+    "model": {
+      "value": "Larval reef fish reared under experimental CO2/pH conditions",
+      "quote": "larvae were reared in conditions simulating CO(2)-induced ocean acidification"
+    },
+    "intervention": {
+      "value": "Rearing in seawater at elevated CO2-acidified pH levels",
+      "quote": "reared at levels of ocean pH that could occur ca. 2100 (pH 7.8)"
+    },
+    "assay": {
+      "value": "Olfactory cue discrimination/choice assay",
+      "quote": "discriminated between a range of cues that could help them locate reef habitat"
+    },
+    "dose": {
+      "value": "Control pH 8.15; treatments pH 7.8 and pH 7.6",
+      "quote": "control seawater (pH 8.15)"
+    },
+    "timing": {
+      "value": "End-of-century (ca. 2100) and later next-century projections",
+      "quote": "levels of ocean pH that could occur ca. 2100 (pH 7.8)"
+    },
+    "endpoint": {
+      "value": "Behavioral response/attraction to olfactory stimuli",
+      "quote": "Larvae became strongly attracted to olfactory stimuli they normally avoided"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "No response to any olfactory cues at pH 7.6",
+      "quote": "they no longer responded to any olfactory cues when reared at pH levels (pH 7.6)"
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-08-27T21:52:48.899Z",
+  "model": "claude-sonnet-5"
+}

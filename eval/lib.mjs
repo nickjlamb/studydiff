@@ -20,6 +20,54 @@ export const EVAL_DIR = here;
 export const CACHE_DIR = join(here, 'cache');
 export const CASES_PATH = join(here, 'cases.json');
 
+/**
+ * The benchmark is split into two sets that must NEVER be pooled.
+ *
+ *   'dev'     — eval/cases.json. The original 15 documented contradictions. Read
+ *               across two phases: failures analysed, spans re-audited. Every
+ *               number from it is DEVELOPMENT-set accuracy, not a blind measure.
+ *   'heldout' — eval/cases-heldout.json. Curated to a pre-registered protocol
+ *               (eval/HELDOUT-PROTOCOL.md) by a curator kept blind to the dev
+ *               set's per-case failures, then fetched and scored ONCE.
+ *
+ * Separation is structural rather than remembered: each set has its own cases
+ * file AND its own cache directory, so there is no code path on which a dev
+ * extraction can be scored as held-out data or vice versa. A `split:` field
+ * inside one file would have been less plumbing, but it would put the guarantee
+ * in every reporting call site instead of in the filesystem.
+ *
+ * The two numbers are always reported separately. Summing them into an "n=30"
+ * figure would relaunder the dev set as blind data, which is the one thing the
+ * held-out set exists to prevent.
+ */
+export const SETS = ['dev', 'heldout'];
+export const DEFAULT_SET = 'dev';
+
+export function parseSet(args) {
+  const i = args.indexOf('--set');
+  if (i === -1) return DEFAULT_SET;
+  const s = args[i + 1];
+  if (!SETS.includes(s)) {
+    throw new Error(`--set must be one of: ${SETS.join(', ')} (got "${s}")`);
+  }
+  return s;
+}
+
+/** Human-readable name, used in every report header so the set is never ambiguous. */
+export const SET_LABELS = {
+  dev: 'DEV (development set — read across two phases, NOT a blind number)',
+  heldout: 'HELD-OUT (pre-registered, measured once)',
+};
+
+export function casesPath(set = DEFAULT_SET) {
+  return set === 'dev' ? CASES_PATH : join(here, `cases-${set}.json`);
+}
+
+/** Own directory per set. Dev paths are unchanged, so the dev number cannot move. */
+export function cacheDirFor(set = DEFAULT_SET) {
+  return set === 'dev' ? CACHE_DIR : join(here, `cache-${set}`);
+}
+
 /** The design dimensions a driver can be ranked into. Mirrors DRIVER_RANK's keys. */
 export const SCORED_DIMENSIONS = [
   'assay', 'model', 'intervention', 'dose', 'timing',
@@ -40,8 +88,13 @@ export function loadEnv() {
   }
 }
 
-export function loadCases() {
-  const raw = JSON.parse(readFileSync(CASES_PATH, 'utf8'));
+export function loadCases(set = DEFAULT_SET) {
+  const p = casesPath(set);
+  if (!existsSync(p)) {
+    throw new Error(`No cases file for set "${set}" at ${p}.`);
+  }
+  const raw = JSON.parse(readFileSync(p, 'utf8'));
+  raw.set = set;
   return raw;
 }
 
@@ -70,8 +123,8 @@ export function parseDepth(args) {
   return d;
 }
 
-export function cachePath(caseId, pmid, depth = DEFAULT_DEPTH) {
-  return join(CACHE_DIR, `${caseId}__${pmid}__${depth}.json`);
+export function cachePath(caseId, pmid, depth = DEFAULT_DEPTH, set = DEFAULT_SET) {
+  return join(cacheDirFor(set), `${caseId}__${pmid}__${depth}.json`);
 }
 
 /**
@@ -92,8 +145,8 @@ export function isRealExtraction(entry) {
   return true;
 }
 
-export function readCache(caseId, pmid, depth = DEFAULT_DEPTH) {
-  const p = cachePath(caseId, pmid, depth);
+export function readCache(caseId, pmid, depth = DEFAULT_DEPTH, set = DEFAULT_SET) {
+  const p = cachePath(caseId, pmid, depth, set);
   if (!existsSync(p)) return null;
   const entry = JSON.parse(readFileSync(p, 'utf8'));
   if (!isRealExtraction(entry)) {
@@ -109,12 +162,21 @@ export function readCache(caseId, pmid, depth = DEFAULT_DEPTH) {
       `"${entry.depthArm}" arm. Refusing to mix arms.`,
     );
   }
+  // Same reasoning as the depth-arm guard, applied to the dev/held-out split.
+  // The directories already separate the sets; this catches a file copied
+  // between them by hand, which is exactly how a held-out set gets contaminated.
+  if (entry.set && entry.set !== set) {
+    throw new Error(
+      `Cache entry ${caseId}__${pmid}__${depth}.json belongs to the "${entry.set}" ` +
+      `set but was read as "${set}". Refusing to mix sets.`,
+    );
+  }
   return entry;
 }
 
-export function writeCache(caseId, pmid, depth, payload) {
-  mkdirSync(CACHE_DIR, { recursive: true });
-  writeFileSync(cachePath(caseId, pmid, depth), JSON.stringify(payload, null, 2));
+export function writeCache(caseId, pmid, depth, payload, set = DEFAULT_SET) {
+  mkdirSync(cacheDirFor(set), { recursive: true });
+  writeFileSync(cachePath(caseId, pmid, depth, set), JSON.stringify(payload, null, 2));
 }
 
 /**

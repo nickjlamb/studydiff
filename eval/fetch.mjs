@@ -15,7 +15,7 @@
 
 import { fetchPaper, abstract } from '../src/ncbi.mjs';
 import { extractCard } from '../src/extract.mjs';
-import { loadCases, readCache, writeCache, loadEnv, parseDepth } from './lib.mjs';
+import { loadCases, readCache, writeCache, loadEnv, parseDepth, parseSet, SET_LABELS } from './lib.mjs';
 
 loadEnv(); // reads .env the same way src/server.mjs does
 
@@ -23,6 +23,7 @@ const args = process.argv.slice(2);
 const force = args.includes('--force');
 const only = args.includes('--case') ? args[args.indexOf('--case') + 1] : null;
 const depth = parseDepth(args);
+const set = parseSet(args);
 
 /**
  * Retrieve a paper at the requested depth.
@@ -51,7 +52,7 @@ async function main() {
     console.error(RED('\n  ANTHROPIC_API_KEY is not set. Extraction needs it.\n'));
     process.exit(1);
   }
-  const data = loadCases();
+  const data = loadCases(set);
   const cases = only ? data.cases.filter((c) => c.id === only) : data.cases;
   if (!cases.length) {
     console.error(RED(`\n  No case matching "${only}".\n`));
@@ -63,11 +64,12 @@ async function main() {
   let failed = 0;
 
   console.log('');
+  console.log(DIM(`  set:       ${SET_LABELS[set]}`));
   console.log(DIM(`  depth arm: ${depth}${depth === 'abstract' ? ' (primary, pre-registered)' : ' (secondary — confounded by PMC OA membership)'}`));
   console.log('');
   for (const c of cases) {
     for (const p of c.papers) {
-      if (!force && readCache(c.id, p.pmid, depth)) {
+      if (!force && readCache(c.id, p.pmid, depth, set)) {
         skipped++;
         console.log(DIM(`  cached   ${c.id} / ${p.pmid}`));
         continue;
@@ -80,6 +82,7 @@ async function main() {
         writeCache(c.id, p.pmid, depth, {
           pmid: p.pmid,
           caseId: c.id,
+          set,
           depthArm: depth,
           question: c.question,
           citation: p.citation,
@@ -90,7 +93,7 @@ async function main() {
           card,
           extractedAt: new Date().toISOString(),
           model: process.env.STUDYDIFF_MODEL || 'claude-sonnet-5',
-        });
+        }, set);
         fetched++;
         console.log(GREEN(`  fetched  ${c.id} / ${p.pmid}  ${DIM(`${paper.sourceDepth} · ${paper.text.length} chars`)}`));
       } catch (err) {
@@ -101,9 +104,10 @@ async function main() {
   }
 
   console.log('');
-  console.log(`  ${fetched} fetched · ${skipped} already cached · ${failed} failed  ${DIM(`[arm: ${depth}]`)}`);
+  console.log(`  ${fetched} fetched · ${skipped} already cached · ${failed} failed  ${DIM(`[set: ${set} · arm: ${depth}]`)}`);
   if (failed) console.log(DIM('  Re-run to retry failures; cached entries are skipped.'));
-  console.log(DIM(`  Now run \`npm run eval${depth === 'abstract' ? '' : ' -- --depth as-retrieved'}\`.`));
+  const flags = [set === 'dev' ? '' : `--set ${set}`, depth === 'abstract' ? '' : `--depth ${depth}`].filter(Boolean).join(' ');
+  console.log(DIM(`  Now run \`npm run eval${flags ? ` -- ${flags}` : ''}\`.`));
   console.log('');
 }
 

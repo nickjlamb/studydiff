@@ -1,0 +1,63 @@
+{
+  "pmid": "34000257",
+  "caseId": "convalescent-plasma-timing",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does convalescent plasma improve clinical outcomes in Covid-19?",
+  "citation": "RECOVERY Collaborative Group 2021, Lancet",
+  "title": "Convalescent plasma in patients admitted to hospital with COVID-19 (RECOVERY): a randomised controlled, open-label, platform trial.",
+  "sourceDepth": "abstract",
+  "textChars": 2403,
+  "text": "Many patients with COVID-19 have been treated with plasma containing anti-SARS-CoV-2 antibodies. We aimed to evaluate the safety and efficacy of convalescent plasma therapy in patients admitted to hospital with COVID-19.\n\nThis randomised, controlled, open-label, platform trial (Randomised Evaluation of COVID-19 Therapy [RECOVERY]) is assessing several possible treatments in patients hospitalised with COVID-19 in the UK. The trial is underway at 177 NHS hospitals from across the UK. Eligible and consenting patients were randomly assigned (1:1) to receive either usual care alone (usual care group) or usual care plus high-titre convalescent plasma (convalescent plasma group). The primary outcome was 28-day mortality, analysed on an intention-to-treat basis. The trial is registered with ISRCTN, 50189673, and ClinicalTrials.gov, NCT04381936.\n\nBetween May 28, 2020, and Jan 15, 2021, 11558 (71%) of 16287 patients enrolled in RECOVERY were eligible to receive convalescent plasma and were assigned to either the convalescent plasma group or the usual care group. There was no significant difference in 28-day mortality between the two groups: 1399 (24%) of 5795 patients in the convalescent plasma group and 1408 (24%) of 5763 patients in the usual care group died within 28 days (rate ratio 1·00, 95% CI 0·93-1·07; p=0·95). The 28-day mortality rate ratio was similar in all prespecified subgroups of patients, including in those patients without detectable SARS-CoV-2 antibodies at randomisation. Allocation to convalescent plasma had no significant effect on the proportion of patients discharged from hospital within 28 days (3832 [66%] patients in the convalescent plasma group vs 3822 [66%] patients in the usual care group; rate ratio 0·99, 95% CI 0·94-1·03; p=0·57). Among those not on invasive mechanical ventilation at randomisation, there was no significant difference in the proportion of patients meeting the composite endpoint of progression to invasive mechanical ventilation or death (1568 [29%] of 5493 patients in the convalescent plasma group vs 1568 [29%] of 5448 patients in the usual care group; rate ratio 0·99, 95% CI 0·93-1·05; p=0·79).\n\nIn patients hospitalised with COVID-19, high-titre convalescent plasma did not improve survival or other prespecified clinical outcomes.\n\nUK Research and Innovation (Medical Research Council) and National Institute of Health Research.",
+  "card": {
+    "pmid": "34000257",
+    "citation": "Abani et al. 2022 Lancet",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Convalescent plasma did not improve survival or clinical outcomes",
+      "quote": "high-titre convalescent plasma did not improve survival or other prespecified clinical outcomes"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "patients admitted to hospital with COVID-19"
+    },
+    "model": {
+      "value": "Hospitalised COVID-19 patients, UK multicenter RCT",
+      "quote": "patients hospitalised with COVID-19 in the UK"
+    },
+    "intervention": {
+      "value": "Usual care plus high-titre convalescent plasma vs usual care alone",
+      "quote": "receive either usual care alone (usual care group) or usual care plus high-titre convalescent plasma (convalescent plasma group)"
+    },
+    "assay": {
+      "value": "Randomised controlled open-label platform trial (RECOVERY)",
+      "quote": "This randomised, controlled, open-label, platform trial (Randomised Evaluation of COVID-19 Therapy [RECOVERY])"
+    },
+    "dose": {
+      "value": "High-titre convalescent plasma (dose not further specified)",
+      "quote": "usual care plus high-titre convalescent plasma"
+    },
+    "timing": {
+      "value": "Enrollment May 28, 2020 to Jan 15, 2021; 28-day follow-up",
+      "quote": "Between May 28, 2020, and Jan 15, 2021"
+    },
+    "endpoint": {
+      "value": "28-day mortality; hospital discharge; progression to ventilation/death",
+      "quote": "The primary outcome was 28-day mortality, analysed on an intention-to-treat basis."
+    },
+    "sampleSize": {
+      "value": "11558 patients (5795 plasma vs 5763 usual care)",
+      "quote": "11558 (71%) of 16287 patients enrolled in RECOVERY were eligible to receive convalescent plasma"
+    },
+    "statistic": {
+      "value": "No significant mortality difference; rate ratio 1.00",
+      "quote": "rate ratio 1·00, 95% CI 0·93-1·07; p=0·95"
+    },
+    "limitations": {
+      "value": "Open-label design; no limitations explicitly discussed in abstract",
+      "quote": "randomised, controlled, open-label, platform trial"
+    }
+  },
+  "extractedAt": "2026-08-27T21:54:18.083Z",
+  "model": "claude-sonnet-5"
+}

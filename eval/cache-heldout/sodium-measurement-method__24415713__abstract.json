@@ -1,0 +1,63 @@
+{
+  "pmid": "24415713",
+  "caseId": "sodium-measurement-method",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Is the association between habitual sodium intake and cardiovascular events J-shaped or monotonically positive?",
+  "citation": "Cook et al. 2014, Circulation",
+  "title": "Lower levels of sodium intake and reduced cardiovascular risk.",
+  "sourceDepth": "abstract",
+  "textChars": 1668,
+  "text": "Recent studies have raised the possibility of adverse effects of low sodium, particularly <2300 mg/d, on cardiovascular disease; however, these paradoxical findings might have resulted from suboptimal measurement of sodium and potential biases related to indication or reverse causation.\n\nPhases 1 and 2 of the Trials of Hypertension Prevention (TOHP) collected multiple 24-hour urine specimens among prehypertensive individuals. During extended post-trial surveillance, 193 cardiovascular events or cardiovascular disease deaths occurred among 2275 participants not in a sodium reduction intervention with 10 (TOHP II) or 15 (TOHP I) years of post-trial follow-up. Median sodium excretion was 3630 mg/d, with 1.4% of the participants having intake <1500 mg/d and 10% <2300 mg/d, consistent with national levels. Compared with those with sodium excretion of 3600 to <4800 mg/d, risk for those with sodium <2300 mg/d was 32% lower after multivariable adjustment (hazard ratio, 0.68; 95% confidence interval, 0.34-1.37; P for trend=0.13). There was a linear 17% increase in risk per 1000 mg/d increase in sodium (P=0.05). Spline curves supported a linear association of sodium with cardiovascular events, which continued to decrease from 3600 to 2300 and 1500 mg/d, although the data were sparse at the lowest levels. Controlling for creatinine levels had little effect on these results.\n\nResults from the TOHP studies, which overcome the major methodological challenges of prior studies, are consistent with overall health benefits of reducing sodium intake to the 1500 to 2300 mg/d range in the majority of the population, in agreement with current dietary guidelines.",
+  "card": {
+    "pmid": "24415713",
+    "citation": "Cook et al. 2014 Circulation",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Monotonically positive/linear (lower sodium, lower CVD risk)",
+      "quote": "Spline curves supported a linear association of sodium with cardiovascular events, which continued to decrease from 3600 to 2300 and 1500 mg/d"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "Trials of Hypertension Prevention (TOHP) collected multiple 24-hour urine specimens among prehypertensive individuals"
+    },
+    "model": {
+      "value": "Prehypertensive adults, post-trial cohort follow-up",
+      "quote": "collected multiple 24-hour urine specimens among prehypertensive individuals"
+    },
+    "intervention": {
+      "value": "Observational follow-up in participants not assigned to sodium reduction",
+      "quote": "193 cardiovascular events or cardiovascular disease deaths occurred among 2275 participants not in a sodium reduction intervention"
+    },
+    "assay": {
+      "value": "24-hour urinary sodium excretion measurement",
+      "quote": "collected multiple 24-hour urine specimens among prehypertensive individuals"
+    },
+    "dose": {
+      "value": "Median 3630 mg/d sodium; categories <1500, <2300, 3600-<4800 mg/d",
+      "quote": "Median sodium excretion was 3630 mg/d, with 1.4% of the participants having intake <1500 mg/d and 10% <2300 mg/d"
+    },
+    "timing": {
+      "value": "10 (TOHP II) or 15 (TOHP I) years post-trial follow-up",
+      "quote": "with 10 (TOHP II) or 15 (TOHP I) years of post-trial follow-up"
+    },
+    "endpoint": {
+      "value": "Cardiovascular events or cardiovascular disease death",
+      "quote": "193 cardiovascular events or cardiovascular disease deaths occurred among 2275 participants"
+    },
+    "sampleSize": {
+      "value": "2275 participants; 193 events",
+      "quote": "193 cardiovascular events or cardiovascular disease deaths occurred among 2275 participants"
+    },
+    "statistic": {
+      "value": "HR 0.68 (<2300 vs 3600-4800 mg/d); 17% increase per 1000 mg/d",
+      "quote": "risk for those with sodium <2300 mg/d was 32% lower after multivariable adjustment (hazard ratio, 0.68; 95% confidence interval, 0.34-1.37; P for trend=0.13). There was a linear 17% increase in risk per 1000 mg/d increase in sodium (P=0.05)"
+    },
+    "limitations": {
+      "value": "Sparse data at lowest sodium levels",
+      "quote": "although the data were sparse at the lowest levels"
+    }
+  },
+  "extractedAt": "2026-08-27T21:54:35.222Z",
+  "model": "claude-sonnet-5"
+}

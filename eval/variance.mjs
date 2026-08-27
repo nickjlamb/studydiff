@@ -20,7 +20,7 @@ import { DIMENSIONS } from '../src/types.mjs';
 import { fetchPaper } from '../src/ncbi.mjs';
 import { extractCard } from '../src/extract.mjs';
 import { buildResult } from '../src/pipeline.mjs';
-import { loadCases, cell, loadEnv } from './lib.mjs';
+import { loadCases, cell, loadEnv, parseSet } from './lib.mjs';
 
 loadEnv(); // reads .env the same way src/server.mjs does
 
@@ -89,7 +89,7 @@ async function main() {
     console.error(RED('\n  ANTHROPIC_API_KEY is not set. Extraction needs it.\n'));
     process.exit(1);
   }
-  const data = loadCases();
+  const data = loadCases(parseSet(process.argv.slice(2)));
   const ids = only ? [only] : DEFAULT_PAIRS;
   const cases = data.cases.filter((c) => ids.includes(c.id));
 

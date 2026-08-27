@@ -1,0 +1,63 @@
+{
+  "pmid": "14207455",
+  "caseId": "thalidomide-species-sensitivity",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Is thalidomide teratogenic when given during the window of limb formation?",
+  "citation": "Delahunt & Lassen 1964, Science",
+  "title": "THALIDOMIDE SYNDROME IN MONKEYS.",
+  "sourceDepth": "abstract",
+  "textChars": 372,
+  "text": "Pregnant monkeys were treated with thalidomide after implantation but before formation of the fetal limbs. Two fetuses that were recovered from the treated females had congenital abnormalities. The thalidomide syndrome in the monkeys was manifested by amelia, phocomelia, internal hydrocephaly, facial capillary hemangioma, hypogenesis of the metatarsal bones, and anotia.",
+  "card": {
+    "pmid": "14207455",
+    "citation": "DELAHUNT et al. 1996 Science",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Thalidomide caused limb and other malformations even when given before limb formation",
+      "quote": "treated with thalidomide after implantation but before formation of the fetal limbs"
+    },
+    "species": {
+      "value": "Monkeys",
+      "quote": "Pregnant monkeys were treated with thalidomide"
+    },
+    "model": {
+      "value": "Pregnant monkey model of thalidomide teratogenicity",
+      "quote": "Pregnant monkeys were treated with thalidomide after implantation"
+    },
+    "intervention": {
+      "value": "Thalidomide administration during early pregnancy",
+      "quote": "treated with thalidomide after implantation but before formation of the fetal limbs"
+    },
+    "assay": {
+      "value": "Examination of fetuses for congenital abnormalities",
+      "quote": "Two fetuses that were recovered from the treated females had congenital abnormalities"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "After implantation, before fetal limb formation",
+      "quote": "after implantation but before formation of the fetal limbs"
+    },
+    "endpoint": {
+      "value": "Presence of congenital abnormalities/thalidomide syndrome features",
+      "quote": "congenital abnormalities. The thalidomide syndrome in the monkeys was manifested by amelia, phocomelia, internal hydrocephaly, facial capillary hemangioma, hypogenesis of the metatarsal bones, and anotia"
+    },
+    "sampleSize": {
+      "value": "Two affected fetuses recovered",
+      "quote": "Two fetuses that were recovered from the treated females had congenital abnormalities"
+    },
+    "statistic": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "limitations": {
+      "value": "Very small sample size (only two affected fetuses)",
+      "quote": "Two fetuses that were recovered from the treated females had congenital abnormalities"
+    }
+  },
+  "extractedAt": "2026-08-27T21:53:42.920Z",
+  "model": "claude-sonnet-5"
+}

@@ -1,0 +1,63 @@
+{
+  "pmid": "32445440",
+  "caseId": "remdesivir-endpoint-choice",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does remdesivir benefit adults hospitalised with Covid-19?",
+  "citation": "Beigel et al. 2020, N Engl J Med",
+  "title": "Remdesivir for the Treatment of Covid-19 - Final Report.",
+  "sourceDepth": "abstract",
+  "textChars": 2055,
+  "text": "Although several therapeutic agents have been evaluated for the treatment of coronavirus disease 2019 (Covid-19), no antiviral agents have yet been shown to be efficacious.\n\nWe conducted a double-blind, randomized, placebo-controlled trial of intravenous remdesivir in adults who were hospitalized with Covid-19 and had evidence of lower respiratory tract infection. Patients were randomly assigned to receive either remdesivir (200 mg loading dose on day 1, followed by 100 mg daily for up to 9 additional days) or placebo for up to 10 days. The primary outcome was the time to recovery, defined by either discharge from the hospital or hospitalization for infection-control purposes only.\n\nA total of 1062 patients underwent randomization (with 541 assigned to remdesivir and 521 to placebo). Those who received remdesivir had a median recovery time of 10 days (95% confidence interval [CI], 9 to 11), as compared with 15 days (95% CI, 13 to 18) among those who received placebo (rate ratio for recovery, 1.29; 95% CI, 1.12 to 1.49; P<0.001, by a log-rank test). In an analysis that used a proportional-odds model with an eight-category ordinal scale, the patients who received remdesivir were found to be more likely than those who received placebo to have clinical improvement at day 15 (odds ratio, 1.5; 95% CI, 1.2 to 1.9, after adjustment for actual disease severity). The Kaplan-Meier estimates of mortality were 6.7% with remdesivir and 11.9% with placebo by day 15 and 11.4% with remdesivir and 15.2% with placebo by day 29 (hazard ratio, 0.73; 95% CI, 0.52 to 1.03). Serious adverse events were reported in 131 of the 532 patients who received remdesivir (24.6%) and in 163 of the 516 patients who received placebo (31.6%).\n\nOur data show that remdesivir was superior to placebo in shortening the time to recovery in adults who were hospitalized with Covid-19 and had evidence of lower respiratory tract infection. (Funded by the National Institute of Allergy and Infectious Diseases and others; ACTT-1 ClinicalTrials.gov number, NCT04280705.).",
+  "card": {
+    "pmid": "32445440",
+    "citation": "Beigel et al. 2020 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Remdesivir shortened recovery time vs placebo in hospitalised Covid-19 adults",
+      "quote": "remdesivir was superior to placebo in shortening the time to recovery in adults who were hospitalized with Covid-19"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "adults who were hospitalized with Covid-19"
+    },
+    "model": {
+      "value": "Hospitalized adults with lower respiratory tract Covid-19 infection",
+      "quote": "adults who were hospitalized with Covid-19 and had evidence of lower respiratory tract infection"
+    },
+    "intervention": {
+      "value": "Intravenous remdesivir vs placebo",
+      "quote": "double-blind, randomized, placebo-controlled trial of intravenous remdesivir"
+    },
+    "assay": {
+      "value": "Randomized controlled clinical trial",
+      "quote": "double-blind, randomized, placebo-controlled trial"
+    },
+    "dose": {
+      "value": "200 mg loading dose, then 100 mg daily up to 9 days",
+      "quote": "200 mg loading dose on day 1, followed by 100 mg daily for up to 9 additional days"
+    },
+    "timing": {
+      "value": "Up to 10 days treatment; outcomes assessed to day 29",
+      "quote": "or placebo for up to 10 days"
+    },
+    "endpoint": {
+      "value": "Time to recovery (discharge or infection-control-only hospitalization)",
+      "quote": "The primary outcome was the time to recovery, defined by either discharge from the hospital or hospitalization for infection-control purposes only."
+    },
+    "sampleSize": {
+      "value": "1062 patients (541 remdesivir, 521 placebo)",
+      "quote": "A total of 1062 patients underwent randomization (with 541 assigned to remdesivir and 521 to placebo)."
+    },
+    "statistic": {
+      "value": "Median recovery 10 vs 15 days; rate ratio 1.29 (P<0.001)",
+      "quote": "median recovery time of 10 days (95% confidence interval [CI], 9 to 11), as compared with 15 days (95% CI, 13 to 18)"
+    },
+    "limitations": {
+      "value": "Mortality benefit not statistically significant; CI crossed 1",
+      "quote": "hazard ratio, 0.73; 95% CI, 0.52 to 1.03"
+    }
+  },
+  "extractedAt": "2026-08-27T21:52:34.435Z",
+  "model": "claude-sonnet-5"
+}

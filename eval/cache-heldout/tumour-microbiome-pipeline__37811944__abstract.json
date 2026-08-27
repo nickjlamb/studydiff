@@ -1,0 +1,63 @@
+{
+  "pmid": "37811944",
+  "caseId": "tumour-microbiome-pipeline",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Do tumour and blood sequencing datasets contain genuine cancer-type-specific microbial signatures?",
+  "citation": "Gihawi et al. 2023, mBio",
+  "title": "Major data analysis errors invalidate cancer microbiome findings.",
+  "sourceDepth": "abstract",
+  "textChars": 546,
+  "text": "Recent reports showing that human cancers have a distinctive microbiome have led to a flurry of papers describing microbial signatures of different cancer types. Many of these reports are based on flawed data that, upon re-analysis, completely overturns the original findings. The re-analysis conducted here shows that most of the microbes originally reported as associated with cancer were not present at all in the samples. The original report of a cancer microbiome and more than a dozen follow-up studies are, therefore, likely to be invalid.",
+  "card": {
+    "pmid": "37811944",
+    "citation": "Gihawi et al. 2023 mBio",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "No genuine cancer-specific microbial signatures; original findings invalid",
+      "quote": "most of the microbes originally reported as associated with cancer were not present at all in the samples"
+    },
+    "species": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "model": {
+      "value": "Re-analysis of published cancer microbiome sequencing datasets",
+      "quote": "The re-analysis conducted here shows that most of the microbes originally reported as associated with cancer"
+    },
+    "intervention": {
+      "value": "Re-analysis of existing tumour/blood sequencing data (no new intervention)",
+      "quote": "The re-analysis conducted here shows that most of the microbes originally reported as associated with cancer were not present at all in the samples."
+    },
+    "assay": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "endpoint": {
+      "value": "Presence/validity of reported cancer-associated microbial signatures",
+      "quote": "most of the microbes originally reported as associated with cancer were not present at all in the samples"
+    },
+    "sampleSize": {
+      "value": "Original report plus >12 follow-up studies re-examined",
+      "quote": "The original report of a cancer microbiome and more than a dozen follow-up studies are, therefore, likely to be invalid."
+    },
+    "statistic": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "limitations": {
+      "value": "Original studies based on flawed data analysis",
+      "quote": "Many of these reports are based on flawed data that, upon re-analysis, completely overturns the original findings."
+    }
+  },
+  "extractedAt": "2026-08-27T21:53:26.996Z",
+  "model": "claude-sonnet-5"
+}
