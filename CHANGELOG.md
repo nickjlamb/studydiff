@@ -25,6 +25,47 @@ All notable changes to StudyDiff are documented here. Format based on
 
 ### Added
 
+- **Held-out benchmark set** (`eval/cases-heldout.json`): a second, blind set of 15 documented
+  contradictions, curated to a protocol written and committed *before any case was selected*
+  (`eval/HELDOUT-PROTOCOL.md`) by a curator kept blind to the dev set's per-case failures, then
+  fetched and scored on the pre-registered abstract arm. Deliberately different fields —
+  microbiome, marine ecology, toxicology, psychology, critical care, oncology, infectious
+  disease — with no paper or contradiction shared with `cases.json`, enforced by `selftest`
+  rather than trusted to memory.
+
+  It exists because the original 15 had been read across two phases, which makes every
+  post-fix figure from them *development-set* accuracy. The blind result:
+
+  ```
+  Top-1 accuracy (strict)      13.3%  (95% CI 3.7-37.9%)   [2/15]
+  Baseline "always say assay"  20.0%  (95% CI 7.0-45.2%)   [3/15]
+  Oracle ceiling (reachable)   73.3%  (95% CI 48.0-89.1%)  [11/15]
+  Non-assay-labelled cases      0.0%  (95% CI 0.0-24.3%)   [0/12]
+  ```
+
+  On unseen data the retired prior scores *below* the constant guess, by one case out of
+  fifteen; the intervals overlap almost entirely, so it remains indistinguishable from
+  guessing `assay` every time rather than demonstrably worse. Across both sets it identified
+  **0 of 25** contradictions whose established cause was not `assay`. The ceiling is *higher*
+  here than on the dev set (73.3% vs 66.7%) — extraction surfaced the right answer more often
+  and the prior took it no more often, which is the Phase 1-2 conclusion reproduced on data
+  the development loop never saw.
+
+  Reported separately from the dev-set number and never pooled: an "n=30" figure would
+  relaunder read data as blind data. Nothing in `src/` was changed on the basis of it.
+  An adversarial verification pass over all 45 abstracts before scoring confirmed 45/45 spans
+  verbatim and corrected 16 defects in the interpretive fields — including one inverted
+  mechanism and one derived number presented as a paper's finding — all recorded in the file's
+  `provenance.verificationHistory` rather than quietly absorbed.
+
+- **`--set dev|heldout` throughout the eval harness.** Each set has its own cases file *and*
+  its own cache directory, so the two can never be pooled by a forgotten filter; cache entries
+  carry their set and the reader refuses a mismatch, as it already did for depth arms.
+  `selftest` gained contamination checks (no shared ids or PMIDs with the dev set, no paper in
+  two cases, no label cited to one of its own papers) and a warning if a set contains no
+  hard-visibility cases. Dev-set paths are byte-identical, and `npm run eval` still prints
+  13.3% [2/15]. New scripts: `eval:heldout`, `eval:fetch:heldout`, `eval:selftest:heldout`.
+
 - **Driver-ranking benchmark** (`eval/`): 15 documented contradictions, each label carrying
   its own citation; scorer with Wilson 95% intervals, a constant-guess baseline, an oracle
   ceiling and a confusion matrix. `npm run eval` regenerates the published numbers offline

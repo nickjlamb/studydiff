@@ -73,6 +73,14 @@ const POLARITY_FIELDS = new Set(['finding', 'limitations']);
 //   discordant         0/15             not similar to the baseline — the SAME as it
 //   non-assay labels   0.0% [0/13]
 //
+// Confirmed blind on a held-out set of 15 further contradictions (`eval/cases-heldout.json`),
+// curated to a pre-registered protocol and scored once:
+//
+//   top-1 accuracy    13.3% [2/15]      baseline "always guess assay" was 20.0% [3/15]
+//   discordant         1/15             below the constant guess by a single case
+//   non-assay labels   0.0% [0/12]      0 of 25 across both sets
+//   oracle ceiling    73.3% [11/15]     HIGHER than the dev set's 66.7%, and still not taken
+//
 // The mechanism is now understood. Two papers almost always use somewhat different
 // methods, so `assay` almost always diverges, so a prior that ranks `assay` first fires
 // almost every time (13/15). Fixing grounding first doubled the oracle ceiling 33% -> 67%
