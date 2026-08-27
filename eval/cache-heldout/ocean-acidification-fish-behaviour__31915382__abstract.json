@@ -1,0 +1,63 @@
+{
+  "pmid": "31915382",
+  "caseId": "ocean-acidification-fish-behaviour",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does end-of-century ocean acidification impair the behaviour of coral reef fishes?",
+  "citation": "Clark et al. 2020, Nature",
+  "title": "Ocean acidification does not impair the behaviour of coral reef fishes.",
+  "sourceDepth": "abstract",
+  "textChars": 1275,
+  "text": "The partial pressure of CO 2 in the oceans has increased rapidly over the past century, driving ocean acidification and raising concern for the stability of marine ecosystems 1-3 . Coral reef fishes are predicted to be especially susceptible to end-of-century ocean acidification on the basis of several high-profile papers 4,5 that have reported profound behavioural and sensory impairments-for example, complete attraction to the chemical cues of predators under conditions of ocean acidification. Here, we comprehensively and transparently show that-in contrast to previous studies-end-of-century ocean acidification levels have negligible effects on important behaviours of coral reef fishes, such as the avoidance of chemical cues from predators, fish activity levels and behavioural lateralization (left-right turning preference). Using data simulations, we additionally show that the large effect sizes and small within-group variances that have been reported in several previous studies are highly improbable. Together, our findings indicate that the reported effects of ocean acidification on the behaviour of coral reef fishes are not reproducible, suggesting that behavioural perturbations will not be a major consequence for coral reef fishes in high CO 2 oceans.",
+  "card": {
+    "pmid": "31915382",
+    "citation": "Clark et al. 2020 Nature",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "End-of-century ocean acidification does NOT impair reef fish behaviour",
+      "quote": "end-of-century ocean acidification levels have negligible effects on important behaviours of coral reef fishes"
+    },
+    "species": {
+      "value": "Coral reef fishes (species not specified in abstract)",
+      "quote": "Coral reef fishes are predicted to be especially susceptible to end-of-century ocean acidification"
+    },
+    "model": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "intervention": {
+      "value": "Exposure to end-of-century ocean acidification (elevated CO2) levels",
+      "quote": "end-of-century ocean acidification levels have negligible effects"
+    },
+    "assay": {
+      "value": "Behavioural assays: predator cue avoidance, activity, lateralization; plus data simulations",
+      "quote": "avoidance of chemical cues from predators, fish activity levels and behavioural lateralization (left-right turning preference)"
+    },
+    "dose": {
+      "value": "End-of-century CO2/pCO2 levels (specific ppm not given in abstract)",
+      "quote": "end-of-century ocean acidification levels"
+    },
+    "timing": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "endpoint": {
+      "value": "Behavioural responses: predator cue avoidance, activity levels, lateralization",
+      "quote": "avoidance of chemical cues from predators, fish activity levels and behavioural lateralization"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "Reported large effect sizes/small variances in prior studies deemed highly improbable via simulation",
+      "quote": "the large effect sizes and small within-group variances that have been reported in several previous studies are highly improbable"
+    },
+    "limitations": {
+      "value": "Findings contradict prior high-profile studies; prior effects judged non-reproducible",
+      "quote": "the reported effects of ocean acidification on the behaviour of coral reef fishes are not reproducible"
+    }
+  },
+  "extractedAt": "2026-08-27T21:52:56.438Z",
+  "model": "claude-sonnet-5"
+}

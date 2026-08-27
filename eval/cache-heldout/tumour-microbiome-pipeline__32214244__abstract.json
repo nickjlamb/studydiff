@@ -1,0 +1,63 @@
+{
+  "pmid": "32214244",
+  "caseId": "tumour-microbiome-pipeline",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Do tumour and blood sequencing datasets contain genuine cancer-type-specific microbial signatures?",
+  "citation": "Poore et al. 2020, Nature",
+  "title": "Microbiome analyses of blood and tissues suggest cancer diagnostic approach.",
+  "sourceDepth": "abstract",
+  "textChars": 1299,
+  "text": "Systematic characterization of the cancer microbiome provides the opportunity to develop techniques that exploit non-human, microorganism-derived molecules in the diagnosis of a major human disease. Following recent demonstrations that some types of cancer show substantial microbial contributions 1-10 , we re-examined whole-genome and whole-transcriptome sequencing studies in The Cancer Genome Atlas 11 (TCGA) of 33 types of cancer from treatment-naive patients (a total of 18,116 samples) for microbial reads, and found unique microbial signatures in tissue and blood within and between most major types of cancer. These TCGA blood signatures remained predictive when applied to patients with stage Ia-IIc cancer and cancers lacking any genomic alterations currently measured on two commercial-grade cell-free tumour DNA platforms, despite the use of very stringent decontamination analyses that discarded up to 92.3% of total sequence data. In addition, we could discriminate among samples from healthy, cancer-free individuals (n = 69) and those from patients with multiple types of cancer (prostate, lung, and melanoma; 100 samples in total) solely using plasma-derived, cell-free microbial nucleic acids. This potential microbiome-based oncology diagnostic tool warrants further exploration.",
+  "card": {
+    "pmid": "32214244",
+    "citation": "Poore et al. 2020 Nature",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Yes, unique microbial signatures found across cancer types in tissue and blood",
+      "quote": "found unique microbial signatures in tissue and blood within and between most major types of cancer"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "treatment-naive patients"
+    },
+    "model": {
+      "value": "TCGA cancer patients and healthy controls (human cohort study)",
+      "quote": "The Cancer Genome Atlas 11 (TCGA) of 33 types of cancer from treatment-naive patients"
+    },
+    "intervention": {
+      "value": "No intervention; observational re-analysis of sequencing data for microbial reads",
+      "quote": "we re-examined whole-genome and whole-transcriptome sequencing studies in The Cancer Genome Atlas 11 (TCGA) of 33 types of cancer"
+    },
+    "assay": {
+      "value": "Whole-genome and whole-transcriptome sequencing analysis of microbial reads",
+      "quote": "whole-genome and whole-transcriptome sequencing studies in The Cancer Genome Atlas 11 (TCGA)"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "Treatment-naive patients; stage Ia-IIc cancer subset examined",
+      "quote": "predictive when applied to patients with stage Ia-IIc cancer"
+    },
+    "endpoint": {
+      "value": "Discrimination of cancer type/status via microbial signatures in tissue/blood/plasma",
+      "quote": "we could discriminate among samples from healthy, cancer-free individuals (n = 69) and those from patients with multiple types of cancer"
+    },
+    "sampleSize": {
+      "value": "18,116 TCGA samples; 69 healthy controls; 100 cancer patient samples",
+      "quote": "a total of 18,116 samples"
+    },
+    "statistic": {
+      "value": "Up to 92.3% of sequence data discarded during stringent decontamination",
+      "quote": "despite the use of very stringent decontamination analyses that discarded up to 92.3% of total sequence data"
+    },
+    "limitations": {
+      "value": "Potential contamination requiring stringent decontamination filtering of sequence data",
+      "quote": "despite the use of very stringent decontamination analyses that discarded up to 92.3% of total sequence data"
+    }
+  },
+  "extractedAt": "2026-08-27T21:53:20.660Z",
+  "model": "claude-sonnet-5"
+}

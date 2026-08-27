@@ -1,0 +1,63 @@
+{
+  "pmid": "33406353",
+  "caseId": "convalescent-plasma-timing",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does convalescent plasma improve clinical outcomes in Covid-19?",
+  "citation": "Libster et al. 2021, N Engl J Med",
+  "title": "Early High-Titer Plasma Therapy to Prevent Severe Covid-19 in Older Adults.",
+  "sourceDepth": "abstract",
+  "textChars": 2014,
+  "text": "Therapies to interrupt the progression of early coronavirus disease 2019 (Covid-19) remain elusive. Among them, convalescent plasma administered to hospitalized patients has been unsuccessful, perhaps because antibodies should be administered earlier in the course of illness.\n\nWe conducted a randomized, double-blind, placebo-controlled trial of convalescent plasma with high IgG titers against severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) in older adult patients within 72 hours after the onset of mild Covid-19 symptoms. The primary end point was severe respiratory disease, defined as a respiratory rate of 30 breaths per minute or more, an oxygen saturation of less than 93% while the patient was breathing ambient air, or both. The trial was stopped early at 76% of its projected sample size because cases of Covid-19 in the trial region decreased considerably and steady enrollment of trial patients became virtually impossible.\n\nA total of 160 patients underwent randomization. In the intention-to-treat population, severe respiratory disease developed in 13 of 80 patients (16%) who received convalescent plasma and 25 of 80 patients (31%) who received placebo (relative risk, 0.52; 95% confidence interval [CI], 0.29 to 0.94; P = 0.03), with a relative risk reduction of 48%. A modified intention-to-treat analysis that excluded 6 patients who had a primary end-point event before infusion of convalescent plasma or placebo showed a larger effect size (relative risk, 0.40; 95% CI, 0.20 to 0.81). No solicited adverse events were observed.\n\nEarly administration of high-titer convalescent plasma against SARS-CoV-2 to mildly ill infected older adults reduced the progression of Covid-19. (Funded by the Bill and Melinda Gates Foundation and the Fundación INFANT Pandemic Fund; Dirección de Sangre y Medicina Transfusional del Ministerio de Salud number, PAEPCC19, Plataforma de Registro Informatizado de Investigaciones en Salud number, 1421, and ClinicalTrials.gov number, NCT04479163.).",
+  "card": {
+    "pmid": "33406353",
+    "citation": "Libster et al. 2021 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Early high-titer convalescent plasma reduced progression to severe Covid-19 in older adults",
+      "quote": "Early administration of high-titer convalescent plasma against SARS-CoV-2 to mildly ill infected older adults reduced the progression of Covid-19."
+    },
+    "species": {
+      "value": "Humans",
+      "quote": "older adult patients within 72 hours after the onset of mild Covid-19 symptoms"
+    },
+    "model": {
+      "value": "Older adults with mild Covid-19, randomized controlled trial",
+      "quote": "randomized, double-blind, placebo-controlled trial of convalescent plasma with high IgG titers"
+    },
+    "intervention": {
+      "value": "High-titer anti-SARS-CoV-2 convalescent plasma vs placebo, given within 72h of symptom onset",
+      "quote": "convalescent plasma with high IgG titers against severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) in older adult patients within 72 hours after the onset of mild Covid-19 symptoms"
+    },
+    "assay": {
+      "value": "IgG antibody titer measurement against SARS-CoV-2 (for plasma selection)",
+      "quote": "convalescent plasma with high IgG titers against severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2)"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "Administered within 72 hours after symptom onset",
+      "quote": "within 72 hours after the onset of mild Covid-19 symptoms"
+    },
+    "endpoint": {
+      "value": "Severe respiratory disease (high respiratory rate or low oxygen saturation)",
+      "quote": "defined as a respiratory rate of 30 breaths per minute or more, an oxygen saturation of less than 93% while the patient was breathing ambient air, or both"
+    },
+    "sampleSize": {
+      "value": "160 patients randomized (80 plasma, 80 placebo)",
+      "quote": "A total of 160 patients underwent randomization."
+    },
+    "statistic": {
+      "value": "Severe disease in 16% plasma vs 31% placebo; RR 0.52 (P=0.03)",
+      "quote": "severe respiratory disease developed in 13 of 80 patients (16%) who received convalescent plasma and 25 of 80 patients (31%) who received placebo (relative risk, 0.52; 95% confidence interval [CI], 0.29 to 0.94; P = 0.03)"
+    },
+    "limitations": {
+      "value": "Trial stopped early at 76% of planned sample size due to declining cases",
+      "quote": "The trial was stopped early at 76% of its projected sample size because cases of Covid-19 in the trial region decreased considerably"
+    }
+  },
+  "extractedAt": "2026-08-27T21:54:09.903Z",
+  "model": "claude-sonnet-5"
+}

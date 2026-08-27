@@ -1,0 +1,63 @@
+{
+  "pmid": "17183309",
+  "caseId": "obesity-microbiome-power",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Is human obesity associated with a consistent shift in the gut Firmicutes-to-Bacteroidetes ratio?",
+  "citation": "Ley et al. 2006, Nature",
+  "title": "Microbial ecology: human gut microbes associated with obesity.",
+  "sourceDepth": "abstract",
+  "textChars": 423,
+  "text": "Two groups of beneficial bacteria are dominant in the human gut, the Bacteroidetes and the Firmicutes. Here we show that the relative proportion of Bacteroidetes is decreased in obese people by comparison with lean people, and that this proportion increases with weight loss on two types of low-calorie diet. Our findings indicate that obesity has a microbial component, which might have potential therapeutic implications.",
+  "card": {
+    "pmid": "17183309",
+    "citation": "Ley et al. 2007 Nature",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Obesity linked to decreased Bacteroidetes relative to Firmicutes; reverses with weight loss",
+      "quote": "the relative proportion of Bacteroidetes is decreased in obese people by comparison with lean people"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "human gut microbes associated with obesity"
+    },
+    "model": {
+      "value": "Human gut microbiota, obese vs lean individuals",
+      "quote": "the relative proportion of Bacteroidetes is decreased in obese people by comparison with lean people"
+    },
+    "intervention": {
+      "value": "Low-calorie diet-induced weight loss",
+      "quote": "this proportion increases with weight loss on two types of low-calorie diet"
+    },
+    "assay": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "endpoint": {
+      "value": "Relative proportion of Bacteroidetes vs Firmicutes in gut",
+      "quote": "the relative proportion of Bacteroidetes is decreased in obese people"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-08-27T21:51:29.840Z",
+  "model": "claude-sonnet-5"
+}

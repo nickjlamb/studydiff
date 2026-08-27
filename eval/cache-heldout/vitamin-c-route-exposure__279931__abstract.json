@@ -1,0 +1,63 @@
+{
+  "pmid": "279931",
+  "caseId": "vitamin-c-route-exposure",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does high-dose vitamin C prolong survival in patients with advanced cancer?",
+  "citation": "Cameron & Pauling 1978, Proc Natl Acad Sci U S A",
+  "title": "Supplemental ascorbate in the supportive treatment of cancer: reevaluation of prolongation of survival times in terminal human cancer.",
+  "sourceDepth": "abstract",
+  "textChars": 1293,
+  "text": "A study has been made of the survival times of 100 terminal cancer patients who were given supplemental ascorbate, usually 10 g/day, as part of their routine management and 1000 matched controls, similar patients who had received the same treatment except for the ascorbate. The two sets of patients were in part the same as those used in our earlier study [Cameron, E. & Pauling, L. (1976) Proc. Natl. Acad. Sci. USA 73, 3685-3689]. Tests confirm that the ascorbate-treated patients and the matched controls are representative subpopulations of the same population of \"untreatable\" patients. Survival times were measured not only from the date of \"untreatability\" but also from the precisely known date of first hospital attendance for the cancer that eventually reached the terminal stage. The ascorbate-treated patients were found to have a mean survival time about 300 days greater than that of the controls. Survival times greater than 1 yr after the date of untreatability were observed for 22% of the ascorbate-treated patients and for 0.4% of the controls. The mean survival time of these 22 ascorbate-treated patients is 2.4 yr after reaching the apparently terminal stage; 8 of the ascorbate-treated patients are still alive, with a mean survival time after untreatability of 3.5 yr.",
+  "card": {
+    "pmid": "279931",
+    "citation": "Cameron et al. 1978 Proc Natl Acad Sci U S A",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "High-dose vitamin C prolonged survival in terminal cancer patients",
+      "quote": "ascorbate-treated patients were found to have a mean survival time about 300 days greater than that of the controls"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "100 terminal cancer patients"
+    },
+    "model": {
+      "value": "Terminal/untreatable human cancer patients, retrospective matched control study",
+      "quote": "representative subpopulations of the same population of \"untreatable\" patients"
+    },
+    "intervention": {
+      "value": "Supplemental ascorbate (vitamin C) as part of routine management vs matched controls without ascorbate",
+      "quote": "given supplemental ascorbate, usually 10 g/day, as part of their routine management and 1000 matched controls, similar patients who had received the same treatment except for the ascorbate"
+    },
+    "assay": {
+      "value": "Retrospective comparison of survival times between treated and matched control cohorts",
+      "quote": "Survival times were measured not only from the date of \"untreatability\" but also from the precisely known date of first hospital attendance"
+    },
+    "dose": {
+      "value": "Usually 10 g/day ascorbate",
+      "quote": "usually 10 g/day"
+    },
+    "timing": {
+      "value": "Survival measured from date of untreatability and from first hospital attendance; follow-up years",
+      "quote": "Survival times were measured not only from the date of \"untreatability\" but also from the precisely known date of first hospital attendance"
+    },
+    "endpoint": {
+      "value": "Survival time (days/years) after untreatability or first hospital attendance",
+      "quote": "mean survival time about 300 days greater than that of the controls"
+    },
+    "sampleSize": {
+      "value": "100 ascorbate-treated patients vs 1000 matched controls",
+      "quote": "100 terminal cancer patients who were given supplemental ascorbate ... and 1000 matched controls"
+    },
+    "statistic": {
+      "value": "22% of treated patients survived >1yr vs 0.4% of controls; mean survival +300 days",
+      "quote": "Survival times greater than 1 yr after the date of untreatability were observed for 22% of the ascorbate-treated patients and for 0.4% of the controls"
+    },
+    "limitations": {
+      "value": "Retrospective, non-randomized, historical matched controls, overlapping cohort with earlier study",
+      "quote": "The two sets of patients were in part the same as those used in our earlier study"
+    }
+  },
+  "extractedAt": "2026-08-27T21:54:58.922Z",
+  "model": "claude-sonnet-5"
+}

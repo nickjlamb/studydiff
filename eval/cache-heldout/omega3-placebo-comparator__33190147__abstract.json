@@ -1,0 +1,63 @@
+{
+  "pmid": "33190147",
+  "caseId": "omega3-placebo-comparator",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Do high-dose omega-3 fatty acids added to statin therapy reduce major adverse cardiovascular events?",
+  "citation": "Nicholls et al. 2020, JAMA",
+  "title": "Effect of High-Dose Omega-3 Fatty Acids vs Corn Oil on Major Adverse Cardiovascular Events in Patients at High Cardiovascular Risk: The STRENGTH Randomized Clinical Trial.",
+  "sourceDepth": "abstract",
+  "textChars": 2702,
+  "text": "It remains uncertain whether the omega-3 fatty acids eicosapentaenoic acid (EPA) and docosahexaenoic acid (DHA) reduce cardiovascular risk.\n\nTo determine the effects on cardiovascular outcomes of a carboxylic acid formulation of EPA and DHA (omega-3 CA) with documented favorable effects on lipid and inflammatory markers in patients with atherogenic dyslipidemia and high cardiovascular risk.\n\nA double-blind, randomized, multicenter trial (enrollment October 30, 2014, to June 14, 2017; study termination January 8, 2020; last patient visit May 14, 2020) comparing omega-3 CA with corn oil in statin-treated participants with high cardiovascular risk, hypertriglyceridemia, and low levels of high-density lipoprotein cholesterol (HDL-C). A total of 13 078 patients were randomized at 675 academic and community hospitals in 22 countries in North America, Europe, South America, Asia, Australia, New Zealand, and South Africa.\n\nParticipants were randomized to receive 4 g/d of omega-3 CA (n = 6539) or corn oil, which was intended to serve as an inert comparator (n = 6539), in addition to usual background therapies, including statins.\n\nThe primary efficacy measure was a composite of cardiovascular death, nonfatal myocardial infarction, nonfatal stroke, coronary revascularization, or unstable angina requiring hospitalization.\n\nWhen 1384 patients had experienced a primary end point event (of a planned 1600 events), the trial was prematurely halted based on an interim analysis that indicated a low probability of clinical benefit of omega-3 CA vs the corn oil comparator. Among the 13 078 treated patients (mean [SD] age, 62.5 [9.0] years; 35% women; 70% with diabetes; median low-density lipoprotein [LDL] cholesterol level, 75.0 mg/dL; median triglycerides level, 240 mg/dL; median HDL-C level, 36 mg/dL; and median high-sensitivity C-reactive protein level, 2.1 mg/L), 12 633 (96.6%) completed the trial with ascertainment of primary end point status. The primary end point occurred in 785 patients (12.0%) treated with omega-3 CA vs 795 (12.2%) treated with corn oil (hazard ratio, 0.99 [95% CI, 0.90-1.09]; P = .84). A greater rate of gastrointestinal adverse events was observed in the omega-3 CA group (24.7%) compared with corn oil-treated patients (14.7%).\n\nAmong statin-treated patients at high cardiovascular risk, the addition of omega-3 CA, compared with corn oil, to usual background therapies resulted in no significant difference in a composite outcome of major adverse cardiovascular events. These findings do not support use of this omega-3 fatty acid formulation to reduce major adverse cardiovascular events in high-risk patients.\n\nClinicalTrials.gov Identifier: NCT02104817.",
+  "card": {
+    "pmid": "33190147",
+    "citation": "Nicholls et al. 2021 JAMA",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "High-dose omega-3 CA did not reduce MACE vs corn oil",
+      "quote": "resulted in no significant difference in a composite outcome of major adverse cardiovascular events"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "statin-treated participants with high cardiovascular risk"
+    },
+    "model": {
+      "value": "Statin-treated patients with hypertriglyceridemia and low HDL-C, high CV risk",
+      "quote": "statin-treated participants with high cardiovascular risk, hypertriglyceridemia, and low levels of high-density lipoprotein cholesterol (HDL-C)"
+    },
+    "intervention": {
+      "value": "Omega-3 carboxylic acid (EPA+DHA) vs corn oil, added to statin therapy",
+      "quote": "Participants were randomized to receive 4 g/d of omega-3 CA (n = 6539) or corn oil"
+    },
+    "assay": {
+      "value": "Randomized double-blind multicenter clinical trial",
+      "quote": "A double-blind, randomized, multicenter trial"
+    },
+    "dose": {
+      "value": "4 g/day omega-3 carboxylic acid",
+      "quote": "4 g/d of omega-3 CA"
+    },
+    "timing": {
+      "value": "Enrollment Oct 2014–Jun 2017; terminated Jan 2020; last visit May 2020",
+      "quote": "enrollment October 30, 2014, to June 14, 2017; study termination January 8, 2020; last patient visit May 14, 2020"
+    },
+    "endpoint": {
+      "value": "Composite MACE: CV death, MI, stroke, revascularization, unstable angina",
+      "quote": "a composite of cardiovascular death, nonfatal myocardial infarction, nonfatal stroke, coronary revascularization, or unstable angina requiring hospitalization"
+    },
+    "sampleSize": {
+      "value": "13,078 randomized patients (6539 per group)",
+      "quote": "A total of 13 078 patients were randomized"
+    },
+    "statistic": {
+      "value": "HR 0.99 (95% CI 0.90-1.09), P=.84; no significant difference",
+      "quote": "hazard ratio, 0.99 [95% CI, 0.90-1.09]; P = .84"
+    },
+    "limitations": {
+      "value": "Trial prematurely halted after interim analysis showed low benefit probability",
+      "quote": "the trial was prematurely halted based on an interim analysis that indicated a low probability of clinical benefit"
+    }
+  },
+  "extractedAt": "2026-08-27T21:52:09.979Z",
+  "model": "claude-sonnet-5"
+}

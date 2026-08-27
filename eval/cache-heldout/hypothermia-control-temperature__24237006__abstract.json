@@ -1,0 +1,63 @@
+{
+  "pmid": "24237006",
+  "caseId": "hypothermia-control-temperature",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does induced mild hypothermia after resuscitated cardiac arrest improve survival and neurological outcome?",
+  "citation": "Nielsen et al. 2013, N Engl J Med",
+  "title": "Targeted temperature management at 33°C versus 36°C after cardiac arrest.",
+  "sourceDepth": "abstract",
+  "textChars": 1921,
+  "text": "Unconscious survivors of out-of-hospital cardiac arrest have a high risk of death or poor neurologic function. Therapeutic hypothermia is recommended by international guidelines, but the supporting evidence is limited, and the target temperature associated with the best outcome is unknown. Our objective was to compare two target temperatures, both intended to prevent fever.\n\nIn an international trial, we randomly assigned 950 unconscious adults after out-of-hospital cardiac arrest of presumed cardiac cause to targeted temperature management at either 33°C or 36°C. The primary outcome was all-cause mortality through the end of the trial. Secondary outcomes included a composite of poor neurologic function or death at 180 days, as evaluated with the Cerebral Performance Category (CPC) scale and the modified Rankin scale.\n\nIn total, 939 patients were included in the primary analysis. At the end of the trial, 50% of the patients in the 33°C group (235 of 473 patients) had died, as compared with 48% of the patients in the 36°C group (225 of 466 patients) (hazard ratio with a temperature of 33°C, 1.06; 95% confidence interval [CI], 0.89 to 1.28; P=0.51). At the 180-day follow-up, 54% of the patients in the 33°C group had died or had poor neurologic function according to the CPC, as compared with 52% of patients in the 36°C group (risk ratio, 1.02; 95% CI, 0.88 to 1.16; P=0.78). In the analysis using the modified Rankin scale, the comparable rate was 52% in both groups (risk ratio, 1.01; 95% CI, 0.89 to 1.14; P=0.87). The results of analyses adjusted for known prognostic factors were similar.\n\nIn unconscious survivors of out-of-hospital cardiac arrest of presumed cardiac cause, hypothermia at a targeted temperature of 33°C did not confer a benefit as compared with a targeted temperature of 36°C. (Funded by the Swedish Heart-Lung Foundation and others; TTM ClinicalTrials.gov number, NCT01020916.).",
+  "card": {
+    "pmid": "24237006",
+    "citation": "Nielsen et al. 2013 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "No benefit of 33°C vs 36°C on mortality or neurologic outcome",
+      "quote": "hypothermia at a targeted temperature of 33°C did not confer a benefit as compared with a targeted temperature of 36°C"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "Unconscious survivors of out-of-hospital cardiac arrest"
+    },
+    "model": {
+      "value": "Unconscious adults after out-of-hospital cardiac arrest, presumed cardiac cause",
+      "quote": "950 unconscious adults after out-of-hospital cardiac arrest of presumed cardiac cause"
+    },
+    "intervention": {
+      "value": "Targeted temperature management at 33°C vs 36°C",
+      "quote": "randomly assigned 950 unconscious adults after out-of-hospital cardiac arrest of presumed cardiac cause to targeted temperature management at either 33°C or 36°C"
+    },
+    "assay": {
+      "value": "Randomized controlled trial with clinical outcome scales (CPC, modified Rankin)",
+      "quote": "as evaluated with the Cerebral Performance Category (CPC) scale and the modified Rankin scale"
+    },
+    "dose": {
+      "value": "Two target temperatures: 33°C or 36°C",
+      "quote": "targeted temperature management at either 33°C or 36°C"
+    },
+    "timing": {
+      "value": "Outcomes assessed through end of trial and at 180 days",
+      "quote": "The primary outcome was all-cause mortality through the end of the trial. Secondary outcomes included a composite of poor neurologic function or death at 180 days"
+    },
+    "endpoint": {
+      "value": "All-cause mortality; composite of death or poor neurologic function",
+      "quote": "The primary outcome was all-cause mortality through the end of the trial. Secondary outcomes included a composite of poor neurologic function or death at 180 days"
+    },
+    "sampleSize": {
+      "value": "950 randomized; 939 included in primary analysis",
+      "quote": "In total, 939 patients were included in the primary analysis."
+    },
+    "statistic": {
+      "value": "HR 1.06 (95% CI 0.89-1.28) for mortality; RR 1.02 (CPC) and 1.01 (Rankin) at 180 days",
+      "quote": "hazard ratio with a temperature of 33°C, 1.06; 95% confidence interval [CI], 0.89 to 1.28; P=0.51"
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-08-27T21:52:26.669Z",
+  "model": "claude-sonnet-5"
+}

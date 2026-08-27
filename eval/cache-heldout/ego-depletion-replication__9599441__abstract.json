@@ -1,0 +1,63 @@
+{
+  "pmid": "9599441",
+  "caseId": "ego-depletion-replication",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does exerting self-control deplete a limited resource, impairing self-control on a subsequent task?",
+  "citation": "Baumeister et al. 1998, J Pers Soc Psychol",
+  "title": "Ego depletion: is the active self a limited resource?",
+  "sourceDepth": "abstract",
+  "textChars": 842,
+  "text": "Choice, active response, self-regulation, and other volition may all draw on a common inner resource. In Experiment 1, people who forced themselves to eat radishes instead of tempting chocolates subsequently quit faster on unsolvable puzzles than people who had not had to exert self-control over eating. In Experiment 2, making a meaningful personal choice to perform attitude-relevant behavior caused a similar decrement in persistence. In Experiment 3, suppressing emotion led to a subsequent drop in performance of solvable anagrams. In Experiment 4, an initial task requiring high self-regulation made people more passive (i.e., more prone to favor the passive-response option). These results suggest that the self's capacity for active volition is limited and that a range of seemingly different, unrelated acts share a common resource.",
+  "card": {
+    "pmid": "9599441",
+    "citation": "Baumeister et al. 1998 J Pers Soc Psychol",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Exerting self-control depletes a limited resource, impairing subsequent self-control",
+      "quote": "the self's capacity for active volition is limited and that a range of seemingly different, unrelated acts share a common resource"
+    },
+    "species": {
+      "value": "Humans",
+      "quote": "people who forced themselves to eat radishes instead of tempting chocolates"
+    },
+    "model": {
+      "value": "Healthy adult human participants, laboratory experiments",
+      "quote": "people who forced themselves to eat radishes instead of tempting chocolates subsequently quit faster on unsolvable puzzles"
+    },
+    "intervention": {
+      "value": "Four tasks requiring self-control: resisting food temptation, making meaningful choice, suppressing emotion, high self-regulation task",
+      "quote": "In Experiment 1, people who forced themselves to eat radishes instead of tempting chocolates... In Experiment 2, making a meaningful personal choice to perform attitude-relevant behavior... In Experiment 3, suppressing emotion... In Experiment 4, an initial task requiring high self-regulation"
+    },
+    "assay": {
+      "value": "Behavioral persistence and performance tasks (puzzles, anagrams, passive-response choice)",
+      "quote": "subsequently quit faster on unsolvable puzzles than people who had not had to exert self-control over eating"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "Sequential two-task design within single session per experiment",
+      "quote": "subsequently quit faster on unsolvable puzzles"
+    },
+    "endpoint": {
+      "value": "Persistence on unsolvable puzzles; anagram performance; passivity in response choice",
+      "quote": "quit faster on unsolvable puzzles"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "Self-control tasks caused decreased persistence/performance vs control groups (direction only, no stats given)",
+      "quote": "caused a similar decrement in persistence"
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-08-27T21:54:42.987Z",
+  "model": "claude-sonnet-5"
+}

@@ -1,0 +1,63 @@
+{
+  "pmid": "15019083",
+  "caseId": "aflatoxin-species-susceptibility",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does aflatoxin B1 exposure cause liver cancer in rodents?",
+  "citation": "Shupe & Sell 2004, Toxicol Lett",
+  "title": "Low hepatic glutathione S-transferase and increased hepatic DNA adduction contribute to increased tumorigenicity of aflatoxin B1 in newborn and partially hepatectomized mice.",
+  "sourceDepth": "abstract",
+  "textChars": 1779,
+  "text": "Low levels of hepatic glutathione S-transferase and increased formation of aflatoxin B1 (AFB1)-DNA adducts correlate with hepatocyte proliferation and increased hepatocarcinogenesis in both newborn mice and partially hepatectomized adult mice, as compared to normal, adult C57BL/6J mice. Newborn mice, which are highly susceptible to the hepatocarcinogenic effects of AFB1, have active proliferation of hepatocytes until 3 weeks of age, when hepatocyte proliferation abruptly ceases. At about this time, the mice become highly resistant to AFB1. In adult mice, AFB1 carcinogenicity is increased after stimulation of liver proliferation by partial hepatectomy. To become carcinogenic, AFB1 is activated in the liver by the P450 enzyme system to electrophilic intermediates, some of which form DNA adducts believed to be responsible for mutations leading to cancer. The most carcinogenic intermediate, AFB(1)-8,9-epoxide, is detoxified by glutathione S-transferase-mediated conjugation to glutathione. Glutathione levels, glutathione S-transferase levels, and AFB1-DNA adduct formation were measured at 4, 10, 30, 120, 245 and 365 days of age in C57BL/6J mice. There was a 5-fold increase in hepatic glutathione S-transferase levels and 13-fold decrease in hepatic AFB1-DNA adduct formation over these ages. Induction of hepatocyte proliferation following partial hepatectomy of 120-day-old mice lowered hepatic glutathione S-transferase levels and increased the extent of hepatic AFB1-DNA formation to levels similar to those measured in 4-day-old mice. These results indicate that increased susceptibility to AFB1 hepatocarcinogenesis in newborn mice, and in adult mice following partial hepatectomy, is due to decreased GST and increased adduct formation in proliferating liver.",
+  "card": {
+    "pmid": "15019083",
+    "citation": "Shupe et al. 2004 Toxicol Lett",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "AFB1 causes increased liver cancer susceptibility via low GST and high DNA adducts",
+      "quote": "increased susceptibility to AFB1 hepatocarcinogenesis in newborn mice, and in adult mice following partial hepatectomy, is due to decreased GST and increased adduct formation"
+    },
+    "species": {
+      "value": "Mice",
+      "quote": "C57BL/6J mice"
+    },
+    "model": {
+      "value": "Newborn mice and partially hepatectomized adult mice",
+      "quote": "increased tumorigenicity of aflatoxin B1 in newborn and partially hepatectomized mice"
+    },
+    "intervention": {
+      "value": "AFB1 exposure; partial hepatectomy to induce hepatocyte proliferation",
+      "quote": "AFB1 carcinogenicity is increased after stimulation of liver proliferation by partial hepatectomy"
+    },
+    "assay": {
+      "value": "Measurement of glutathione, GST levels, and AFB1-DNA adduct formation",
+      "quote": "Glutathione levels, glutathione S-transferase levels, and AFB1-DNA adduct formation were measured"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "Measured at 4, 10, 30, 120, 245 and 365 days of age",
+      "quote": "measured at 4, 10, 30, 120, 245 and 365 days of age in C57BL/6J mice"
+    },
+    "endpoint": {
+      "value": "Hepatic GST levels, AFB1-DNA adduct formation, hepatocarcinogenesis susceptibility",
+      "quote": "correlate with hepatocyte proliferation and increased hepatocarcinogenesis"
+    },
+    "sampleSize": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "statistic": {
+      "value": "5-fold increase in GST, 13-fold decrease in DNA adducts with age",
+      "quote": "5-fold increase in hepatic glutathione S-transferase levels and 13-fold decrease in hepatic AFB1-DNA adduct formation"
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-08-27T21:54:00.573Z",
+  "model": "claude-sonnet-5"
+}

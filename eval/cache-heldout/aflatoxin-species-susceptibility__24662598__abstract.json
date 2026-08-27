@@ -1,0 +1,63 @@
+{
+  "pmid": "24662598",
+  "caseId": "aflatoxin-species-susceptibility",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does aflatoxin B1 exposure cause liver cancer in rodents?",
+  "citation": "Johnson et al. 2014, Cancer Prev Res (Phila)",
+  "title": "Complete protection against aflatoxin B(1)-induced liver cancer with a triterpenoid: DNA adduct dosimetry, molecular signature, and genotoxicity threshold.",
+  "sourceDepth": "abstract",
+  "textChars": 1818,
+  "text": "In experimental animals and humans, aflatoxin B1 (AFB1) is a potent hepatic toxin and carcinogen. The synthetic oleanane triterpenoid 1-[2-cyano-3-,12-dioxooleana-1,9(11)-dien-28-oyl]imidazole (CDDO-Im), a powerful activator of Keap1-Nrf2 signaling, protects against AFB1-induced toxicity and preneoplastic lesion formation (GST-P-positive foci). This study assessed and mechanistically characterized the chemoprotective efficacy of CDDO-Im against AFB1-induced hepatocellular carcinoma (HCC). A lifetime cancer bioassay was undertaken in F344 rats dosed with AFB1 (200 μg/kg rat/day) for four weeks and receiving either vehicle or CDDO-Im (three times weekly), one week before and throughout the exposure period. Weekly, 24-hour urine samples were collected for analysis of AFB1 metabolites. In a subset of rats, livers were analyzed for GST-P foci. The comparative response of a toxicogenomic RNA expression signature for AFB1 was examined. CDDO-Im completely protected (0/20) against AFB1-induced liver cancer compared with a 96% incidence (22/23) observed in the AFB1 group. With CDDO-Im treatment, integrated level of urinary AFB1-N(7)-guanine was significantly reduced (66%) and aflatoxin-N-acetylcysteine, a detoxication product, was consistently elevated (300%) after the first AFB1 dose. In AFB1-treated rats, the hepatic burden of GST-P-positive foci increased substantially (0%-13.8%) over the four weeks, but was largely absent with CDDO-Im intervention. The toxicogenomic RNA expression signature characteristic of AFB1 was absent in the AFB1 + CDDO-Im-treated rats. The remarkable efficacy of CDDO-Im as an anticarcinogen is established even in the face of a significant aflatoxin adduct burden. Consequently, the absence of cancer requires a concept of a threshold for DNA damage for cancer development.",
+  "card": {
+    "pmid": "24662598",
+    "citation": "Johnson et al. 2015 Cancer Prev Res (Phila)",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "AFB1 causes liver cancer in rats; CDDO-Im fully prevents it",
+      "quote": "CDDO-Im completely protected (0/20) against AFB1-induced liver cancer compared with a 96% incidence (22/23) observed in the AFB1 group."
+    },
+    "species": {
+      "value": "Rat (F344)",
+      "quote": "F344 rats dosed with AFB1"
+    },
+    "model": {
+      "value": "Lifetime cancer bioassay in F344 rats",
+      "quote": "A lifetime cancer bioassay was undertaken in F344 rats"
+    },
+    "intervention": {
+      "value": "AFB1 dosing ± CDDO-Im (Nrf2 activator) co-treatment",
+      "quote": "receiving either vehicle or CDDO-Im (three times weekly), one week before and throughout the exposure period"
+    },
+    "assay": {
+      "value": "Urinary AFB1 metabolite analysis, GST-P foci histology, toxicogenomic RNA signature",
+      "quote": "Weekly, 24-hour urine samples were collected for analysis of AFB1 metabolites. In a subset of rats, livers were analyzed for GST-P foci."
+    },
+    "dose": {
+      "value": "AFB1 200 μg/kg/day for four weeks",
+      "quote": "AFB1 (200 μg/kg rat/day) for four weeks"
+    },
+    "timing": {
+      "value": "4-week AFB1 exposure; lifetime follow-up for tumors",
+      "quote": "for four weeks and receiving either vehicle or CDDO-Im (three times weekly), one week before and throughout the exposure period"
+    },
+    "endpoint": {
+      "value": "Hepatocellular carcinoma incidence; GST-P foci; DNA adducts; gene signature",
+      "quote": "chemoprotective efficacy of CDDO-Im against AFB1-induced hepatocellular carcinoma (HCC)"
+    },
+    "sampleSize": {
+      "value": "20 CDDO-Im-treated vs 23 AFB1-only rats",
+      "quote": "0/20) against AFB1-induced liver cancer compared with a 96% incidence (22/23)"
+    },
+    "statistic": {
+      "value": "0% vs 96% HCC incidence; 66% adduct reduction; 300% detox increase",
+      "quote": "urinary AFB1-N(7)-guanine was significantly reduced (66%) and aflatoxin-N-acetylcysteine, a detoxication product, was consistently elevated (300%)"
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-08-27T21:53:51.973Z",
+  "model": "claude-sonnet-5"
+}

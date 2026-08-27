@@ -1,0 +1,63 @@
+{
+  "pmid": "33264556",
+  "caseId": "remdesivir-endpoint-choice",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does remdesivir benefit adults hospitalised with Covid-19?",
+  "citation": "WHO Solidarity Trial Consortium 2021, N Engl J Med",
+  "title": "Repurposed Antiviral Drugs for Covid-19 - Interim WHO Solidarity Trial Results.",
+  "sourceDepth": "abstract",
+  "textChars": 2459,
+  "text": "World Health Organization expert groups recommended mortality trials of four repurposed antiviral drugs - remdesivir, hydroxychloroquine, lopinavir, and interferon beta-1a - in patients hospitalized with coronavirus disease 2019 (Covid-19).\n\nWe randomly assigned inpatients with Covid-19 equally between one of the trial drug regimens that was locally available and open control (up to five options, four active and the local standard of care). The intention-to-treat primary analyses examined in-hospital mortality in the four pairwise comparisons of each trial drug and its control (drug available but patient assigned to the same care without that drug). Rate ratios for death were calculated with stratification according to age and status regarding mechanical ventilation at trial entry.\n\nAt 405 hospitals in 30 countries, 11,330 adults underwent randomization; 2750 were assigned to receive remdesivir, 954 to hydroxychloroquine, 1411 to lopinavir (without interferon), 2063 to interferon (including 651 to interferon plus lopinavir), and 4088 to no trial drug. Adherence was 94 to 96% midway through treatment, with 2 to 6% crossover. In total, 1253 deaths were reported (median day of death, day 8; interquartile range, 4 to 14). The Kaplan-Meier 28-day mortality was 11.8% (39.0% if the patient was already receiving ventilation at randomization and 9.5% otherwise). Death occurred in 301 of 2743 patients receiving remdesivir and in 303 of 2708 receiving its control (rate ratio, 0.95; 95% confidence interval [CI], 0.81 to 1.11; P = 0.50), in 104 of 947 patients receiving hydroxychloroquine and in 84 of 906 receiving its control (rate ratio, 1.19; 95% CI, 0.89 to 1.59; P = 0.23), in 148 of 1399 patients receiving lopinavir and in 146 of 1372 receiving its control (rate ratio, 1.00; 95% CI, 0.79 to 1.25; P = 0.97), and in 243 of 2050 patients receiving interferon and in 216 of 2050 receiving its control (rate ratio, 1.16; 95% CI, 0.96 to 1.39; P = 0.11). No drug definitely reduced mortality, overall or in any subgroup, or reduced initiation of ventilation or hospitalization duration.\n\nThese remdesivir, hydroxychloroquine, lopinavir, and interferon regimens had little or no effect on hospitalized patients with Covid-19, as indicated by overall mortality, initiation of ventilation, and duration of hospital stay. (Funded by the World Health Organization; ISRCTN Registry number, ISRCTN83971151; ClinicalTrials.gov number, NCT04315948.).",
+  "card": {
+    "pmid": "33264556",
+    "citation": "Pan et al. 2021 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Remdesivir did not reduce mortality in hospitalized Covid-19 patients",
+      "quote": "No drug definitely reduced mortality, overall or in any subgroup"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "11,330 adults underwent randomization"
+    },
+    "model": {
+      "value": "Adult inpatients hospitalized with Covid-19",
+      "quote": "patients hospitalized with coronavirus disease 2019 (Covid-19)"
+    },
+    "intervention": {
+      "value": "Remdesivir vs open control (standard of care)",
+      "quote": "2750 were assigned to receive remdesivir"
+    },
+    "assay": {
+      "value": "Open-label randomized controlled trial (Solidarity trial)",
+      "quote": "randomly assigned inpatients with Covid-19 equally between one of the trial drug regimens"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "28-day mortality; median day of death, day 8",
+      "quote": "The Kaplan-Meier 28-day mortality was 11.8%"
+    },
+    "endpoint": {
+      "value": "In-hospital mortality; also ventilation initiation and hospitalization duration",
+      "quote": "intention-to-treat primary analyses examined in-hospital mortality"
+    },
+    "sampleSize": {
+      "value": "2750 remdesivir; 2708 control (405 hospitals, 30 countries)",
+      "quote": "2750 were assigned to receive remdesivir"
+    },
+    "statistic": {
+      "value": "Rate ratio 0.95 (95% CI 0.81–1.11), P=0.50",
+      "quote": "rate ratio, 0.95; 95% confidence interval [CI], 0.81 to 1.11; P = 0.50"
+    },
+    "limitations": {
+      "value": "Open-label design; crossover between arms occurred",
+      "quote": "Adherence was 94 to 96% midway through treatment, with 2 to 6% crossover"
+    }
+  },
+  "extractedAt": "2026-08-27T21:52:41.823Z",
+  "model": "claude-sonnet-5"
+}

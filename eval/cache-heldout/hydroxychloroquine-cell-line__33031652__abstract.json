@@ -1,0 +1,63 @@
+{
+  "pmid": "33031652",
+  "caseId": "hydroxychloroquine-cell-line",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does chloroquine or hydroxychloroquine inhibit SARS-CoV-2 effectively enough to treat Covid-19?",
+  "citation": "RECOVERY Collaborative Group 2020, N Engl J Med",
+  "title": "Effect of Hydroxychloroquine in Hospitalized Patients with Covid-19.",
+  "sourceDepth": "abstract",
+  "textChars": 1952,
+  "text": "Hydroxychloroquine and chloroquine have been proposed as treatments for coronavirus disease 2019 (Covid-19) on the basis of in vitro activity and data from uncontrolled studies and small, randomized trials.\n\nIn this randomized, controlled, open-label platform trial comparing a range of possible treatments with usual care in patients hospitalized with Covid-19, we randomly assigned 1561 patients to receive hydroxychloroquine and 3155 to receive usual care. The primary outcome was 28-day mortality.\n\nThe enrollment of patients in the hydroxychloroquine group was closed on June 5, 2020, after an interim analysis determined that there was a lack of efficacy. Death within 28 days occurred in 421 patients (27.0%) in the hydroxychloroquine group and in 790 (25.0%) in the usual-care group (rate ratio, 1.09; 95% confidence interval [CI], 0.97 to 1.23; P = 0.15). Consistent results were seen in all prespecified subgroups of patients. The results suggest that patients in the hydroxychloroquine group were less likely to be discharged from the hospital alive within 28 days than those in the usual-care group (59.6% vs. 62.9%; rate ratio, 0.90; 95% CI, 0.83 to 0.98). Among the patients who were not undergoing mechanical ventilation at baseline, those in the hydroxychloroquine group had a higher frequency of invasive mechanical ventilation or death (30.7% vs. 26.9%; risk ratio, 1.14; 95% CI, 1.03 to 1.27). There was a small numerical excess of cardiac deaths (0.4 percentage points) but no difference in the incidence of new major cardiac arrhythmia among the patients who received hydroxychloroquine.\n\nAmong patients hospitalized with Covid-19, those who received hydroxychloroquine did not have a lower incidence of death at 28 days than those who received usual care. (Funded by UK Research and Innovation and National Institute for Health Research and others; RECOVERY ISRCTN number, ISRCTN50189673; ClinicalTrials.gov number, NCT04381936.).",
+  "card": {
+    "pmid": "33031652",
+    "citation": "Horby et al. 2020 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Hydroxychloroquine did not reduce 28-day mortality; no clinical benefit for Covid-19",
+      "quote": "did not have a lower incidence of death at 28 days than those who received usual care"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "patients hospitalized with Covid-19"
+    },
+    "model": {
+      "value": "Hospitalized Covid-19 patients (RECOVERY platform trial)",
+      "quote": "patients hospitalized with Covid-19"
+    },
+    "intervention": {
+      "value": "Hydroxychloroquine vs usual care",
+      "quote": "we randomly assigned 1561 patients to receive hydroxychloroquine and 3155 to receive usual care"
+    },
+    "assay": {
+      "value": "Randomized, controlled, open-label platform trial",
+      "quote": "randomized, controlled, open-label platform trial comparing a range of possible treatments with usual care"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "28-day follow-up; enrollment closed June 5, 2020",
+      "quote": "enrollment of patients in the hydroxychloroquine group was closed on June 5, 2020"
+    },
+    "endpoint": {
+      "value": "28-day all-cause mortality (primary); secondary: discharge, ventilation/death, arrhythmia",
+      "quote": "The primary outcome was 28-day mortality."
+    },
+    "sampleSize": {
+      "value": "4716 total (1561 hydroxychloroquine, 3155 usual care)",
+      "quote": "we randomly assigned 1561 patients to receive hydroxychloroquine and 3155 to receive usual care"
+    },
+    "statistic": {
+      "value": "Rate ratio 1.09 (95% CI 0.97–1.23), P=0.15 for mortality",
+      "quote": "rate ratio, 1.09; 95% confidence interval [CI], 0.97 to 1.23; P = 0.15"
+    },
+    "limitations": {
+      "value": "Open-label design; interim analysis stopped enrollment early for futility",
+      "quote": "after an interim analysis determined that there was a lack of efficacy"
+    }
+  },
+  "extractedAt": "2026-08-27T21:51:08.762Z",
+  "model": "claude-sonnet-5"
+}

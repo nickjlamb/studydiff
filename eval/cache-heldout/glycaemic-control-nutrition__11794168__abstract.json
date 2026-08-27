@@ -1,0 +1,63 @@
+{
+  "pmid": "11794168",
+  "caseId": "glycaemic-control-nutrition",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does tight glycaemic control with intensive insulin therapy reduce mortality in critically ill adults?",
+  "citation": "van den Berghe et al. 2001, N Engl J Med",
+  "title": "Intensive insulin therapy in critically ill patients.",
+  "sourceDepth": "abstract",
+  "textChars": 2071,
+  "text": "Hyperglycemia and insulin resistance are common in critically ill patients, even if they have not previously had diabetes. Whether the normalization of blood glucose levels with insulin therapy improves the prognosis for such patients is not known.\n\nWe performed a prospective, randomized, controlled study involving adults admitted to our surgical intensive care unit who were receiving mechanical ventilation. On admission, patients were randomly assigned to receive intensive insulin therapy (maintenance of blood glucose at a level between 80 and 110 mg per deciliter [4.4 and 6.1 mmol per liter]) or conventional treatment (infusion of insulin only if the blood glucose level exceeded 215 mg per deciliter [11.9 mmol per liter] and maintenance of glucose at a level between 180 and 200 mg per deciliter [10.0 and 11.1 mmol per liter]).\n\nAt 12 months, with a total of 1548 patients enrolled, intensive insulin therapy reduced mortality during intensive care from 8.0 percent with conventional treatment to 4.6 percent (P<0.04, with adjustment for sequential analyses). The benefit of intensive insulin therapy was attributable to its effect on mortality among patients who remained in the intensive care unit for more than five days (20.2 percent with conventional treatment, as compared with 10.6 percent with intensive insulin therapy, P=0.005). The greatest reduction in mortality involved deaths due to multiple-organ failure with a proven septic focus. Intensive insulin therapy also reduced overall in-hospital mortality by 34 percent, bloodstream infections by 46 percent, acute renal failure requiring dialysis or hemofiltration by 41 percent, the median number of red-cell transfusions by 50 percent, and critical-illness polyneuropathy by 44 percent, and patients receiving intensive therapy were less likely to require prolonged mechanical ventilation and intensive care.\n\nIntensive insulin therapy to maintain blood glucose at or below 110 mg per deciliter reduces morbidity and mortality among critically ill patients in the surgical intensive care unit.",
+  "card": {
+    "pmid": "11794168",
+    "citation": "van den Berghe et al. 2002 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Intensive insulin therapy reduced ICU and in-hospital mortality",
+      "quote": "intensive insulin therapy reduced mortality during intensive care from 8.0 percent with conventional treatment to 4.6 percent"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "adults admitted to our surgical intensive care unit"
+    },
+    "model": {
+      "value": "Critically ill surgical ICU patients on mechanical ventilation",
+      "quote": "adults admitted to our surgical intensive care unit who were receiving mechanical ventilation"
+    },
+    "intervention": {
+      "value": "Intensive insulin therapy vs conventional treatment",
+      "quote": "randomly assigned to receive intensive insulin therapy...or conventional treatment"
+    },
+    "assay": {
+      "value": "Randomized controlled clinical trial with blood glucose monitoring",
+      "quote": "prospective, randomized, controlled study"
+    },
+    "dose": {
+      "value": "Target glucose 80-110 mg/dL (intensive) vs 180-200 mg/dL (conventional)",
+      "quote": "maintenance of blood glucose at a level between 80 and 110 mg per deciliter [4.4 and 6.1 mmol per liter]"
+    },
+    "timing": {
+      "value": "12 months follow-up",
+      "quote": "At 12 months, with a total of 1548 patients enrolled"
+    },
+    "endpoint": {
+      "value": "Mortality during intensive care and in-hospital mortality",
+      "quote": "intensive insulin therapy reduced mortality during intensive care from 8.0 percent with conventional treatment to 4.6 percent"
+    },
+    "sampleSize": {
+      "value": "1548 patients",
+      "quote": "a total of 1548 patients enrolled"
+    },
+    "statistic": {
+      "value": "Mortality 8.0% to 4.6%, P<0.04; overall in-hospital mortality reduced 34%",
+      "quote": "reduced mortality during intensive care from 8.0 percent with conventional treatment to 4.6 percent (P<0.04, with adjustment for sequential analyses)"
+    },
+    "limitations": {
+      "value": "Single-center surgical ICU population; benefit mainly in patients staying >5 days",
+      "quote": "The benefit of intensive insulin therapy was attributable to its effect on mortality among patients who remained in the intensive care unit for more than five days"
+    }
+  },
+  "extractedAt": "2026-08-27T21:53:04.414Z",
+  "model": "claude-sonnet-5"
+}

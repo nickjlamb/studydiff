@@ -1,0 +1,63 @@
+{
+  "pmid": "19318384",
+  "caseId": "glycaemic-control-nutrition",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does tight glycaemic control with intensive insulin therapy reduce mortality in critically ill adults?",
+  "citation": "NICE-SUGAR Study Investigators 2009, N Engl J Med",
+  "title": "Intensive versus conventional glucose control in critically ill patients.",
+  "sourceDepth": "abstract",
+  "textChars": 2113,
+  "text": "The optimal target range for blood glucose in critically ill patients remains unclear.\n\nWithin 24 hours after admission to an intensive care unit (ICU), adults who were expected to require treatment in the ICU on 3 or more consecutive days were randomly assigned to undergo either intensive glucose control, with a target blood glucose range of 81 to 108 mg per deciliter (4.5 to 6.0 mmol per liter), or conventional glucose control, with a target of 180 mg or less per deciliter (10.0 mmol or less per liter). We defined the primary end point as death from any cause within 90 days after randomization.\n\nOf the 6104 patients who underwent randomization, 3054 were assigned to undergo intensive control and 3050 to undergo conventional control; data with regard to the primary outcome at day 90 were available for 3010 and 3012 patients, respectively. The two groups had similar characteristics at baseline. A total of 829 patients (27.5%) in the intensive-control group and 751 (24.9%) in the conventional-control group died (odds ratio for intensive control, 1.14; 95% confidence interval, 1.02 to 1.28; P=0.02). The treatment effect did not differ significantly between operative (surgical) patients and nonoperative (medical) patients (odds ratio for death in the intensive-control group, 1.31 and 1.07, respectively; P=0.10). Severe hypoglycemia (blood glucose level, < or = 40 mg per deciliter [2.2 mmol per liter]) was reported in 206 of 3016 patients (6.8%) in the intensive-control group and 15 of 3014 (0.5%) in the conventional-control group (P<0.001). There was no significant difference between the two treatment groups in the median number of days in the ICU (P=0.84) or hospital (P=0.86) or the median number of days of mechanical ventilation (P=0.56) or renal-replacement therapy (P=0.39).\n\nIn this large, international, randomized trial, we found that intensive glucose control increased mortality among adults in the ICU: a blood glucose target of 180 mg or less per deciliter resulted in lower mortality than did a target of 81 to 108 mg per deciliter. (ClinicalTrials.gov number, NCT00220987.)",
+  "card": {
+    "pmid": "19318384",
+    "citation": "Finfer et al. 2009 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Intensive glucose control increased mortality vs conventional control",
+      "quote": "intensive glucose control increased mortality among adults in the ICU"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "critically ill patients"
+    },
+    "model": {
+      "value": "Adult ICU patients requiring ≥3 days of ICU care",
+      "quote": "adults who were expected to require treatment in the ICU on 3 or more consecutive days"
+    },
+    "intervention": {
+      "value": "Intensive vs conventional glucose control (randomized)",
+      "quote": "randomly assigned to undergo either intensive glucose control... or conventional glucose control"
+    },
+    "assay": {
+      "value": "Blood glucose monitoring against target ranges",
+      "quote": "target blood glucose range of 81 to 108 mg per deciliter"
+    },
+    "dose": {
+      "value": "Intensive: 81-108 mg/dL; Conventional: ≤180 mg/dL",
+      "quote": "target of 180 mg or less per deciliter (10.0 mmol or less per liter)"
+    },
+    "timing": {
+      "value": "Randomized within 24 h of ICU admission; followed to 90 days",
+      "quote": "Within 24 hours after admission to an intensive care unit (ICU)... death from any cause within 90 days after randomization"
+    },
+    "endpoint": {
+      "value": "90-day all-cause mortality (primary endpoint)",
+      "quote": "We defined the primary end point as death from any cause within 90 days after randomization."
+    },
+    "sampleSize": {
+      "value": "6104 randomized (3054 intensive, 3050 conventional)",
+      "quote": "Of the 6104 patients who underwent randomization, 3054 were assigned to undergo intensive control and 3050 to undergo conventional control"
+    },
+    "statistic": {
+      "value": "OR 1.14 (95% CI 1.02-1.28), P=0.02 for intensive control mortality",
+      "quote": "odds ratio for intensive control, 1.14; 95% confidence interval, 1.02 to 1.28; P=0.02"
+    },
+    "limitations": {
+      "value": "Severe hypoglycemia far more common with intensive control (safety concern)",
+      "quote": "Severe hypoglycemia (blood glucose level, < or = 40 mg per deciliter [2.2 mmol per liter]) was reported in 206 of 3016 patients (6.8%) in the intensive-control group and 15 of 3014 (0.5%) in the conventional-control group"
+    }
+  },
+  "extractedAt": "2026-08-27T21:53:12.807Z",
+  "model": "claude-sonnet-5"
+}

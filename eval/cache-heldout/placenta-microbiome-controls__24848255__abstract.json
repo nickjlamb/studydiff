@@ -1,0 +1,63 @@
+{
+  "pmid": "24848255",
+  "caseId": "placenta-microbiome-controls",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Does the human placenta harbour a resident microbiome?",
+  "citation": "Aagaard et al. 2014, Sci Transl Med",
+  "title": "The placenta harbors a unique microbiome.",
+  "sourceDepth": "abstract",
+  "textChars": 1382,
+  "text": "Humans and their microbiomes have coevolved as a physiologic community composed of distinct body site niches with metabolic and antigenic diversity. The placental microbiome has not been robustly interrogated, despite recent demonstrations of intracellular bacteria with diverse metabolic and immune regulatory functions. A population-based cohort of placental specimens collected under sterile conditions from 320 subjects with extensive clinical data was established for comparative 16S ribosomal DNA-based and whole-genome shotgun (WGS) metagenomic studies. Identified taxa and their gene carriage patterns were compared to other human body site niches, including the oral, skin, airway (nasal), vaginal, and gut microbiomes from nonpregnant controls. We characterized a unique placental microbiome niche, composed of nonpathogenic commensal microbiota from the Firmicutes, Tenericutes, Proteobacteria, Bacteroidetes, and Fusobacteria phyla. In aggregate, the placental microbiome profiles were most akin (Bray-Curtis dissimilarity <0.3) to the human oral microbiome. 16S-based operational taxonomic unit analyses revealed associations of the placental microbiome with a remote history of antenatal infection (permutational multivariate analysis of variance, P = 0.006), such as urinary tract infection in the first trimester, as well as with preterm birth <37 weeks (P = 0.001).",
+  "card": {
+    "pmid": "24848255",
+    "citation": "Aagaard et al. 2014 Sci Transl Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "Yes, placenta harbors a unique, low-biomass commensal microbiome",
+      "quote": "We characterized a unique placental microbiome niche, composed of nonpathogenic commensal microbiota"
+    },
+    "species": {
+      "value": "Human",
+      "quote": "A population-based cohort of placental specimens collected under sterile conditions from 320 subjects"
+    },
+    "model": {
+      "value": "Human placental tissue specimens, population-based cohort",
+      "quote": "A population-based cohort of placental specimens collected under sterile conditions from 320 subjects with extensive clinical data was established"
+    },
+    "intervention": {
+      "value": "Observational comparison across body site niches; no intervention",
+      "quote": "Identified taxa and their gene carriage patterns were compared to other human body site niches, including the oral, skin, airway (nasal), vaginal, and gut microbiomes from nonpregnant controls."
+    },
+    "assay": {
+      "value": "16S rDNA sequencing and whole-genome shotgun metagenomics",
+      "quote": "comparative 16S ribosomal DNA-based and whole-genome shotgun (WGS) metagenomic studies"
+    },
+    "dose": {
+      "value": "not reported",
+      "quote": ""
+    },
+    "timing": {
+      "value": "Placental specimens collected at delivery; history includes first trimester infection",
+      "quote": "such as urinary tract infection in the first trimester"
+    },
+    "endpoint": {
+      "value": "Placental microbiome composition and its association with antenatal infection/preterm birth",
+      "quote": "revealed associations of the placental microbiome with a remote history of antenatal infection (permutational multivariate analysis of variance, P = 0.006)... as well as with preterm birth <37 weeks (P = 0.001)."
+    },
+    "sampleSize": {
+      "value": "320 subjects",
+      "quote": "320 subjects with extensive clinical data"
+    },
+    "statistic": {
+      "value": "Bray-Curtis <0.3 similarity to oral microbiome; PERMANOVA P=0.006 and P=0.001",
+      "quote": "Bray-Curtis dissimilarity <0.3) to the human oral microbiome... P = 0.006... P = 0.001"
+    },
+    "limitations": {
+      "value": "not reported",
+      "quote": ""
+    }
+  },
+  "extractedAt": "2026-08-27T21:51:16.425Z",
+  "model": "claude-sonnet-5"
+}

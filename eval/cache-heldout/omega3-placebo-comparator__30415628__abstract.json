@@ -1,0 +1,63 @@
+{
+  "pmid": "30415628",
+  "caseId": "omega3-placebo-comparator",
+  "set": "heldout",
+  "depthArm": "abstract",
+  "question": "Do high-dose omega-3 fatty acids added to statin therapy reduce major adverse cardiovascular events?",
+  "citation": "Bhatt et al. 2019, N Engl J Med",
+  "title": "Cardiovascular Risk Reduction with Icosapent Ethyl for Hypertriglyceridemia.",
+  "sourceDepth": "abstract",
+  "textChars": 2506,
+  "text": "Patients with elevated triglyceride levels are at increased risk for ischemic events. Icosapent ethyl, a highly purified eicosapentaenoic acid ethyl ester, lowers triglyceride levels, but data are needed to determine its effects on ischemic events.\n\nWe performed a multicenter, randomized, double-blind, placebo-controlled trial involving patients with established cardiovascular disease or with diabetes and other risk factors, who had been receiving statin therapy and who had a fasting triglyceride level of 135 to 499 mg per deciliter (1.52 to 5.63 mmol per liter) and a low-density lipoprotein cholesterol level of 41 to 100 mg per deciliter (1.06 to 2.59 mmol per liter). The patients were randomly assigned to receive 2 g of icosapent ethyl twice daily (total daily dose, 4 g) or placebo. The primary end point was a composite of cardiovascular death, nonfatal myocardial infarction, nonfatal stroke, coronary revascularization, or unstable angina. The key secondary end point was a composite of cardiovascular death, nonfatal myocardial infarction, or nonfatal stroke.\n\nA total of 8179 patients were enrolled (70.7% for secondary prevention of cardiovascular events) and were followed for a median of 4.9 years. A primary end-point event occurred in 17.2% of the patients in the icosapent ethyl group, as compared with 22.0% of the patients in the placebo group (hazard ratio, 0.75; 95% confidence interval [CI], 0.68 to 0.83; P<0.001); the corresponding rates of the key secondary end point were 11.2% and 14.8% (hazard ratio, 0.74; 95% CI, 0.65 to 0.83; P<0.001). The rates of additional ischemic end points, as assessed according to a prespecified hierarchical schema, were significantly lower in the icosapent ethyl group than in the placebo group, including the rate of cardiovascular death (4.3% vs. 5.2%; hazard ratio, 0.80; 95% CI, 0.66 to 0.98; P=0.03). A larger percentage of patients in the icosapent ethyl group than in the placebo group were hospitalized for atrial fibrillation or flutter (3.1% vs. 2.1%, P=0.004). Serious bleeding events occurred in 2.7% of the patients in the icosapent ethyl group and in 2.1% in the placebo group (P=0.06).\n\nAmong patients with elevated triglyceride levels despite the use of statins, the risk of ischemic events, including cardiovascular death, was significantly lower among those who received 2 g of icosapent ethyl twice daily than among those who received placebo. (Funded by Amarin Pharma; REDUCE-IT ClinicalTrials.gov number, NCT01492361 .).",
+  "card": {
+    "pmid": "30415628",
+    "citation": "Bhatt et al. 2019 N Engl J Med",
+    "sourceDepth": "abstract",
+    "finding": {
+      "value": "High-dose icosapent ethyl (omega-3, EPA) added to statins significantly reduced MACE",
+      "quote": "the risk of ischemic events, including cardiovascular death, was significantly lower among those who received 2 g of icosapent ethyl twice daily than among those who received placebo"
+    },
+    "species": {
+      "value": "Humans",
+      "quote": "Patients with elevated triglyceride levels are at increased risk for ischemic events."
+    },
+    "model": {
+      "value": "Patients with established CVD or diabetes+risk factors, on statins, elevated triglycerides",
+      "quote": "involving patients with established cardiovascular disease or with diabetes and other risk factors, who had been receiving statin therapy"
+    },
+    "intervention": {
+      "value": "Icosapent ethyl (purified EPA ethyl ester) vs placebo, added to statin therapy",
+      "quote": "The patients were randomly assigned to receive 2 g of icosapent ethyl twice daily (total daily dose, 4 g) or placebo."
+    },
+    "assay": {
+      "value": "Multicenter, randomized, double-blind, placebo-controlled clinical trial",
+      "quote": "We performed a multicenter, randomized, double-blind, placebo-controlled trial"
+    },
+    "dose": {
+      "value": "4 g/day (2 g twice daily) icosapent ethyl",
+      "quote": "2 g of icosapent ethyl twice daily (total daily dose, 4 g)"
+    },
+    "timing": {
+      "value": "Median follow-up of 4.9 years",
+      "quote": "were followed for a median of 4.9 years"
+    },
+    "endpoint": {
+      "value": "Composite CV death, MI, stroke, revascularization, unstable angina (primary); CV death/MI/stroke (key secondary)",
+      "quote": "The primary end point was a composite of cardiovascular death, nonfatal myocardial infarction, nonfatal stroke, coronary revascularization, or unstable angina."
+    },
+    "sampleSize": {
+      "value": "8179 patients",
+      "quote": "A total of 8179 patients were enrolled"
+    },
+    "statistic": {
+      "value": "Primary endpoint HR 0.75 (95% CI 0.68-0.83), P<0.001",
+      "quote": "hazard ratio, 0.75; 95% confidence interval [CI], 0.68 to 0.83; P<0.001"
+    },
+    "limitations": {
+      "value": "Increased atrial fibrillation/flutter hospitalization and trend toward more bleeding",
+      "quote": "A larger percentage of patients in the icosapent ethyl group than in the placebo group were hospitalized for atrial fibrillation or flutter (3.1% vs. 2.1%, P=0.004)."
+    }
+  },
+  "extractedAt": "2026-08-27T21:52:01.842Z",
+  "model": "claude-sonnet-5"
+}
