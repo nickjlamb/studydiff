@@ -43,10 +43,10 @@ It is built for a bench scientist deciding which of two conflicting papers to tr
 
 Most "AI literature" tools generate a fluent answer and ask you to trust it. StudyDiff inverts that:
 
-- **It shows the evidence, then gets out of the way.** The design differences up top; every value with the verbatim sentence that supports it underneath.
+- **It shows the evidence, then gets out of the way.** The design differences up top; every value with the verbatim sentence that supports it underneath — and click any verified value to see that exact sentence highlighted in the paper's own text.
 - **It refuses to guess.** Any field the source doesn't state is shown as *not reported*, never inferred.
 - **It verifies itself.** A deterministic grounding check (no second LLM acting as judge) confirms every extracted value and every explanation is backed by a verbatim quote and traceable numbers. Anything that fails is downgraded *before* it can be used as a reason.
-- **It knows what it can't do**, because it was measured — see below.
+- **It knows what it can't do**, because it was measured — on two independent benchmark sets, the second one held out and scored once. See below.
 
 ## Does it work? A measured answer
 
@@ -204,7 +204,7 @@ All three ship as offline demos (`npm run demo` / `npm run demo -- resveratrol-s
 
 ## Using it
 
-- **Web app** (`npm run serve`) — examples, PMID/DOI lookup, PDF upload, or paste; streams each pipeline step live, and exports a reproducible **Markdown report** with every value's verbatim supporting sentence.
+- **Web app** (`npm run serve`) — examples, PMID/DOI lookup, PDF upload, or paste; streams each pipeline step live, lets you click any grounded value to see it highlighted in the source, and exports a reproducible **Markdown report** with every value's verbatim supporting sentence.
 - **MCP server** (`npm run mcp`) — lets Claude, or any agent, call the contradiction engine directly. See [MCP server](#mcp-server).
 - **CLI** — `node src/cli.mjs --q "Does resveratrol activate SIRT1?" 12939617 19843076`
 - **Deploy** — see [DEPLOY.md](DEPLOY.md) (Railway + custom domain).
@@ -259,7 +259,7 @@ src/pdf.mjs         PDF text extraction (pure JS)
 src/extract.mjs     Claude tool-use → structured study cards
 src/grounding.mjs   deterministic verification (OpenGATE)
 src/compare.mjs     divergence detection (divergent vs. shared design dimensions)
-eval/               driver-ranking benchmark: 15 cited contradictions + scorer
+eval/               driver-ranking benchmark: two sets of 15 cited contradictions (dev + held-out) + scorer
 src/gaps.mjs        bounded "observed across these papers"
 src/pipeline.mjs    orchestration: retrieve → extract → verify → compare
 src/report.mjs      shared Markdown report (answer, drivers, quotes, verification)
@@ -271,7 +271,7 @@ fixtures/           cached real papers for the offline demos
 
 ## Roadmap
 
-Keyword search with a results picker, a source viewer that highlights each grounded quote in the original text, batch comparison, and an exportable report. Full list in [ROADMAP.md](ROADMAP.md).
+Keyword search with a results picker, batch comparison, and comparing more than two papers are the open directions. The benchmark is done and the result held up blind, so the next work is accuracy, not features: better *extraction* to raise the measured ceiling, and an entailment check to catch prose overstatement that deterministic grounding can't see. Full list — including what's been tried and retired — in [ROADMAP.md](ROADMAP.md).
 
 ## Contributing
 
