@@ -23,6 +23,15 @@ shown unless it's grounded in the source.** Suggestions welcome via
   `npm run eval:normtest` still reject. `buildResult` now returns each paper's normalised
   source text and per-field match spans in the payload (no second endpoint). The part that
   survived the benchmark, now visible in the source rather than taken on faith.
+- ~~**A held-out set.**~~ Built, pre-registered, and measured once
+  ([`eval/HELDOUT-PROTOCOL.md`](eval/HELDOUT-PROTOCOL.md)). A second set of 15 documented
+  contradictions, curated blind, sharing no paper or id with the dev set, scored through
+  separate `--set heldout` plumbing against its own committed cache. The blind result: top-1
+  **13.3% [2/15]** against a 20.0% always-guess-`assay` baseline — the retired prior lands at
+  or below a constant guess on data it had never seen (n=15, intervals overlap, so
+  "indistinguishable from a constant", not "worse"). Combined with the dev set, **0 of 25**
+  non-assay-labelled contradictions identified. Independent, blind confirmation that the
+  ranking was right to retire — and nothing in `src/` changed on the basis of the number.
 
 ## Next
 
@@ -34,9 +43,6 @@ shown unless it's grounded in the source.** Suggestions welcome via
   overstatement: a value with no numbers and a real quote passes unconditionally, so
   hedge-dropping is invisible (3 slips across 59 adjudicated fields). A looser substring
   test cannot catch this; a different check is needed. See `eval/PHASE2.md`.
-- **A held-out set.** The 15 cases have now been looked at across two phases, so post-fix
-  numbers are development-set accuracy, not a blind measurement. Only a fresh set can
-  restore that.
 
 ## Later
 
