@@ -8,6 +8,7 @@ All notable changes to StudyDiff are documented here. Format based on
 
 ### Added
 
+- Server icon in `server.json` for the MCP Registry listing. It goes out with the next registry publish.
 - **Source viewer.** Every grounded value in the full comparison is now a button — click
   it to open the paper's own text with the supporting sentence highlighted in place, in
   surrounding context. This closes the last gap between *"we verified this"* and *"see for

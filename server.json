@@ -2,6 +2,15 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.nickjlamb/studydiff",
   "description": "Explain why two scientific papers disagree, every claim grounded in a verbatim source quote.",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/nickjlamb/studydiff/main/docs/icon.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
   "repository": {
     "url": "https://github.com/nickjlamb/studydiff",
     "source": "github"
